@@ -1,0 +1,80 @@
+﻿<Window x:Class="UIProject.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UIProject.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter="clr-namespace:UIProject.Converters"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:pages="clr-namespace:UIProject.Pages"
+        mc:Ignorable="d"
+        Title="HomepageWindow" 
+        Height="700"
+        SizeToContent="Manual"
+        WindowState="{Binding WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        WindowStartupLocation="Manual"
+        Style="{StaticResource CustomWindowStyle}"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <converter:PageViewModelToPageControlConverter x:Key="ViewModelToPageConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="{Binding Width, ElementName=PAGE_CONTENT}"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              x:Name="IconGrid"
+              Margin="5 0 10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Background="{StaticResource RoyalBlue}">
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel x:Name="TabsContainer"
+                            Orientation="Vertical"
+                            Margin="0"
+                            Background="{StaticResource RoyalBlue}">
+                    <Grid Height="90">
+                        <!-- Display the icon -->
+                        <Image Margin="10"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Width="50"
+                               Height="50"
+                               Source="{Binding IconSource}"/>
+                    </Grid>
+                    
+                    <!-- List tabs -->
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1"
+              Margin="0 0 5 5">
+            <!-- Display the page content -->
+            <Frame x:Name="PAGE_CONTENT"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   VerticalContentAlignment="Stretch"
+                   HorizontalContentAlignment="Stretch"
+                   NavigationUIVisibility="Hidden"
+                   Content="{Binding CurrentPageVM, Converter={StaticResource ViewModelToPageConverter}}">
+            </Frame>
+        </Grid>
+    </Grid>
+</Window>

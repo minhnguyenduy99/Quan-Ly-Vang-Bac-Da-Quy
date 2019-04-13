@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Colors">
+    <SolidColorBrush x:Key="RoyalBlue">#111E6C</SolidColorBrush>
+    <SolidColorBrush x:Key="AzureBlue">#0080FF</SolidColorBrush>
+    <SolidColorBrush x:Key="EgyptianBlue">#104A6</SolidColorBrush>
+    <SolidColorBrush x:Key="IndependenceBlue">#4C516D</SolidColorBrush>
+    <SolidColorBrush x:Key="AirForceBlue">#588BAE</SolidColorBrush>
+
+    <Color x:Key="RoyalBlueForeground">#111E6C</Color>
+    <Color x:Key="AzureBlueForeground">#0080FF</Color>
+    <Color x:Key="EgyptianBlueForeground">#104A6</Color>
+    <Color x:Key="IndependenceBlueForeground">#4C516D</Color>
+    <Color x:Key="AirForceBlueForeground">#588BAE</Color>
+
+</ResourceDictionary>

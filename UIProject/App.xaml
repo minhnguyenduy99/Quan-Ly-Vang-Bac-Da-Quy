@@ -1,0 +1,61 @@
+﻿<Application x:Class="UIProject.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:UIProject"
+             StartupUri="./Views/LoginWindow.xaml"
+             ShutdownMode="OnLastWindowClose">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Material design resources-->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
+                <!-- Custom styles for controls  -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="./Styles/LabelStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/CustomWindowStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/TextBlockStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/TabButtonStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/ExpanderStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/InfoCardStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
+                <!-- Image source -->
+                <ResourceDictionary>
+                    <system:String x:Key="LoginBackground">/Images/login-background.jpg</system:String>
+                    <system:String x:Key="SoftwareIcon">/Images/software_icon.png</system:String>
+                    <system:String x:Key="TongQuan_DonHang">/Images/tongquan_donhang.png</system:String>
+                    <system:String x:Key="TongQuan_ThuNhap">/Images/tongquan_thunhap.png</system:String>
+                    <system:String x:Key="Tab_TongQuan">/Images/tab_tongquan.png</system:String>
+                </ResourceDictionary>
+                
+                <!-- Color pallete -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="./Colors/Purple.xaml"/>
+                        <ResourceDictionary Source="./Colors/Yellow.xaml"/>
+                        <ResourceDictionary Source="./Colors/Blue.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+
+                <!-- Default window name for all windows -->
+                <ResourceDictionary>
+                    <system:String x:Key="WaitingDialogWindowName">WaitingDialogWindowName</system:String>
+                    <system:String x:Key="LoginWindowName">LoginWindowName</system:String>
+                    <system:String x:Key="HomeWindowName">HomeWindowName</system:String>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+                      
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

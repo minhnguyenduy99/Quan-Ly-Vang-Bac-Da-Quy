@@ -1,0 +1,7 @@
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\bin\Debug\BaseMVVM_Service.exe.config
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\bin\Debug\BaseMVVM_Service.exe
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\bin\Debug\BaseMVVM_Service.pdb
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\obj\Debug\BaseMVVM_Service.csprojAssemblyReference.cache
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\obj\Debug\BaseMVVM_Service.csproj.CoreCompileInputs.cache
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\obj\Debug\BaseMVVM_Service.exe
+E:\Uni File\Semester IV\NM CNPM\Đồ án\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\obj\Debug\BaseMVVM_Service.pdb
