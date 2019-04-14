@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace UIProject.ServiceProviders
+namespace Projects.ServiceProviders
 {
     /// <summary>
     /// Provides implementation for animation sliding effect

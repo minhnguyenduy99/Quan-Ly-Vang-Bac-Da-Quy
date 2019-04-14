@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace UIProject.ServiceProviders
+namespace Projects.ServiceProviders
 {
     /// <summary>
     /// Indicating the animation mode of UI 
