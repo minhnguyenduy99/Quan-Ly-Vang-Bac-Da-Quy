@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BaseMVVM_Service.BaseMVVM
 {
-    public abstract class BaseDataModel:ObservableObject
+    /// <summary>
+    /// Base class for model of data
+    /// </summary>
+    public abstract class BaseDataModel: ObservableObject
     {
 
     }

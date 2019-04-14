@@ -24,7 +24,6 @@ namespace UIProject.ViewModels
 
         #region Private Fields
         private string tabName;
-        private string iconSource;
         private TabState state;
         private bool isChecked;
         #endregion
@@ -39,7 +38,6 @@ namespace UIProject.ViewModels
             Idle,
             Process
         }
-
 
         /// <summary>
         /// The name of tab control
@@ -74,7 +72,10 @@ namespace UIProject.ViewModels
             }
         }
 
-        public TabViewModel()
+        /// <summary>
+        /// Create an instance of <see cref="TabViewModel"/>
+        /// </summary>
+        public TabViewModel() : base()
         {
         }
 

@@ -14,6 +14,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Projects.ServiceProviders;
 
 namespace UIProject.Pages
 {
@@ -25,6 +26,19 @@ namespace UIProject.Pages
         public TongQuanPage()
         {
             InitializeComponent();
+
+            this.Loaded += TongQuanPage_Loaded;
+            this.Unloaded += TongQuanPage_Unloaded;
+        }
+
+        private async void TongQuanPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            await new AnimationHelper().PerformAnimationAsync(this, AnimationMode.LeftToRight);
+        }
+
+        private async void TongQuanPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await new AnimationHelper().PerformAnimationAsync(this, AnimationMode.RightToLeft);
         }
     }
 }

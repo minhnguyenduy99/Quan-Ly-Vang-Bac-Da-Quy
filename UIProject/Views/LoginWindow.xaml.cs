@@ -32,11 +32,7 @@ namespace UIProject
         {
             InitializeComponent();
 
-            viewModel = new LoginWindowViewModel(new AccountModel()
-            {
-                Username = "Minh",
-                Password = "1234"
-            })
+            viewModel = new LoginWindowViewModel
             {
                 CanMaximized = false,
                 CanMinimized = false,
@@ -65,7 +61,7 @@ namespace UIProject
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.UpdatePassword(PasswordBox.Password);
+            viewModel.UpdateTypingPassword(PasswordBox.Password);
 
             ProcessLogin();
         }

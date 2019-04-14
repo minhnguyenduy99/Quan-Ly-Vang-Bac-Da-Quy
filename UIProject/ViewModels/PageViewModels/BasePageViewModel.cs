@@ -1,5 +1,6 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using ModelProject.Models;
+using Projects.ServiceProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,5 @@ namespace UIProject.ViewModels.PageViewModels
     /// </summary>
     public abstract class BasePageViewModel : BaseViewModel
     {
-        
     }
 }

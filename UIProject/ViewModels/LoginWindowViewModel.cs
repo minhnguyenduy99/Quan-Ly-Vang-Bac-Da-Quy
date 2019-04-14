@@ -18,7 +18,7 @@ namespace UIProject.ViewModels
     /// <summary>
     /// Provide a view model for login window to interact with login process
     /// </summary>
-    public class LoginWindowViewModel:BaseWindowViewModel<AccountModel>
+    public class LoginWindowViewModel: BaseWindowViewModel
     {
         private const string DEFAULT_ERROR_TEXT = "Tên đăng nhập hoặc mật khẩu không đúng";
 
@@ -99,37 +99,23 @@ namespace UIProject.ViewModels
             }
         }
 
-        public LoginWindowViewModel(AccountModel accountModel) : base(accountModel)
+        public LoginWindowViewModel() : base()
         {
 
         }
 
         public bool Login()
         {
-            IsAccountValid = AccountVM.Login(TypingUsername, TypingPassword);
+            IsAccountValid = true;
+            Thread.Sleep(3000);
             OnPropertyChanged("IsAccountValid");
             return IsAccountValid;
         }
 
-        public void UpdatePassword(string password)
+        public void UpdateTypingPassword(string password)
         {
             if (!IsPasswordShow)
                 this.TypingPassword = password;
         }
-
-        #region Internal methods for processing on LoginViewModel
-
-        private NhanVienVM QueryStaffInformation()
-        {
-            // Temporarily malfunction for testing
-            return new NhanVienVM(new NhanVienModel()
-            {
-                FullName = "Nguyen Duy Minh",
-                DateOfBirth = DateTime.Now,
-                CMND = "225818043"
-            });
-        }
-
-        #endregion
     }
 }

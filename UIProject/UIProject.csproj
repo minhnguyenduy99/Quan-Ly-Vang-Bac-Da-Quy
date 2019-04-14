@@ -68,6 +68,8 @@
     <Compile Include="CustomControls\InfoCardLabel.xaml.cs">
       <DependentUpon>InfoCardLabel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceProviders\AnimationHelper.cs" />
+    <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseContentViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />

@@ -37,7 +37,6 @@ namespace UIProject.ViewModels
         #region Private Fields
         private TabViewModel currentTabVM;
         private BasePageViewModel currentPageVM;
-        private NhanVienVM nhanVienVM;
         #endregion
 
         /// <summary>
@@ -68,19 +67,8 @@ namespace UIProject.ViewModels
             set => SetProperty(ref currentPageVM, value);
         }
 
-        public HomePageWindowViewModel() : this(new NhanVienVM(new NhanVienModel()
+        public HomePageWindowViewModel()
         {
-            FullName = "Nguyen Duy Minh",
-            DateOfBirth = DateTime.Now,
-            CMND = "225818043"
-        })) { }
-
-        public HomePageWindowViewModel(NhanVienVM nhanVienVM)
-        {
-            if (nhanVienVM == null)
-                throw new ArgumentNullException("Account view model cannot be null");
-            this.nhanVienVM = nhanVienVM;
-
             SetUpWindowLayout();
 
             InitializeTabs();

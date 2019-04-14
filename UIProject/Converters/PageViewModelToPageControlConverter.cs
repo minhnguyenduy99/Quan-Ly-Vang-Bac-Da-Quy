@@ -13,20 +13,15 @@ using System.Windows.Data;
 namespace UIProject.Converters
 {
     /// <summary>
-    /// Provides conversion from current selected tab to the corresponding page
+    /// Provides conversion from current page view model to corresponding page control
     /// </summary>)
     class PageViewModelToPageControlConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return "Sorry page not found";
-            var objectType = value.GetType();
-            if (objectType == typeof(TongQuanPageVM))
-            {
-                return new TongQuanPage() { DataContext = value };
-            }
-            return Binding.DoNothing;
+                return "Page not found";
+            return GetPageInstance(value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -35,16 +30,14 @@ namespace UIProject.Converters
         }
 
         /// <summary>
-        /// Get the page instance corresponding to the tab name
+        /// Get page instance corresponding with the page view model
         /// </summary>
-        /// <param name="currentTab">The tab to be converted</param>
-        /// <param name="listDefaultTabNames">The list tab names constantly available</param>
+        /// <param name="pageVM">The view model of page</param>
         /// <returns></returns>
-        private Page GetPageInstance(TabViewModel currentTab, List<string> listDefaultTabNames)
+        private Page GetPageInstance(object pageVM)
         {
-            //string tabName = currentTab.TabName;
-            //if (tabName == listDefaultTabNames[0])
-            //    return new TongQuanPage() { DataContext = currentTab.PageViewModel };
+            if (pageVM.GetType() == typeof(TongQuanPageVM))
+                return new TongQuanPage() { DataContext = pageVM };
             return null;          
         }
     }
