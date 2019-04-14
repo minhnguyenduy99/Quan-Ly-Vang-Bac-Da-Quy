@@ -14,7 +14,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Projects.ServiceProviders;
+using UIProject.ServiceProviders;
 
 namespace UIProject.Pages
 {
