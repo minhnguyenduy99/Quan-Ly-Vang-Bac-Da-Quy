@@ -1,6 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using ModelProject.Models;
-using Projects.ServiceProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
