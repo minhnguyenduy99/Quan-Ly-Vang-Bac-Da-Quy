@@ -33,12 +33,12 @@ namespace UIProject.Pages
 
         private async void TongQuanPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            await new AnimationHelper().PerformAnimationAsync(this, AnimationMode.LeftToRight);
+            await new AnimationHelper().PerformAnimationAsync(this, SlideAnimationMode.LeftToRight);
         }
 
         private async void TongQuanPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await new AnimationHelper().PerformAnimationAsync(this, AnimationMode.RightToLeft);
+            await this.FadeIn(0.5f, 0.5f);
         }
     }
 }

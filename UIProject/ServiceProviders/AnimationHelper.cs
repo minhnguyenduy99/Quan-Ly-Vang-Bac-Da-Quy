@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 namespace UIProject.ServiceProviders
 {
     /// <summary>
-    /// Provides implementation for animation sliding effect
+    /// Provides animation performance and <see cref="Timeline"/> type creation 
     /// </summary>
     public class AnimationHelper : IAnimationService
     {
@@ -25,14 +25,14 @@ namespace UIProject.ServiceProviders
         /// <param name="control"></param>
         /// <param name="mode"></param>
         /// <returns></returns>
-        public async Task PerformAnimationAsync(FrameworkElement control, AnimationMode mode)
+        public async Task PerformAnimationAsync(FrameworkElement control, SlideAnimationMode mode)
         {
             PerformAnimation(control, mode);
         }
 
-        public void PerformAnimation(FrameworkElement control, AnimationMode mode)
+        public void PerformAnimation(FrameworkElement control, SlideAnimationMode mode)
         {
-            if (mode == AnimationMode.None)
+            if (mode == SlideAnimationMode.None)
                 return;
 
             control.Visibility = Visibility.Hidden;
@@ -56,26 +56,79 @@ namespace UIProject.ServiceProviders
 
             control.Visibility = Visibility.Visible;          
         }
-      
+
+        /// <summary>
+        /// Provides slide effect
+        /// </summary>
+        /// <param name="controlWidth">The width of the control applying the animation</param>
+        /// <param name="animationMode">The animation mode of sliding</param>
+        /// /// <param name="decelerationRatio">The ratio of timespan spent to decelerate</param>
+        /// <returns>The animation</returns>
+        public ThicknessAnimation CreateSlideAnimation(
+            double controlWidth, 
+            double controlHeight, 
+            SlideAnimationMode animationMode, 
+            double seconds,
+            double decelerationRatio = 0.9f)
+        {
+            GetThicknessAnimateValue(controlWidth, controlHeight, animationMode, out Thickness from, out Thickness to);
+
+            var slideAnimation = new ThicknessAnimation
+            {
+                From = from,
+                To = to,
+                Duration = new Duration(System.TimeSpan.FromSeconds(seconds)),
+                DecelerationRatio = decelerationRatio
+            };
+
+            Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("Margin"));
+
+            return slideAnimation;         
+        }
+
+        /// <summary>
+        /// Provides fade animation
+        /// </summary>
+        /// <param name="from">the first opacity value</param>
+        /// <param name="to">The last opacity value</param>
+        /// <param name="seconds">The timespan of animation</param>
+        /// <param name="decelerationRatio">The ratio of timespan spent to decelerate</param>
+        /// <returns>The animation</returns>
+        public DoubleAnimation CreateFadeAnimation(double from, double to, double seconds, double decelerationRatio = 0.9f)
+        {
+            var fadeAnimation = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = new Duration(System.TimeSpan.FromSeconds(seconds)),
+                DecelerationRatio = decelerationRatio
+            };
+
+            Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath("Opacity"));
+
+            return fadeAnimation;
+        }
+
+
         private void GetThicknessAnimateValue(
             double controlWidth, 
             double controlHeight,
-            AnimationMode mode, 
+            SlideAnimationMode mode, 
             out Thickness firstThickness, 
             out Thickness lastThickness)
         {
             switch (mode)
             {
-                case AnimationMode.LeftToRight:
+                case SlideAnimationMode.LeftToRight:
                     firstThickness = new Thickness(-controlWidth, 0, controlWidth, 0);
                     break;
-                case AnimationMode.RightToLeft:
+                case SlideAnimationMode.RightToLeft:
                     firstThickness = new Thickness(controlWidth, 0, -controlWidth, 0);
                     break;
-                case AnimationMode.TopToBottom:
+                case SlideAnimationMode.TopToBottom:
                     firstThickness = new Thickness(0, -controlHeight, 0, controlHeight);
                     break;
-                case AnimationMode.BottomToTop:
+                case SlideAnimationMode.BottomToTop:
                     firstThickness = new Thickness(0, controlHeight, 0, -controlHeight);
                     break;
                 default:

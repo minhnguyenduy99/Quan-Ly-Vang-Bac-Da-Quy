@@ -11,13 +11,23 @@ namespace UIProject.ServiceProviders
     /// <summary>
     /// Indicating the animation mode of UI 
     /// </summary>
-    public enum AnimationMode
+    public enum SlideAnimationMode
     {
         TopToBottom = 0,
         BottomToTop = 1,
         LeftToRight = 2,
         RightToLeft = 3,
         None = 4
+    }
+
+    /// <summary>
+    /// Indicating mode of fade effect
+    /// </summary>
+    public enum FadeMode
+    {
+        FadeIn = 0,
+        FadeOut = 1,
+        None
     }
 
     /// <summary>
@@ -31,7 +41,6 @@ namespace UIProject.ServiceProviders
         /// <param name="control">The control applies the animation</param>
         /// <param name="mode">The animation mode to be displayed</param>
         /// <returns>The task represents the animation action</returns>
-        void PerformAnimation(FrameworkElement control, AnimationMode mode);
-
+        void PerformAnimation(FrameworkElement control, SlideAnimationMode mode);
     }
 }
