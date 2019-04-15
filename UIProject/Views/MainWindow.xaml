@@ -15,6 +15,7 @@
         WindowState="{Binding WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowStartupLocation="Manual"
         Style="{StaticResource CustomWindowStyle}"
+        Opacity="1"
         >
     <Window.Resources>
         <ResourceDictionary>

@@ -44,7 +44,22 @@ namespace UIProject
             };
 
             DataContext = viewModel;
+
+            this.Loaded += LoginWindow_Loaded;
+            this.Closed += LoginWindow_Closed;
         }
+
+        private async void LoginWindow_Closed(object sender, EventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 1f, 0f);
+        }
+
+
+        private async void LoginWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1f);
+        }
+
         private void ToggleShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             if (ToggleShowPassword.IsChecked == false)

@@ -33,11 +33,18 @@ namespace UIProject.Views
             InitializeComponent();
 
             this.Loaded += MainWindow_Loaded;
+            this.Closed += MainWindow_Closed;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Closed(object sender, EventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 1f, 0f);
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             SetupTabState();
+            await AnimationHelper.FadeAsync(this, 0f, 1f);
         }
 
         private void SetupTabState()
