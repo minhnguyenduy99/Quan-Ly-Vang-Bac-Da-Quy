@@ -1,0 +1,116 @@
+﻿<Page x:Class="UIProject.Pages.BanHangPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UIProject.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      mc:Ignorable="d" 
+      Title="BanHangPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
+            <Image Margin="15 15 10 15"
+                   VerticalAlignment="Stretch"
+                   Width="40"
+                   Stretch="Uniform"
+                   Source="/Images/software_icon.png"/>
+            <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
+                                          Hint="Nhập tên sản phẩm"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="PART_PRODUCTS"
+                  Grid.Row="0">
+                <!-- Menu grid view -->
+                <DataGrid
+                          Margin="10 8 10 5"
+                          ItemsSource="{Binding Items3}"
+                          CanUserSortColumns="True"
+                          CanUserAddRows="False"
+                          AutoGenerateColumns="False"
+                          materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="70"
+                                            Binding="{Binding Code}"
+                                            Header="STT"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Code}"
+                                            Header="Mã hàng"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="130"
+                                            Binding="{Binding Code}"
+                                            Header="Tên sản phẩm"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="130"
+                                            Binding="{Binding Code}"
+                                            Header="Loại sản phẩm"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="110"
+                                            Binding="{Binding Code}"
+                                            Header="Đơn vị tính"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Code}"
+                                            Header="Số lượng"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Code}"
+                                            Header="Đơn giá"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="110"
+                                            Binding="{Binding Code}"
+                                            Header="Chiết khấu"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Code}"
+                                            Header="Thuế (%)"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        <DataGridTextColumn Width="120"
+                                            Binding="{Binding Code}"
+                                            Header="Thành tiền"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1"
+              Width="auto"
+              Height="auto"
+              Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <TabControl HorizontalAlignment="Stretch"
+                        Style="{StaticResource CustomTabControlStyle}"
+                        Margin="5 5 5 10">
+                <TabItem Header="Khách hàng"
+                         ContentTemplate="{StaticResource CustomerTabItemTemplate}"/>
+                <TabItem Header="Tùy chọn"/>
+            </TabControl>
+            <TabControl Grid.Row="1"
+                        Style="{StaticResource CustomTabControlStyle}"
+                        Margin="5 5 5 10">
+                <TabItem Header="Thanh toán"
+                         ContentTemplate="{StaticResource CheckoutDataTemplate}"/>
+                <TabItem Header="Khuyến mãi"/>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Page>

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7A030B19-C9A4-4B98-9341-43D43522ECA7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Projects</RootNamespace>
-    <AssemblyName>Projects</AssemblyName>
+    <RootNamespace>UIProject</RootNamespace>
+    <AssemblyName>UIProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -68,9 +68,18 @@
     <Compile Include="CustomControls\InfoCardLabel.xaml.cs">
       <DependentUpon>InfoCardLabel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\SearchTextBox.xaml.cs">
+      <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BanHangPage.xaml.cs">
+      <DependentUpon>BanHangPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
     <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
+    <Compile Include="Test\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LayoutViewModels\BaseContentViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />
@@ -108,6 +117,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BanHangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TongQuanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,7 +141,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TabControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,6 +247,11 @@
       <Name>ModelProject</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\search_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\paymethod_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

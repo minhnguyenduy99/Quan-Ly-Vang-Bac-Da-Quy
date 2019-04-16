@@ -1,0 +1,195 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Styles"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:customControls="clr-namespace:UIProject.CustomControls">
+    
+    <!-- DataTemplate for Customer content tab-->
+    <DataTemplate x:Key="CustomerTabItemTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Grid.ColumnSpan="2"
+                     materialDesign:HintAssist.Hint="Nhập tên khách hàng"
+                     Margin="10 20 10 20"
+                     FontSize="13"
+                     materialDesign:ColorZoneAssist.Mode="Light"/>
+            <Label Grid.Row="1" Grid.Column="0"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="Điện thoại"/>
+            <Label Grid.Row="2" Grid.Column="0"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="Địa chỉ"/>
+            <Label Grid.Row="3" Grid.Column="0"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="Công nợ"/>
+            <Label Grid.Row="1" Grid.Column="1"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="{Binding ModelData.Telephone}"/>
+            <Label Grid.Row="2" Grid.Column="1"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="{Binding ModelData.Address}"/>
+            <Label Grid.Row="3" Grid.Column="1"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="{Binding ModelData.Debt}"/>
+            <Grid Grid.Row="4"/>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- Checkout data template -->
+    <DataTemplate x:Key="CheckoutDataTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="Tổng tiền"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="VAT"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="Chiết khấu"/>
+                <Label Grid.Row="0" Grid.Column="1"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="{Binding ModelData.TotalMoney}"/>
+                <Label Grid.Row="0" Grid.Column="2"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="{Binding ModelData.VAT}"/>
+                <Label Grid.Row="0" Grid.Column="0"
+                   Style="{StaticResource SmallDefinedLabelStyle}"
+                   Content="Tổng tiền"/>
+            </Grid>
+            <Separator BorderThickness="2"
+                       BorderBrush="LightGray"
+                       Margin="10 2 10 2"
+                       Grid.Row="1"/>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Style="{StaticResource SmallDefinedLabelStyle}"
+                           FontWeight="Bold"
+                           Content="Khách hàng phải trả"/>
+                    <Label Grid.Column="1"
+                           Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="{Binding ModelData.MustPaidMoney}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Margin="10"
+                           Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+                           Stretch="Uniform"
+                           Height="25"
+                           Source="/Images/paymethod_icon.png"/>
+                    <TextBox Grid.Column="1"
+                             FontSize="13"
+                             VerticalAlignment="Center"
+                             Margin="10 5 10 5"
+                             materialDesign:HintAssist.Hint="Nhập số tiền khách phải trả"
+                             FlowDirection="RightToLeft"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Margin="0 10 0 0"
+                           Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="Tiền thối lại"
+                           VerticalAlignment="Center"/>
+                    <Label Grid.Column="1"
+                           Margin="0 10 0 0"
+                           FlowDirection="RightToLeft"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="{Binding ModelData.MoneyBack}"/>
+                </Grid>
+                <Button Grid.Row="3"
+                        Content="Thanh toán"
+                        VerticalAlignment="Stretch"
+                        Margin="10 5 10 5"
+                        Height="60"
+                        Background="{DynamicResource AirForceBlue}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                        materialDesign:ShadowAssist.Darken="True"
+                        BorderBrush="{DynamicResource AirForceBlue}"/>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- TabItem basic control template -->
+    <ControlTemplate TargetType="TabItem" x:Key="TabItemControlTemplate">
+        <Border x:Name="OuterBorder"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{DynamicResource AirForceBlue}"
+                BorderThickness="0"
+                Padding="10">
+            <ContentPresenter Content="{TemplateBinding Header}"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter TargetName="OuterBorder" Property="BorderThickness" Value="0 0 0 2"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="TabItem" x:Key="CustomTabItemStyle">
+        <Setter Property="Template" Value="{StaticResource TabItemControlTemplate}"/>
+        <Setter Property="Background" Value="{Binding Background}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource AirForceBlue}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TabControl" x:Key="CustomTabControlStyle">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource CustomTabItemStyle}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+</ResourceDictionary>
