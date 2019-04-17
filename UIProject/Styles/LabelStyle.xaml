@@ -24,6 +24,13 @@
         <Setter Property="FontWeight" Value="Light"/>
     </Style>
     
+    <!-- Label for medium title -->
+    <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="MediumLabelStyle">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
+    
     <!-- Label for link style -->
     <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="LinkLabelStyle">
         <Setter Property="FontSize" Value="15"/>

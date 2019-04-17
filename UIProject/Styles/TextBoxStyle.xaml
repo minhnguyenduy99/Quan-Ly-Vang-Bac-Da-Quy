@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:UIProject.Styles"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:customControls="clr-namespace:UIProject.CustomControls">
+    
     <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="CustomSearchTextBoxStyle">
         <Setter Property="Background" Value="White"/>
         <Setter Property="IconBackground" Value="{DynamicResource AirForceBlue}"/>

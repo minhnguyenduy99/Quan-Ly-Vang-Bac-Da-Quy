@@ -35,8 +35,12 @@
             </Grid.ColumnDefinitions>
             <Grid x:Name="PART_PRODUCTS"
                   Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
                 <!-- Menu grid view -->
-                <DataGrid
+                <DataGrid Grid.Row="0"
                           Margin="10 8 10 5"
                           ItemsSource="{Binding Items3}"
                           CanUserSortColumns="True"
@@ -87,6 +91,22 @@
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid Grid.Row="1"
+                      Margin="10 5 10 5"
+                      Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Style="{StaticResource MediumLabelStyle}"
+                           Content="Sản phẩm gần đây"/>
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding}"
+                             BorderThickness="0"
+                             BorderBrush="Transparent"
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    </ListBox>
+                </Grid>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1"

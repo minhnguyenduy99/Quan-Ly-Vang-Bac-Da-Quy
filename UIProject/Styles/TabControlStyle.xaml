@@ -53,15 +53,15 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource SmallDefinedLabelStyle}"
@@ -75,12 +75,34 @@
                 <Label Grid.Row="0" Grid.Column="1"
                    Style="{StaticResource SmallDefinedLabelStyle}"
                    Content="{Binding ModelData.TotalMoney}"/>
-                <Label Grid.Row="0" Grid.Column="2"
+                <Label Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource SmallDefinedLabelStyle}"
                    Content="{Binding ModelData.VAT}"/>
-                <Label Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource SmallDefinedLabelStyle}"
-                   Content="Tổng tiền"/>
+                <Grid Grid.Row="2" Grid.Column="1"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <RadioButton VerticalAlignment="Center"
+                                     Content="đ"
+                                     FontSize="13"
+                                     Margin="0 0 5 0"
+                                     IsChecked="true"
+                                     VerticalContentAlignment="Center"/>
+                        <RadioButton VerticalAlignment="Center"
+                                     FontSize="13"
+                                     Content="%"
+                                     VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <TextBox Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             Margin="5"
+                             FlowDirection="RightToLeft"
+                             materialDesign:HintAssist.Hint="Chiết khấu"/>
+                </Grid>
             </Grid>
             <Separator BorderThickness="2"
                        BorderBrush="LightGray"
@@ -106,32 +128,20 @@
                            Style="{StaticResource SmallDefinedLabelStyle}"
                            Content="{Binding ModelData.MustPaidMoney}"/>
                 </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                           Margin="10"
-                           Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
-                           Stretch="Uniform"
-                           Height="25"
-                           Source="/Images/paymethod_icon.png"/>
-                    <TextBox Grid.Column="1"
-                             FontSize="13"
-                             VerticalAlignment="Center"
-                             Margin="10 5 10 5"
-                             materialDesign:HintAssist.Hint="Nhập số tiền khách phải trả"
-                             FlowDirection="RightToLeft"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                </Grid>
-                <Grid Grid.Row="2">
+                <TextBox Grid.Row="1"
+                        FontSize="13"
+                        VerticalAlignment="Center"
+                        Margin="10 5 10 5"
+                        materialDesign:HintAssist.Hint="Nhập số tiền khách phải trả"
+                        FlowDirection="RightToLeft"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"
-                           Margin="0 10 0 0"
+                           Margin="10 10 0 0"
                            Style="{StaticResource SmallDefinedLabelStyle}"
                            Content="Tiền thối lại"
                            VerticalAlignment="Center"/>
