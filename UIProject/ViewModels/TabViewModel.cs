@@ -85,7 +85,6 @@ namespace UIProject.ViewModels
         /// <param name="tabName">The name of tab</param>
         /// <param name="iconSourceKey">The source key of the icon in the source dictionary</param>
         /// <param name="state">The state of tab</param>
-        /// <param name="nhanVienVM"></param>
         /// <returns></returns>
         public static TabViewModel CreateTabViewModel(string tabName, string iconSourceKey, TabState state)
         {
@@ -108,6 +107,11 @@ namespace UIProject.ViewModels
         protected virtual void OnTabSelected(string tabName)
         {
             TabSelected?.Invoke(this, new TabSelectedEventArgs(tabName));
+        }
+
+        protected override void SetDefaultStyle()
+        {
+            
         }
 
 

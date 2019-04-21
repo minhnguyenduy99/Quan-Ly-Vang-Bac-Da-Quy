@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:UIProject.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
       mc:Ignorable="d" 
       Title="BanHangPage">
     <Grid>
@@ -41,52 +42,56 @@
                 </Grid.RowDefinitions>
                 <!-- Menu grid view -->
                 <DataGrid Grid.Row="0"
+                          x:Name="ProductView"
                           Margin="10 8 10 5"
                           ItemsSource="{Binding Items3}"
                           CanUserSortColumns="True"
                           CanUserAddRows="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
                           AutoGenerateColumns="False"
-                          materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-                          materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                          materialDesign:DataGridAssist.CellPadding="8"
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                          IsReadOnly="False"
+                          SelectionUnit="FullRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="70"
-                                            Binding="{Binding Code}"
-                                            Header="STT"
-                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                                            Binding="{Binding No}"
+                                            Header="STT"/>
                         <DataGridTextColumn Width="100"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding OrderCode}"
                                             Header="Mã hàng"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="130"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding ProductName}"
                                             Header="Tên sản phẩm"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="130"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding ProductType}"
                                             Header="Loại sản phẩm"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="110"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding Unit}"
                                             Header="Đơn vị tính"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="100"
-                                            Binding="{Binding Code}"
                                             Header="Số lượng"
-                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                                            Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        </DataGridTextColumn>
                         <DataGridTextColumn Width="100"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding SinglePrice}"
                                             Header="Đơn giá"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="110"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding Discount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Header="Chiết khấu"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="100"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding Tax}"
                                             Header="Thuế (%)"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                         <DataGridTextColumn Width="120"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding TotalMoney}"
                                             Header="Thành tiền"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"/>
                     </DataGrid.Columns>

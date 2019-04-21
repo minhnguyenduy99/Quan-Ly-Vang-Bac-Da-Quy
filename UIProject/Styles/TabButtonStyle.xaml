@@ -28,18 +28,33 @@
             </Grid>
         </Grid>
     </DataTemplate>
-    
-    
+
+    <DataTemplate x:Key="SubtabButtonTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="7"
+                       Text="{Binding TabName}"
+                       Foreground="{Binding Foreground}"
+                       FontSize="13"/>
+        </Grid>
+        
+    </DataTemplate>
+
     <Style x:Key="MenuTabRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
         <Setter Property="Background" Value="{Binding Background}"/>
         <Setter Property="ContentTemplate" Value="{StaticResource TabButtonStyleDataTemplate}"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Height" Value="auto"/>
-        <Setter Property="ContentTemplate" Value="{StaticResource TabButtonStyleDataTemplate}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Setter Property="BorderBrush" Value="{Binding FocusBackground}"/>
-        
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="true">
                 <Setter Property="Background" Value="{Binding FocusBackground}"/>
@@ -50,6 +65,11 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="SubMenuTabRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MenuTabRadioButtonStyle}">
+        <Setter Property="ContentTemplate" Value="{StaticResource SubtabButtonTemplate}"/>
+        <Setter Property="Padding" Value="7"/>
+    </Style>
+    
     <Style x:Key="SmallTabButtonStyle" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
         <Setter Property="Height" Value="auto"/>
         <Setter Property="FontSize" Value="10"/>

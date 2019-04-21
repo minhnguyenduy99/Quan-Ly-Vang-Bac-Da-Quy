@@ -33,13 +33,43 @@ namespace UIProject.ServiceProviders
         {
             Fade(control, from, to);
         }
+        public static async Task SlideAndFadeAsync(FrameworkElement control, SlideAnimationMode mode, double from, double to)
+        {
+            SlideAndFade(control, mode, from, to);
+        }
+
+        public static void SlideAndFade(FrameworkElement control, SlideAnimationMode mode, double from, double to)
+        {
+            if (mode == SlideAnimationMode.None)
+                return;
+
+            control.Visibility = Visibility.Hidden;
+
+            var slideAnimation = CreateSlideAnimation(
+               control.ActualWidth,
+               control.ActualHeight,
+               mode,
+               TimeSpan);
+
+            var fadeAnimation = CreateFadeAnimation(from, to, TimeSpan);
+
+            var sb = new Storyboard();
+            sb.Children.Add(slideAnimation);
+            sb.Children.Add(fadeAnimation);
+
+            sb.Begin(control);
+
+            if (to == 0)
+                control.Visibility = Visibility.Collapsed;
+            else
+                control.Visibility = Visibility.Visible;
+        }
 
         public static void Slide(FrameworkElement control, SlideAnimationMode mode)
         {
             if (mode == SlideAnimationMode.None)
                 return;
 
-            control.Visibility = Visibility.Hidden;
 
             var slideAnimation = CreateSlideAnimation(
                 control.ActualWidth,
@@ -50,14 +80,11 @@ namespace UIProject.ServiceProviders
             var sb = new Storyboard();
             sb.Children.Add(slideAnimation);            
 
-            sb.Begin(control);
-
-            control.Visibility = Visibility.Visible;          
+            sb.Begin(control);      
         }
 
         public static void Fade(FrameworkElement control, double from, double to)
         {
-
             var fadeInAnimation = CreateFadeAnimation(from, to, TimeSpan);
 
             var sb = new Storyboard();

@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}"
-                   Text="Xin chào quý khách">
+                               Text="Xin chào quý khách">
                     </TextBlock>
                     <TextBlock Margin="0 10 0 0"
                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
@@ -65,20 +65,8 @@
             </Grid>
             <materialDesign:Card Margin="0 50 0 0"
                              materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                <StackPanel>
-                    <Expander HeaderTemplate="{StaticResource ExpanderHeaderTemplate}"
-                          BorderBrush="LightGray"
-                          Background="White">
-                    </Expander>
-                    <Expander HeaderTemplate="{StaticResource ExpanderHeaderTemplate}"
-                          BorderBrush="LightGray"
-                          Background="White">
-                    </Expander>
-                    <Expander HeaderTemplate="{StaticResource ExpanderHeaderTemplate}"
-                          BorderBrush="LightGray"
-                          Background="White">
-                    </Expander>
-                </StackPanel>
+                <ListBox ItemTemplate="{StaticResource TinhTrangDonHangTemplate}"
+                         ItemsSource="{Binding ListOrderStatus}"/>
             </materialDesign:Card>
         </StackPanel>
         <StackPanel Grid.Column="2"

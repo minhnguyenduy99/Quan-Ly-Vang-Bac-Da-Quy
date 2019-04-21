@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using static UIProject.ViewModels.TabViewModel;
+using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.Views
 {
@@ -43,17 +44,46 @@ namespace UIProject.Views
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            SetupTabState();
+            SetupBindingTabControl();
             await AnimationHelper.FadeAsync(this, 0f, 1f);
         }
 
-        private void SetupTabState()
+        private void SetupBindingTabControl()
         {
-            var tabs = TabsContainer.Children.OfType<RadioButton>();
-            for(int i=0;i<tabs.Count();i++)
+            var tabs = TabsContainer.Children;
+            int count = 0;
+            for(int i=0;i<tabs.Count;i++)
             {
-                tabs.ElementAt(i).DataContext = tabs.ElementAt(i).Content = (DataContext as HomePageWindowViewModel).ListTabs[i];
+                if (tabs[i] is RadioButton)
+                {                  
+                    var radioButtonTab = tabs[i] as RadioButton;
+                    radioButtonTab.DataContext = radioButtonTab.Content = (DataContext as HomePageWindowViewModel).ListTabs[count];
+                    count++;
+                }
+                else
+                {
+                    if (tabs[i] is StackPanel)
+                    { 
+                        SetupExpander(tabs[i] as StackPanel, count - 1);
+                        count++;
+                    }
+                }
             }
+        }
+
+        private void SetupExpander(StackPanel subtab, int viewModelIndex)
+        {
+            var tabs = subtab.Children.OfType<RadioButton>();
+            var expanderTabVM = (DataContext as HomePageWindowViewModel).ListTabs[viewModelIndex] as ExpandTabViewModel;
+            for (int i = 0; i < tabs.Count(); i++)
+            {
+                tabs.ElementAt(i).DataContext = tabs.ElementAt(i).Content = expanderTabVM.Children[i];
+            }
+        }
+
+        private void Collapsed_tab(object sender, RoutedEventArgs e)
+        {
+            IconGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:UIProject"
-             StartupUri="./Test/TestWindow.xaml"
+             StartupUri="./Views/LoginWindow.xaml"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
         <ResourceDictionary>
@@ -29,6 +29,15 @@
                         <ResourceDictionary Source="./Styles/InfoCardStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/TabControlStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/TextBoxStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
+                <!-- Custom templates for data displayed -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/TinhTrangDonHangTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/SanPhamTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

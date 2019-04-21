@@ -100,7 +100,6 @@
                     <TextBox Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              Margin="5"
-                             FlowDirection="RightToLeft"
                              materialDesign:HintAssist.Hint="Chiết khấu"/>
                 </Grid>
             </Grid>
@@ -133,7 +132,6 @@
                         VerticalAlignment="Center"
                         Margin="10 5 10 5"
                         materialDesign:HintAssist.Hint="Nhập số tiền khách phải trả"
-                        FlowDirection="RightToLeft"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -147,7 +145,6 @@
                            VerticalAlignment="Center"/>
                     <Label Grid.Column="1"
                            Margin="0 10 0 0"
-                           FlowDirection="RightToLeft"
                            VerticalAlignment="Center"
                            Style="{StaticResource SmallDefinedLabelStyle}"
                            Content="{Binding ModelData.MoneyBack}"/>

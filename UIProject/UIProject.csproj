@@ -64,6 +64,7 @@
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\DialogWindowTypeConverter.cs" />
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
+    <Compile Include="Converters\TabCheckedToVisibilityConverter.cs" />
     <Compile Include="Converters\TabNameToTabViewModelConverter.cs" />
     <Compile Include="CustomControls\InfoCardLabel.xaml.cs">
       <DependentUpon>InfoCardLabel.xaml</DependentUpon>
@@ -71,6 +72,7 @@
     <Compile Include="CustomControls\SearchTextBox.xaml.cs">
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataValidation\PositiveNumberValidation.cs" />
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
     </Compile>
@@ -80,7 +82,11 @@
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FunctionInterfaces\IExpandableVM.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\BaseHeaderedControlViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\ExpandTabViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseContentViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\BaseHeaderViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
@@ -154,6 +160,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomControlTemplates\CustomExpanderTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomControlTemplates\InvalidateDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomDataTemplates\TinhTrangDonHangTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,5 +275,6 @@
   <ItemGroup>
     <Resource Include="Images\paymethod_icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

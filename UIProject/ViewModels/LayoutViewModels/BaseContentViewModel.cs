@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace UIProject.ViewModels.LayoutViewModels
@@ -50,7 +51,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// Base view model for ContentControl without a specified Data Model
     /// </summary>
-    public abstract class BaseContentViewModel : BaseViewModel
+    public class BaseContentViewModel : BaseViewModel
     {
         private string iconSource;
 
@@ -77,5 +78,15 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// The background of tab when it is focused or hover
         /// </summary>
         public Brush FocusBackground { get; set; } = Brushes.LightGray;
+
+
+        /// <summary>
+        /// The default style for the view model
+        /// </summary>
+        protected virtual void SetDefaultStyle()
+        {
+            this.Background = (Brush)Application.Current.FindResource("RoyalBlue");
+            this.Foreground = Brushes.White;
+        }
     }
 }

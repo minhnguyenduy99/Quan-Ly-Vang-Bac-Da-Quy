@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates">
+    <DataTemplate x:Key="TinhTrangDonHangTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Width="70"
+                   Margin="10"
+                   Stretch="Uniform"
+                   Source="{Binding IconSource}"/>
+            <Label Style="{DynamicResource DefinedLabelStyle}"
+                   Margin="20 10 10 10"
+                   Foreground="{DynamicResource AirForceBlue}"
+                   Content="{Binding Count}"/>
+            <Label Style="{DynamicResource DefinedLabelStyle}"
+                   Foreground="{DynamicResource AirForceBlue}"
+                   Margin="20 10 10 10"
+                   Content="{Binding OrderInfo}"/>
+        </Grid>
+    </DataTemplate>
+    
+</ResourceDictionary>
