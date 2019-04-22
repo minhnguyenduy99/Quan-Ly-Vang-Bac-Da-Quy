@@ -2,61 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Styles">
     <!-- Listbox item template -->
-    <DataTemplate x:Key="ProductItemDataTemplate">
-        <Border x:Name="OuterBorder"
-                BorderThickness="0"
-                BorderBrush="Transparent"
-                Width="200"
-                VerticalAlignment="Stretch"
-                Margin="10">
-            <StackPanel VerticalAlignment="Stretch"
-                        Orientation="Vertical">
-                <Image Source="{Binding ModelData.ImageSource}"
-                       Height="70"
-                       Stretch="Uniform"/>
-                <Label Style="{DynamicResource SmallDefinedLabelStyle}">
-                    <TextBlock TextWrapping="NoWrap"
-                               Text="{Binding ModelData.ProductName}"/>
-                </Label>
-                <StackPanel Orientation="Horizontal">
-                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
-                           FontWeight="Bold"
-                           Content="{Binding ModelData.Price}"/>
-                    <Label Style="{DynamicResource SmallDefinedLabelStyle}"
-                           FontWeight="Bold"
-                           Content="{Binding ModelData.Quantity}"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-        <DataTemplate.Triggers>
+    <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle" BasedOn="{StaticResource MaterialDesignToolToggleListBoxItem}">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="MinWidth" Value="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}}"/>
+        <Setter Property="MinHeight" Value="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                             Storyboard.TargetName="OuterBorder"
-                                             From="0.5" To="1"
-                                             Duration="0:0:0.4"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                             Storyboard.TargetName="OuterBorder"
-                                             From="1" To="0.5"
-                                             Duration="0:0:0.4"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
-        </DataTemplate.Triggers>
-    </DataTemplate>
+        </Style.Triggers>
+    </Style>
     
     <!-- ListBox style to display product in the BanHang page -->
     <Style TargetType="ListBox" x:Key="ProductItemDisplayedListBoxStyle">
-        <Setter Property="ItemTemplate" Value="{StaticResource ProductItemDataTemplate}"/>
+        <Setter Property="ItemTemplate" Value="{DynamicResource ProductItemDataTemplate}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItemStyle}"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -66,10 +31,5 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

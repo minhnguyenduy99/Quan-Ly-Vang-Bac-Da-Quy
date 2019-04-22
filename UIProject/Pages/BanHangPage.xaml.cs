@@ -25,17 +25,15 @@ namespace UIProject.Pages
         {
             InitializeComponent();
 
-            var product = new
-            {
-                
-            };
-
-            this.ProductView.ItemsSource = new ObservableCollection<Product>()
+            var listProducts = new ObservableCollection<Product>()
             {
                 new Product(),
                 new Product(),
                 new Product()
             };
+
+            this.ProductView.ItemsSource = listProducts;
+            this.ProductDisplayed.ItemsSource = listProducts;
         }
     }
 
@@ -52,11 +50,12 @@ namespace UIProject.Pages
         public double Tax { get; set; }
         public long TotalMoney { get; set; }
 
+        public string ProductImageSource { get; set; }
         public Product()
         {
             No = 1;
             OrderCode = "PD001";
-            ProductName = "Jewel";
+            ProductName = "Jewelnafnakgnaknglanlgkaetea";
             ProductType = "Gold";
             Unit = "a";
             Quantity = 0;
@@ -64,6 +63,7 @@ namespace UIProject.Pages
             Discount = 0.04;
             Tax = 0.05;
             TotalMoney = 20000;
+            ProductImageSource = (string)Application.Current.FindResource("SoftwareIcon");
         }
     }
 }

@@ -20,7 +20,7 @@ namespace UIProject.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return new BanHangPage();
+                return new DanhSachDonHangPage();
             return GetPageInstance(value);
         }
 
@@ -38,7 +38,7 @@ namespace UIProject.Converters
         {
             if (pageVM.GetType() == typeof(TongQuanPageVM))
                 return new TongQuanPage() { DataContext = pageVM };
-            return new BanHangPage();          
+            return new DanhSachDonHangPage();
         }
     }
 }

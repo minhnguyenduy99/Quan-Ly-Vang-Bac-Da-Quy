@@ -18,7 +18,7 @@
     </Style>
     
     <!-- Label for big title -->
-    <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="TitleLabelStyle">
+    <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="LargeLabelStyle">
         <Setter Property="FontSize" Value="25"/> 
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontWeight" Value="Light"/>
@@ -30,7 +30,12 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontWeight" Value="Light"/>
     </Style>
-    
+
+    <Style TargetType="Label" BasedOn="{StaticResource DefinedLabelStyle}" x:Key="SmallDefinedLabelStyle">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+
     <!-- Label for link style -->
     <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="LinkLabelStyle">
         <Setter Property="FontSize" Value="15"/>
@@ -41,11 +46,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
 
-    <Style TargetType="Label" BasedOn="{StaticResource DefinedLabelStyle}" x:Key="SmallDefinedLabelStyle">
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="Gray"/>
-    </Style>
 
     <Style TargetType="{x:Type Hyperlink}" x:Key="CustomHyperlinkStyle">
         <Setter Property="FontStyle" Value="Oblique"/>

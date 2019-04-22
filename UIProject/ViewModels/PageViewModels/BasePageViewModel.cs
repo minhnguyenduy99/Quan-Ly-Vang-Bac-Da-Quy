@@ -15,5 +15,6 @@ namespace UIProject.ViewModels.PageViewModels
     /// </summary>
     public abstract class BasePageViewModel : BaseViewModel
     {
+
     }
 }

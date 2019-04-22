@@ -29,15 +29,23 @@
                         <ResourceDictionary Source="./Styles/InfoCardStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/TabControlStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/TextBoxStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/ListBoxStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/DataGridStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 
                 <!-- Custom templates for data displayed -->
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
+                        
+                        <!-- Data templates -->
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/TinhTrangDonHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/SanPhamTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/TabThanhToanTemplate.xaml"/>
+                        
+                        <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

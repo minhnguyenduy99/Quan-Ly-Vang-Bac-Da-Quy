@@ -35,6 +35,8 @@ namespace UIProject.Views
 
             this.Loaded += MainWindow_Loaded;
             this.Closed += MainWindow_Closed;
+
+            
         }
 
         private async void MainWindow_Closed(object sender, EventArgs e)
