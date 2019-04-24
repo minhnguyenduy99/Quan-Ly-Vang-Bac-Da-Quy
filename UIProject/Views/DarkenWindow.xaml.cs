@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for InfoDialogWindow.xaml
+    /// Interaction logic for DarkenWindow.xaml
     /// </summary>
-    public partial class InfoDialogWindow : Window
+    public partial class DarkenWindow : Window
     {
-        public InfoDialogWindow()
+        public DarkenWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
+        }
+
+        public DarkenWindow(Page page) : this()
+        {
+            PART_PAGE.Content = page;
         }
     }
 }

@@ -43,10 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataViewModels\AccountVM.cs" />
-    <Compile Include="DataViewModels\NhanVienVM.cs" />
-    <Compile Include="Models\AccountModel.cs" />
-    <Compile Include="Models\NhanVienModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

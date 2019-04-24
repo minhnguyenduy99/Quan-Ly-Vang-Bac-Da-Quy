@@ -6,7 +6,7 @@
     <Style TargetType="{x:Type Window}"  x:Key="CustomWindowStyle">
         <Setter Property="Background" Value="{Binding}"/>
         <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
@@ -25,49 +25,48 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0"
-                              Background="White"
-                              Visibility="{Binding NavigationBarVisibility}">
+                                  Background="White"
+                                  Visibility="{Binding NavigationBarVisibility}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <Image Source="{Binding IconSource}"
-                                       Stretch="Fill"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Margin="10 5 0 5"
-                                       Width="30"
-                                       WindowChrome.IsHitTestVisibleInChrome="True"/>
+                                           Stretch="Fill"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Margin="10 5 0 5"
+                                           Width="30"
+                                           WindowChrome.IsHitTestVisibleInChrome="True"/>
                             </Grid>
                             <StackPanel Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        HorizontalAlignment="Right"
-                                        >
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
                                 <Button x:Name="MinimizedButton"
-                                        Margin="5"
-                                        WindowChrome.IsHitTestVisibleInChrome="True"
-                                        IsEnabled="{Binding CanMinimized}"
-                                        Command="{Binding MinimizedCommand}"
-                                        VerticalContentAlignment="Center"
-                                        HorizontalContentAlignment="Center">
+                                            Margin="5"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
+                                            IsEnabled="{Binding CanMinimized}"
+                                            Command="{Binding MinimizedCommand}"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center">
                                     <materialDesign:PackIcon Kind="WindowMinimize" />
                                 </Button>
                                 <Button x:Name="MaximizedButton"
-                                        Margin="5"
-                                        WindowChrome.IsHitTestVisibleInChrome="True"
-                                        IsEnabled="{Binding CanMaximized}"
-                                        Command="{Binding MaximizedCommand}">
+                                            Margin="5"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
+                                            IsEnabled="{Binding CanMaximized}"
+                                            Command="{Binding MaximizedCommand}">
                                     <materialDesign:PackIcon Kind="WindowMaximize" />
                                 </Button>
                                 <Button x:Name="ExitButton"
-                                        Margin="5"                      
-                                        FontSize="15"
-                                        Padding="20 0 20 0"
-                                        Content="_X"
-                                        WindowChrome.IsHitTestVisibleInChrome="True"
-                                        Command="{Binding ExitCommand}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/>
+                                            Margin="5"                      
+                                            FontSize="15"
+                                            Padding="20 0 20 0"
+                                            Content="_X"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
+                                            Command="{Binding ExitCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/>
                             </StackPanel>
                         </Grid>
                         <ContentPresenter Grid.Row="1"/>
@@ -79,11 +78,9 @@
 
     <!-- Dialog Window Style-->
     <Style TargetType="{x:Type Window}" BasedOn="{StaticResource CustomWindowStyle}" x:Key="CustomDialogWindowStyle">
-        <Setter Property="WindowChrome.CaptionHeight" Value="0"></Setter>
         <Setter Property="ResizeMode" Value="NoResize"/>
-        <Setter Property="SizeToContent" Value="Manual"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="Height" Value="100"/>
+        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        <Setter Property="WindowChrome.WindowChrome" Value="{x:Null}"/>
     </Style>
 
 </ResourceDictionary>

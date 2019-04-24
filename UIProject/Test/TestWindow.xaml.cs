@@ -40,7 +40,7 @@ namespace UIProject.Test
 
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.PART_PAGE.Content = new BanHangPage();
+            this.PART_PAGE.Content = new DanhSachDonHangPage();
         }
     }
 }

@@ -45,8 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseMVVM\BaseCommand.cs" />
-    <Compile Include="BaseMVVM\BaseDataModel.cs" />
-    <Compile Include="BaseMVVM\BaseDataViewModel.cs" />
     <Compile Include="BaseMVVM\BaseViewModel.cs" />
     <Compile Include="BaseMVVM\ObservableObject.cs" />
     <Compile Include="Program.cs" />

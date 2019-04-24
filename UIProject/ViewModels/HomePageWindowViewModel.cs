@@ -1,5 +1,4 @@
-﻿using ModelProject.DataViewModels;
-using UIProject.ViewModels.LayoutViewModels;
+﻿using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ViewModels.PageViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ using System.Windows.Media;
 
 using static UIProject.ViewModels.TabViewModel;
 using static UIProject.ViewModels.LayoutViewModels.ExpandTabViewModel;
-using ModelProject.Models;
 
 namespace UIProject.ViewModels
 {
@@ -26,17 +24,11 @@ namespace UIProject.ViewModels
         {
             "Tổng quan",
             "Bán hàng",
-            "Đơn hàng",
             "Tạo đơn hàng",
             "Danh sách đơn hàng",
-            "Quản lý giao hàng",
-            "Khách trả hàng",
-            "Khách hàng & đối tác",
             "Khách hàng",
             "Đối tác",
             "Sản phẩm",
-            "Danh sách sản phẩm",
-            "Quản lý kho",
             "Dịch vụ",
         };
         #endregion
@@ -117,41 +109,25 @@ namespace UIProject.ViewModels
             {
                 CreateTabViewModel(ListTabNames[0], "Tab_TongQuan", TabState.New),
                 CreateTabViewModel(ListTabNames[1], "SoftwareIcon", TabState.New),
-                CreateExpandTabViewModel(ListTabNames[2], "SoftwareIcon", TabState.New,
-                    new List<BaseContentViewModel>()
-                    {
-                        CreateTabViewModel(ListTabNames[3], "SoftwareIcon", TabState.New),
-                        CreateTabViewModel(ListTabNames[4], "SoftwareIcon", TabState.New),
-                        CreateTabViewModel(ListTabNames[5], "SoftwareIcon", TabState.New),
-                        CreateTabViewModel(ListTabNames[6], "SoftwareIcon", TabState.New),
-                    }),
-                CreateExpandTabViewModel(ListTabNames[7], "SoftwareIcon", TabState.New,
-                    new List<BaseContentViewModel>()
-                    {
-                        CreateTabViewModel(ListTabNames[8], "SoftwareIcon", TabState.New),
-                        CreateTabViewModel(ListTabNames[9], "SoftwareIcon", TabState.New),
-                    }),
-                CreateExpandTabViewModel(ListTabNames[10], "SoftwareIcon", TabState.New,
-                    new List<BaseContentViewModel>()
-                    {
-                        CreateTabViewModel(ListTabNames[11], "SoftwareIcon", TabState.New),
-                        CreateTabViewModel(ListTabNames[12], "SoftwareIcon", TabState.New),
-                    }),
+                CreateTabViewModel(ListTabNames[2], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[3], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[4], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[5], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[6], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[7], "SoftwareIcon", TabState.New),
             };
 
             //  Set up pages to corresponding tabs
             TabPageVM = new Dictionary<string, BasePageViewModel>();
 
-            TabPageVM.Add(ListTabs[0].TabName, new TongQuanPageVM());
-            TabPageVM.Add(ListTabs[1].TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[2]).Children[0]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[2]).Children[1]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[2]).Children[2]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[2]).Children[3]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[3]).Children[0]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[3]).Children[1]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[4]).Children[0]).TabName, null);
-            TabPageVM.Add(((TabViewModel)((ExpandTabViewModel)ListTabs[4]).Children[1]).TabName, null);
+            TabPageVM.Add(ListTabNames[0], new TongQuanPageVM());
+            TabPageVM.Add(ListTabNames[1], new BanHangPageVM());
+            TabPageVM.Add(ListTabNames[2], null);
+            TabPageVM.Add(ListTabNames[3], null);
+            TabPageVM.Add(ListTabNames[4], null);
+            TabPageVM.Add(ListTabNames[5], null);
+            TabPageVM.Add(ListTabNames[6], null);
+            TabPageVM.Add(ListTabNames[7], null);
 
             SubcribeTabChangedEvent();
         }
@@ -164,15 +140,7 @@ namespace UIProject.ViewModels
             //  Subcribe the FocusTabChanged event of tab by hooking the OnCurrentTabChanged method 
             foreach (var tab in ListTabs)
             {
-                if (tab is TabViewModel)
-                    tab.TabSelected += OnCurrentTabChanged;
-                else
-                {
-                    foreach (var subtab in ((ExpandTabViewModel)tab).Children)
-                    {
-                        ((TabViewModel)subtab).TabSelected += OnCurrentTabChanged;
-                    }
-                }
+                tab.TabSelected += OnCurrentTabChanged;
             }
         }
     }

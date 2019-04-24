@@ -1,6 +1,4 @@
-﻿using ModelProject.Models;
-using ModelProject.DataViewModels;
-using UIProject.ViewModels.LayoutViewModels;
+﻿using UIProject.ViewModels.LayoutViewModels;
 using UIProject.Views;
 using System;
 using System.Collections.Generic;
