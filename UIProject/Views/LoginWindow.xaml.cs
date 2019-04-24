@@ -86,7 +86,9 @@ namespace UIProject
                 {
                     CanMaximized = false,
                     CanMinimized = false,
-                    DialogType = DialogWindowType.Waiting,                   
+                    MessageText = "Vui lòng đợi",
+                    Background = Brushes.White,
+                    DialogType = DialogWindowType.WaitingMessage,                   
                 });
 
             waitingDialog.Owner = this;

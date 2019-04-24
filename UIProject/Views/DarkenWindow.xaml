@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="DarkenWindow"
         WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Black"
-        Opacity="0.4"
-        WindowState="Maximized">
-    <Frame x:Name="PART_PAGE"
-           VerticalAlignment="Center"
-           HorizontalAlignment="Center"></Frame>
+        SizeToContent="WidthAndHeight">
+    <Grid>
+        <Frame x:Name="PART_PAGE"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Opacity="1"></Frame>
+    </Grid>
 </Window>

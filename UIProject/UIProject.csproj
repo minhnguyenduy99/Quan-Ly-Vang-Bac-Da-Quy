@@ -127,8 +127,8 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrderFilterWindow.xaml.cs">
-      <DependentUpon>OrderFilterWindow.xaml</DependentUpon>
+    <Compile Include="Views\OrderFilterDialogWindow.xaml.cs">
+      <DependentUpon>OrderFilterDialogWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
       <SubType>Designer</SubType>
@@ -273,7 +273,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderFilterWindow.xaml">
+    <Page Include="Views\OrderFilterDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

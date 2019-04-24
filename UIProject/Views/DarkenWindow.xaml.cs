@@ -26,8 +26,6 @@ namespace UIProject.Views
 
         public DarkenWindow(Page page) : this()
         {
-            this.Opacity = 0.4;
-
             PART_PAGE.Content = page;
         }
     }

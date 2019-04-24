@@ -14,9 +14,12 @@ namespace UIProject.ViewModels.LayoutViewModels
     public enum DialogWindowType
     {
         Waiting,
+        WaitingMessage,
         WaitingCancel,
+        WaitingMessageCancel,
         YesNo,
-        Info
+        Info,
+        None
     }
 
     /// <summary>

@@ -7,6 +7,5 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Style="{StaticResource CustomDialogWindowStyle}"
-        Background="White"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
 </Window>

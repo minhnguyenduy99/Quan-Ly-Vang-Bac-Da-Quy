@@ -17,22 +17,20 @@ using UIProject.ViewModels.LayoutViewModels;
 namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for OrderFilterWindow.xaml
+    /// Interaction logic for OrderFilterDialogWindow.xaml
     /// </summary>
-    public partial class OrderFilterWindow : Window, IClosable
+    public partial class OrderFilterDialogWindow : Window, IClosable
     {
-        
-        public OrderFilterWindow()
+        public OrderFilterDialogWindow()
         {
             InitializeComponent();
-            DataContext = new DialogWindowViewModel()
-            {
-                NavigationBarVisibility = Visibility.Collapsed,
-                CanMaximized = false,
-                CanMinimized = false,
-                WindowState = WindowState.Normal,
-                Title = string.Empty
-            };
+            this.DataContext = new DialogWindowViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

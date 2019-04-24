@@ -14,6 +14,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ViewModels.LayoutViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -30,16 +31,10 @@ namespace UIProject.Pages
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)
         {
-            this.Opacity = 0.4;
-            this.Background = Brushes.Black;
-            this.Effect = new BlurEffect();
+            OrderFilterDialogWindow orderFilterWnd = new OrderFilterDialogWindow();
+            orderFilterWnd.ShowDialog();
 
-            var filterWnd = new OrderFilterWindow();
 
-            filterWnd.ShowDialog();
-
-            this.Opacity = 1;
-            this.Background = Brushes.WhiteSmoke;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace UIProject.Views
         public DialogPopupWindow()
         {
             InitializeComponent(); 
-
         }
 
         public DialogPopupWindow(DialogWindowViewModel dialogWindowVM) : this()
@@ -42,21 +41,29 @@ namespace UIProject.Views
             {
                 case DialogWindowType.Waiting: this.ContentTemplate = GetDialogContentTemplate("WaitingDialogTemplate");break;
                 case DialogWindowType.YesNo: this.ContentTemplate = GetDialogContentTemplate("YesNoDialogTemplate");break;
+                case DialogWindowType.WaitingMessage: this.ContentTemplate = GetDialogContentTemplate("WaitingMessageDialogTemplate");break;
+                case DialogWindowType.WaitingMessageCancel: this.ContentTemplate = GetDialogContentTemplate("WaitingMessageCancelTemplate");break;
             }
         }
 
+
+        public void ApplyCustomTemplateForViewModel(string resource)
+        {
+            this.ContentTemplate = GetDialogContentTemplate(resource);
+        }
 
         private DataTemplate GetDialogContentTemplate(string resource)
         {
             return (DataTemplate)Application.Current.FindResource(resource);
         }
 
-
+        
         public void ApplyViewModel(BaseViewModel viewModel)
         {
             this.ViewModel = viewModel;
 
-            this.DataContext = this.ViewModel;
-        }
+            this.DataContext = viewModel;
+            this.Content = viewModel;
+        }      
     }
 }

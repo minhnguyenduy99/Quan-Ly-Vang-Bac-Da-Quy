@@ -18,47 +18,80 @@
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate x:Key="WaitingDialogTemplate">
-        <Grid Background="White"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Width="100"
-              Height="100">
-            <ProgressBar 
+        <Border Background="{Binding Background}"
+                CornerRadius="15"
+                BorderThickness="1"
+                BorderBrush="LightGray">
+            <Grid 
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <ProgressBar Margin="50 30"
+                             Width="50"
+                             Height="50"
+                             Style="{StaticResource MaterialDesignCircularProgressBar}"
+                             Value="0"
+                             IsIndeterminate="True"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="WaitingMessageDialogTemplate">
+        <Border Background="{Binding Background}"
+                CornerRadius="15"
+                BorderThickness="1"
+                BorderBrush="LightGray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource LargeLabelStyle}"
+                   Content="{Binding MessageText}"
+                   Foreground="Black"
+                   Margin="50 20 50 20"/>
+                <ProgressBar Grid.Row="1"
+                         Margin="0 10 0 20"
                          Width="50"
                          Height="50"
                          Style="{StaticResource MaterialDesignCircularProgressBar}"
                          Value="0"
                          IsIndeterminate="True"/>
-        </Grid>
+            </Grid>
+        </Border>
     </DataTemplate>
-
+    
+    
     <DataTemplate x:Key="YesNoDialogTemplate">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Style="{StaticResource LargeLabelStyle}"
-                   Content="{Binding MessageText}"/>
-            <Button Grid.Column="0"
+        <Border Background="{Binding Background}"
+                CornerRadius="15"
+                BorderThickness="1"
+                BorderBrush="LightGray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Style="{StaticResource LargeLabelStyle}"
+                       Content="{Binding MessageText}"/>
+                <Button Grid.Column="0"
                         x:Name="Yes"
                         HorizontalAlignment="Center"
                         Content="{Binding YesText}"
                         Margin="10"
                         Command="{Binding YesButtonPressedCommand}"
-                        Width="100"
-                        />
-            <Button Grid.Column="1"
+                        Width="100"/>
+                <Button Grid.Column="1"
                         x:Name="No"
                         Margin="10"
                         Width="100"
                         HorizontalAlignment="Center"
                         Content="{Binding NoText}"
                         Command="{Binding NoButtonPressedCommand}"/>
-        </Grid>
+            </Grid>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>
