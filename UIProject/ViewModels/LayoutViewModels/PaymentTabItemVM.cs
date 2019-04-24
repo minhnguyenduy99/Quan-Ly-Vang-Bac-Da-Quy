@@ -27,7 +27,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// The view model of Payment tab item 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PaymentTabItemVM<T> : BaseTabItemVM<T>, IDataErrorInfo
+    public class PaymentTabItemVM : TabViewModel
     {
         public readonly double DEFAULT_VAT = 0.1;
 

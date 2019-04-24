@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
-    public class CustomerTabItemVM<T> : BaseTabItemVM<T>
+    public class CustomerTabItemVM : BaseTabItemVM
     {
         private string typingCustomerName;
 

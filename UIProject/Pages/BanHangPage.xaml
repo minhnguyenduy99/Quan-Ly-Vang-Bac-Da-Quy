@@ -12,7 +12,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="239"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -43,7 +43,7 @@
                 <!-- Menu grid view -->
                 <DataGrid Grid.Row="0"
                           x:Name="ProductView"
-                          Margin="10 8 10 5"
+                          Margin="10 8 5 5"
                           ItemsSource="{Binding Items3}"
                           CanUserSortColumns="True"
                           CanUserAddRows="False"
@@ -62,11 +62,12 @@
                                             Header="STT"
                                             HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                             CellStyle="{StaticResource CenteredDataGridCell}"/>
-                        <DataGridTextColumn Width="100"
+                        <DataGridTextColumn Width="80"
                                             Binding="{Binding OrderCode}"
                                             Header="Mã hàng"
                                             TextBlock.TextAlignment="Right"
                                             IsReadOnly="True"
+                                            CanUserSort="False"
                                             HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                             CellStyle="{StaticResource CenteredDataGridCell}"/>
                         <DataGridTextColumn Width="130"
@@ -77,6 +78,7 @@
                                             HeaderStyle="{StaticResource LeftDataGridHeader}"
                                             CellStyle="{StaticResource LeftDataGridCell}"/>
                         <DataGridTextColumn Width="130"
+                                            CanUserSort="False"
                                             Binding="{Binding ProductType}"
                                             Header="Loại sản phẩm"                                           
                                             IsReadOnly="True"
@@ -84,6 +86,7 @@
                                             CellStyle="{StaticResource CenteredDataGridCell}"/>
                         <DataGridTextColumn Width="110"
                                             Binding="{Binding Unit}"
+                                            CanUserSort="False"
                                             Header="Đơn vị tính"
                                             TextBlock.TextAlignment="Center"
                                             IsReadOnly="True"
@@ -94,6 +97,7 @@
                                             Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             HeaderStyle="{StaticResource RightDataGridHeader}"
                                             CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"
                                             IsReadOnly="False"/>
                         <DataGridTextColumn Width="100"
                                             Binding="{Binding SinglePrice}"
@@ -102,31 +106,58 @@
                                             IsReadOnly="True"
                                             HeaderStyle="{StaticResource RightDataGridHeader}"
                                             CellStyle="{StaticResource RightDataGridCell}"/>
-                        <DataGridTextColumn Width="110"
+                        <DataGridTextColumn Width="120"
+                                            CanUserSort="False"
                                             TextBlock.TextAlignment="Right"
                                             IsReadOnly="False"
                                             Binding="{Binding Discount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Header="Chiết khấu"
                                             HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"/>
-                        <DataGridTextColumn Width="100"
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                        <DataGridTextColumn Width="90"
                                             Binding="{Binding Tax}"
                                             Header="Thuế (%)"
                                             TextBlock.TextAlignment="Right"
                                             IsReadOnly="False"
+                                            CanUserSort="False"
                                             HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"/>
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                         <DataGridTextColumn Width="120"
                                             Binding="{Binding TotalMoney}"
                                             Header="Thành tiền"
                                             TextBlock.TextAlignment="Right"
                                             IsReadOnly="True"
+                                            CanUserSort="False"                                           
                                             HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"/>
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                        <DataGridTemplateColumn Width="30"
+                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                            VerticalAlignment="Center"
+                                            ToolTip="Xóa sản phẩm khỏi đơn hàng"
+                                            Padding="5"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            HorizontalAlignment="Center"
+                                            BorderThickness="0">
+                                        <materialDesign:PackIcon Kind="RemoveCircle" 
+                                                                 Margin="0"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Row="1"
-                      Margin="10 5 10 5"
+                      Margin="10 5 5 5"
                       Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -150,8 +181,8 @@
                         </StackPanel>
                     </Border>
                     <Grid Grid.Column="1"
-                      Margin="5 0 0 0"
-                      Background="White">
+                          Margin="5 0 0 0"
+                          Background="White">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
@@ -160,15 +191,14 @@
                            Margin="7"
                            Content="Sản phẩm gần đây"/>
                         <ListBox x:Name="ProductDisplayed"
-                             Grid.Row="1"
-                             Style="{StaticResource ProductItemDisplayedListBoxStyle}"
-                             BorderThickness="0"
-                             BorderBrush="Transparent"
-                             ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                 Grid.Row="1"
+                                 Style="{StaticResource ProductItemDisplayedListBoxStyle}"
+                                 BorderThickness="0"
+                                 BorderBrush="Transparent"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Visible">
                         </ListBox>
                     </Grid>
                 </Grid>
-               
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1"

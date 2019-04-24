@@ -1,6 +1,4 @@
-﻿using ModelProject.Models;
-using ModelProject.DataViewModels;
-using UIProject.ViewModels.PageViewModels;
+﻿using UIProject.ViewModels.PageViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 
 using System;

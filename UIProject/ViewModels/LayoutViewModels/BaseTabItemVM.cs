@@ -11,7 +11,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// Base view model of tab item
     /// </summary>
     /// <typeparam name="T">The data model associating with <see cref="BaseTabItemVM{T}"/></typeparam>
-    public abstract class BaseTabItemVM<T> : BaseViewModel<T>
+    public abstract class BaseTabItemVM : BaseViewModel
     {
         private string tabName;
         private bool isSelected;

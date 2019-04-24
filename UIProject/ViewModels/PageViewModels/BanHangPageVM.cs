@@ -22,7 +22,13 @@ namespace UIProject.ViewModels.PageViewModels
             get => GetPropertyValue<string>();
             set => SetProperty(value);
         }
-            
-        
+
+        public BanHangPageVM() : base() { }
+
+        protected override void LoadPageComponents()
+        {
+            TakeFullScreen = true;
+        }
+
     }
 }

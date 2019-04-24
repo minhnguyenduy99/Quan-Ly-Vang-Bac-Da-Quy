@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using ModelProject.Models;
 using UIProject.ViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ServiceProviders;
@@ -54,7 +53,6 @@ namespace UIProject
             await AnimationHelper.FadeAsync(this, 1f, 0f);
         }
 
-
         private async void LoginWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await AnimationHelper.FadeAsync(this, 0f, 1f);
@@ -83,16 +81,15 @@ namespace UIProject
 
         private async void ProcessLogin()
         {
-            DialogPopupWindow waitingDialog = new DialogPopupWindow()
-            {
-                DataContext = new DialogWindowViewModel()
+            DialogPopupWindow waitingDialog = new DialogPopupWindow(
+                new DialogWindowViewModel()
                 {
                     CanMaximized = false,
                     CanMinimized = false,
-                    DialogType = DialogWindowType.Waiting,
-                }
-            };
-                        
+                    DialogType = DialogWindowType.Waiting,                   
+                });
+
+            waitingDialog.Owner = this;
 
             Task<bool> loginTask = new Task<bool>(viewModel.Login);
 

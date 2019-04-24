@@ -4,19 +4,60 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UIProject.Pages"
+      xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:md="clr-namespace:ControlzEx;assembly=MaterialDesignThemes.Wpf"
       mc:Ignorable="d" 
-      Width="1070"
-      Height="700"
       Title="DanhSachDonHangPage">
     <Grid>
+        <Grid.Resources>
+            <Button Content="Close" x:Key="DialogContent"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource LargeLabelStyle}"
+        <Label Style="{StaticResource HeaderLabelStyle}"
                Margin="10"
-               FontWeight="Bold"
                Content="Đơn hàng"
                HorizontalAlignment="Left"/>
+        <Grid Grid.Row="1"
+              Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="29*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Margin="0 20 10 20" Grid.ColumnSpan="2"
+                        Orientation="Horizontal">
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Padding="20 5 20 5"
+                        Height="auto"
+                        Background="{StaticResource AirForceBlue}"
+                        Foreground="White"
+                        Click="OpenFilterWindow">
+                    _Lọc đơn hàng
+                </Button>
+                <customControls:SearchTextBox Margin="20 0 0 0"
+                                              Hint="Tìm kiếm đơn hàng"
+                                              IconSource="/Images/search_icon.png"
+                                              IconHeight="25"
+                                              TextBoxWidth="500"/>
+            </StackPanel>
+            <TabControl Grid.Row="1" Grid.ColumnSpan="2">
+                <TabItem Header="Tất cả đơn hàng"
+                         Style="{StaticResource CustomTabItemStyle}"/>
+                <TabItem Header="Đang giao dịch"
+                         Style="{StaticResource CustomTabItemStyle}"/>
+                <TabItem Header="Hoàn thành"
+                         Style="{StaticResource CustomTabItemStyle}"/>
+            </TabControl>
+        </Grid>
+
     </Grid>
 </Page>

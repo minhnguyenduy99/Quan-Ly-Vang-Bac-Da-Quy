@@ -36,4 +36,56 @@
             </StackPanel>
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="ProductItemSearchTemplate">
+        <Border BorderBrush="Gray"
+                BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        Padding="7">
+                    <Image Height="15"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Stretch="Uniform"
+                           Source="{Binding ProductImageSource}"/>
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Margin="3"
+                           HorizontalContentAlignment="Left"
+                           Style="{StaticResource MediumLabelStyle}"
+                           Content="{Binding ProductName}"/>
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Margin="3 0 3 3"
+                           HorizontalContentAlignment="Left"
+                           Style="{StaticResource MediumLabelStyle}"
+                           Content="{Binding ProductOrder}"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Margin="3"
+                           HorizontalContentAlignment="Right"
+                           Style="{StaticResource MediumLabelStyle}"
+                           Content="{Binding SinglePrice}"/>
+                    <Label Grid.Row="1" Grid.Column="1"
+                           Margin="3 0 3 3"
+                           HorizontalContentAlignment="Right"
+                           Style="{StaticResource MediumLabelStyle}"
+                           Content="{Binding Quantity, StringFormat=Có thể bán : {0}}"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </DataTemplate>
 </ResourceDictionary>

@@ -36,8 +36,10 @@ namespace UIProject.Converters
         /// <returns></returns>
         private Page GetPageInstance(object pageVM)
         {
-            if (pageVM.GetType() == typeof(TongQuanPageVM))
+            if (pageVM is TongQuanPageVM)
                 return new TongQuanPage() { DataContext = pageVM };
+            if (pageVM is BanHangPageVM)
+                return new BanHangPage();
             return new DanhSachDonHangPage();
         }
     }

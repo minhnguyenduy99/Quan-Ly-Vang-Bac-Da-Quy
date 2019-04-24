@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Templates.CustomControlTemplates"
+                    xmlns:converters="clr-namespace:UIProject.Converters"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:layoutVM="clr-namespace:UIProject.ViewModels.LayoutViewModels">
+    
+    <!-- Required resources for using in custom data templates -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <converters:DialogWindowTypeConverter x:Key="dialogTypeConverter"/>
+            <sys:String x:Key="YesNoDialog">YesNo</sys:String>
+            <sys:String x:Key="WaitingDialog">Waiting</sys:String>
+            <sys:String x:Key="WaitingCancelDialog">WaitingCancel</sys:String>
+            <sys:String x:Key="InfoDialog">Info</sys:String>
+            <layoutVM:DialogWindowViewModel x:Key="DialogWindowVM"/>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <DataTemplate x:Key="WaitingDialogTemplate">
+        <Grid Background="White"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              Width="100"
+              Height="100">
+            <ProgressBar 
+                         Width="50"
+                         Height="50"
+                         Style="{StaticResource MaterialDesignCircularProgressBar}"
+                         Value="0"
+                         IsIndeterminate="True"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="YesNoDialogTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Style="{StaticResource LargeLabelStyle}"
+                   Content="{Binding MessageText}"/>
+            <Button Grid.Column="0"
+                        x:Name="Yes"
+                        HorizontalAlignment="Center"
+                        Content="{Binding YesText}"
+                        Margin="10"
+                        Command="{Binding YesButtonPressedCommand}"
+                        Width="100"
+                        />
+            <Button Grid.Column="1"
+                        x:Name="No"
+                        Margin="10"
+                        Width="100"
+                        HorizontalAlignment="Center"
+                        Content="{Binding NoText}"
+                        Command="{Binding NoButtonPressedCommand}"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

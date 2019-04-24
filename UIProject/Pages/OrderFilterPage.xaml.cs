@@ -10,18 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UIProject.Views
+namespace UIProject.Pages
 {
     /// <summary>
-    /// Interaction logic for InfoDialogWindow.xaml
+    /// Interaction logic for OrderFilterPage.xaml
     /// </summary>
-    public partial class InfoDialogWindow : Window
+    public partial class OrderFilterPage : Page
     {
-        public InfoDialogWindow()
+        public OrderFilterPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((Parent as Frame).Parent as Window).Close();
         }
     }
 }

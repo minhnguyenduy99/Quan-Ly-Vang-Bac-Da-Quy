@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\AccountValidToVisibility.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DialogWindowTypeConverter.cs" />
     <Compile Include="Converters\LongStringToThreeDotConverter.cs" />
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
@@ -83,11 +84,15 @@
     <Compile Include="Pages\DanhSachDonHangPage.xaml.cs">
       <DependentUpon>DanhSachDonHangPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OrderFilterPage.xaml.cs">
+      <DependentUpon>OrderFilterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TaoDonHangPage.xaml.cs">
       <DependentUpon>TaoDonHangPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
     <Compile Include="ServiceProviders\IAnimationService.cs" />
+    <Compile Include="ServiceProviders\IAttachedViewModelAble.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
     <Compile Include="Test\TestConsole.cs" />
     <Compile Include="Test\TestWindow.xaml.cs">
@@ -113,14 +118,17 @@
     <Compile Include="Pages\TongQuanPage.xaml.cs">
       <DependentUpon>TongQuanPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DarkenWindow.xaml.cs">
+      <DependentUpon>DarkenWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogPopupWindow.xaml.cs">
       <DependentUpon>DialogPopupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InfoDialogWindow.xaml.cs">
-      <DependentUpon>InfoDialogWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderFilterWindow.xaml.cs">
+      <DependentUpon>OrderFilterWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
       <SubType>Designer</SubType>
@@ -151,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DanhSachDonHangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OrderFilterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +214,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\CustomControlTemplates\PopupDialogTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\CustomControlTemplates\TabItemControlTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,11 +242,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DialogPopupWindow.xaml">
+    <Page Include="Views\DarkenWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InfoDialogWindow.xaml">
+    <Page Include="Views\DialogPopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderFilterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

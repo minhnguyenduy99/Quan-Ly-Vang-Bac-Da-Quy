@@ -11,7 +11,7 @@ namespace UIProject.Test
     {
         public static void TestMethod(string[] args)
         {
-            CustomerTabItemVM<object> customer = new CustomerTabItemVM<object>();
+            CustomerTabItemVM customer = new CustomerTabItemVM();
 
             return;
         }

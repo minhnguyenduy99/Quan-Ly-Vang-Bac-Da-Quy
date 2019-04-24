@@ -21,6 +21,7 @@
         <ResourceDictionary>
             <converter:PageViewModelToPageControlConverter x:Key="ViewModelToPageConverter"/>
             <converter:TabCheckedToVisibilityConverter x:Key="TabCheckedToSubtabVisilityConverter"/>
+            <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="WhiteSmoke">
@@ -31,7 +32,8 @@
         <Grid Grid.Column="0"
               Width="250"
               x:Name="IconGrid"
-              Margin="5 0 10 5">
+              Margin="5 0 10 5"
+              Visibility="{Binding CurrentPageVM.TakeFullScreen, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -40,7 +42,8 @@
                   Background="{StaticResource RoyalBlue}">
             </Grid>
             <Grid Grid.Row="1">
-                <StackPanel x:Name="TabsContainer"                            
+                <StackPanel 
+                            x:Name="TabsContainer"                            
                             Margin="0"
                             Background="{StaticResource RoyalBlue}">
                     <Grid Height="90">
@@ -54,27 +57,15 @@
                     </Grid>
                     
                     <!-- List tabs -->
-                    <RadioButton x:Name="PART_TONGQUAN"
-                                 Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton x:Name="COLLAPSED_TAB_BanHang"
-                                 Style="{StaticResource MenuTabRadioButtonStyle}"
-                                 Checked="Collapsed_tab"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"
-                                 x:Name="PART_DonHang"/>
-                    <StackPanel Orientation="Vertical"
-                                Visibility="{Binding IsChecked, ElementName=PART_DonHang, Converter={StaticResource TabCheckedToSubtabVisilityConverter}, UpdateSourceTrigger=PropertyChanged}">
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                    </StackPanel>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"
-                                 x:Name="PART_KhachHang"/>
-                    <StackPanel Orientation="Vertical"
-                                Visibility="{Binding IsChecked, ElementName=PART_KhachHang, Converter={StaticResource TabCheckedToSubtabVisilityConverter}, UpdateSourceTrigger=PropertyChanged}">
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"/>
-                    </StackPanel>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    
                 </StackPanel>
             </Grid>
             
