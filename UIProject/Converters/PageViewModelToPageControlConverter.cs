@@ -20,7 +20,7 @@ namespace UIProject.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return new DanhSachDonHangPage();
+                return new NhapHangPage();
             return GetPageInstance(value);
         }
 

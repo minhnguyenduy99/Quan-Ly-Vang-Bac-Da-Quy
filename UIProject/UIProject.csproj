@@ -84,8 +84,11 @@
     <Compile Include="Pages\DanhSachDonHangPage.xaml.cs">
       <DependentUpon>DanhSachDonHangPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OrderFilterPage.xaml.cs">
-      <DependentUpon>OrderFilterPage.xaml</DependentUpon>
+    <Compile Include="Pages\KhachHangPage.xaml.cs">
+      <DependentUpon>KhachHangPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NhapHangPage.xaml.cs">
+      <DependentUpon>NhapHangPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TaoDonHangPage.xaml.cs">
       <DependentUpon>TaoDonHangPage.xaml</DependentUpon>
@@ -118,8 +121,8 @@
     <Compile Include="Pages\TongQuanPage.xaml.cs">
       <DependentUpon>TongQuanPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DarkenWindow.xaml.cs">
-      <DependentUpon>DarkenWindow.xaml</DependentUpon>
+    <Compile Include="Views\CustomerAddingDialogWindow.xaml.cs">
+      <DependentUpon>CustomerAddingDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogPopupWindow.xaml.cs">
       <DependentUpon>DialogPopupWindow.xaml</DependentUpon>
@@ -131,6 +134,10 @@
       <DependentUpon>OrderFilterDialogWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Colors\Gray.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,7 +169,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\OrderFilterPage.xaml">
+    <Page Include="Pages\KhachHangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NhapHangPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +233,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachDonHangTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachKhachHangTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\CustomDataTemplates\DiaChiTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,7 +261,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DarkenWindow.xaml">
+    <Page Include="Views\CustomerAddingDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UIProject.Views
+namespace UIProject.Pages
 {
     /// <summary>
-    /// Interaction logic for DarkenWindow.xaml
+    /// Interaction logic for NhapHangPage.xaml
     /// </summary>
-    public partial class DarkenWindow : Window
+    public partial class NhapHangPage : Page
     {
-        public DarkenWindow()
+        public NhapHangPage()
         {
-            InitializeComponent();           
-        }
-
-        public DarkenWindow(Page page) : this()
-        {
-            PART_PAGE.Content = page;
+            InitializeComponent();
         }
     }
 }

@@ -10,24 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
+using UIProject.ViewModels.LayoutViewModels;
 
-namespace UIProject.Pages
+namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for OrderFilterPage.xaml
+    /// Interaction logic for CustomerAddingDialogWindow.xaml
     /// </summary>
-    public partial class OrderFilterPage : Page
+    public partial class CustomerAddingDialogWindow : Window, IClosable
     {
-        public OrderFilterPage()
+        public CustomerAddingDialogWindow()
         {
             InitializeComponent();
-        }
+            DataContext = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.None
+            };
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ((Parent as Frame).Parent as Window).Close();
         }
     }
 }

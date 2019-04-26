@@ -42,7 +42,8 @@
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/TinhTrangDonHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/SanPhamTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/TabThanhToanTemplate.xaml"/>
-                        
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachDonHangTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachKhachHangTemplate.xaml"/>
                         <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>
@@ -65,6 +66,7 @@
                         <ResourceDictionary Source="./Colors/Purple.xaml"/>
                         <ResourceDictionary Source="./Colors/Yellow.xaml"/>
                         <ResourceDictionary Source="./Colors/Blue.xaml"/>
+                        <ResourceDictionary Source="./Colors/Gray.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
 

@@ -18,4 +18,50 @@
     <Style TargetType="{x:Type customControls:SearchTextBox}" BasedOn="{StaticResource CustomSearchTextBoxStyle}" x:Key="SmallSearchTextBoxStyle">
         <Setter Property="Background" Value="Blue"/>
     </Style>
+
+    <Style x:Key="UIProjectTextBoxStyle" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="7 10"/>
+        <Setter Property="materialDesign:HintAssist.IsFloating" Value="False"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="true">
+                <Setter Property="BorderBrush" Value="{DynamicResource AirForceBlue}"/>
+                <Setter Property="BorderThickness" Value="0 0 0 2"/>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="Background.Color">
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                From="WhiteSmoke"
+                                                To="#dddddd"
+                                                Duration="0:0:0.3"/>
+                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                From="Transparent"
+                                                To="#111E6C"
+                                                Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="Background.Color">
+                            <ColorAnimation From="#dddddd"
+                                                To="WhiteSmoke"
+                                                Duration="0:0:0.3"/>
+                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                From="#111E6C"
+                                                To="Transparent"
+                                                Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

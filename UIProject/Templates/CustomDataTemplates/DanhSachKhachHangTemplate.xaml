@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <DataTemplate x:Key="DanhSachKhachHangTemplate">
+        <DataGrid Grid.Row="0"
+                  CanUserSortColumns="True"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  AutoGenerateColumns="False"
+                  materialDesign:DataGridAssist.CellPadding="8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridHyperlinkColumn Width="120"
+                                         Binding="{Binding OrderCode}"
+                                         CanUserSort="False"
+                                         IsReadOnly="True"
+                                         Header="Mã khách hàng"
+                                         HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                         CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="150"
+                                    Binding="{Binding DateEstablished}"
+                                    Header="Tên khách hàng"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="130"
+                                    IsReadOnly="True"
+                                    Binding="{Binding CustomerName}"
+                                    Header="Địa chỉ"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="130"
+                                    CanUserSort="True"
+                                    Binding="{Binding TotalMoney}"
+                                    Header="Email"                                           
+                                    IsReadOnly="True"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="130"
+                                    CanUserSort="True"
+                                    Binding="{Binding TotalMoney}"
+                                    Header="Số điện thoại"                                           
+                                    IsReadOnly="True"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                <DataGridTextColumn Width="130"
+                                    CanUserSort="True"
+                                    Binding="{Binding TotalMoney}"
+                                    Header="Công nợ"                                           
+                                    IsReadOnly="True"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DataTemplate>
+</ResourceDictionary>

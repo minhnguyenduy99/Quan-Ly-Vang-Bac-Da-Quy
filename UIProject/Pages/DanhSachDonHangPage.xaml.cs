@@ -27,6 +27,8 @@ namespace UIProject.Pages
         public DanhSachDonHangPage()
         {
             InitializeComponent();
+
+            
         }
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)

@@ -1,0 +1,313 @@
+﻿<Page x:Class="UIProject.Pages.NhapHangPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:local="clr-namespace:UIProject.Pages"
+      mc:Ignorable="d" 
+      Title="NhapHangPage">
+    <Page.Resources>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="MinWidth" Value="200"/>
+        </Style>
+        <Style x:Key="CustomOrderInfoLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0 0 0 7"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="2"
+                   Style="{StaticResource HeaderLabelStyle}"
+                   Margin="10"
+                   Content="Nhập hàng"
+                   HorizontalAlignment="Left"/>
+            <customControls:SearchTextBox Grid.Row="0" Grid.Column="1"
+                                          Margin="10"
+                                          IconHeight="25"
+                                          IconSource="/Images/search_icon.png"
+                                          Background="White"
+                                          Hint="Tìm kiếm sản phẩm"
+                                          IconBackground="{StaticResource AirForceBlue}"/>
+        </Grid>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="2"
+                   Margin="10"/>
+        <DataGrid Grid.Row="2" Grid.Column="0"
+                    x:Name="ProductView"
+                    Margin="10 10 5 10"
+                    ItemsSource="{Binding Items3}"
+                    CanUserSortColumns="True"
+                    CanUserAddRows="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    AutoGenerateColumns="False"
+                    materialDesign:DataGridAssist.CellPadding="8"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                    SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120"
+                                            Binding="{Binding No}"
+                                            CanUserSort="False"
+                                            TextBlock.TextAlignment="Center"
+                                            IsReadOnly="False"
+                                            Header="Mã sản phẩm"
+                                            HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                            CellStyle="{StaticResource LeftDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="130"
+                                            Binding="{Binding OrderCode}"
+                                            Header="Tên sản phẩm"
+                                            TextBlock.TextAlignment="Right"
+                                            IsReadOnly="False"
+                                            CanUserSort="False"
+                                            HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                            CellStyle="{StaticResource CenteredDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="80"
+                                            TextBlock.TextAlignment="Center"
+                                            IsReadOnly="False"
+                                            Binding="{Binding ProductName}"
+                                            Header="Số lượng"
+                                            HeaderStyle="{StaticResource RightDataGridHeader}"
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="130"
+                                            CanUserSort="False"
+                                            Binding="{Binding ProductType}"
+                                            Header="Đơn giá"                                           
+                                            IsReadOnly="False"
+                                            HeaderStyle="{StaticResource RightDataGridHeader}"
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="70"
+                                            Binding="{Binding Unit}"
+                                            CanUserSort="False"
+                                            Header="Thuế"
+                                            TextBlock.TextAlignment="Center"
+                                            IsReadOnly="False"
+                                            HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                            CellStyle="{StaticResource CenteredDataGridCell}"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="100"
+                                            Header="Thành tiền"
+                                            HeaderStyle="{StaticResource RightDataGridHeader}"
+                                            CellStyle="{StaticResource RightDataGridCell}"
+                                            IsReadOnly="False"
+                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTemplateColumn Width="30"
+                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                            VerticalAlignment="Center"
+                                            ToolTip="Xóa sản phẩm khỏi đơn hàng"
+                                            Padding="5"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            HorizontalAlignment="Center"
+                                            BorderThickness="0">
+                                <materialDesign:PackIcon Kind="RemoveCircle" 
+                                                                 Margin="0"
+                                                                 Width="20"
+                                                                 Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="2" Grid.Column="1"
+                BorderBrush="Transparent"
+                Background="White"
+                Margin="5 10 10 10"
+                Padding="7">
+            <Grid VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                            Orientation="Vertical"
+                            Margin="0 10 0 20">
+                    <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
+                           Content="Mã đơn hàng"/>
+                    <TextBox/>
+                </StackPanel>
+                <StackPanel Grid.Row="1"
+                                Orientation="Vertical"
+                                Margin="0 0 0 20">
+                    <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
+                               Content="Nhà cung cấp"/>
+                    <TextBox />
+                </StackPanel>
+                <StackPanel Grid.Row="2"
+                                Orientation="Vertical">
+                    <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
+                               Content="Ngày nhập hàng"/>
+                    <DatePicker FontSize="15"
+                                Name="LocaleDatePicker"
+                                materialDesign:HintAssist.Hint="Locale Date">
+                        <DatePicker.Style>
+                            <Style TargetType="DatePicker">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Padding" Value="7"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border>
+                                                <Grid x:Name="PART_ROOT"
+                                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox x:Name="PART_TextBox"
+                                                                 Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}}"/>
+                                                    <Button x:Name="PART_Button"
+                                                            Grid.Column="1"
+                                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                                            VerticalAlignment="Center"
+                                                            Padding="5"
+                                                            Background="Transparent"
+                                                            BorderBrush="Transparent"
+                                                            HorizontalAlignment="Center"
+                                                            BorderThickness="0"
+                                                            Command="{Binding}">
+                                                        <materialDesign:PackIcon Kind="DateRange" 
+                                                                                     Margin="0"
+                                                                                     Width="auto"
+                                                                                     Height="auto"/>
+                                                    </Button>
+                                                    <Popup x:Name="PART_Popup"
+                                                            AllowsTransparency="True"
+                                                            Placement="Bottom"
+                                                            PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                                            StaysOpen="False" />
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Style>
+                    </DatePicker>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="3"
+              Background="White"
+              Margin="10 5 5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0"
+                       VerticalAlignment="Stretch">
+                <TextBox Margin="10"
+                         DockPanel.Dock="Top"
+                         VerticalAlignment="Center"/>
+                <TextBox Margin="10"
+                         DockPanel.Dock="Bottom"
+                         AcceptsReturn="True"
+                         Height="150"/>
+            </DockPanel>
+            <Grid Grid.Column="1">
+                <Grid HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="10">
+                    <Grid.Resources>
+                        <Style x:Key="CustomDefinedLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="0 0 20 10"/>
+                        </Style>
+                        <Style x:Key="ValueLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="{StaticResource AirForceBlue}"/>
+                            <Setter Property="Margin" Value="0 0 20 10"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource CustomDefinedLabelStyle}"
+                           Content="Số lượng"/>
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Style="{StaticResource CustomDefinedLabelStyle}"
+                           Content="Tiền hàng"/>
+                    <Label Grid.Row="2" Grid.Column="0"
+                           Style="{StaticResource CustomDefinedLabelStyle}"
+                           Content="Tổng tiền phải trả"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Style="{StaticResource ValueLabelStyle}"
+                           Content="120"/>
+                    <Label Grid.Row="1" Grid.Column="1"
+                           Style="{StaticResource ValueLabelStyle}"
+                           Content="12,005,000"/>
+                    <Label Grid.Row="2" Grid.Column="1"
+                           Style="{StaticResource ValueLabelStyle}"
+                           Content="12,500,000"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <ContentControl VerticalContentAlignment="Center">
+                <StackPanel Margin="5 5 10 10"
+                            Orientation="Vertical"
+                            VerticalAlignment="Stretch"
+                            Background="White">
+                    <Button Grid.Row="3"
+                            Content="Lưu"
+                            FontSize="20"
+                            VerticalAlignment="Stretch"
+                            Margin="10 10 10 20"
+                            Height="60"                      
+                            Background="{DynamicResource AirForceBlue}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            materialDesign:ShadowAssist.Darken="True"
+                            BorderBrush="{DynamicResource AirForceBlue}"/>
+                    <Button Grid.Row="3"
+                            Content="Thanh toán"
+                            VerticalAlignment="Stretch"
+                            Margin="10 20 10 10"
+                            FontSize="20"
+                            Height="60"
+                            Background="{DynamicResource AirForceBlue}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            materialDesign:ShadowAssist.Darken="True"
+                            BorderBrush="{DynamicResource AirForceBlue}"/>
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+    </Grid>
+</Page>

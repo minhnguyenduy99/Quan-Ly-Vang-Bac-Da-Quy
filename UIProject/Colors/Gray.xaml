@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Colors">
+    <SolidColorBrush x:Key="LightGrayBrush">#999999</SolidColorBrush>
+    <SolidColorBrush x:Key="MediumLightGrayBrush">#777777</SolidColorBrush>
+    <SolidColorBrush x:Key="MediumDarkGrayBrush">#555555</SolidColorBrush>
+    <SolidColorBrush x:Key="DarkGrayBrush">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="VeryLightGrayBrush">#111111</SolidColorBrush>
+
+    <Color x:Key="LightGrayColor">#999999</Color>
+    <Color x:Key="MediumLightGrayColor">#777777</Color>
+    <Color x:Key="MediumDarkGrayColor">#555555</Color>
+    <Color x:Key="DarkGrayColor">#333333</Color>
+    <Color x:Key="VeryLightGrayColor">#111111</Color>
+</ResourceDictionary>

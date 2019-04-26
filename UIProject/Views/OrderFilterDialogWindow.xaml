@@ -23,18 +23,18 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2"
-                   Style="{StaticResource LargeLabelStyle}"
-                   Content="Lọc đơn hàng"/>
+                       Style="{StaticResource LargeLabelStyle}"
+                       Content="Lọc đơn hàng"/>
                 <Separator Grid.Row="1" Grid.ColumnSpan="2"
-                       Margin="20 10 20 30"
-                       BorderThickness="3"
-                       BorderBrush="Gray"/>
+                           Margin="20 10 20 30"
+                           BorderThickness="3"
+                           BorderBrush="Gray"/>
                 <Grid Grid.Row="2" Grid.Column="0">
                     <StackPanel Orientation="Vertical"
-                            Margin="20 0 0 0">
+                                Margin="20 0 0 0">
                         <Label Style="{StaticResource MediumLabelStyle}"
-                           Content="Chọn điều kiện lọc"
-                           HorizontalAlignment="Left"/>
+                               Content="Chọn điều kiện lọc"
+                               HorizontalAlignment="Left"/>
                         <CheckBox Content="Đặt hàng" Margin="10 5"/>
                         <CheckBox Content="Đang giao dịch" Margin="10 5"/>
                         <CheckBox Content="Kết thúc" Margin="10 5"/>
@@ -42,15 +42,15 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="2" Grid.Column="1"
-                        Orientation="Vertical">
+                            Orientation="Vertical">
                     <Label Style="{StaticResource MediumLabelStyle}"
-                       Content="Trạng thái"
-                       HorizontalAlignment="Left"/>
+                           Content="Trạng thái"
+                           HorizontalAlignment="Left"/>
                     <ComboBox Grid.Row="2" Grid.Column="1"
-                          VerticalAlignment="Top"
-                          Margin="10 10 30 10"
-                          HorizontalAlignment="Stretch"
-                          SelectedIndex="0">
+                              VerticalAlignment="Top"
+                              Margin="10 10 30 10"
+                              HorizontalAlignment="Stretch"
+                              SelectedIndex="0">
                         <ComboBoxItem Content="Đóng gói"/>
                         <ComboBoxItem Content="Xuất khooooooooooo"/>
                         <ComboBoxItem Content="Thanh toán"/>

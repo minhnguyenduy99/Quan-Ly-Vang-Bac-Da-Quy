@@ -9,14 +9,17 @@
     <!-- Datagrid column header style -->
     <Style x:Key="CenteredDataGridHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource CustomDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="LeftDataGridHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource CustomDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
     <Style x:Key="RightDataGridHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource CustomDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 
     <Style x:Key="CustomEditingTextColumnElementStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
@@ -35,7 +38,6 @@
     </Style>
     
     <!-- Datagrid cell style -->
-
     <Style x:Key="CustomDataGridCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0 10 13 0"/>
@@ -70,5 +72,26 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+
+    <Style TargetType="{x:Type DataGridTextColumn}" x:Key="ReadonlyDataGridTextColumn">
+        <Setter Property="IsReadOnly" Value="true"/>
+    </Style>
+    
+    <Style TargetType="{x:Type DataGridTextColumn}" BasedOn="{StaticResource ReadonlyDataGridTextColumn}" x:Key="CenteredReadonlyDataGridTextColumn">
+        <Setter Property="HeaderStyle" Value="{StaticResource CenteredDataGridHeader}"/>
+        <Setter Property="CellStyle" Value="{StaticResource CenteredDataGridCell}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridTextColumn}" BasedOn="{StaticResource ReadonlyDataGridTextColumn}" x:Key="LeftReadonlyDataGridTextColumn">
+        <Setter Property="HeaderStyle" Value="{StaticResource LeftDataGridHeader}"/>
+        <Setter Property="CellStyle" Value="{StaticResource LeftDataGridCell}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridTextColumn}" BasedOn="{StaticResource ReadonlyDataGridTextColumn}" x:Key="RightReadonlyDataGridTextColumn">
+        <Setter Property="HeaderStyle" Value="{StaticResource RightDataGridHeader}"/>
+        <Setter Property="CellStyle" Value="{StaticResource RightDataGridCell}"/>
+    </Style>
+    
+    
 
 </ResourceDictionary>
