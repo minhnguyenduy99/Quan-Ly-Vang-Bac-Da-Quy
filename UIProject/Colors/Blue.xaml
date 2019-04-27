@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:UIProject.Colors">
     <SolidColorBrush x:Key="RoyalBlue">#111E6C</SolidColorBrush>
     <SolidColorBrush x:Key="AzureBlue">#0080FF</SolidColorBrush>
-    <SolidColorBrush x:Key="EgyptianBlue">#104A6</SolidColorBrush>
+    <SolidColorBrush x:Key="EgyptianBlue">#104A6C</SolidColorBrush>
     <SolidColorBrush x:Key="IndependenceBlue">#4C516D</SolidColorBrush>
     <SolidColorBrush x:Key="AirForceBlue">#588BAE</SolidColorBrush>
 

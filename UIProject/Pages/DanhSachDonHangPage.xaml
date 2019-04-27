@@ -31,9 +31,8 @@
             <StackPanel Grid.Row="0"
                         Margin="0 20 10 20" Grid.ColumnSpan="2"
                         Orientation="Horizontal">
-                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Padding="20 5 20 5"
-                        Height="auto"
+                <Button Style="{StaticResource UIProjectLightButtonStyle}"
+                        FontSize="15"
                         Background="{StaticResource AirForceBlue}"
                         Foreground="White"
                         Click="OpenFilterWindow">

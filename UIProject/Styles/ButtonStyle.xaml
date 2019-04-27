@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Styles"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectMediumButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Height" Value="auto"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectLightButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Height" Value="auto"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectDarkButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Height" Value="auto"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectLightShadowButtonStyle" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
+        <Setter Property="materialDesign:ShadowAssist.Darken" Value="True"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectMediumShadowButtonStyle" BasedOn="{StaticResource UIProjectMediumButtonStyle}">
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
+        <Setter Property="materialDesign:ShadowAssist.Darken" Value="True"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectDarkShadowButtonStyle" BasedOn="{StaticResource UIProjectDarkButtonStyle}">
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
+        <Setter Property="materialDesign:ShadowAssist.Darken" Value="True"/>
+    </Style>
+
+</ResourceDictionary>

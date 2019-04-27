@@ -51,11 +51,9 @@
             <StackPanel Grid.Row="0"
                         Margin="0 20 10 20" Grid.ColumnSpan="2"
                         Orientation="Horizontal">
-                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Padding="20 5 20 5"
-                        Height="auto"
-                        Background="{StaticResource AirForceBlue}"
-                        Foreground="White">
+                <Button Style="{StaticResource UIProjectLightButtonStyle}"
+                        FontSize="15"
+                        Height="auto">
                     _Lọc khách hàng
                 </Button>
                 <customControls:SearchTextBox Margin="20 0 0 0"

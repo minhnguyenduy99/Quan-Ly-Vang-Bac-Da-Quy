@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       Title="NhapHangPage">
     <Page.Resources>
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
+        <Style x:Key="CustomTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="MinWidth" Value="200"/>
         </Style>
@@ -17,6 +17,10 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="0 0 0 7"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightShadowButtonStyle}">
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Margin" Value="10 10 10 20"/>
         </Style>
     </Page.Resources>
     <Grid>
@@ -40,15 +44,13 @@
                    Margin="10"
                    Content="Nhập hàng"
                    HorizontalAlignment="Left"/>
-            <customControls:SearchTextBox Grid.Row="0" Grid.Column="1"
-                                          Margin="10"
-                                          IconHeight="25"
-                                          IconSource="/Images/search_icon.png"
-                                          Background="White"
-                                          Hint="Tìm kiếm sản phẩm"
-                                          IconBackground="{StaticResource AirForceBlue}"/>
+            <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
+                                          Grid.Row="0" Grid.Column="1"
+                                          Height="40"
+                                          HorizontalAlignment="Right"
+                                          Hint="Nhập tên sản phẩm"
+                                          Margin="10"/>
         </Grid>
-
         <Separator Grid.Row="1" Grid.ColumnSpan="2"
                    Margin="10"/>
         <DataGrid Grid.Row="2" Grid.Column="0"
@@ -152,19 +154,19 @@
                             Margin="0 10 0 20">
                     <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
                            Content="Mã đơn hàng"/>
-                    <TextBox/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1"
                                 Orientation="Vertical"
                                 Margin="0 0 0 20">
                     <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
-                               Content="Nhà cung cấp"/>
-                    <TextBox />
+                            Content="Nhà cung cấp"/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2"
                                 Orientation="Vertical">
                     <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
-                               Content="Ngày nhập hàng"/>
+                           Content="Ngày nhập hàng"/>
                     <DatePicker FontSize="15"
                                 Name="LocaleDatePicker"
                                 materialDesign:HintAssist.Hint="Locale Date">
@@ -178,14 +180,15 @@
                                         <ControlTemplate>
                                             <Border>
                                                 <Grid x:Name="PART_ROOT"
-                                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition/>
                                                         <ColumnDefinition Width="auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBox x:Name="PART_TextBox"
-                                                                 Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}}"/>
+                                                             Style="{StaticResource CustomTextBoxStyle}"
+                                                             Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}}"/>
                                                     <Button x:Name="PART_Button"
                                                             Grid.Column="1"
                                                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
@@ -224,16 +227,35 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0"
-                       VerticalAlignment="Stretch">
-                <TextBox Margin="10"
-                         DockPanel.Dock="Top"
-                         VerticalAlignment="Center"/>
-                <TextBox Margin="10"
-                         DockPanel.Dock="Bottom"
-                         AcceptsReturn="True"
-                         Height="150"/>
-            </DockPanel>
+            <Grid Grid.Column="0"
+                  VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource CustomOrderInfoLabelStyle}">
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </Grid.Resources>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Content="Tags"/>
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Style="{StaticResource CustomTextBoxStyle}"
+                         Margin="10"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Margin="10 12 10 10"
+                       VerticalAlignment="Top"
+                       Content="Ghi chú"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Margin="10"
+                         Height="100"
+                         Style="{StaticResource CustomTextBoxStyle}"/>
+            </Grid>
             <Grid Grid.Column="1">
                 <Grid HorizontalAlignment="Right"
                       VerticalAlignment="Top"
@@ -286,26 +308,10 @@
                             Orientation="Vertical"
                             VerticalAlignment="Stretch"
                             Background="White">
-                    <Button Grid.Row="3"
-                            Content="Lưu"
-                            FontSize="20"
-                            VerticalAlignment="Stretch"
-                            Margin="10 10 10 20"
-                            Height="60"                      
-                            Background="{DynamicResource AirForceBlue}"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                            materialDesign:ShadowAssist.Darken="True"
-                            BorderBrush="{DynamicResource AirForceBlue}"/>
-                    <Button Grid.Row="3"
-                            Content="Thanh toán"
-                            VerticalAlignment="Stretch"
-                            Margin="10 20 10 10"
-                            FontSize="20"
-                            Height="60"
-                            Background="{DynamicResource AirForceBlue}"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                            materialDesign:ShadowAssist.Darken="True"
-                            BorderBrush="{DynamicResource AirForceBlue}"/>
+                    <Button 
+                            Content="Lưu"/>
+                    <Button 
+                            Content="Hủy"/>
                 </StackPanel>
             </ContentControl>
         </Grid>

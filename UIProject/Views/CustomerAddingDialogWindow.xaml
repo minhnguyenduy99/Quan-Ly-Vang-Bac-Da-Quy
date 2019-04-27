@@ -21,19 +21,15 @@
             <Setter Property="FontSize" Value="13"/>
         </Style>
         
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}">
             <Setter Property="Margin" Value="0 20 0 10"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Background" Value="{StaticResource AirForceBlue}"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Height" Value="auto"/>
-            <Setter Property="Padding" Value="10 7"/>
             <Setter Property="Width" Value="100"/>
         </Style>
         <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+            <Setter Property="materialDesign:TextFieldAssist.DecorationVisibility" Value="Collapsed"/>
             <Setter Property="BorderBrush" Value="{DynamicResource AirForceBlue}"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="true">

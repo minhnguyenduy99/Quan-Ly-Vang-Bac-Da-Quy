@@ -106,7 +106,9 @@
             </Grid>
             <Grid Margin="10">
                 <Button 
-                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Style="{StaticResource UIProjectLightButtonStyle}"
+                        FontSize="15"
+                        Height="40"
                         Content="Đăng xuất"
                         Command="{Binding LogOutCommand}"/>
             </Grid>

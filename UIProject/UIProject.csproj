@@ -115,6 +115,9 @@
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\BanHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\BasePageViewModel.cs" />
+    <Compile Include="ViewModels\PageViewModels\DanhSachDonHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\KhachHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\NhapHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\TongQuanPageVM.cs" />
     <Compile Include="ServiceProviders\IClosable.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TongQuanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,7 +16,7 @@
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderBrush" Value="{Binding}"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="0 0 0 1"/>
         </Style>
     </UserControl.Style>
     <Grid 
@@ -30,7 +30,8 @@
                   BorderThickness="0"
                   VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch"
-                  materialDesign:HintAssist.Hint="{Binding Hint, ElementName=uc}"                  
+                  materialDesign:HintAssist.Hint="{Binding Hint, ElementName=uc}"      
+                  materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                   Margin="0"
                   VerticalContentAlignment="Center"
                   Width="{Binding TextBoxWidth,ElementName=uc}"

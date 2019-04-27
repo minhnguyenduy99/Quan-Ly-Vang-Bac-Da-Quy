@@ -65,6 +65,7 @@
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     
                 </StackPanel>
             </Grid>

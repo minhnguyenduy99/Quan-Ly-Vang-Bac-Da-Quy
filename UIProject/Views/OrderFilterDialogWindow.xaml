@@ -52,13 +52,13 @@
                               HorizontalAlignment="Stretch"
                               SelectedIndex="0">
                         <ComboBoxItem Content="Đóng gói"/>
-                        <ComboBoxItem Content="Xuất khooooooooooo"/>
+                        <ComboBoxItem Content="Xuất kho"/>
                         <ComboBoxItem Content="Thanh toán"/>
                     </ComboBox>
-                    <Button Content="Lọc"
-                            BorderThickness="0"
+                    <Button Style="{StaticResource UIProjectLightButtonStyle}"
+                            FontSize="13"
                             Margin="10 30 10 0"
-                            Background="{StaticResource AirForceBlue}"
+                            Content="Lọc"
                             Click="Button_Click"/>
                 </StackPanel>
             </Grid>

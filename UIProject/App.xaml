@@ -13,11 +13,27 @@
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightBlue.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-                
+
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.LightBlue.Named.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <!-- primary -->
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#588BAE"/>
+                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1034A6"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White"/>
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#000080"/>
+                    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White"/>
+                    <!-- accent -->
+                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#588BAE"/>
+                    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="White"/>
+                </ResourceDictionary>
+
                 <!-- Custom styles for controls  -->
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -31,6 +47,7 @@
                         <ResourceDictionary Source="./Styles/TextBoxStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/ListBoxStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/DataGridStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/ButtonStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

@@ -20,7 +20,7 @@ namespace UIProject.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return new NhapHangPage();
+                return "Trang này đang được cập nhật";
             return GetPageInstance(value);
         }
 
@@ -40,7 +40,13 @@ namespace UIProject.Converters
                 return new TongQuanPage() { DataContext = pageVM };
             if (pageVM is BanHangPageVM)
                 return new BanHangPage();
-            return new DanhSachDonHangPage();
+            if (pageVM is DanhSachDonHangPageVM)
+                return new DanhSachDonHangPage();
+            if (pageVM is KhachHangPageVM)
+                return new KhachHangPage();
+            if (pageVM is NhapHangPageVM)
+                return new NhapHangPage();
+            return null;
         }
     }
 }

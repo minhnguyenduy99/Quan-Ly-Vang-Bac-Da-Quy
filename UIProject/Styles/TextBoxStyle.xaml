@@ -3,20 +3,18 @@
                     xmlns:local="clr-namespace:UIProject.Styles"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:customControls="clr-namespace:UIProject.CustomControls">
-    
+
     <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="CustomSearchTextBoxStyle">
         <Setter Property="Background" Value="White"/>
-        <Setter Property="IconBackground" Value="{DynamicResource AirForceBlue}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="IconBackground" Value="{DynamicResource PrimaryHueLightBrush}"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="IconSource" Value="/Images/search_icon.png"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="TextBoxWidth" Value="300"/>
         <Setter Property="IconHeight" Value="20"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    </Style>
-
-    <Style TargetType="{x:Type customControls:SearchTextBox}" BasedOn="{StaticResource CustomSearchTextBoxStyle}" x:Key="SmallSearchTextBoxStyle">
-        <Setter Property="Background" Value="Blue"/>
     </Style>
 
     <Style x:Key="UIProjectTextBoxStyle" TargetType="TextBox">
@@ -26,13 +24,14 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="7 10"/>
         <Setter Property="materialDesign:HintAssist.IsFloating" Value="False"/>
+        <Setter Property="materialDesign:TextFieldAssist.DecorationVisibility" Value="Collapsed"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Width" Value="auto"/>
         <Setter Property="FontSize" Value="13"/>
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="true">
                 <Setter Property="BorderBrush" Value="{DynamicResource AirForceBlue}"/>
-                <Setter Property="BorderThickness" Value="0 0 0 2"/>
+                <Setter Property="BorderThickness" Value="2"/>
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetProperty="Background.Color">
@@ -41,9 +40,9 @@
                                                 To="#dddddd"
                                                 Duration="0:0:0.3"/>
                             <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
-                                                From="Transparent"
-                                                To="#111E6C"
-                                                Duration="0:0:0.3"/>
+                                            From="Transparent"
+                                            To="#111E6C"
+                                            Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -61,7 +60,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-
         </Style.Triggers>
     </Style>
+
 </ResourceDictionary>

@@ -33,10 +33,10 @@
         <Border BorderBrush="LightGray"
                 BorderThickness="2"
                 CornerRadius="15"
-                Padding="0 0 0 20"
+                Padding="0 0 0 10"
                 Margin="0,79,7.5,79"
                 Width="300"
-                Height="400"
+                Height="auto"
                 HorizontalAlignment="Right"
                 >
             <Grid HorizontalAlignment="Stretch">
@@ -46,13 +46,13 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="auto"/>
 
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0"
                        Style="{StaticResource LargeLabelStyle}"
-                       Foreground="Purple"
+                       Foreground="{StaticResource EgyptianBlue}"
                        Content="Đăng nhập">
                 </Label>
                 <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -129,10 +129,9 @@
                 <Grid Grid.Row="4">
                     <Grid Margin="30 0">
                         <Button x:Name="LoginButton"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Style="{StaticResource UIProjectLightButtonStyle}"
+                                FontSize="15"
                                 TabIndex="5"
-                                HorizontalAlignment="Stretch"
-                                Height="40"
                                 IsDefault="True"
                                 Click="LoginButton_Click">
                             _Đăng Nhập
@@ -140,7 +139,8 @@
                     </Grid>
                 </Grid>
                 <Label Grid.Row="6"
-                       Style="{StaticResource LinkLabelStyle}"
+                       Margin="0 10 0 0"
+                       Style="{StaticResource MediumLabelStyle}"
                        Content="Quên mật khẩu?"
                        Cursor="Hand">
                 </Label>

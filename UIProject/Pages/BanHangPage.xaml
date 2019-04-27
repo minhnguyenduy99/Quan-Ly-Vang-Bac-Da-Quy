@@ -147,6 +147,7 @@
                                             HorizontalAlignment="Center"
                                             BorderThickness="0">
                                         <materialDesign:PackIcon Kind="RemoveCircle" 
+                                                                 Foreground="Black"
                                                                  Margin="0"
                                                                  Width="20"
                                                                  Height="20"/>
