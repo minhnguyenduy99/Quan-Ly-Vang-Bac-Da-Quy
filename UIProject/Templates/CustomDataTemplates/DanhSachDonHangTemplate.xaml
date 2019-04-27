@@ -19,8 +19,7 @@
                                          IsReadOnly="True"
                                          Header="Mã đơn hàng"
                                          HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                         CellStyle="{StaticResource LeftDataGridCell}"
-                                         />
+                                         CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="120"
                                     Binding="{Binding DateEstablished}"
                                     Header="Ngày tạo đơn"

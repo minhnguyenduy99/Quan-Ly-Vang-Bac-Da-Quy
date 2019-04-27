@@ -90,13 +90,11 @@
     <Compile Include="Pages\NhapHangPage.xaml.cs">
       <DependentUpon>NhapHangPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TaoDonHangPage.xaml.cs">
-      <DependentUpon>TaoDonHangPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
     <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ServiceProviders\IAttachedViewModelAble.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
+    <Compile Include="Test\TestClasses.cs" />
     <Compile Include="Test\TestConsole.cs" />
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
@@ -177,10 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\NhapHangPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\TaoDonHangPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

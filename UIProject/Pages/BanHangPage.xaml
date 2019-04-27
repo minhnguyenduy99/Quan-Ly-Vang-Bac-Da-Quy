@@ -215,14 +215,14 @@
                         Margin="5 5 5 10">
                 <TabItem Header="Khách hàng"
                          ContentTemplate="{StaticResource CustomerTabItemTemplate}"/>
-                <TabItem Header="Tùy chọn"/>
+                <TabItem Header="Tùy chọn"
+                         ContentTemplate="{StaticResource SettingDataTemplate}"/>
             </TabControl>
             <TabControl Grid.Row="1"
                         Style="{StaticResource CustomTabControlStyle}"
-                        Margin="5 5 5 10">
+                        Margin="5">
                 <TabItem Header="Thanh toán"
                          ContentTemplate="{StaticResource CheckoutDataTemplate}"/>
-                <TabItem Header="Khuyến mãi"/>
             </TabControl>
         </Grid>
     </Grid>

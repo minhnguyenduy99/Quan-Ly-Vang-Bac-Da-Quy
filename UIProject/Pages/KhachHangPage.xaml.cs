@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.Test;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -24,6 +25,13 @@ namespace UIProject.Pages
         public KhachHangPage()
         {
             InitializeComponent();
+
+            PART_CustomerList.Content = new List<Customer>()
+            {
+                new Customer(),
+                new Customer(),
+                new Customer()
+            };
         }
 
         private void OpenAddNewCustomerDialog(object sender, RoutedEventArgs e)

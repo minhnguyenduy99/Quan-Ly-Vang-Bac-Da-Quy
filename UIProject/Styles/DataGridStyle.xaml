@@ -5,6 +5,8 @@
 
     <Style x:Key="CustomDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="materialDesign:DataGridAssist.ColumnHeaderPadding" Value="8"/>
+        <Setter Property="Padding" Value="5 8"/>
     </Style>
     <!-- Datagrid column header style -->
     <Style x:Key="CenteredDataGridHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource CustomDataGridColumnHeaderStyle}">
@@ -40,7 +42,7 @@
     <!-- Datagrid cell style -->
     <Style x:Key="CustomDataGridCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0 10 13 0"/>
+        <Setter Property="materialDesign:DataGridAssist.CellPadding" Value="8 10 8 8"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Style.Triggers>

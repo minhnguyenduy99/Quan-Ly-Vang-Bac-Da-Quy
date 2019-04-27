@@ -52,7 +52,7 @@
 
                 <Label Grid.Row="0"
                        Style="{StaticResource LargeLabelStyle}"
-                       Foreground="{StaticResource EgyptianBlue}"
+                       Foreground="{StaticResource RoyalBlue}"
                        Content="Đăng nhập">
                 </Label>
                 <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -129,7 +129,7 @@
                 <Grid Grid.Row="4">
                     <Grid Margin="30 0">
                         <Button x:Name="LoginButton"
-                                Style="{StaticResource UIProjectLightButtonStyle}"
+                                Style="{StaticResource UIProjectMediumButtonStyle}"
                                 FontSize="15"
                                 TabIndex="5"
                                 IsDefault="True"

@@ -5,55 +5,80 @@
     <DataTemplate x:Key="DanhSachKhachHangTemplate">
         <DataGrid Grid.Row="0"
                   CanUserSortColumns="True"
+                  ItemsSource="{Binding}"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  materialDesign:DataGridAssist.CellPadding="8"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                   SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridHyperlinkColumn Width="120"
-                                         Binding="{Binding OrderCode}"
+                <DataGridCheckBoxColumn Width="50"
+                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
+                <DataGridHyperlinkColumn Width="70"
+                                         Binding="{Binding CustomerID}"
                                          CanUserSort="False"
                                          IsReadOnly="True"
-                                         Header="Mã khách hàng"
-                                         HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                         CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="150"
-                                    Binding="{Binding DateEstablished}"
+                                         Header="Mã KH"
+                                         HeaderStyle="{StaticResource RightDataGridHeader}"
+                                         CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    Binding="{Binding Name}"
                                     Header="Tên khách hàng"
                                     IsReadOnly="True"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="130"
+                <DataGridTextColumn Width="80"
+                                    Binding="{Binding Gender}"
+                                    Header="Giới tính"
                                     IsReadOnly="True"
-                                    Binding="{Binding CustomerName}"
-                                    Header="Địa chỉ"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Area}"
+                                    Header="Khu vực"
+                                    CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="130"
-                                    CanUserSort="True"
-                                    Binding="{Binding TotalMoney}"
-                                    Header="Email"                                           
-                                    IsReadOnly="True"
-                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                    CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="130"
-                                    CanUserSort="True"
-                                    Binding="{Binding TotalMoney}"
+                                    CanUserSort="False"
+                                    Binding="{Binding PhoneNumber}"
                                     Header="Số điện thoại"                                           
                                     IsReadOnly="True"
-                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
                 <DataGridTextColumn Width="130"
-                                    CanUserSort="True"
-                                    Binding="{Binding TotalMoney}"
+                                    CanUserSort="False"
+                                    Binding="{Binding Debt}"
                                     Header="Công nợ"                                           
                                     IsReadOnly="True"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTemplateColumn Width="50"
+                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                    VerticalAlignment="Center"
+                                    ToolTip="Xóa sản phẩm khỏi đơn hàng"
+                                    Padding="5"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center"
+                                    BorderThickness="0">
+                                <materialDesign:PackIcon Kind="MoreCircleOutline" 
+                                                         Foreground="Black"
+                                                         Margin="0"
+                                                         Width="20"
+                                                         Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </DataTemplate>

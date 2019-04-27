@@ -199,16 +199,17 @@
                                                             HorizontalAlignment="Center"
                                                             BorderThickness="0"
                                                             Command="{Binding}">
-                                                        <materialDesign:PackIcon Kind="DateRange" 
-                                                                                     Margin="0"
-                                                                                     Width="auto"
-                                                                                     Height="auto"/>
+                                                        <materialDesign:PackIcon Kind="DateRange"
+                                                                                 Foreground="Black"
+                                                                                 Margin="0"
+                                                                                 Width="auto"
+                                                                                 Height="auto"/>
                                                     </Button>
                                                     <Popup x:Name="PART_Popup"
-                                                            AllowsTransparency="True"
-                                                            Placement="Bottom"
-                                                            PlacementTarget="{Binding ElementName=PART_TextBox}"
-                                                            StaysOpen="False" />
+                                                           AllowsTransparency="True"
+                                                           Placement="Bottom"
+                                                           PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                                           StaysOpen="False" />
                                                 </Grid>
                                             </Border>
                                         </ControlTemplate>

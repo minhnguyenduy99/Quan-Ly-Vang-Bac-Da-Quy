@@ -106,7 +106,7 @@
             </Grid>
             <Grid Margin="10">
                 <Button 
-                        Style="{StaticResource UIProjectLightButtonStyle}"
+                        Style="{StaticResource UIProjectDarkButtonStyle}"
                         FontSize="15"
                         Height="40"
                         Content="Đăng xuất"
