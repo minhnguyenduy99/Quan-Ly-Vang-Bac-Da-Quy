@@ -35,12 +35,11 @@ namespace UIProject.Test
                 IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
                 WindowState = WindowState.Maximized
             };
-            this.Loaded += TestWindow_Loaded;
         }
 
-        private void TestWindow_Loaded(object sender, RoutedEventArgs e)
+        private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            this.PART_PAGE.Content = new DanhSachDonHangPage();
+            MessageBox.Show(object.ReferenceEquals(btn1.Content, btn2.Content).ToString());
         }
     }
 }

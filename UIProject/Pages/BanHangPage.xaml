@@ -7,6 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
       xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
+      xmlns:services="clr-namespace:UIProject.ServiceProviders"
       mc:Ignorable="d" 
       Title="BanHangPage">
     <Grid>
@@ -138,19 +139,17 @@
                                                 CellStyle="{StaticResource ButtonDataGridCellStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                            VerticalAlignment="Center"
+                                    <Button Style="{StaticResource UIProjectIconButtonStyle}"
                                             ToolTip="Xóa sản phẩm khỏi đơn hàng"
-                                            Padding="5"
-                                            Background="Transparent"
-                                            BorderBrush="Transparent"
+                                            VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
-                                            BorderThickness="0">
-                                        <materialDesign:PackIcon Kind="RemoveCircle" 
-                                                                 Foreground="Black"
-                                                                 Margin="0"
-                                                                 Width="20"
-                                                                 Height="20"/>
+                                            Background="Transparent"
+                                            Foreground="Black"
+                                            Width="30"
+                                            Height="30">
+                                        <materialDesign:PackIcon Kind="RemoveCircle"
+                                                                 Height="auto"
+                                                                 Width="auto"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -169,15 +168,14 @@
                             BorderBrush="LightGray"
                             Padding="7">
                         <StackPanel >
-                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                                    HorizontalAlignment="Left"
-                                    ToolTip="Lọc"
-                                    Background="{StaticResource AirForceBlue}"
-                                    BorderBrush="Transparent">
-                                <materialDesign:PackIcon Kind="FilterRemove"
-                                                         Foreground="White"
-                                                         Width="24"
-                                                         Height="24"/>
+                            <Button x:Name="btn1"
+                                    Style="{StaticResource UIProjectLightIconButtonStyle}"
+                                    Height="40"
+                                    Width="40"
+                                    ToolTip="Lọc sản phẩm">
+                                <materialDesign:PackIcon Kind="Filter"
+                                                         Height="auto"
+                                                         Width="auto"/>
                             </Button>
                         </StackPanel>
                     </Border>

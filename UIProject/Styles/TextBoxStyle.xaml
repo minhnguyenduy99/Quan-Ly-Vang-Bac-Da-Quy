@@ -19,9 +19,8 @@
 
     <Style x:Key="UIProjectTextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0 0 0 2"/>
         <Setter Property="Background" Value="WhiteSmoke"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="7 10"/>
         <Setter Property="materialDesign:HintAssist.IsFloating" Value="False"/>
         <Setter Property="materialDesign:TextFieldAssist.DecorationVisibility" Value="Collapsed"/>

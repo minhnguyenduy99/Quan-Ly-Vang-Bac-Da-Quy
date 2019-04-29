@@ -5,14 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UIProject.Test"
         mc:Ignorable="d"
-        Style="{StaticResource CustomWindowStyle}"
         Title="TestWindow">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Setter Property="Content" Value="abc"/>
+        </Style>
+    </Window.Resources>
     <Grid Background="WhiteSmoke">
-        <Frame x:Name="PART_PAGE"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
-               HorizontalContentAlignment="Stretch">
-            
-        </Frame>
+        <Button x:Name="btn1"
+                Style="{StaticResource ButtonStyle}"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Click="Btn1_Click"/>
+        <Button x:Name="btn2"
+                Style="{StaticResource ButtonStyle}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
     </Grid>
 </Window>

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Styles"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:iconButtonExt="clr-namespace:UIProject.ServiceProviders">
 
     <Style TargetType="{x:Type Button}" x:Key="UIProjectMediumButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -44,5 +45,26 @@
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
         <Setter Property="materialDesign:ShadowAssist.Darken" Value="True"/>
     </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectIconButtonStyle" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+        
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectShadowIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
+        <Setter Property="materialDesign:ShadowAssist.Darken" Value="true"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectLightIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="UIProjectDarkIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+    </Style>
+
 
 </ResourceDictionary>

@@ -27,7 +27,7 @@ namespace UIProject.ViewModels
             "Tạo đơn hàng",
             "Danh sách đơn hàng",
             "Khách hàng",
-            "Đối tác",
+            "Nhà cung cấp",
             "Sản phẩm",
             "Dịch vụ",
             "Nhập hàng"
@@ -127,7 +127,7 @@ namespace UIProject.ViewModels
             TabPageVM.Add(ListTabNames[2], null);
             TabPageVM.Add(ListTabNames[3], new DanhSachDonHangPageVM());
             TabPageVM.Add(ListTabNames[4], new KhachHangPageVM());
-            TabPageVM.Add(ListTabNames[5], null);
+            TabPageVM.Add(ListTabNames[5], new NhaCungCapPageVM());
             TabPageVM.Add(ListTabNames[6], null);
             TabPageVM.Add(ListTabNames[7], null);
             TabPageVM.Add(ListTabNames[8], new NhapHangPageVM());
