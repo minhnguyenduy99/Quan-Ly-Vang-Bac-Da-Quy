@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class SanPhamModel
+    public class SanPhamModel
     {
         private int maSP;
         private int maLoaiSP;

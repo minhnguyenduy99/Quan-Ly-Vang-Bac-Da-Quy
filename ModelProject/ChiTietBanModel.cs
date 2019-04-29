@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class ChiTietBanModel
+    public class ChiTietBanModel
     {
         private int maPhieuMuaHang;
         private int maSP;

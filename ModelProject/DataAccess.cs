@@ -10,7 +10,7 @@ using Dapper;
 
 namespace ModelProject
 {
-    class DataAccess
+    public class DataAccess
     {
         //San pham
         public static List<SanPhamModel> LoadSanPham()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class LoaiDichVuModel
+    public class LoaiDichVuModel
     {
         private int maLoaiDV;
         private string tenLoaiDV;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class PhieuDichVuModel
+    public class PhieuDichVuModel
     {
         private int maPhieu;
         private int soPhieu;

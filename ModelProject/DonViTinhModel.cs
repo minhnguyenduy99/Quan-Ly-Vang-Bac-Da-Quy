@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class DonViTinhModel
+    public class DonViTinhModel
     {
         private int maDVT;
         private string tenDVT;

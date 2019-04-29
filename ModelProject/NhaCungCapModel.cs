@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class NhaCungCapModel
+    public class NhaCungCapModel
     {
         private int maNCC;
         private string diaChi;

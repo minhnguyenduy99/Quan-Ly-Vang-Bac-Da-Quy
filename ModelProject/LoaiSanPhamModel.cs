@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class LoaiSanPhamModel
+    public class LoaiSanPhamModel
     {
         private int maLoaiSP;
         private int maDVT;

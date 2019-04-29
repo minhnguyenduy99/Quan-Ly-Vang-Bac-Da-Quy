@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    class KhachHangModel
+    public class KhachHangModel
     {
         private int maKH;
         private int SDT;
