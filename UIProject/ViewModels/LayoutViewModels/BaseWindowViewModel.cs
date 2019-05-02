@@ -75,6 +75,15 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public Visibility NavigationBarVisibility { get; set; } = Visibility.Visible;
 
+        /// <summary>
+        /// The x-coordinate startup location of the window
+        /// </summary>
+        public double Left { get; set; } = 0f;
+
+        /// <summary>
+        /// The y-coordinate startup location of the window
+        /// </summary>
+        public double Top { get; set; } = 0f;
 
         public ICommand MinimizedCommand
         {

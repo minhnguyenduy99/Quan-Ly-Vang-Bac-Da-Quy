@@ -18,6 +18,8 @@ using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ServiceProviders;
 using UIProject.Views;
 
+using MaterialDesignThemes.Wpf;
+
 namespace UIProject
 {
     /// <summary>
@@ -105,6 +107,14 @@ namespace UIProject
                 InitializeHomepageWindow();
                 this.Close();
             }
+        }
+
+        private void DialogOpened(object sender, DialogOpenedEventArgs e)
+        {
+            var currentSession = e.Session;
+            if (viewModel.Login())
+                InitializeHomepageWindow();
+            currentSession.Close();
         }
 
         private void InitializeHomepageWindow()

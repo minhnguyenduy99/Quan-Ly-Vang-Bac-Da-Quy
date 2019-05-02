@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BaseMVVM_Service.BaseMVVM;
+using ModelProject;
+
 
 namespace UIProject.ViewModels.PageViewModels
 {
@@ -15,9 +17,30 @@ namespace UIProject.ViewModels.PageViewModels
     public class TongQuanPageVM : BasePageViewModel
     {
 
+        #region Models
+        private List<PhieuBanModel> dsPhieuBan;
+        private List<KhachHangModel> dsKhachHang;
+        private long doanhThu;
+        #endregion
+
         private ICommand getMoreInfoCommand;
         private ICommand logoutCommand;
        
+        public int SoLuongHoaDon
+        {
+            get => this.dsPhieuBan.Count;
+        }
+
+        public int SoLuongKhachHangMoi
+        {
+            get => this.dsKhachHang.Count;
+        }
+
+        public long DoanhThu
+        {
+            get => this.doanhThu;
+        }
+
 
         /// <summary>
         /// Command hiển thị thông tin nhân viên
@@ -47,9 +70,9 @@ namespace UIProject.ViewModels.PageViewModels
 
         protected override void LoadPageComponents()
         {
-             // Load all models needed for page
+            // Load all models needed for page
+            dsPhieuBan = DataAccess.LoadPhieuBan();
+            dsKhachHang = DataAccess.LoadKhachHang();
         }
-
-
     }
 }

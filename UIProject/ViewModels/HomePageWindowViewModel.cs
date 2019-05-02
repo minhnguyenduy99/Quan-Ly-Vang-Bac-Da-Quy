@@ -24,7 +24,6 @@ namespace UIProject.ViewModels
         {
             "Tổng quan",
             "Bán hàng",
-            "Tạo đơn hàng",
             "Danh sách đơn hàng",
             "Khách hàng",
             "Nhà cung cấp",
@@ -116,7 +115,6 @@ namespace UIProject.ViewModels
                 CreateTabViewModel(ListTabNames[5], "SoftwareIcon", TabState.New),
                 CreateTabViewModel(ListTabNames[6], "SoftwareIcon", TabState.New),
                 CreateTabViewModel(ListTabNames[7], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[8], "SoftwareIcon", TabState.New),
             };
 
             //  Set up pages to corresponding tabs
@@ -124,13 +122,12 @@ namespace UIProject.ViewModels
 
             TabPageVM.Add(ListTabNames[0], new TongQuanPageVM());
             TabPageVM.Add(ListTabNames[1], new BanHangPageVM());
-            TabPageVM.Add(ListTabNames[2], null);
-            TabPageVM.Add(ListTabNames[3], new DanhSachDonHangPageVM());
-            TabPageVM.Add(ListTabNames[4], new KhachHangPageVM());
-            TabPageVM.Add(ListTabNames[5], new NhaCungCapPageVM());
+            TabPageVM.Add(ListTabNames[2], new DanhSachDonHangPageVM());
+            TabPageVM.Add(ListTabNames[3], new KhachHangPageVM());
+            TabPageVM.Add(ListTabNames[4], new NhaCungCapPageVM());
+            TabPageVM.Add(ListTabNames[5], null);
             TabPageVM.Add(ListTabNames[6], null);
-            TabPageVM.Add(ListTabNames[7], null);
-            TabPageVM.Add(ListTabNames[8], new NhapHangPageVM());
+            TabPageVM.Add(ListTabNames[7], new NhapHangPageVM());
 
             SubcribeTabChangedEvent();
         }

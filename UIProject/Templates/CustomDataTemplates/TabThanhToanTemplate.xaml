@@ -21,26 +21,32 @@
                      materialDesign:HintAssist.Hint="Nhập tên khách hàng"
                      Margin="10 20 10 20"
                      FontSize="13"
-                     materialDesign:ColorZoneAssist.Mode="Light"/>
+                     materialDesign:ColorZoneAssist.Mode="Light"
+                     DataContext="{Binding TimKiemKhachHangVM}"/>
             <Label Grid.Row="1" Grid.Column="0"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
-                   Content="Điện thoại"/>
+                   Content="Họ tên"/>
             <Label Grid.Row="2" Grid.Column="0"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
-                   Content="Địa chỉ"/>
+                   Content="Điện thoại"/>
             <Label Grid.Row="3" Grid.Column="0"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="Địa chỉ"/>
+            <Label Grid.Row="4" Grid.Column="0"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
                    Content="Công nợ"/>
             <Label Grid.Row="1" Grid.Column="1"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
-                   Content="{Binding ModelData.Telephone}"/>
+                   Content="{Binding KhachHang.HoTen}"/>
             <Label Grid.Row="2" Grid.Column="1"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
-                   Content="{Binding ModelData.Address}"/>
+                   Content="{Binding KhachHang.SDT1}"/>
             <Label Grid.Row="3" Grid.Column="1"
                    Style="{DynamicResource SmallDefinedLabelStyle}"
-                   Content="{Binding ModelData.Debt}"/>
-            <Grid Grid.Row="4"/>
+                   Content="{Binding KhachHang.DiaChi}"/>
+            <Label Grid.Row="4" Grid.Column="1"
+                   Style="{DynamicResource SmallDefinedLabelStyle}"
+                   Content="{Binding KhachHang.CongNo}"/>
         </Grid>
     </DataTemplate>
     
@@ -69,12 +75,12 @@
                    VerticalAlignment="Top"
                    Content="Ghi chú"/>
             <TextBox Grid.Row="0" Grid.Column="1"
-                         IsEnabled="False"/>
+                     IsEnabled="False"/>
             <TextBox Grid.Row="1" Grid.Column="1"
+                     Style="{StaticResource UIProjectMultipleLineTextBoxStyle}"
+                     Margin="7"
                      Height="auto"
-                     VerticalAlignment="Stretch"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"/>
+                     VerticalAlignment="Stretch"/>
         </Grid>
     </DataTemplate>
     
@@ -187,6 +193,7 @@
                         Height="60"
                         FontSize="20"
                         Margin="10 5"
+                        Command="{Binding ThanhToanCommand}"
                         Style="{StaticResource UIProjectLightShadowButtonStyle}"/>
             </Grid>
         </Grid>

@@ -14,6 +14,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
 using UIProject.ViewModels.LayoutViewModels;
 using UIProject.Views;
 
@@ -28,15 +29,19 @@ namespace UIProject.Pages
         {
             InitializeComponent();
 
+            this.Loaded += DanhSachDonHangPage_Loaded;
             
+        }
+
+        private async void DanhSachDonHangPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await this.FadeIn(0.5f, 0.5f);
         }
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)
         {
             OrderFilterDialogWindow orderFilterWnd = new OrderFilterDialogWindow();
             orderFilterWnd.ShowDialog();
-
-
         }
     }
 }

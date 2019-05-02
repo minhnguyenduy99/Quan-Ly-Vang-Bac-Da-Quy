@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,27 +11,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.Pages;
 using UIProject.ServiceProviders;
 
-namespace UIProject.Pages
+namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for DoiTacPage.xaml
+    /// Interaction logic for SearchWindow.xaml
     /// </summary>
-    public partial class DoiTacPage : Page
+    public partial class SearchWindow : Window, IClosable
     {
-        public DoiTacPage()
+        public SearchWindow()
         {
             InitializeComponent();
+            PART_ListBox.ItemsSource = new ObservableCollection<Product>()
+            {
+                new Product(),
+                new Product(),
+                new Product()
+            };
 
-            this.Loaded += DoiTacPage_Loaded;
-        }
-
-        private async void DoiTacPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            await this.FadeIn(0.5f, 0.5f);
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,11 +36,31 @@ namespace UIProject.Test
                 IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
                 WindowState = WindowState.Maximized
             };
+
+            this.DataContext = new MainWindowViewModel();
+
         }
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(object.ReferenceEquals(btn1.Content, btn2.Content).ToString());
+        }
+
+        
+    }
+
+    public class MainWindowViewModel
+    {
+        private ICommand openMessageBoxCmd;
+        public ICommand OpenMessageBoxCommand
+        {
+            get => openMessageBoxCmd ?? new BaseCommand(OnOpenMessageBox);
+            set => openMessageBoxCmd = value;
+        }
+
+        protected void OnOpenMessageBox()
+        {
+            MessageBox.Show("Message box");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
+using UIProject.ViewModels.LayoutViewModels;
+using UIProject.ViewModels.PageViewModels;
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -21,20 +26,31 @@ namespace UIProject.Pages
     /// </summary>
     public partial class BanHangPage : Page
     {
+        public BanHangPageVM ViewModel { get; private set; }
         public BanHangPage()
         {
             InitializeComponent();
 
-            var listProducts = new ObservableCollection<Product>()
-            {
-                new Product(),
-                new Product(),
-                new Product()
-            };
+            this.Loaded += BanHangPage_Loaded;
 
-            this.ProductView.ItemsSource = listProducts;
-            this.ProductDisplayed.ItemsSource = listProducts;
+            ViewModel = new BanHangPageVM();
+
+            PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
+            ProductView.DataContext = ViewModel.DanhSachChiTietBan;
+
+            ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
         }
+
+        private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)
+        {
+            MessageBox.Show("Sản phẩm này đã được chọn");
+        }
+
+        private async void BanHangPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await this.FadeIn(0.5f, 0.5f);
+        }
+
     }
 
     public class Product

@@ -65,6 +65,18 @@
     <Style TargetType="{x:Type Button}" x:Key="UIProjectDarkIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
         <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
     </Style>
-
-
+    
+    <!-- This style is used for any control that wants to have the clickable behavior -->
+    <!-- This can be done by setting button as root element -->
+    <Style TargetType="{x:Type Button}" x:Key="ClickableTemplateButtonStyle" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="materialDesign:ShadowAssist.ShadowEdges" Value="None"/>
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0"/>
+        <Setter Property="materialDesign:ShadowAssist.Darken" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
 </ResourceDictionary>

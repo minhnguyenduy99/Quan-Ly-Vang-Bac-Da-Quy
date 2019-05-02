@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
 using UIProject.Test;
 using UIProject.Views;
 
@@ -32,6 +33,13 @@ namespace UIProject.Pages
                 new Customer(),
                 new Customer()
             };
+
+            this.Loaded += KhachHangPage_Loaded;
+        }
+
+        private async void KhachHangPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await this.FadeIn(0.5f, 0.5f);
         }
 
         private void OpenAddNewCustomerDialog(object sender, RoutedEventArgs e)
@@ -39,11 +47,7 @@ namespace UIProject.Pages
             var addCustomerBtn = sender as Button;
 
             CustomerAddingDialogWindow dialog = new CustomerAddingDialogWindow();
-            Point currentPosition = 
-                addCustomerBtn.TransformToAncestor(this).Transform(new Point(0, 0));
-            dialog.Left = currentPosition.X - 200;
-            dialog.Top = currentPosition.Y + 100 ;
-            dialog.ShowDialog();           
+            dialog.ShowDialog(addCustomerBtn);        
         }
     }
 }

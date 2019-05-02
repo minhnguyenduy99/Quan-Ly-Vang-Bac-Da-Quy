@@ -8,6 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using UIProject.Test;
+using System.IO;
+using ModelProject;
+using System.Data.SQLite;
+using Dapper;
 
 namespace UIProject
 {
@@ -15,6 +19,6 @@ namespace UIProject
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    { 
+    {
     }
 }
