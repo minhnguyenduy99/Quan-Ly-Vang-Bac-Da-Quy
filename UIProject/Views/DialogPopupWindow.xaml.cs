@@ -61,7 +61,6 @@ namespace UIProject.Views
         public void ApplyViewModel(BaseViewModel viewModel)
         {
             this.ViewModel = viewModel;
-
             this.DataContext = viewModel;
             this.Content = viewModel;
         }      

@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -42,7 +53,12 @@
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +84,7 @@
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
     <Compile Include="Converters\TabCheckedToVisibilityConverter.cs" />
     <Compile Include="Converters\TabNameToTabViewModelConverter.cs" />
+    <Compile Include="Converters\TextPropertyToVisibilityConverter.cs" />
     <Compile Include="CustomControls\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
@@ -78,6 +95,12 @@
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataValidation\PositiveNumberValidation.cs" />
+    <Compile Include="Events\ItemAddedEventArgs.cs" />
+    <Compile Include="Events\ItemEventArgs.cs" />
+    <Compile Include="Events\ItemRemovedEventArgs.cs" />
+    <Compile Include="Events\ItemSelectedEventArgs.cs" />
+    <Compile Include="Events\SelectedEventArgs.cs" />
+    <Compile Include="Events\TextValueChangedEventArgs.cs" />
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
     </Compile>
@@ -94,9 +117,13 @@
       <DependentUpon>NhapHangPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
+    <Compile Include="ServiceProviders\AsynchorousPerformHelper.cs" />
+    <Compile Include="ServiceProviders\DialogControlExtension.cs" />
     <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ServiceProviders\IAttachedViewModelAble.cs" />
     <Compile Include="ServiceProviders\IconButtonExtension.cs" />
+    <Compile Include="ServiceProviders\ISubmitable.cs" />
+    <Compile Include="ServiceProviders\LoadDataHelper.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
     <Compile Include="Test\TestClasses.cs" />
     <Compile Include="Test\TestConsole.cs" />
@@ -104,15 +131,20 @@
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FunctionInterfaces\IExpandableVM.cs" />
+    <Compile Include="ViewModels\FunctionInterfaces\ISelectable.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseHeaderedControlViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseTabItemVM.cs" />
     <Compile Include="ViewModels\LayoutViewModels\CustomerTabItemVM.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\DataGridViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ExpandTabViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseContentViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseHeaderViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\PaymentTabItemVM.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\SearchAndSelectViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\SearchTextBoxViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\BanHangPageVM.cs" />
@@ -141,6 +173,9 @@
     </Compile>
     <Compile Include="Views\ProviderAddingDialogWindow.xaml.cs">
       <DependentUpon>ProviderAddingDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
       <SubType>Designer</SubType>
@@ -317,6 +352,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -384,4 +423,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>

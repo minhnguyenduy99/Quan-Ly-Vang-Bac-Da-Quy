@@ -154,6 +154,7 @@ namespace ModelProject
                 return output.ToList();
             }
         }
+
         public static void SavePhieuMua(PhieuMuaModel PhieuMua)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -229,7 +230,7 @@ namespace ModelProject
         }
         private static string LoadConnectionString(string id = "Default")
         {
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+            return "Data Source=.\\database.db;Version=3;";
         }
     }
 }

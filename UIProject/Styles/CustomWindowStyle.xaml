@@ -10,6 +10,8 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        <Setter Property="Left" Value="{Binding Left}"/>
+        <Setter Property="Top" Value="{Binding Top}"/>
         <Setter Property="WindowState" Value="{Binding WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>

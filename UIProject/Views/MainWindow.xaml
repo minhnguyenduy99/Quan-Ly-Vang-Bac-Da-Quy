@@ -15,8 +15,7 @@
         WindowState="{Binding WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowStartupLocation="Manual"
         Style="{StaticResource CustomWindowStyle}"
-        Opacity="1"
-        >
+        Opacity="1">
     <Window.Resources>
         <ResourceDictionary>
             <converter:PageViewModelToPageControlConverter x:Key="ViewModelToPageConverter"/>
@@ -46,6 +45,12 @@
                             x:Name="TabsContainer"                            
                             Margin="0"
                             Background="{StaticResource RoyalBlue}">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Separator}">
+                            <Setter Property="Margin" Value="10"/>
+                            <Setter Property="Background" Value="WhiteSmoke"/>
+                        </Style>
+                    </StackPanel.Resources>
                     <Grid Height="90">
                         <!-- Display the icon -->
                         <Image Margin="10"
@@ -58,11 +63,13 @@
                     
                     <!-- List tabs -->
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <Separator/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <Separator/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <Separator/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>

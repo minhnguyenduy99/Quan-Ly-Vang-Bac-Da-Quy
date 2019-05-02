@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.Events;
+using UIProject.Pages;
+using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.CustomControls
 {
@@ -23,6 +27,19 @@ namespace UIProject.CustomControls
         public SearchTextBox()
         {
             InitializeComponent();
+
+            this.PART_TextBox.LostFocus += PART_TextBox_LostFocus;
+            this.PART_TextBox.GotFocus += PART_TextBox_GotFocus;
+        }
+
+        private void PART_TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.PART_ListBox.Visibility = Visibility.Visible;
+        }
+
+        private void PART_TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.PART_ListBox.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -40,8 +57,43 @@ namespace UIProject.CustomControls
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            set
+            {
+                SetValue(TextProperty, value);
+            }
         }
+
+        /// <summary>
+        /// Event occurs when the text property changed
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public event TextChangedEventHandler TextChanged
+        {
+            add { PART_TextBox.TextChanged += value; }
+            remove
+            {
+                PART_TextBox.TextChanged -= value;
+            }
+        }
+        
+        /// <summary>
+        /// Event occurs when the selected item changed
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public event SelectionChangedEventHandler SelectionChanged
+        {
+            add { PART_ListBox.SelectionChanged += value; }
+            remove { PART_ListBox.SelectionChanged -= value; }
+        }
+
+        /// <summary>
+        /// Event occurs when an item is selected
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public event EventHandler<SelectedEventArgs> Selected;
 
         /// <summary>
         /// The hint text in the <see cref="SearchTextBox"/>
@@ -79,6 +131,33 @@ namespace UIProject.CustomControls
             set => SetValue(IconBackgroundProperty, value);
         }
 
+        /// <summary>
+        /// The item source of <see cref="SearchTextBox"/>
+        /// </summary>
+        public object SearchBoxItemSource
+        {
+            get => (object)GetValue(SearchBoxItemSourceProperty);
+            set => SetValue(SearchBoxItemSourceProperty, value);
+        }
+
+        /// <summary>
+        /// The template of item in <see cref="SearchTextBox"/> source
+        /// </summary>
+        public DataTemplate SearchBoxItemTemplate
+        {
+            get => (DataTemplate)GetValue(SearchBoxItemTemplateProperty);
+            set => SetValue(SearchBoxItemTemplateProperty, value);
+        }
+
+        /// <summary>
+        /// The text displayed when the item source is null or empty
+        /// </summary>
+        public string EmptySourceText
+        {
+            get => (string)GetValue(EmptySourceTextProperty);
+            set => SetValue(EmptySourceTextProperty, value);
+        }
+
         #region Dependency Properties
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
             "IconSource", 
@@ -114,6 +193,23 @@ namespace UIProject.CustomControls
             typeof(Brush),
             typeof(SearchTextBox));
 
+        public static readonly DependencyProperty SearchBoxItemSourceProperty = DependencyProperty.Register(
+            "SearchBoxItemSource",
+            typeof(object),
+            typeof(SearchTextBox));
+
+        public static readonly DependencyProperty SearchBoxItemTemplateProperty = DependencyProperty.Register(
+            "SearchBoxItemTemplate",
+            typeof(DataTemplate),
+            typeof(SearchTextBox));
+
+        public static readonly DependencyProperty EmptySourceTextProperty = DependencyProperty.Register(
+            "EmptySourceText",
+            typeof(string),
+            typeof(SearchTextBox),
+            new PropertyMetadata(string.Empty));
         #endregion
+
     }
+
 }

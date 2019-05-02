@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:UIProject.Test"
         mc:Ignorable="d"
         Title="TestWindow">
@@ -15,8 +16,13 @@
         <Button x:Name="btn1"
                 Style="{StaticResource ButtonStyle}"
                 VerticalAlignment="Top"
-                HorizontalAlignment="Center"
-                Click="Btn1_Click"/>
+                HorizontalAlignment="Center">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenMessageBoxCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
         <Button x:Name="btn2"
                 Style="{StaticResource ButtonStyle}"
                 VerticalAlignment="Center"

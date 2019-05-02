@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using UIProject.ServiceProviders;
 
 namespace UIProject.Pages
 {
@@ -10,6 +11,13 @@ namespace UIProject.Pages
         public NhapHangPage()
         {
             InitializeComponent();
+
+            this.Loaded += NhapHangPage_Loaded;
+        }
+
+        private async void NhapHangPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            await this.FadeIn(0.5f, 0.5f);
         }
     }
 }

@@ -22,5 +22,17 @@ namespace UIProject.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"E:\\Uni File\\Semester IV\\NM C" +
+            "NPM\\Đồ án\\Quan-Ly-Vang-Bac-Da-Quy\\ModelProject\\database.db\";Integrated Security=" +
+            "True;Connect Timeout=30")]
+        public string con {
+            get {
+                return ((string)(this["con"]));
+            }
+        }
     }
 }

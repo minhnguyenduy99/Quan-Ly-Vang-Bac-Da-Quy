@@ -5,9 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UIProject.CustomControls"
+             xmlns:converters="clr-namespace:UIProject.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             >
+             mc:Ignorable="d">
     <UserControl.Style>
         <Style TargetType="UserControl">
             <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -19,14 +19,23 @@
             <Setter Property="BorderThickness" Value="0 0 0 1"/>
         </Style>
     </UserControl.Style>
-    <Grid 
-          Background="Transparent"
-          HorizontalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBox  BorderBrush="Transparent"
+    <UserControl.Resources>
+        <converters:TextPropertyToVisibilityConverter x:Key="ItemVisibilitySearchConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+                  Background="Transparent"
+                  HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox  x:Name="PART_TextBox"
+                  BorderBrush="Transparent"
                   BorderThickness="0"
                   VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch"
@@ -35,20 +44,35 @@
                   Margin="0"
                   VerticalContentAlignment="Center"
                   Width="{Binding TextBoxWidth,ElementName=uc}"
-                  Text="{Binding Text, ElementName=uc}"
+                  Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   FontSize="{Binding FontSize,ElementName=uc}"
                   Foreground="{Binding Foreground,ElementName=uc}"
                   Background="Transparent"
                   Padding="5 0 0 0">
-        </TextBox>
-        <Grid Grid.Column="1"
-              Background="{Binding IconBackground,ElementName=uc}"
-              Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
-              Height="auto">
-            <Image Source="{Binding IconSource,ElementName=uc}"
+            </TextBox>
+            <Grid Grid.Column="1"
+                  Background="{Binding IconBackground,ElementName=uc}"
+                  Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+                  Height="auto">
+                <Image Source="{Binding IconSource,ElementName=uc}"
                    Stretch="Uniform"
                    Height="{Binding IconHeight, ElementName=uc}"
                    Margin="15 10 15 10"/>
+            </Grid>
         </Grid>
+        <Canvas Grid.Row="1"
+                Height="auto"               
+                Width="auto"
+                Visibility="{Binding Text,ElementName=PART_TextBox, Converter={StaticResource ItemVisibilitySearchConverter}}">
+            <ListBox x:Name="PART_ListBox"
+                     SelectionMode="Single"
+                     Height="auto"
+                     MaxHeight="250"
+                     Background="White"
+                     ItemsSource="{Binding DisplayItems,UpdateSourceTrigger=PropertyChanged}"
+                     SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}">
+            </ListBox>
+        </Canvas>
     </Grid>
 </UserControl>
