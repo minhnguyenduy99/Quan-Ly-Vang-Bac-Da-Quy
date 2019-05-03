@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using ModelProject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,8 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             if (obj is ItemViewModel<T>)
             {
-                return Model.Equals(((ItemViewModel<T>)obj).Model);
+                var castObj = (ItemViewModel<T>)obj;
+                return Model.Equals(castObj.Model);
             }
             return false;
         }

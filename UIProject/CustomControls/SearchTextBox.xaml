@@ -71,7 +71,8 @@
                      Background="White"
                      ItemsSource="{Binding DisplayItems,UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}">
+                     ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}"
+                     IsSynchronizedWithCurrentItem="False">
             </ListBox>
         </Canvas>
     </Grid>

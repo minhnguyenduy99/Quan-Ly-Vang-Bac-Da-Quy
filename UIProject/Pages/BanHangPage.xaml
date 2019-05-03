@@ -47,7 +47,10 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </customControls:SearchTextBox>
-            
+            <StackPanel x:Name="PART_Filter"
+                        Orientation="Horizontal">
+                <ComboBox ItemsSource="{Binding FilterLoaiSanPham}"/>
+            </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0"
               Panel.ZIndex="1">

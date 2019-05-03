@@ -25,12 +25,6 @@ namespace UIProject.Views
         public SearchWindow()
         {
             InitializeComponent();
-            PART_ListBox.ItemsSource = new ObservableCollection<Product>()
-            {
-                new Product(),
-                new Product(),
-                new Product()
-            };
 
             
         }

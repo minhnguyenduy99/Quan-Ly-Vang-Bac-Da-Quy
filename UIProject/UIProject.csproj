@@ -100,6 +100,7 @@
     <Compile Include="Events\ItemRemovedEventArgs.cs" />
     <Compile Include="Events\ItemSelectedEventArgs.cs" />
     <Compile Include="Events\SelectedEventArgs.cs" />
+    <Compile Include="Events\SelectedItemChangedEventArgs.cs" />
     <Compile Include="Events\TextValueChangedEventArgs.cs" />
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
@@ -141,6 +142,8 @@
     <Compile Include="ViewModels\LayoutViewModels\BaseHeaderViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />
+    <Compile Include="ServiceProviders\FilterHelper.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\ItemCollectionViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\PaymentTabItemVM.cs" />
     <Compile Include="ViewModels\LayoutViewModels\SearchAndSelectViewModel.cs" />

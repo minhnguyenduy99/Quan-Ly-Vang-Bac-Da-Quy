@@ -52,34 +52,4 @@ namespace UIProject.Pages
         }
 
     }
-
-    public class Product
-    {
-        public int No { get; set; }
-        public string OrderCode { get; set; }
-        public string ProductName { get; set; }
-        public string ProductType { get; set; }
-        public string Unit { get; set; }
-        public int Quantity { get; set; }
-        public long SinglePrice { get; set; }
-        public double Discount { get; set; }
-        public double Tax { get; set; }
-        public long TotalMoney { get; set; }
-
-        public string ProductImageSource { get; set; }
-        public Product()
-        {
-            No = 1;
-            OrderCode = "PD001";
-            ProductName = "Jewelnafnakgnaknglanlgkaetea";
-            ProductType = "Gold";
-            Unit = "a";
-            Quantity = 0;
-            SinglePrice = 30000;
-            Discount = 0.04;
-            Tax = 0.05;
-            TotalMoney = 20000;
-            ProductImageSource = (string)Application.Current.FindResource("SoftwareIcon");
-        }
-    }
 }

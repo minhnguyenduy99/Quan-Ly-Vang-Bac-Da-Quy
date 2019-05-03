@@ -114,7 +114,6 @@ namespace UIProject.ViewModels.PageViewModels
         }
         protected override void LoadPageComponents()
         {
-
             PhieuBan = new PhieuBanModel();
 
             TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(new ObservableCollection<SanPhamModel>()
@@ -124,12 +123,16 @@ namespace UIProject.ViewModels.PageViewModels
                 new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000},
                 new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000},
                 new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000},
-                new SanPhamModel(){MaSP = 3, TenSP = "B", DonGiaMuaVao = 100000},
+                new SanPhamModel(){MaSP = 2, TenSP = "B", DonGiaMuaVao = 100000},
             });
+
             DanhSachChiTietBan = new DataGridViewModel<ChiTietBanModel>();
             TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>();
 
-            TimKiemSanPhamVM.Filter = sanPham => sanPham.Model.TenSP.ToLower().Contains(TimKiemSanPhamVM.Text.ToLower());
+            TimKiemSanPhamVM.Filters = new Func<ItemViewModel<SanPhamModel>, bool>[]
+            {
+                sanPham => sanPham.Model.TenSP.ToLower().Contains(TimKiemSanPhamVM.Text.ToLower())
+            };
             TimKiemSanPhamVM.SelectItem += TimKiemSanPhamVM_SelectionChanged;
         }
         protected virtual void OnThanhToanCommandExecute()
