@@ -8,21 +8,21 @@ namespace ModelProject
 {
     public class ChiTietDichVuModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maPhieu;
-        private int maLoaiDV;
+        private string maPhieu;
+        private string maLoaiDV;
         private long chiPhiRieng;
         private int soLuong;
         private long thanhTien;
         private long traTruoc;
         private string ngayGiao;
-        private int maTinhTrang;
+        private string maTinhTrang;
 
-        public int MaPhieu
+        public string MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
         }
-        public int MaLoaiDV
+        public string MaLoaiDV
         {
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
@@ -52,7 +52,7 @@ namespace ModelProject
             get => ngayGiao;
             set => SetProperty(ref ngayGiao, value);
         }
-        public int MaTinhTrang
+        public string MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);

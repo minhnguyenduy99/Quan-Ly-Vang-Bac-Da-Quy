@@ -8,11 +8,11 @@ namespace ModelProject
 {
     public class NhaCungCapModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maNCC;
+        private string maNCC;
         private string diaChi;
-        private int dienThoai;
+        private string dienThoai;
 
-        public int MaNCC
+        public string MaNCC
         {
             get => maNCC;
             set => SetProperty(ref maNCC, value);
@@ -22,7 +22,7 @@ namespace ModelProject
             get => diaChi;
             set => SetProperty(ref diaChi, value);
         }
-        public int DienThoai
+        public string DienThoai
         {
             get => dienThoai;
             set => SetProperty(ref dienThoai, value);

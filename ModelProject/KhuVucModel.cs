@@ -8,10 +8,10 @@ namespace ModelProject
 {
     public class KhuVucModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maKhuVuc;
+        private string maKhuVuc;
         private string tenKhuVuc;
 
-        public int MaKhuVuc
+        public string MaKhuVuc
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);

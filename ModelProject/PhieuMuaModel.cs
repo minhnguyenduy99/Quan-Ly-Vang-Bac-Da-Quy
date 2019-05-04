@@ -8,12 +8,12 @@ namespace ModelProject
 {
     public class PhieuMuaModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maPhieu;
+        private string maPhieu;
         private int soPhieu;
         private string ngayLap;
-        private int maNCC;
+        private string maNCC;
 
-        public int MaPhieu
+        public string MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
@@ -28,7 +28,7 @@ namespace ModelProject
             get => ngayLap;
             set => SetProperty(ref ngayLap, value);
         }
-        public int MaNCC
+        public string MaNCC
         {
             get => maNCC;
             set => SetProperty(ref maNCC, value);

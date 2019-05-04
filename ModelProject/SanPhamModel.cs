@@ -8,17 +8,17 @@ namespace ModelProject
 {
     public class SanPhamModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maSP;
-        private int maLoaiSP;
+        private string maSP;
+        private string maLoaiSP;
         private long donGiaMuaVao;
         private string tenSP;
 
-        public int MaSP
+        public string MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);
         }
-        public int MaLoaiSP
+        public string MaLoaiSP
         {
             get => maLoaiSP;
             set => SetProperty(ref maLoaiSP, value);

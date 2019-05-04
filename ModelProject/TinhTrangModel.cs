@@ -8,10 +8,10 @@ namespace ModelProject
 {
     public class TinhTrangModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maTinhTrang;
+        private string maTinhTrang;
         private string tenTinhTrang;
 
-        public int MaTinhTrang
+        public string MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);

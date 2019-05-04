@@ -8,17 +8,17 @@ namespace ModelProject
 {
     public class ChiTietMuaModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maPhieuMuaHang;
-        private int maSP;
+        private string maPhieuMuaHang;
+        private string maSP;
         private int soLuong;
         private long donGia;
 
-        public int MaPhieuMuaHang
+        public string MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
         }
-        public int MaSP
+        public string MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);

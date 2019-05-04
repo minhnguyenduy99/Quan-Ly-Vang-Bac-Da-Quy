@@ -8,21 +8,21 @@ namespace ModelProject
 {
     public class LoaiSanPhamModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maLoaiSP;
-        private int maDVT;
-        private int phanTramLoiNhuan;
+        private string maLoaiSP;
+        private string maDVT;
+        private double phanTramLoiNhuan;
 
-        public int MaLoaiSP
+        public string MaLoaiSP
         {
             get => maLoaiSP;
             set => SetProperty(ref maLoaiSP, value);
         }
-        public int MaDVT
+        public string MaDVT
         {
             get => maDVT;
             set => SetProperty(ref maDVT, value);
         }
-        public int PhanTramLoiNhuan
+        public double PhanTramLoiNhuan
         {
             get => phanTramLoiNhuan;
             set => SetProperty(ref phanTramLoiNhuan, value);

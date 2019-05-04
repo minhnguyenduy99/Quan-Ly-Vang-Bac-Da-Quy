@@ -8,15 +8,15 @@ namespace ModelProject
 {
     public class KhachHangModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maKH;
+        private string maKH;
         private int SDT;
         private string tenKH;
         private string diaChi;
         private long congNo;
-        private int maKhuVuc;
+        private string maKhuVuc;
         private string email;
 
-        public int MaKH
+        public string MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
@@ -42,7 +42,7 @@ namespace ModelProject
             get => congNo;
             set => SetProperty(ref congNo, value);
         }
-        public int MaKhuVuc
+        public string MaKhuVuc
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);

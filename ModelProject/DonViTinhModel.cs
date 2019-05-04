@@ -7,10 +7,10 @@ namespace ModelProject
 {
     public class DonViTinhModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maDVT;
+        private string maDVT;
         private string tenDVT;
 
-        public int MaDVT
+        public string MaDVT
         {
             get => maDVT;
             set => SetProperty(ref maDVT, value);

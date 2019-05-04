@@ -9,19 +9,19 @@ namespace ModelProject
 {
     public class ChiTietBanModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maPhieuMuaHang;
-        private int maSP;
+        private string maPhieuMuaHang;
+        private string maSP;
         private int soLuong;
         private long thanhTien;
         private long donGiaMuaVao;
         private long chietKhau;
         private long thue;
-        public int MaPhieuMuaHang
+        public string MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
         }
-        public int MaSP
+        public string MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);
