@@ -6,16 +6,42 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class ChiTietMuaModel
+    public class ChiTietMuaModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
         private int maPhieuMuaHang;
         private int maSP;
         private int soLuong;
         private long donGia;
 
-        public int MaPhieuMuaHang { get => maPhieuMuaHang; set => maPhieuMuaHang = value; }
-        public int MaSP { get => maSP; set => maSP = value; }
-        public int SoLuong { get => soLuong; set => soLuong = value; }
-        public long DonGia { get => donGia; set => donGia = value; }
+        public int MaPhieuMuaHang
+        {
+            get => maPhieuMuaHang;
+            set => SetProperty(ref maPhieuMuaHang, value);
+        }
+        public int MaSP
+        {
+            get => maSP;
+            set => SetProperty(ref maSP, value);
+        }
+        public int SoLuong
+        {
+            get => soLuong;
+            set => SetProperty(ref soLuong, value);
+        }
+        public long DonGia
+        {
+            get => donGia;
+            set => SetProperty(ref donGia, value);
+        }
+        public override bool Equals(object obj)
+        {
+            //Two buying details only match if and only if they both have the same maPhieuMuaHang and maSP.
+            if (obj is ChiTietMuaModel)
+            {
+                ChiTietMuaModel secondObj = (ChiTietMuaModel)obj;
+                return (maPhieuMuaHang.Equals(secondObj.maPhieuMuaHang)) && (maSP.Equals(secondObj.maSP));
+            }
+            return false;
+        }
     }
 }

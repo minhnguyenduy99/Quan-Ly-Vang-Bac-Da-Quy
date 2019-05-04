@@ -3,4 +3,7 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>D:\GitHub\Quan-Ly-Vang-Bac-Da-Quy\BaseMVVM_Service\</ReferencePath>
+  </PropertyGroup>
 </Project>
