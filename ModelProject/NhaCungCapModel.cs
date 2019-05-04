@@ -21,7 +21,7 @@ namespace ModelProject
 
         public string TenNCC
         {
-            get => tenNCC:
+            get => tenNCC;
             set => SetProperty(ref tenNCC, value);
         }
         public string DiaChi
