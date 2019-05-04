@@ -9,6 +9,7 @@ namespace ModelProject
     public class NhaCungCapModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
         private string maNCC;
+        private string tenNCC;
         private string diaChi;
         private string dienThoai;
 
@@ -16,6 +17,12 @@ namespace ModelProject
         {
             get => maNCC;
             set => SetProperty(ref maNCC, value);
+        }
+
+        public string TenNCC
+        {
+            get => tenNCC:
+            set => SetProperty(ref tenNCC, value);
         }
         public string DiaChi
         {

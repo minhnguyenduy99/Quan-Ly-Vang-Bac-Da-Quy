@@ -9,7 +9,7 @@ namespace ModelProject
     public class PhieuBanModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
         private string maPhieu;
-        private int soPhieu;
+        private string soPhieu;
         private string ngayLap;
         private string maKH;
     
@@ -18,7 +18,7 @@ namespace ModelProject
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
         }
-        public int SoPhieu
+        public string SoPhieu
         {
             get => soPhieu;
             set => SetProperty(ref soPhieu, value);
