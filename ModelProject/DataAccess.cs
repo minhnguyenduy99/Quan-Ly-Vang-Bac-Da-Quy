@@ -28,6 +28,9 @@ namespace ModelProject
                 cnn.Execute("insert into  SanPham (MASP,TENSP,MALOAISP,DONGIAMUAVAO) values (@MaSP,@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
             }
         }
+
+  
+
         //Chi tiet ban
         public static List<ChiTietBanModel> LoadChiTietBan()
         {
@@ -125,7 +128,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan) ",loaiSP);
+                cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan) ", loaiSP);
             }
         }
         // Nha cung cap
@@ -228,6 +231,211 @@ namespace ModelProject
                 cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
             }
         }
+
+        //Loc theo ten (cum tu) 
+        public static List<SanPhamModel> FilterSPByName(string query)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * from SanPham where TENSP like @n ", new { n = "%" + query + "%" });
+            }
+        }
+
+        //Loc theo ma loai sp 
+        public static List<SanPhamModel> FilterSPByKind(string query)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from SanPham SP join LOAISANPHAM LSP " +
+                    "on SP.MALOAISP = LSP.MALOAISP " +
+                    "where TENLOAISP like @q ", new { q = "%" + query + "%" });
+            }
+        }
+
+        //Loc theo ten 
+
+        public static List<KhachHangModel> FilterKHByName(string query)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * from KhachHang where TENKH like @q ", new { q = "%" + query + "%" });
+            }
+        }
+
+        //loc theo khu vuc 
+        public static List<KhachHangModel> FilterKHByKhuVuc(string query)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from KhachHang kh join KhuVuc kv " +
+                    "on kh.MAKHUVUC = kv.MAKHUVUC" +
+                    " where kv.TENKHUVUC like @q ", new { q = "%" + query + "%" });
+            }
+        }
+
+        //loc theo sdt 
+        public static List<KhachHangModel> FilterKHBySDT(string query)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from KhachHang " +
+                    "where SDT like @q ", new { q = "%" + query + "%" });
+            }
+        }
+
+        //loc theo Ma 
+
+        public static SanPhamModel LoadSPByMaSP(string masp)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from SanPham " +
+                    "where MASP=@masp ", masp);
+            }
+        }
+
+        public static KhachHangModel LoadKHByMaKH(string makh)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from KhachHang " +
+                    "where MAKH=@makh ", makh);
+            }
+        }
+
+        public static NhaCungCapModel LoadNCCByMaNCC(string mancc)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from NhaCungCap " +
+                    "where MANCC=@mancc ", mancc);
+            }
+        }
+
+
+        public static KhuVucModel LoadKhuVucByMKV(string makv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from KhuVuc " +
+                    "where MAKHUVUC=@makv ", makv);
+            }
+        }
+
+        public static PhieuBanModel LoadPhieuBanByMaPhieuBan(string mapb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from PhieuBan " +
+                    "where MAPHIEU=@mapb ", mapb);
+            }
+        }
+
+        public static PhieuMuaModel LoadPhieuBanByMaPhieuMua(string mapb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from PhieuMua " +
+                    "where MAPHIEU=@mapb ", mapb);
+            }
+        }
+
+        //Copy paste tu day 
+
+        public static DonViTinhModel LoadDonViTinhByMADVT(string madvt)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from DonViTinh " +
+                    "where MADVT=@madvt ", madvt);
+            }
+        }
+
+        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(string madv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from LoaiDichVu " +
+                    "where MALOAIDICHVU=@madv ", madv);
+            }
+        }
+
+        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(string malsp)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from LoaiSanPham " +
+                    "where MALOAISANPHAM=@malsp ", malsp);
+            }
+        }
+
+        public static PhieuDichVuModel LoadPhieuDichVuByMaPDV(string mapdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from PhieuDichVu " +
+                    "where MAPHIEU=@mapdv ", mapdv);
+            }
+        }
+
+        public static TinhTrangModel LoadTinhTrangByMaTT(string matt)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from TinhTrang " +
+                    "where MATINHTRANG=@matt ", matt);
+            }
+        }
+
+
+
+        //Các bản chi tiết 
+        public static ChiTietBanModel LoadChiTietBanByMaCTB(string mactb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from ChiTietBan " +
+                    "where MAPHIEUMUAHANG=@mactb ", mactb);
+            }
+        }
+
+
+        public static ChiTietMuaModel LoadChiTietMuaByMaCTM(string mactb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from ChiTietMua " +
+                    "where MAPHIEUMUAHANG=@mactb ", mactb);
+            }
+        }
+
+        public static ChiTietDichVuModel LoadChiTietDichVuByMaCTDV(string macctdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("select * " +
+                    "from ChiTietBan " +
+                    "where MAPHIEU=@mactdv ", mactdv);
+            }
+        }
+
+        
         private static string LoadConnectionString(string id = "Default")
         {
             return "Data Source=.\\database.db;Version=3;";
