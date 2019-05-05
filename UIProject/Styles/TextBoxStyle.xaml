@@ -7,16 +7,26 @@
     <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="CustomSearchTextBoxStyle">
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="IconBackground" Value="{DynamicResource PrimaryHueLightBrush}"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="TextBoxPadding" Value="5 0 0 0"/>
         <Setter Property="IconSource" Value="/Images/search_icon.png"/>
         <Setter Property="FontSize" Value="15"/>
-        <Setter Property="TextBoxWidth" Value="300"/>
-        <Setter Property="IconHeight" Value="20"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="true">
+                <Setter Property="BorderBrush" Value="#588BAE"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="NoFieldSearchTextBoxStyle" BasedOn="{StaticResource CustomSearchTextBoxStyle}">
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="BorderThickness" Value="Black"/>
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="TextBoxPadding" Value="0"/>
+    </Style>
+    
     <Style x:Key="UIProjectTextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="WhiteSmoke"/>

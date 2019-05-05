@@ -43,7 +43,7 @@
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"
                                               IconBackground="{StaticResource AirForceBlue}"
-                                              TextBoxWidth="500"/>
+                                              Width="500"/>
             </StackPanel>
             <TabControl Grid.Row="1" Grid.ColumnSpan="2">
                 <TabItem Header="Tất cả đơn hàng"

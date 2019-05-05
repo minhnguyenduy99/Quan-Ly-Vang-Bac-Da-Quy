@@ -35,10 +35,10 @@ namespace UIProject.Pages
 
             ViewModel = new BanHangPageVM();
 
-            PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
-            ProductView.DataContext = ViewModel.DanhSachChiTietBan;
-
+            this.DataContext = ViewModel;
+            //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
             ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
+            PART_LoaiSanPham.DataContext = ViewModel.LoaiSanPhamFilterVM;
         }
 
         private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)

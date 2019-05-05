@@ -35,29 +35,28 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBox  x:Name="PART_TextBox"
-                  BorderBrush="Transparent"
-                  BorderThickness="0"
-                  VerticalAlignment="Stretch"
-                  HorizontalAlignment="Stretch"
-                  materialDesign:HintAssist.Hint="{Binding Hint, ElementName=uc}"      
-                  materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                  Margin="0"
-                  VerticalContentAlignment="Center"
-                  Width="{Binding TextBoxWidth,ElementName=uc}"
-                  Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  FontSize="{Binding FontSize,ElementName=uc}"
-                  Foreground="{Binding Foreground,ElementName=uc}"
-                  Background="Transparent"
-                  Padding="5 0 0 0">
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      materialDesign:HintAssist.Hint="{Binding Hint, ElementName=uc}"      
+                      materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                      Margin="0"
+                      VerticalContentAlignment="Center"                    
+                      Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      FontSize="{Binding FontSize,ElementName=uc}"
+                      Foreground="{Binding Foreground,ElementName=uc}"
+                      Background="Transparent"
+                      Padding="{Binding TextBoxPadding, ElementName=uc}">
             </TextBox>
             <Grid Grid.Column="1"
                   Background="{Binding IconBackground,ElementName=uc}"
                   Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
                   Height="auto">
                 <Image Source="{Binding IconSource,ElementName=uc}"
-                   Stretch="Uniform"
-                   Height="{Binding IconHeight, ElementName=uc}"
-                   Margin="15 10 15 10"/>
+                       Stretch="Uniform"
+                       Height="{Binding IconHeight, ElementName=uc}"
+                       Margin="15 10 15 10"/>
             </Grid>
         </Grid>
         <Canvas Grid.Row="1"
@@ -67,8 +66,9 @@
             <ListBox x:Name="PART_ListBox"
                      SelectionMode="Single"
                      Height="auto"
-                     MaxHeight="250"
-                     Background="White"
+                     MaxHeight="{Binding ListBoxMaxHeight, ElementName=uc}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Background="{Binding SearchListBoxBackground, ElementName=uc}"
                      ItemsSource="{Binding DisplayItems,UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}"

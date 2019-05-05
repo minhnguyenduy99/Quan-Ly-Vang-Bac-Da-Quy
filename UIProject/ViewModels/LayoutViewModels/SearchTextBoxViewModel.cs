@@ -11,6 +11,7 @@ using System.Windows.Input;
 using UIProject.Events;
 using UIProject.Pages;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
@@ -18,7 +19,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// A view model provides functionalities for data searching and item selection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SearchTextBoxViewModel<T> : BaseViewModel
+    public class SearchTextBoxViewModel<T> : BaseViewModel, IAsyncCurrentSelectedItem
     {
         #region Private Fields
         private ItemViewModel<T> selectedItem;
@@ -47,26 +48,31 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// The item which is selected
         /// </summary>
-        public ItemViewModel<T> SelectedItem
+        public ISelectable SelectedItem
         {
             get => selectedItem;
             set
             {
                 if (selectedItem != null)
                     selectedItem.IsSelected = false;
-                SetProperty(ref selectedItem, value);
+                SetProperty(ref selectedItem, (ItemViewModel<T>)value);
                 if (value != null)
                 {
                     selectedItem.IsSelected = true;
-                    OnSelectedItem(new ItemSelectedEventArgs<T>(value));
+                    OnSelectedItem(new SelectedItemChangedEventArgs((ItemViewModel<T>)value));
                 }
             }
         }
 
         /// <summary>
-        /// The callback represents the filter function
+        /// The default filter callback for <see cref="SearchTextBoxViewModel{T}"/>
         /// </summary>
-        public Func<ItemViewModel<T>,bool>[] Filters { get; set; }
+        public Func<ItemViewModel<T>, bool> DefaultFilter { get; set; }
+
+        /// <summary>
+        /// The array of filter callbacks added for filtering 
+        /// </summary>
+        public Func<ItemViewModel<T>, bool>[] AdditionFilters { get; set; }
 
         /// <summary>
         /// The text for searching
@@ -121,7 +127,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected virtual void OnTextPropertyChanged(string oldValue, string newValue)
         {
             if (!string.IsNullOrEmpty(newValue))
-                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(Filters));
+            {
+                var filters = GetAllFilters();
+                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(filters));                  
+            }
             else
             {
                 this.DisplayItems.Clear();
@@ -129,23 +138,40 @@ namespace UIProject.ViewModels.LayoutViewModels
             TextChanged?.Invoke(this, new TextValueChangedEventArgs(oldValue, newValue));
         }
 
+        /// <summary>
+        /// Combines the DefaultFilter and AdditionFilters into one array
+        /// </summary>
+        /// <returns></returns>
+        private Func<ItemViewModel<T>, bool>[] GetAllFilters()
+        {
+            Func<ItemViewModel<T>, bool>[] filters = new Func<ItemViewModel<T>, bool>[AdditionFilters.Length + 1];
+            filters[0] = DefaultFilter;
+            for (int i=1;i< filters.Length; i++)
+            {
+                filters[i] = AdditionFilters[i - 1];
+            }
+
+            return filters;
+        }
+
+
         protected virtual void OnDisplayItemsEmpty()
         {
             DisplayItemsEmpty?.Invoke(this, EventArgs.Empty);              
         }
 
-        protected virtual void OnSelectedItem(ItemSelectedEventArgs<T> e)
+        protected virtual void OnSelectedItem(SelectedItemChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(Text))
                 Text = string.Empty;
-            SelectItem?.Invoke(this, e);
+            SelectedItemChanged?.Invoke(this, e);
         }
         #endregion
 
         #region Event Declaration
         public event EventHandler<TextValueChangedEventArgs> TextChanged;
         public event EventHandler DisplayItemsEmpty;
-        public event EventHandler<ItemSelectedEventArgs<T>> SelectItem;
+        public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
         #endregion
     }
 

@@ -105,15 +105,6 @@ namespace UIProject.CustomControls
         }
 
         /// <summary>
-        /// The width of textbox control in the <see cref="SearchTextBox"/> 
-        /// </summary>
-        public double TextBoxWidth
-        {
-            get { return (double)GetValue(TextBoxWidthProperty); }
-            set { SetValue(TextBoxWidthProperty, value); }
-        }
-
-        /// <summary>
         /// The height of the icon in <see cref="SearchTextBox"/>
         /// </summary>
         public double IconHeight
@@ -129,6 +120,15 @@ namespace UIProject.CustomControls
         {
             get => (Brush)GetValue(IconBackgroundProperty);
             set => SetValue(IconBackgroundProperty, value);
+        }
+
+        /// <summary>
+        /// The padding value of <see cref="TextBox"/> part 
+        /// </summary>
+        public Thickness TextBoxPadding
+        {
+            get => (Thickness)GetValue(TextBoxPaddingProperty);
+            set => SetValue(TextBoxPaddingProperty, value);
         }
 
         /// <summary>
@@ -158,6 +158,25 @@ namespace UIProject.CustomControls
             set => SetValue(EmptySourceTextProperty, value);
         }
 
+        /// <summary>
+        /// The background of <see cref="ListBox"/> part in <see cref="SearchTextBox"/>
+        /// </summary>
+        public Brush SearchListBoxBackground
+        {
+            get => (Brush)GetValue(SearchListBoxBackgroundProperty);
+            set => SetValue(SearchListBoxBackgroundProperty, value);
+        }
+
+        /// <summary>
+        /// The height of <see cref="ListBox"/> part 
+        /// </summary>
+        public double ListBoxMaxHeight
+        {
+            get => (double)GetValue(ListBoxMaxHeightProperty);
+            set => SetValue(ListBoxMaxHeightProperty, value);
+
+        }
+
         #region Dependency Properties
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
             "IconSource", 
@@ -178,11 +197,6 @@ namespace UIProject.CustomControls
             typeof(SearchTextBox),
             new PropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty TextBoxWidthProperty = DependencyProperty.Register(
-            "TextBoxWidth",
-            typeof(double),
-            typeof(SearchTextBox));
-
         public static readonly DependencyProperty IconHeightProperty = DependencyProperty.Register(
             "IconHeight",
             typeof(double),
@@ -192,6 +206,12 @@ namespace UIProject.CustomControls
             "IconBackground",
             typeof(Brush),
             typeof(SearchTextBox));
+
+        public static readonly DependencyProperty TextBoxPaddingProperty = DependencyProperty.Register(
+            "TextBoxPadding",
+            typeof(Thickness),
+            typeof(SearchTextBox),
+            new PropertyMetadata(new Thickness(0)));
 
         public static readonly DependencyProperty SearchBoxItemSourceProperty = DependencyProperty.Register(
             "SearchBoxItemSource",
@@ -208,6 +228,18 @@ namespace UIProject.CustomControls
             typeof(string),
             typeof(SearchTextBox),
             new PropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty SearchListBoxBackgroundProperty = DependencyProperty.Register(
+            "SearchListBoxBackground",
+            typeof(Brush),
+            typeof(SearchTextBox),
+            new PropertyMetadata(Brushes.White));
+
+        public static readonly DependencyProperty ListBoxMaxHeightProperty = DependencyProperty.Register(
+            "ListBoxMaxHeight",
+            typeof(double),
+            typeof(SearchTextBox));
+
         #endregion
 
     }

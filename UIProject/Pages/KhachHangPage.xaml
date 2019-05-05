@@ -60,7 +60,7 @@
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"
                                               IconBackground="{StaticResource AirForceBlue}"
-                                              TextBoxWidth="500"/>
+                                              Width="500"/>
             </StackPanel>
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2"
                             x:Name="PART_CustomerList"

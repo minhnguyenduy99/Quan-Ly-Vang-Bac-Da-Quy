@@ -35,6 +35,11 @@
             </Button>
             <customControls:SearchTextBox x:Name="PART_ProductSearch"
                                           Style="{StaticResource CustomSearchTextBoxStyle}"
+                                          Width="300"
+                                          DataContext="{Binding TimKiemSanPhamVM}"
+                                          ListBoxMaxHeight="250"
+                                          IconHeight="20"
+                                          Margin="10"
                                           SearchBoxItemTemplate="{StaticResource ProductItemSearchTemplate}"
                                           Hint="Nhập tên sản phẩm" 
                                           SearchBoxItemSource="{Binding DisplayItems}"
@@ -48,8 +53,15 @@
                 </i:Interaction.Triggers>
             </customControls:SearchTextBox>
             <StackPanel x:Name="PART_Filter"
-                        Orientation="Horizontal">
-                <ComboBox ItemsSource="{Binding FilterLoaiSanPham}"/>
+                        Orientation="Horizontal"
+                        Margin="30 10 10 10">
+                <ComboBox x:Name="PART_LoaiSanPham"
+                          FontSize="15"
+                          ItemsSource="{Binding Collection.Items}"
+                          SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Model.TenLoaiSP"
+                          materialDesign:HintAssist.Hint="Loại sản phẩm">
+                </ComboBox>
             </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0"
@@ -69,6 +81,7 @@
                     <DataGrid Grid.Row="0"
                               x:Name="ProductView"
                               Margin="10 8 5 5"
+                              DataContext="{Binding DanhSachChiTietBan}"
                               ItemsSource="{Binding Items}"
                               CanUserSortColumns="True"
                               CanUserAddRows="False"
@@ -198,20 +211,20 @@
                            Margin="7"
                            Content="Sản phẩm gần đây"/>
                             <ListBox x:Name="ProductDisplayed"
-                                 Grid.Row="1"
-                                 Style="{StaticResource ProductItemDisplayedListBoxStyle}"
-                                 BorderThickness="0"
-                                 BorderBrush="Transparent"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                     Grid.Row="1"
+                                     Style="{StaticResource ProductItemDisplayedListBoxStyle}"
+                                     BorderThickness="0"
+                                     BorderBrush="Transparent"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Visible">
                             </ListBox>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1"
-              Width="auto"
-              Height="auto"
-              Margin="5">
+                  Width="auto"
+                  Height="auto"
+                  Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
@@ -219,10 +232,12 @@
                 <TabControl HorizontalAlignment="Stretch"
                         Style="{StaticResource CustomTabControlStyle}"
                         Margin="5 5 5 10">
-                    <TabItem Header="Khách hàng"
-                            ContentTemplate="{StaticResource CustomerTabItemTemplate}"/>
-                    <TabItem Header="Tùy chọn"
-                            ContentTemplate="{StaticResource SettingDataTemplate}"/>
+                <TabItem x:Name="TabKhachHang"
+                         Header="Khách hàng"
+                         ContentTemplate="{StaticResource CustomerTabItemTemplate}"
+                         Content="{Binding TimKiemKhachHangVM}"/>
+                <TabItem Header="Tùy chọn"
+                         ContentTemplate="{StaticResource SettingDataTemplate}"/>
                 </TabControl>
                 <TabControl Grid.Row="1"
                             Style="{StaticResource CustomTabControlStyle}"
