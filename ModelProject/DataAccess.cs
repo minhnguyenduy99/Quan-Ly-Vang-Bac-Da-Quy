@@ -390,7 +390,7 @@ namespace ModelProject
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +
                     "from LoaiSanPham " +
-                    "where MALOAISANPHAM=@malsp ", malsp);
+                    "where MALOAISP=@malsp ", malsp);
                 return (LoaiSanPhamModel)output;
             }
         }
