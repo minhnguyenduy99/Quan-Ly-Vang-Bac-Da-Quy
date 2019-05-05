@@ -11,6 +11,5 @@ namespace BaseMVVM_Service.BaseMVVM
     /// </summary>
     public class BaseModel : ObservableObject
     {
-
     }
 }
