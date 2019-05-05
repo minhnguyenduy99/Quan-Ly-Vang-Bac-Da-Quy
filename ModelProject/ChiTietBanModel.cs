@@ -60,7 +60,6 @@ namespace ModelProject
                 return MaSP.Equals(((ChiTietBanModel)obj).MaSP);
                 //Two recept details only match if and only if they both have the same MaPhieuMuaHang and MaSP.
                 return ((maPhieuMuaHang.Equals(((ChiTietBanModel)obj).maPhieuMuaHang)) && (maSP.Equals(((ChiTietBanModel)obj).maSP)));
-
             }
             return false;
         }
