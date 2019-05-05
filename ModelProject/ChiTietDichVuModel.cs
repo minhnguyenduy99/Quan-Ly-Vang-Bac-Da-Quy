@@ -13,7 +13,7 @@ namespace ModelProject
 
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenDV;
-        private long donGiaDV;
+        private double donGiaDV;
         private string tinhTrangDV;
         private string ngayBatDauCungCapDV;
 
@@ -69,19 +69,35 @@ namespace ModelProject
         {
             get
             {
-                LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
-                tenDV = serviceType.TenLoaiDV;
-                return tenDV;
+                if (maLoaiDV != null && maLoaiDV.Length > 0)
+                {
+                    LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
+                    tenDV = serviceType.TenLoaiDV;
+                    return tenDV;
+                }
+                else
+                {
+                    Console.WriteLine("Please set maLoaiDV before get DonViTinh. Otherwise, will always return null");
+                    return "";
+                }
             }
         }
 
-        public long DonGiaDV
+        public double DonGiaDV
         {
             get
             {
-                LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
-                donGiaDV = serviceType.DonGiaDV;
-                return donGiaDV;
+                if (maLoaiDV != null && maLoaiDV.Length > 0)
+                {
+                    LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
+                    donGiaDV = serviceType.DonGiaDV;
+                    return donGiaDV;
+                }
+                else
+                {
+                    Console.WriteLine("Please set maLoaiDV before get DonGiaDV. Otherwise, will always return null");
+                    return -1;
+                }
             }
         }
 
@@ -89,9 +105,17 @@ namespace ModelProject
         {
             get
             {
-                TinhTrangModel status = DataAccess.LoadTinhTrangByMaTT(maTinhTrang);
-                tinhTrangDV = status.TenTinhTrang;
-                return tinhTrangDV;
+                if (maTinhTrang != null && maTinhTrang.Length > 0)
+                {
+                    TinhTrangModel status = DataAccess.LoadTinhTrangByMaTT(maTinhTrang);
+                    tinhTrangDV = status.TenTinhTrang;
+                    return tinhTrangDV;
+                }
+                else
+                {
+                    Console.WriteLine("Please set maLoaiDV before get TinhTrangDV. Otherwise, will always return null");
+                    return "";
+                }
             }
         }
 
