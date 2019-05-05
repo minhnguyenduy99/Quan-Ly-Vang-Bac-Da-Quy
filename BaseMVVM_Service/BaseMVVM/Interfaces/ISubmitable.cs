@@ -10,7 +10,7 @@ namespace BaseMVVM_Service.BaseMVVM.Interfaces
     /// Data is provided with submit ability to be saved in Database
     /// </summary>
     /// <typeparam name="T">Data type</typeparam>
-    interface ISubmitable
+    public interface ISubmitable
     { 
         /// <summary>
         /// Submit data to database
