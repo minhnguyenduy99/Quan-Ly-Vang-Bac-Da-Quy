@@ -16,6 +16,9 @@ namespace ModelProject
             {
                 Console.WriteLine(list[i].MaPhieu + " " + list[i].NgayLap);
             }
+
+            var sanPham = DataAccess.LoadLoaiSanPhamByMaLSP("bb");
+            Console.WriteLine(sanPham);
             // string to datetime type
             //DateTime d = DateTime.Parse(p.NgayLap);
             //Console.WriteLine(d.Day);
