@@ -8,22 +8,7 @@ namespace ModelProject
 {
     public class LoaiSanPhamModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-<<<<<<< HEAD
-        private int maLoaiSP;
-        private string tenLoaiSP;
-        private int maDVT;
-        private int phanTramLoiNhuan;
 
-        public int MaLoaiSP { get => maLoaiSP; set => maLoaiSP = value; }
-        public string TenLoaiSP { get => tenLoaiSP; set => tenLoaiSP = value; }
-        public int MaDVT { get => maDVT; set => maDVT = value; }
-        public int PhanTramLoiNhuan { get => phanTramLoiNhuan; set => phanTramLoiNhuan = value; }
-
-
-        public override string ToString()
-        {
-            return tenLoaiSP;
-=======
         private string maLoaiSP;
         private string tenLoaiSP;
         private string maDVT;
@@ -60,7 +45,6 @@ namespace ModelProject
                 return (maLoaiSP.Equals(secondObj.maLoaiSP));
             }
             return false;
->>>>>>> 909146d5e0b0fcfcadbcc2b611576fac86a4f2f9
         }
     }
 }

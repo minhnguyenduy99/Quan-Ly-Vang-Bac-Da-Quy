@@ -14,20 +14,6 @@ namespace ModelProject
         private long donGiaMuaVao;
         private string tenSP;
 
-<<<<<<< HEAD
-
-        public int MaSP { get => maSP; set => maSP = value; }
-        public int MaLoaiSP { get => maLoaiSP; set => maLoaiSP = value; }
-        public long DonGiaMuaVao { get => donGiaMuaVao; set => donGiaMuaVao = value; }
-        public string TenSP { get => tenSP; set => tenSP = value; }
-        //public int maSP { get; set; }
-        //public int maLoaiSP { get; set; }
-        //public int donGiaMuaVao { get; set; }
-        //public string tenSP { get; set; }
-
-
-
-=======
         public string MaSP
         {
             get => maSP;
@@ -59,7 +45,6 @@ namespace ModelProject
             }
             return false;
         }
->>>>>>> 909146d5e0b0fcfcadbcc2b611576fac86a4f2f9
     }
 
 }

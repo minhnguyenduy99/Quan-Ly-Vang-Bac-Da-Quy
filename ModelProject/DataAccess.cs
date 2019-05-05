@@ -21,6 +21,7 @@ namespace ModelProject
                 return output.ToList();
             }
         }
+
         public static void SaveSanPham(SanPhamModel sanPham)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
