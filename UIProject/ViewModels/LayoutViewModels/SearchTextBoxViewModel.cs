@@ -72,7 +72,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// The array of filter callbacks added for filtering 
         /// </summary>
-        public Func<ItemViewModel<T>, bool>[] AdditionFilters { get; set; }
+        public List<Func<ItemViewModel<T>, bool>> AdditionFilters { get; set; }
 
         /// <summary>
         /// The text for searching
@@ -103,9 +103,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
 
         #region Constructors
-        public SearchTextBoxViewModel(): this(null)
-        {
-        }
+        public SearchTextBoxViewModel(IEnumerable<T> itemsSource) : this(null) { }
 
         /// <summary>
         /// Create an instance of <see cref="SearchTextBoxViewModel{T}"/> 
@@ -119,6 +117,8 @@ namespace UIProject.ViewModels.LayoutViewModels
                 {
                     this.itemsSource.Add(new ItemViewModel<T>(item));
                 }
+
+            AdditionFilters = new List<Func<ItemViewModel<T>, bool>>();
         }
 
         #endregion
@@ -144,7 +144,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <returns></returns>
         private Func<ItemViewModel<T>, bool>[] GetAllFilters()
         {
-            Func<ItemViewModel<T>, bool>[] filters = new Func<ItemViewModel<T>, bool>[AdditionFilters.Length + 1];
+            if (AdditionFilters == null)
+                return new Func<ItemViewModel<T>, bool>[] { DefaultFilter };
+
+            Func<ItemViewModel<T>, bool>[] filters = new Func<ItemViewModel<T>, bool>[AdditionFilters.Count + 1];
             filters[0] = DefaultFilter;
             for (int i=1;i< filters.Length; i++)
             {

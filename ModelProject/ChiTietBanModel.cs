@@ -135,9 +135,6 @@ namespace ModelProject
             get => thue;
             set => SetProperty(ref thue, value);
         }
-
-
-
         public override bool Equals(object obj)
         {
             if (obj is ChiTietBanModel)

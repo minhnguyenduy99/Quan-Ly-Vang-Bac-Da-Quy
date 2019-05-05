@@ -42,6 +42,8 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBan { get; set; }
 
+        public ThemKhachHangWindowVM ThemKhachHangVM { get; set; }
+
 
         /// <summary>
         /// Model của phiếu bán hàng
@@ -87,45 +89,62 @@ namespace UIProject.ViewModels.PageViewModels
             {
                 DanhSachChiTietBan.Add(new ChiTietBanModel()
                 {
-                    MaPhieuMuaHang = 105,
+                    
                     MaSP = sanPhamDaChon.Model.MaSP,
                     SoLuong = 1,
-                    ChietKhau = 10000,
                     DonGiaMuaVao = sanPhamDaChon.Model.DonGiaMuaVao,
-                    Thue = 10,
+                    ChietKhau = 10,
+                    ThanhTien = 100000
                 });
             }
         }
 
-        
-
+      
         private void SetUpBolocTimKiemSanPham()
         {
+            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(new ObservableCollection<SanPhamModel>()
+            {
+                new SanPhamModel(){MaSP = "SP001", TenSP = "A", DonGiaMuaVao = 50000, MaLoaiSP = "LSP001"},
+                new SanPhamModel(){MaSP = "SP002", TenSP = "B", DonGiaMuaVao = 10000, MaLoaiSP = "LSP003"},
+                new SanPhamModel(){MaSP = "SP003", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP004"},
+                new SanPhamModel(){MaSP = "SP004", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP002"},
+                new SanPhamModel(){MaSP = "SP005", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP002"},
+                new SanPhamModel(){MaSP = "SP006", TenSP = "B", DonGiaMuaVao = 100000, MaLoaiSP = "LSP001"},
+            });
+
             LoaiSanPhamFilterVM = new EnumFilterViewModel<SanPhamModel>(
                 LocLoaiSanPhamCallBack, 
                 new ObservableCollection<LoaiSanPhamModel>()
                 {
-                    new LoaiSanPhamModel(){TenLoaiSP = "Đá quý", MaLoaiSP = 444},
-                    new LoaiSanPhamModel(){TenLoaiSP = "Trang sức", MaLoaiSP = 555},
-                    new LoaiSanPhamModel(){TenLoaiSP = "Vàng bạc", MaLoaiSP = 321},
+                    new LoaiSanPhamModel(){TenLoaiSP = "Đá quý", MaLoaiSP = "LSP001"},
+                    new LoaiSanPhamModel(){TenLoaiSP = "Trang sức", MaLoaiSP = "LSP002"},
+                    new LoaiSanPhamModel(){TenLoaiSP = "Vàng bạc", MaLoaiSP = "LSP003"},
                 });
 
-            var KhongLoc = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = -1 };
+            var KhongLoc = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
             LoaiSanPhamFilterVM.Collection.Add(KhongLoc);
 
             TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
-            TimKiemSanPhamVM.AdditionFilters = new Func<ItemViewModel<SanPhamModel>, bool>[]
-            {
-                LoaiSanPhamFilterVM.FilterCallBack             
-            };
+            TimKiemSanPhamVM.AdditionFilters.Add
+                (
+                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
+                );
+
+            TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
         }
 
         private void SetUpBoLocTimKiemKhachHang()
         {
+            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(new ObservableCollection<KhachHangModel>()
+            {
+                new KhachHangModel(){MaKH = "KH001", TenKH = "Nguyễn Duy Minh", DiaChi = "abc xyz ght", CongNo = 100000},
+                new KhachHangModel(){MaKH = "KH002", TenKH = "Nguyễn Văn B", DiaChi = "abc gfgfght", CongNo = 0},
+                new KhachHangModel(){MaKH = "KH003", TenKH = "Nguyễn Duy Hào", DiaChi = "abc xyfgâz ght", CongNo = 20},
+                new KhachHangModel(){MaKH = "KH004", TenKH = "Nguyễn Duy Bảo", DiaChi = "abc xhka ght", CongNo = 1000},
+                new KhachHangModel(){MaKH = "KH005", TenKH = "Nguyễn Duy Tâm", DiaChi = "abc faghz ght", CongNo = 10000000},
+            });
             TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
         }
-
-
 
         #region Callback cho bộ lọc tìm kiếm 
         private bool LocLoaiSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
@@ -136,7 +155,7 @@ namespace UIProject.ViewModels.PageViewModels
                 return true;
             }
             var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
-            if (castLoaiSanPhamDaChon.MaLoaiSP == -1)
+            if (castLoaiSanPhamDaChon.MaLoaiSP == "LSP-1")
                 return true;
             return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
         }
@@ -154,33 +173,21 @@ namespace UIProject.ViewModels.PageViewModels
         protected override void LoadPageComponents()
         {
             PhieuBan = new PhieuBanModel();
-
-            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(new ObservableCollection<KhachHangModel>()
-            {
-                new KhachHangModel(){MaKH = 1, TenKH = "Nguyễn Duy Minh", DiaChi = "abc xyz ght", CongNo = 100000},
-                new KhachHangModel(){MaKH = 2, TenKH = "Nguyễn Văn B", DiaChi = "abc gfgfght", CongNo = 0},
-                new KhachHangModel(){MaKH = 3, TenKH = "Nguyễn Duy Hào", DiaChi = "abc xyfgâz ght", CongNo = 20},
-                new KhachHangModel(){MaKH = 4, TenKH = "Nguyễn Duy Bảo", DiaChi = "abc xhka ght", CongNo = 1000},
-                new KhachHangModel(){MaKH = 5, TenKH = "Nguyễn Duy Tâm", DiaChi = "abc faghz ght", CongNo = 10000000},
-            });
-            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(new ObservableCollection<SanPhamModel>()
-            {
-                new SanPhamModel(){MaSP = 1, TenSP = "A", DonGiaMuaVao = 50000, MaLoaiSP = 444},
-                new SanPhamModel(){MaSP = 2, TenSP = "B", DonGiaMuaVao = 10000, MaLoaiSP = 555},
-                new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = 321},
-                new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = 321},
-                new SanPhamModel(){MaSP = 3, TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = 555},
-                new SanPhamModel(){MaSP = 2, TenSP = "B", DonGiaMuaVao = 100000, MaLoaiSP = 3},
-            });
+            ThemKhachHangVM = new ThemKhachHangWindowVM();
+            ThemKhachHangVM.Closed += ThemKhachHangVM_Closed;
 
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
 
             DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>();
 
-            TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
+            
         }
 
+        private void ThemKhachHangVM_Closed(object sender, WindowViewModelClosedEventArgs<KhachHangModel> e)
+        {
+            
+        }
 
         protected virtual void OnThanhToanCommandExecute()
         {

@@ -208,8 +208,8 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Style="{StaticResource MediumLabelStyle}"
-                           Margin="7"
-                           Content="Sản phẩm gần đây"/>
+                                   Margin="7"
+                                   Content="Sản phẩm gần đây"/>
                             <ListBox x:Name="ProductDisplayed"
                                      Grid.Row="1"
                                      Style="{StaticResource ProductItemDisplayedListBoxStyle}"

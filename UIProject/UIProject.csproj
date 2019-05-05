@@ -103,6 +103,7 @@
     <Compile Include="Events\SelectedEventArgs.cs" />
     <Compile Include="Events\SelectedItemChangedEventArgs.cs" />
     <Compile Include="Events\TextValueChangedEventArgs.cs" />
+    <Compile Include="Events\WindowViewModelClosedEventArgs.cs" />
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
     </Compile>
@@ -124,7 +125,6 @@
     <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ServiceProviders\IAttachedViewModelAble.cs" />
     <Compile Include="ServiceProviders\IconButtonExtension.cs" />
-    <Compile Include="ServiceProviders\ISubmitable.cs" />
     <Compile Include="ServiceProviders\LoadDataHelper.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
     <Compile Include="Test\TestClasses.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LayoutViewModels\AddingWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IAsyncCurrentSelectedItem.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IExpandableVM.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISelectable.cs" />
