@@ -10,6 +10,13 @@ namespace ModelProject
     {
         private string maPhieu;
         private string maLoaiDV;
+
+        //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
+        private string tenDV;
+        private long donGiaDV;
+        private string tinhTrangDV;
+        private string ngayBatDauCungCapDV;
+
         private long chiPhiRieng;
         private int soLuong;
         private long thanhTien;
@@ -57,6 +64,45 @@ namespace ModelProject
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);
+        }
+
+        public string TenDV
+        {
+            get
+            {
+                LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
+                tenDV = serviceType.TenLoaiDV;
+                return tenDV;
+            }
+        }
+
+        public long DonGiaDV
+        {
+            get
+            {
+                LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
+                donGiaDV = serviceType.DonGiaDV;
+                return donGiaDV;
+            }
+        }
+
+        public string TinhTrangDV
+        {
+            get
+            {
+                TinhTrangModel status = DataAccess.LoadTinhTrangByMaTT(maTinhTrang);
+                tinhTrangDV = status.TenTinhTrang;
+                return tinhTrangDV;
+            }
+        }
+
+        public string NgayBatDauCungCapDV
+        {
+            //Chưa implement. Hình như trong dataaccess chưa có get ngày bắt đầu cung cấp DV ?
+            get
+            {
+                return "";
+            }
         }
 
         public override bool Equals(object obj)
