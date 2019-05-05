@@ -21,7 +21,6 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-
         public static void SaveSanPham(SanPhamModel sanPham)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -30,7 +29,7 @@ namespace ModelProject
             }
         }
 
-  
+
 
         //Chi tiet ban
         public static List<ChiTietBanModel> LoadChiTietBan()
@@ -238,7 +237,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * from SanPham where TENSP like @n ", new { n = "%" + query + "%" });
+                var output = cnn.Query<SanPhamModel>("select * from SanPham where TENSP like @n ", new { n = "%" + query + "%" });
+                return output.ToList();
             }
         }
 
@@ -247,10 +247,11 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<SanPhamModel>("select * " +
                     "from SanPham SP join LOAISANPHAM LSP " +
                     "on SP.MALOAISP = LSP.MALOAISP " +
                     "where TENLOAISP like @q ", new { q = "%" + query + "%" });
+                return output.ToList();
             }
         }
 
@@ -260,7 +261,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * from KhachHang where TENKH like @q ", new { q = "%" + query + "%" });
+                var output = cnn.Query<KhachHangModel>("select * from KhachHang where TENKH like @q ", new { q = "%" + query + "%" });
+                return output.ToList();
             }
         }
 
@@ -269,10 +271,11 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang kh join KhuVuc kv " +
                     "on kh.MAKHUVUC = kv.MAKHUVUC" +
                     " where kv.TENKHUVUC like @q ", new { q = "%" + query + "%" });
+                return output.ToList();
             }
         }
 
@@ -281,9 +284,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang " +
                     "where SDT like @q ", new { q = "%" + query + "%" });
+                return output.ToList();
             }
         }
 
@@ -293,9 +297,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<SanPhamModel>("select * " +
                     "from SanPham " +
                     "where MASP=@masp ", masp);
+                return (SanPhamModel)output;
             }
         }
 
@@ -303,9 +308,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang " +
                     "where MAKH=@makh ", makh);
+                return (KhachHangModel)output;
             }
         }
 
@@ -313,9 +319,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<NhaCungCapModel>("select * " +
                     "from NhaCungCap " +
                     "where MANCC=@mancc ", mancc);
+                return (NhaCungCapModel)output;
             }
         }
 
@@ -324,9 +331,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<KhuVucModel>("select * " +
                     "from KhuVuc " +
                     "where MAKHUVUC=@makv ", makv);
+                return (KhuVucModel)output;
             }
         }
 
@@ -334,9 +342,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<PhieuBanModel>("select * " +
                     "from PhieuBan " +
                     "where MAPHIEU=@mapb ", mapb);
+                return (PhieuBanModel)output;
             }
         }
 
@@ -344,9 +353,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<PhieuMuaModel>("select * " +
                     "from PhieuMua " +
                     "where MAPHIEU=@mapb ", mapb);
+                return (PhieuMuaModel)output;
             }
         }
 
@@ -356,9 +366,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<DonViTinhModel>("select * " +
                     "from DonViTinh " +
                     "where MADVT=@madvt ", madvt);
+                return (DonViTinhModel)output;
             }
         }
 
@@ -366,9 +377,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<LoaiDichVuModel>("select * " +
                     "from LoaiDichVu " +
                     "where MALOAIDICHVU=@madv ", madv);
+                return (LoaiDichVuModel)output;
             }
         }
 
@@ -376,9 +388,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<LoaiSanPhamModel>("select * " +
                     "from LoaiSanPham " +
                     "where MALOAISANPHAM=@malsp ", malsp);
+                return (LoaiSanPhamModel)output;
             }
         }
 
@@ -386,9 +399,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<PhieuDichVuModel>("select * " +
                     "from PhieuDichVu " +
                     "where MAPHIEU=@mapdv ", mapdv);
+                return (PhieuDichVuModel)output;
             }
         }
 
@@ -396,9 +410,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<TinhTrangModel>("select * " +
                     "from TinhTrang " +
                     "where MATINHTRANG=@matt ", matt);
+                return (TinhTrangModel)output;
             }
         }
 
@@ -409,9 +424,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<ChiTietBanModel>("select * " +
                     "from ChiTietBan " +
                     "where MAPHIEUMUAHANG=@mactb ", mactb);
+                return (ChiTietBanModel)output;
             }
         }
 
@@ -420,9 +436,10 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<ChiTietMuaModel>("select * " +
                     "from ChiTietMua " +
                     "where MAPHIEUMUAHANG=@mactb ", mactb);
+                return (ChiTietMuaModel)output;
             }
         }
 
@@ -430,13 +447,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("select * " +
+                var output = cnn.Query<ChiTietDichVuModel>("select * " +
                     "from ChiTietBan " +
-                    "where MAPHIEU=@mactdv ", mactdv);
+                    "where MAPHIEU=@mactdv ", macctdv);
+                return (ChiTietDichVuModel)output;
             }
         }
 
-        
+
         private static string LoadConnectionString(string id = "Default")
         {
             return "Data Source=.\\database.db;Version=3;";
