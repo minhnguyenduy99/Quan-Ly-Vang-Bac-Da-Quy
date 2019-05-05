@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace ModelProject
         private long donGiaMuaVao;
         private string tenSP;
 
+
         public int MaSP { get => maSP; set => maSP = value; }
         public int MaLoaiSP { get => maLoaiSP; set => maLoaiSP = value; }
         public long DonGiaMuaVao { get => donGiaMuaVao; set => donGiaMuaVao = value; }
@@ -21,6 +23,8 @@ namespace ModelProject
         //public int maLoaiSP { get; set; }
         //public int donGiaMuaVao { get; set; }
         //public string tenSP { get; set; }
+
+
 
     }
 

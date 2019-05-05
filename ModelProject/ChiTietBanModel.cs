@@ -22,5 +22,14 @@ namespace ModelProject
         public long DonGiaMuaVao { get => donGiaMuaVao; set => donGiaMuaVao = value; }
         public long ChietKhau { get => chietKhau; set => chietKhau = value; }
         public long Thue { get => thue; set => thue = value; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ChiTietBanModel)
+            {
+                return MaSP.Equals(((ChiTietBanModel)obj).MaSP);
+            }
+            return false;
+        }
     }
 }
