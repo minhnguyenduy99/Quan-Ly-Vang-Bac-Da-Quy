@@ -373,25 +373,30 @@ namespace ModelProject
             }
         }
 
-        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(string madv)
+        public static List<LoaiDichVuModel> LoadLoaiDichVuByMaLDV(string madv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<LoaiDichVuModel>("select * " +
                     "from LoaiDichVu " +
-                    "where MALOAIDICHVU=@madv ", madv);
-                return (LoaiDichVuModel)output;
+                    "where MALOAIDV = '@madv' ", madv);
+                return output.ToList();
             }
         }
 
+
+        //Làm giống cái này 
         public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(string malsp)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +
                     "from LoaiSanPham " +
-                    "where MALOAISANPHAM=@malsp ", malsp);
-                return (LoaiSanPhamModel)output;
+                    "where MALOAISP='@malsp' ", malsp);
+                if (output.Count<LoaiSanPhamModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
