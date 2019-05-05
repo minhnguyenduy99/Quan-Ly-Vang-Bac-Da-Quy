@@ -300,7 +300,10 @@ namespace ModelProject
                 var output = cnn.Query<SanPhamModel>("select * " +
                     "from SanPham " +
                     "where MASP=@masp ", masp);
-                return (SanPhamModel)output;
+                if (output.Count<SanPhamModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -311,7 +314,10 @@ namespace ModelProject
                 var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang " +
                     "where MAKH=@makh ", makh);
-                return (KhachHangModel)output;
+                if (output.Count<KhachHangModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -322,7 +328,10 @@ namespace ModelProject
                 var output = cnn.Query<NhaCungCapModel>("select * " +
                     "from NhaCungCap " +
                     "where MANCC=@mancc ", mancc);
-                return (NhaCungCapModel)output;
+                if (output.Count<NhaCungCapModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -334,7 +343,10 @@ namespace ModelProject
                 var output = cnn.Query<KhuVucModel>("select * " +
                     "from KhuVuc " +
                     "where MAKHUVUC=@makv ", makv);
-                return (KhuVucModel)output;
+                if (output.Count<KhuVucModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -345,7 +357,10 @@ namespace ModelProject
                 var output = cnn.Query<PhieuBanModel>("select * " +
                     "from PhieuBan " +
                     "where MAPHIEU=@mapb ", mapb);
-                return (PhieuBanModel)output;
+                if (output.Count<PhieuBanModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -356,7 +371,10 @@ namespace ModelProject
                 var output = cnn.Query<PhieuMuaModel>("select * " +
                     "from PhieuMua " +
                     "where MAPHIEU=@mapb ", mapb);
-                return (PhieuMuaModel)output;
+                if (output.Count<PhieuMuaModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -369,18 +387,24 @@ namespace ModelProject
                 var output = cnn.Query<DonViTinhModel>("select * " +
                     "from DonViTinh " +
                     "where MADVT=@madvt ", madvt);
-                return (DonViTinhModel)output;
+                if (output.Count<DonViTinhModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
-        public static List<LoaiDichVuModel> LoadLoaiDichVuByMaLDV(string madv)
+        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(string madv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<LoaiDichVuModel>("select * " +
                     "from LoaiDichVu " +
                     "where MALOAIDV = '@madv' ", madv);
-                return output.ToList();
+                if (output.Count<LoaiDichVuModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -407,7 +431,10 @@ namespace ModelProject
                 var output = cnn.Query<PhieuDichVuModel>("select * " +
                     "from PhieuDichVu " +
                     "where MAPHIEU=@mapdv ", mapdv);
-                return (PhieuDichVuModel)output;
+                if (output.Count<PhieuDichVuModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -418,7 +445,10 @@ namespace ModelProject
                 var output = cnn.Query<TinhTrangModel>("select * " +
                     "from TinhTrang " +
                     "where MATINHTRANG=@matt ", matt);
-                return (TinhTrangModel)output;
+                if (output.Count<TinhTrangModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -432,7 +462,10 @@ namespace ModelProject
                 var output = cnn.Query<ChiTietBanModel>("select * " +
                     "from ChiTietBan " +
                     "where MAPHIEUMUAHANG=@mactb ", mactb);
-                return (ChiTietBanModel)output;
+                if (output.Count<ChiTietBanModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -444,7 +477,10 @@ namespace ModelProject
                 var output = cnn.Query<ChiTietMuaModel>("select * " +
                     "from ChiTietMua " +
                     "where MAPHIEUMUAHANG=@mactb ", mactb);
-                return (ChiTietMuaModel)output;
+                if (output.Count<ChiTietMuaModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
@@ -455,7 +491,10 @@ namespace ModelProject
                 var output = cnn.Query<ChiTietDichVuModel>("select * " +
                     "from ChiTietBan " +
                     "where MAPHIEU=@mactdv ", macctdv);
-                return (ChiTietDichVuModel)output;
+                if (output.Count<ChiTietDichVuModel>() == 0)
+                    return null;
+                else
+                    return output.ElementAt(0);
             }
         }
 
