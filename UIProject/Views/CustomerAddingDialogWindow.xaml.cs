@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UIProject.Events;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.Views
@@ -21,14 +24,18 @@ namespace UIProject.Views
     /// </summary>
     public partial class CustomerAddingDialogWindow : Window, IClosable
     {
+        public ThemKhachHangWindowVM ViewModel { get; set; }
         public CustomerAddingDialogWindow()
         {
             InitializeComponent();
-            DataContext = new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.None
-            };
+            ViewModel = new ThemKhachHangWindowVM();
+            ViewModel.Closed += ViewModel_Closed;
+            DataContext = ViewModel;
+        }
 
+        private void ViewModel_Closed(object sender, WindowViewModelClosedEventArgs<KhachHangModel> e)
+        {
+            
         }
     }
 }

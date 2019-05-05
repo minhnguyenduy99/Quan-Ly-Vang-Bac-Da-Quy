@@ -27,6 +27,7 @@ namespace ModelProject
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
         }
+
         public long ChiPhiRieng
         {
             get => chiPhiRieng;

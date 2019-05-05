@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BaseMVVM_Service.BaseMVVM;
+using UIProject.Events;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
@@ -16,7 +17,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// View model of Base window without a specified model
     /// </summary>
-    public class BaseWindowViewModel : BaseContentViewModel
+    public class BaseWindowViewModel<T> : BaseContentViewModel<T> where T:BaseModel
     {
         private string _title;
         private WindowState _windowState;
@@ -100,6 +101,13 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         public BaseWindowViewModel() { }
 
+        public event EventHandler<WindowViewModelClosedEventArgs<T>> Closed;
+
+        protected virtual void OnClosed(WindowViewModelClosedEventArgs<T> e)
+        {
+            Closed?.Invoke(this, e);
+        }
+
         protected virtual void OnMinimizedWindow() => WindowState = WindowState.Minimized;
         protected virtual void OnMaximizedWindow()
         {
@@ -115,8 +123,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             if (window != null)
             {
+                OnClosed(new WindowViewModelClosedEventArgs<T>(this.Model));
                 window.Close();
             }
         }
+
     }
 }

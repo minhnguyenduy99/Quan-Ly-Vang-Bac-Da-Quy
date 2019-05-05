@@ -52,15 +52,12 @@ namespace ModelProject
             get => thue;
             set => SetProperty(ref thue, value);
         }
-
         public override bool Equals(object obj)
         {
             if (obj is ChiTietBanModel)
             {
-                return MaSP.Equals(((ChiTietBanModel)obj).MaSP);
                 //Two recept details only match if and only if they both have the same MaPhieuMuaHang and MaSP.
                 return ((maPhieuMuaHang.Equals(((ChiTietBanModel)obj).maPhieuMuaHang)) && (maSP.Equals(((ChiTietBanModel)obj).maSP)));
-
             }
             return false;
         }
