@@ -20,7 +20,7 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
     /// </summary>
-    public partial class SearchWindow : Window, IClosable
+    public partial class SearchWindow : Window, IWindow
     {
         public SearchWindow()
         {

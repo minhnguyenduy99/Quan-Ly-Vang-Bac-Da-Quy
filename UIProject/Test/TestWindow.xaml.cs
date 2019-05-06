@@ -22,7 +22,7 @@ namespace UIProject.Test
     /// <summary>
     /// Interaction logic for TestWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window, IClosable
+    public partial class TestWindow : Window, IWindow
     {
         public TestWindow()
         {

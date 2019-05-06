@@ -31,6 +31,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <customControls:SearchTextBox Grid.Column="0"
+                                              DataContext="{Binding TImKiemKhachHangVM}"
                                               HorizontalAlignment="Stretch"
                                               Panel.ZIndex="99"
                                               ListBoxMaxHeight="150"
@@ -50,7 +51,8 @@
                 <Button Grid.Column="1"
                         Margin="5 10"
                         Style="{DynamicResource UIProjectLightIconButtonStyle}"
-                        ToolTip="Thêm khách hàng mới">
+                        ToolTip="Thêm khách hàng mới"
+                        Command="{Binding ThemKhachHangCommand}">
                     <materialDesign:PackIcon Kind="PersonAdd"
                                              Height="auto"
                                              Width="auto"
@@ -66,13 +68,13 @@
             <Label Grid.Row="4" Grid.Column="0"
                    Content="Công nợ"/>
             <Label Grid.Row="1" Grid.Column="1"
-                   Content="{Binding SelectedItem.Model.TenKH}"/>
+                   Content="{Binding KhachHang.Model.TenKH}"/>
             <Label Grid.Row="2" Grid.Column="1"
-                   Content="{Binding SelectedItem.Model.SDT1}"/>
+                   Content="{Binding KhachHang.Model.SDT1}"/>
             <Label Grid.Row="3" Grid.Column="1"
-                   Content="{Binding SelectedItem.Model.DiaChi}"/>
+                   Content="{Binding KhachHang.Model.DiaChi}"/>
             <Label Grid.Row="4" Grid.Column="1"
-                   Content="{Binding SelectedItem.Model.CongNo}"/>
+                   Content="{Binding KhachHang.Model.CongNo}"/>
         </Grid>
     </DataTemplate>
     
@@ -129,8 +131,8 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource SmallDefinedLabelStyle}"
-                   Content="Tổng tiền"/>
+                       Style="{StaticResource SmallDefinedLabelStyle}"
+                       Content="Tổng tiền"/>
                 <Label Grid.Row="1" Grid.Column="0"
                    Style="{StaticResource SmallDefinedLabelStyle}"
                    Content="VAT"/>

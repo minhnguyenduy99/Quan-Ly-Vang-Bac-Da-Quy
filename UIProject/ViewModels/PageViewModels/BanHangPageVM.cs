@@ -23,7 +23,13 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public KhachHangModel KhachHang
         {
-            get => ((ItemViewModel<KhachHangModel>)TimKiemKhachHangVM.SelectedItem).Model;
+            get
+            {
+                var khachHangDaChon = TimKiemKhachHangVM.SelectedItem as ItemViewModel<KhachHangModel>;
+                if (khachHangDaChon == null)
+                    return null;
+                return khachHangDaChon.Model;
+            }
         }
 
         
@@ -42,7 +48,11 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBan { get; set; }
 
-        public ThemKhachHangWindowVM ThemKhachHangVM { get; set; }
+
+        /// <summary>
+        /// View model của việc thêm khách hàng
+        /// </summary>
+        public AddingWindowViewModel<KhachHangModel> ThemKhachHangVM { get; set; }
 
 
         /// <summary>
@@ -73,6 +83,15 @@ namespace UIProject.ViewModels.PageViewModels
             set => thanhToanCommand = value;
         }
 
+        /// <summary>
+        /// Command thêm khách hàng
+        /// </summary>
+        public ICommand ThemKhachHangCommand
+        {
+            get => new BaseCommand(OnThucThiThemKhachHang);
+        }
+
+
         public BanHangPageVM() : base() { }
 
 
@@ -82,20 +101,15 @@ namespace UIProject.ViewModels.PageViewModels
             remove { DanhSachChiTietBan.ContainsItemModel -= value; }
         }
 
+        public event EventHandler<AddingWindowViewModel<KhachHangModel>> ThucThiThemKhachHang;
+        
+
         private void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
             var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
             if (sanPhamDaChon != null)
             {
-                DanhSachChiTietBan.Add(new ChiTietBanModel()
-                {
-                    
-                    MaSP = sanPhamDaChon.Model.MaSP,
-                    SoLuong = 1,
-                    DonGiaMuaVao = sanPhamDaChon.Model.DonGiaMuaVao,
-                    ChietKhau = 10,
-                    ThanhTien = 100000
-                });
+                DanhSachChiTietBan.Add(new ChiTietBanModel(PhieuBan, sanPhamDaChon.Model, 1));
             }
         }
 
@@ -173,22 +187,21 @@ namespace UIProject.ViewModels.PageViewModels
         protected override void LoadPageComponents()
         {
             PhieuBan = new PhieuBanModel();
-            ThemKhachHangVM = new ThemKhachHangWindowVM();
-            ThemKhachHangVM.Closed += ThemKhachHangVM_Closed;
+            ThemKhachHangVM = new AddingWindowViewModel<KhachHangModel>();
+
 
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
 
             DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>();
 
-            
+
         }
 
-        private void ThemKhachHangVM_Closed(object sender, WindowViewModelClosedEventArgs<KhachHangModel> e)
+        private void OnThucThiThemKhachHang()
         {
-            
+            ThucThiThemKhachHang?.Invoke(this, ThemKhachHangVM);
         }
-
         protected virtual void OnThanhToanCommandExecute()
         {
 

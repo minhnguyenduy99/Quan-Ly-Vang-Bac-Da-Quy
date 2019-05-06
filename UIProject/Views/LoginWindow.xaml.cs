@@ -25,7 +25,7 @@ namespace UIProject
     /// <summary>
     ///  Provide a login window 
     /// </summary>
-    public partial class LoginWindow : Window, IClosable
+    public partial class LoginWindow : Window, IWindow
     {
         private LoginWindowViewModel viewModel { get; set; }
         

@@ -13,7 +13,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// Base view model for <see cref="System.Windows.Controls.ContentControl"/>
     /// </summary>
-    public class BaseContentViewModel<T> : BaseViewModel<T>
+    public class BaseContentViewModel : BaseViewModel
     {
         private string iconSource;
 

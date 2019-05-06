@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +12,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
 
 namespace UIProject.Views
 {
     /// <summary>
     /// Interaction logic for ProviderAddingDialogWindow.xaml
     /// </summary>
-    public partial class ProviderAddingDialogWindow : Window
+    public partial class ProviderAddingDialogWindow : Window, IWindow
     {
         public ProviderAddingDialogWindow()
         {
             InitializeComponent();
+
+            PART_Combobox.ItemsSource = DataAccess.LoadKhuVuc();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels;
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -31,6 +34,13 @@ namespace UIProject.Pages
         private async void DoiTacPage_Loaded(object sender, RoutedEventArgs e)
         {
             await this.FadeIn(0.5f, 0.5f);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProviderAddingDialogWindow providerWindow = new ProviderAddingDialogWindow();
+            providerWindow.DataContext = new AddingWindowViewModel<NhaCungCapModel>();
+            providerWindow.ShowDialog(PART_ProviderAddButton, -500, 50);
         }
     }
 }

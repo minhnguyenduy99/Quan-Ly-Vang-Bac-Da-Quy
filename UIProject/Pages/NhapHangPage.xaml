@@ -47,6 +47,8 @@
             <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
                                           Grid.Row="0" Grid.Column="1"
                                           Height="40"
+                                          IconHeight="20"
+                                          Width="250"
                                           HorizontalAlignment="Right"
                                           Hint="Nhập tên sản phẩm"
                                           Margin="10"/>

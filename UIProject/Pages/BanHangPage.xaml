@@ -169,8 +169,8 @@
                                                 Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}}">
                                             <materialDesign:PackIcon Kind="RemoveCircle"
-                                                                         Height="auto"
-                                                                         Width="auto"/>
+                                                                     Height="auto"
+                                                                     Width="auto"/>
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -178,16 +178,16 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Grid.Row="2"
-                      Margin="10 5 5 5"
-                      Background="White">
+                          Margin="10 5 5 5"
+                          Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0"
-                            BorderThickness="0 0 1 0"
-                            BorderBrush="LightGray"
-                            Padding="7">
+                                BorderThickness="0 0 1 0"
+                                BorderBrush="LightGray"
+                                Padding="7">
                             <StackPanel >
                                 <Button x:Name="btn1"
                                         Style="{StaticResource UIProjectLightIconButtonStyle}"
@@ -201,8 +201,8 @@
                             </StackPanel>
                         </Border>
                         <Grid Grid.Column="1"
-                          Margin="5 0 0 0"
-                          Background="White">
+                              Margin="5 0 0 0"
+                              Background="White">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
@@ -221,30 +221,237 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="1"
+        <Grid Grid.Column="1" Grid.Row="1"
                   Width="auto"
                   Height="auto"
                   Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                <TabControl HorizontalAlignment="Stretch"
-                        Style="{StaticResource CustomTabControlStyle}"
-                        Margin="5 5 5 10">
-                <TabItem x:Name="TabKhachHang"
-                         Header="Khách hàng"
-                         ContentTemplate="{StaticResource CustomerTabItemTemplate}"
-                         Content="{Binding TimKiemKhachHangVM}"/>
-                <TabItem Header="Tùy chọn"
-                         ContentTemplate="{StaticResource SettingDataTemplate}"/>
-                </TabControl>
-                <TabControl Grid.Row="1"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <TabControl HorizontalAlignment="Stretch"
                             Style="{StaticResource CustomTabControlStyle}"
-                            Margin="5">
-                    <TabItem Header="Thanh toán"
-                             ContentTemplate="{StaticResource CheckoutDataTemplate}"/>
-                </TabControl>
-            </Grid>
+                            Margin="5 5 5 10">
+                <TabItem x:Name="TabKhachHang"
+                             Header="Khách hàng">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0"
+                                  HorizontalAlignment="Stretch"
+                                  Panel.ZIndex="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <customControls:SearchTextBox x:Name="PART_TimKiemKhachHang"
+                                                            DataContext="{Binding TimKiemKhachHangVM}"
+                                                            Style="{StaticResource NoFieldSearchTextBoxStyle}"
+                                                            Grid.Column="0"
+                                                            HorizontalAlignment="Stretch"
+                                                            Panel.ZIndex="99"
+                                                            ListBoxMaxHeight="150"
+                                                            SearchBoxItemTemplate="{StaticResource SearchKhachHangTemplate}"
+                                                            SearchBoxItemSource="{Binding DisplayItems}"
+                                                            SearchListBoxBackground="WhiteSmoke"
+                                                            Margin="10"
+                                                            FontWeight="Normal"
+                                                            FontSize="13"
+                                                            IconHeight="17"
+                                                            Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Hint="Tìm kiếm khách hàng"/>
+                            <Button x:Name="PART_AddCustomerButton"
+                                    Grid.Column="1"
+                                    Margin="5 10"
+                                    Style="{DynamicResource UIProjectLightIconButtonStyle}"
+                                    ToolTip="Thêm khách hàng mới"
+                                    Click="Button_Click">
+                                <materialDesign:PackIcon Kind="PersonAdd"
+                                                         Height="auto"
+                                                         Width="auto"
+                                                         Foreground="White"/>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2"
+                              DataContext="{Binding TimKiemKhachHangVM.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource SmallDefinedLabelStyle}">
+                                    <Setter Property="Panel.ZIndex" Value="1"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Content="Họ tên"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Content="Điện thoại"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Content="Địa chỉ"/>
+                            <Label Grid.Row="3" Grid.Column="0"
+                                   Content="Công nợ"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Content="{Binding Model.TenKH}"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Content="{Binding Model.SDT1}"/>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Content="{Binding Model.DiaChi}"/>
+                            <Label Grid.Row="3" Grid.Column="1"
+                                   Content="{Binding Model.CongNo}"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Tùy chọn">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource SmallDefinedLabelStyle}">
+                            </Style>
+                            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
+                                <Setter Property="Margin" Value="7"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Content="Nhân viên"/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Margin="10 5"
+                               VerticalAlignment="Top"
+                               Content="Ghi chú"/>
+                        <TextBox Grid.Row="0" Grid.Column="1"
+                                 IsEnabled="False"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"
+                                 Style="{StaticResource UIProjectMultipleLineTextBoxStyle}"
+                                 Margin="7"
+                                 Height="auto"
+                                 VerticalAlignment="Stretch"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <TabControl Grid.Row="1"
+                        Style="{StaticResource CustomTabControlStyle}"
+                        Margin="5">
+                <TabItem Header="Thanh toán">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Margin="12 7 5 5"
+                                   Style="{StaticResource SmallDefinedLabelStyle}"
+                                   Content="VAT"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Style="{StaticResource SmallDefinedLabelStyle}"
+                                   Content="Chiết khấu"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Style="{StaticResource SmallDefinedLabelStyle}"
+                                   Content="Tổng tiền"/>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Style="{StaticResource SmallDefinedLabelStyle}"
+                                   Content="{Binding PhieuHang.ThanhTien}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                                     HorizontalAlignment="Right"
+                                     Width="70"
+                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                     materialDesign:HintAssist.Hint="Thuế"
+                                     Margin="5"
+                                     Text="{Binding PhieuHang.ChietKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Grid Grid.Row="1" Grid.Column="1"
+                                  VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                    <RadioButton VerticalAlignment="Center"
+                                                 Content="đ"
+                                                 FontSize="13"
+                                                 Margin="0 0 5 0"
+                                                 IsChecked="true"
+                                                 VerticalContentAlignment="Center"/>
+                                    <RadioButton VerticalAlignment="Center"
+                                                 FontSize="13"
+                                                 Content="%"
+                                                 VerticalContentAlignment="Center"/>
+                                </StackPanel>
+                                <TextBox Grid.Column="1"
+                                         Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                         HorizontalAlignment="Stretch"
+                                         Margin="5"
+                                         materialDesign:HintAssist.Hint="Chiết khấu"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <TextBox Grid.Row="0"
+                                     VerticalAlignment="Center"
+                                     Margin="15 5 10 5"
+                                     materialDesign:HintAssist.Hint="Nhập số tiền khách trả"
+                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Margin="10 10 0 0"
+                                       Style="{StaticResource SmallDefinedLabelStyle}"
+                                       Content="Tiền thối lại"
+                                       VerticalAlignment="Center"/>
+                                <Label Grid.Column="1"
+                                       Margin="0 10 0 0"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource SmallDefinedLabelStyle}"
+                                       Content="{Binding ModelData.MoneyBack}"/>
+                            </Grid>
+                            <Button Grid.Row="3"
+                                    Content="Thanh toán"
+                                    Height="60"
+                                    FontSize="20"
+                                    Margin="10 5"
+                                    Command="{Binding ThanhToanCommand}"
+                                    Style="{StaticResource UIProjectLightShadowButtonStyle}"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
     </Grid>
 </Page>

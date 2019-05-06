@@ -38,7 +38,14 @@ namespace UIProject.Pages
             this.DataContext = ViewModel;
             //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
             ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
+            ViewModel.ThucThiThemKhachHang += ViewModel_ThucThiThemKhachHang;
             PART_LoaiSanPham.DataContext = ViewModel.LoaiSanPhamFilterVM;
+           // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
+        }
+
+        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<KhachHangModel> e)
+        {
+            CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow();
         }
 
         private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)
@@ -51,5 +58,16 @@ namespace UIProject.Pages
             await this.FadeIn(0.5f, 0.5f);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow()
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            customerWindow.DataContext = ViewModel.ThemKhachHangVM;
+
+            customerWindow.ShowDialog();
+        }
     }
 }

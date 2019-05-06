@@ -19,7 +19,7 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for OrderFilterDialogWindow.xaml
     /// </summary>
-    public partial class OrderFilterDialogWindow : Window, IClosable
+    public partial class OrderFilterDialogWindow : Window, IWindow
     {
         public OrderFilterDialogWindow()
         {

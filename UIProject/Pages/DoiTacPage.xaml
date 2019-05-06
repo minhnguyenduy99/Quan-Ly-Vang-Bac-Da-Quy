@@ -25,12 +25,13 @@
                Margin="10"
                Content="Nhà cung cấp"
                HorizontalAlignment="Left"/>
-            <Button Grid.Column="1"
+            <Button x:Name="PART_ProviderAddButton"
+                    Grid.Column="1"
                     Margin="10 10 20 10"
                     Style="{StaticResource UIProjectLightIconButtonStyle}"
                     ToolTip="Thêm nhà cung cấp mới"
                     HorizontalAlignment="Right"
-                    services:IconButtonExtension.IconKind="PersonAdd">
+                    Click="Button_Click">
                 <materialDesign:PackIcon Kind="AccountMultiplePlus"
                                          Foreground="White"
                                          Width="auto"
@@ -58,7 +59,8 @@
                         Height="auto">
                     _Lọc NCC
                 </Button>
-                <customControls:SearchTextBox Margin="20 0 0 0"
+                <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
+                                              Margin="20 0 0 0"
                                               Hint="Tìm kiếm nhà cung cấp"
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"

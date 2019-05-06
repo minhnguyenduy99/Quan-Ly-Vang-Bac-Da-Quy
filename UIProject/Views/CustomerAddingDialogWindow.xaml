@@ -93,18 +93,23 @@
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Giới tính"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
-                                     Style="{StaticResource CustomTextBoxStyle}"/>
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding TenKH}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
-                                     Style="{StaticResource CustomTextBoxStyle}"/>
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding SDT}"/>
                             <TextBox Grid.Row="2" Grid.Column="1"
-                                     Style="{StaticResource CustomTextBoxStyle}"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1"
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding DiaChi}"/>
+                            <ComboBox x:Name="PART_Combobox"
+                                      Grid.Row="3" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       Margin="10"                                    
                                       Height="30"
-                                      ItemsSource="{Binding LocalArea}"/>
+                                      SelectedItem="{Binding KhuVuc}"/>
                             <TextBox Grid.Row="4" Grid.Column="1"
-                                     Style="{StaticResource CustomTextBoxStyle}"/>
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     />
                             <ComboBox Grid.Row="5" Grid.Column="1"
                                       HorizontalAlignment="Left"
                                       Margin="10"
@@ -127,9 +132,11 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
-                            Content="Lưu"/>
+                            Content="Lưu"
+                            Command="{Binding SubmitCommand}"/>
                     <Button Grid.Column="1"
-                            Content="Hủy"/>
+                            Content="Hủy"
+                            Command="{Binding CancelCommand}"/>
                 </Grid>
             </Grid>
         </Grid>

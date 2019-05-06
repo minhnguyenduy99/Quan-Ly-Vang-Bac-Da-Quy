@@ -36,7 +36,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// View model of Dialog Windoww without a specified Data model
     /// </summary>
-    public class DialogWindowViewModel<T> : BaseWindowViewModel<T> where T: BaseModel
+    public class DialogWindowViewModel : BaseWindowViewModel 
     {
         #region Default content in the buttons of Dialog Window
         public const string DEFAULT_YES_TEXT = "Có";

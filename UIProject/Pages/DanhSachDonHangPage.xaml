@@ -38,7 +38,8 @@
                         Click="OpenFilterWindow">
                     _Lọc đơn hàng
                 </Button>
-                <customControls:SearchTextBox Margin="20 0 0 0"
+                <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
+                                              Margin="20 0 0 0"
                                               Hint="Tìm kiếm đơn hàng"
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"

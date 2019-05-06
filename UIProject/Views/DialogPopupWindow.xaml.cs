@@ -21,7 +21,7 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for DialogPopupWindow.xaml
     /// </summary>
-    public partial class DialogPopupWindow : Window, IClosable, IViewModelPresenter
+    public partial class DialogPopupWindow : Window, IWindow, IViewModelPresenter
     {
         public BaseViewModel ViewModel { get; set; }
         public DialogPopupWindow()

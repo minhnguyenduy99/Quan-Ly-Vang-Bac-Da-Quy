@@ -17,7 +17,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// View model of Base window without a specified model
     /// </summary>
-    public class BaseWindowViewModel<T> : BaseContentViewModel<T> where T:BaseModel
+    public class BaseWindowViewModel : BaseContentViewModel
     {
         private string _title;
         private WindowState _windowState;
@@ -28,6 +28,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected ICommand _minimizedCmd;
         protected ICommand _maximizedCmd;
         protected ICommand _exitCmd;
+        protected ICommand _showCmd;
 
         /// <summary>
         /// Title of the window
@@ -96,14 +97,18 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
         public ICommand ExitCommand
         {
-            get => _exitCmd ?? (_exitCmd = new BaseCommand<IClosable>(OnExitWindow));
+            get => _exitCmd ?? (_exitCmd = new BaseCommand<IWindow>(OnExitWindow));
         }
 
+        public ICommand ShowCommand
+        {
+            get => _showCmd ?? (_showCmd = new BaseCommand<IWindow>(OnShowWindow));
+        }
         public BaseWindowViewModel() { }
 
-        public event EventHandler<WindowViewModelClosedEventArgs<T>> Closed;
+        public event EventHandler<EventArgs> Closed;
 
-        protected virtual void OnClosed(WindowViewModelClosedEventArgs<T> e)
+        protected virtual void OnClosed(EventArgs e)
         {
             Closed?.Invoke(this, e);
         }
@@ -119,13 +124,17 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         protected virtual bool OnCanMaximized() => CanMaximized;
         protected virtual bool OnCanMinimized() => CanMinimized;
-        protected virtual void OnExitWindow(IClosable window)
+        protected virtual void OnExitWindow(IWindow window)
         {
             if (window != null)
             {
-                OnClosed(new WindowViewModelClosedEventArgs<T>(this.Model));
+                OnClosed(EventArgs.Empty);
                 window.Close();
             }
+        }
+        protected virtual void OnShowWindow(IWindow window)
+        {
+            window.Show();
         }
 
     }

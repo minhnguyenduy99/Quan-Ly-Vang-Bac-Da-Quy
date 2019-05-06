@@ -48,6 +48,7 @@
     <Style TargetType="Label" BasedOn="{StaticResource DefinedLabelStyle}" x:Key="SmallDefinedLabelStyle">
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontWeight" Value="Normal"/>
     </Style>
 
     <!-- Label for link style -->

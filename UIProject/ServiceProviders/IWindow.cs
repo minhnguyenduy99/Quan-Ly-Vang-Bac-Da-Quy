@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace UIProject.ServiceProviders
 {
-    public interface IClosable
+    public interface IWindow
     {
+        void Show();
+        bool? ShowDialog();
         void Close();
     }
 }

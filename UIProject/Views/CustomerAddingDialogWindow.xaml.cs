@@ -22,20 +22,17 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for CustomerAddingDialogWindow.xaml
     /// </summary>
-    public partial class CustomerAddingDialogWindow : Window, IClosable
+    public partial class CustomerAddingDialogWindow : Window, IWindow
     {
-        public ThemKhachHangWindowVM ViewModel { get; set; }
+        public AddingWindowViewModel<KhachHangModel> ViewModel { get; set; }
         public CustomerAddingDialogWindow()
         {
             InitializeComponent();
-            ViewModel = new ThemKhachHangWindowVM();
-            ViewModel.Closed += ViewModel_Closed;
-            DataContext = ViewModel;
-        }
+            ViewModel = new AddingWindowViewModel<KhachHangModel>();
 
-        private void ViewModel_Closed(object sender, WindowViewModelClosedEventArgs<KhachHangModel> e)
-        {
-            
+            DataContext = ViewModel;
+
+            PART_Combobox.ItemsSource = DataAccess.LoadKhuVuc();
         }
     }
 }

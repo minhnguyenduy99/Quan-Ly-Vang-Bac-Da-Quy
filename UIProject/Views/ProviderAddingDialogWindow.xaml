@@ -1,4 +1,5 @@
 ﻿<Window x:Class="UIProject.Views.ProviderAddingDialogWindow"
+        x:Name="ProviderAddingWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -75,16 +76,16 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Tên nhà cung cấp"/>
+                                   Content="Mã nhà cung cấp"/>
                             <Label Grid.Row="1" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Mã nhà cung cấp"/>
+                                   Content="Tên nhà cung cấp"/>
                             <Label Grid.Row="2" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Số điện thoại"/>
                             <Label Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Email"/>
+                                   Content="Khu vực"/>
                             <Label Grid.Row="4" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Email"/>
@@ -97,7 +98,8 @@
                                      Style="{StaticResource CustomTextBoxStyle}"/>
                             <TextBox Grid.Row="2" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1"
+                            <ComboBox x:Name="PART_Combobox"
+                                      Grid.Row="3" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       Margin="10"                                    
                                       Height="30"
@@ -126,9 +128,13 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
-                            Content="Lưu"/>
+                            Content="Lưu"
+                            Command="{Binding SubmitCommand}"
+                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"/>
                     <Button Grid.Column="1"
-                            Content="Hủy"/>
+                            Content="Hủy"
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"/>
                 </Grid>
             </Grid>
         </Grid>
