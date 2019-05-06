@@ -10,6 +10,10 @@ namespace ModelProject
     {
         private string maPhieuMuaHang;
         private string maSP;
+
+        //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
+        private string tenSP;
+
         private int soLuong;
         private long donGia;
 
@@ -33,6 +37,17 @@ namespace ModelProject
             get => donGia;
             set => SetProperty(ref donGia, value);
         }
+
+        public string TenSP
+        {
+            get
+            {
+                SanPhamModel _sanPham = DataAccess.LoadSPByMaSP(maSP);
+                tenSP = _sanPham.TenSP;
+                return tenSP;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             //Two buying details only match if and only if they both have the same maPhieuMuaHang and maSP.
