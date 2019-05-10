@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using BaseMVVM_Service.BaseMVVM.Interfaces;
 using ModelProject;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.Events;
+using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.PageViewModels
@@ -65,6 +67,17 @@ namespace UIProject.ViewModels.PageViewModels
         }
 
         public EnumFilterViewModel<SanPhamModel> LoaiSanPhamFilterVM;
+        
+        /// <summary>
+        /// Số tiền khách hàng đã trả
+        /// </summary>
+        public long SoTienKhachTra
+        {
+            get => GetPropertyValue<long>();
+            set => SetProperty(value);
+        }
+
+        public long SoTienThoiLai { get; set; }
 
         /// <summary>
         /// Danh sách chi tiết bán
@@ -91,7 +104,6 @@ namespace UIProject.ViewModels.PageViewModels
             get => new BaseCommand(OnThucThiThemKhachHang);
         }
 
-
         public BanHangPageVM() : base() { }
 
 
@@ -102,7 +114,6 @@ namespace UIProject.ViewModels.PageViewModels
         }
 
         public event EventHandler<AddingWindowViewModel<KhachHangModel>> ThucThiThemKhachHang;
-        
 
         private void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
@@ -206,7 +217,5 @@ namespace UIProject.ViewModels.PageViewModels
         {
 
         }
-
-
     }
 }

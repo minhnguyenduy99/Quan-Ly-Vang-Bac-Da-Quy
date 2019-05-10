@@ -8,7 +8,6 @@ using System.Windows;
 
 namespace UIProject.ViewModels.PageViewModels
 {
-
     /// <summary>
     /// A base view model of page
     /// </summary>

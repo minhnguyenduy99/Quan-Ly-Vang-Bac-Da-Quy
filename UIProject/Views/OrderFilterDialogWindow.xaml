@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UIProject.Views"
+        xmlns:customControls="clr-namespace:UIProject.CustomControls"
         mc:Ignorable="d"
         Style="{StaticResource CustomDialogWindowStyle}"
         WindowStartupLocation="CenterScreen">
@@ -12,15 +13,16 @@
             BorderBrush="LightGray"
             BorderThickness="1">
         <Grid>
-            <Grid Margin="20 10 20 30">
+            <Grid Margin="20 10 20 10">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2"
                        Style="{StaticResource LargeLabelStyle}"
@@ -35,32 +37,69 @@
                         <Label Style="{StaticResource MediumLabelStyle}"
                                Content="Chọn điều kiện lọc"
                                HorizontalAlignment="Left"/>
-                        <CheckBox Content="Đặt hàng" Margin="10 5"/>
-                        <CheckBox Content="Đang giao dịch" Margin="10 5"/>
-                        <CheckBox Content="Kết thúc" Margin="10 5"/>
-                        <CheckBox Content="Hoàn thành" Margin="10 5"/>
+                        <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                               Content="Tên khách hàng"
+                               Margin="10 10 10 5"/>
+                        <customControls:SearchTextBox Style="{StaticResource UIProjectSearchTextBoxStyle}"
+                                                      Margin="10 0 10 5"
+                                                      Height="30"
+                                                      FontSize="13"
+                                                      Background="White"
+                                                      Foreground="Black"/>
+                        <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                               Content="Tên nhân viên"
+                               Margin="10 10 10 5"/>
+                        <customControls:SearchTextBox Style="{StaticResource UIProjectSearchTextBoxStyle}"
+                                                      Margin="10 0 10 5"
+                                                      Height="30"
+                                                      FontSize="13"
+                                                      Background="White"
+                                                      Foreground="Black"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="2" Grid.Column="1"
                             Orientation="Vertical">
                     <Label Style="{StaticResource MediumLabelStyle}"
-                           Content="Trạng thái"
+                           Content="Thời gian"
                            HorizontalAlignment="Left"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1"
-                              VerticalAlignment="Top"
-                              Margin="10 10 30 10"
-                              HorizontalAlignment="Stretch"
-                              SelectedIndex="0">
-                        <ComboBoxItem Content="Đóng gói"/>
-                        <ComboBoxItem Content="Xuất kho"/>
-                        <ComboBoxItem Content="Thanh toán"/>
-                    </ComboBox>
-                    <Button Style="{StaticResource UIProjectLightButtonStyle}"
-                            FontSize="13"
-                            Margin="10 30 10 0"
-                            Content="Lọc"
-                            Click="Button_Click"/>
+                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="Từ"
+                           Margin="10 10 10 5"/>
+                    <DatePicker Style="{StaticResource UIProjectNoTextBoxStyleDatePickerStyle}"
+                                Background="White"
+                                Margin="10 0 10 5"
+                                SelectedDate="10/12/2018"/>
+                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="Đến"
+                           Margin="10 10 10 5"/>
+                    <DatePicker Style="{StaticResource UIProjectNoTextBoxStyleDatePickerStyle}"
+                                Background="White"
+                                Margin="10 0 10 5"/>
                 </StackPanel>
+                <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="0 30"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="Width" Value="100"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Content="_Lọc"
+                            Click="Button_Click"/>
+                    <Button Grid.Column="1"
+                            Background="#ED2939"
+                            Content="_Hủy"
+                            Click="Button_Click"/>
+                </Grid>
+
             </Grid>
         </Grid>
     </Border>

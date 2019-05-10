@@ -80,11 +80,13 @@
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DialogWindowTypeConverter.cs" />
+    <Compile Include="Converters\InnerControlHeightConverter.cs" />
     <Compile Include="Converters\LongStringToThreeDotConverter.cs" />
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
     <Compile Include="Converters\TabCheckedToVisibilityConverter.cs" />
     <Compile Include="Converters\TabNameToTabViewModelConverter.cs" />
     <Compile Include="Converters\TextPropertyToVisibilityConverter.cs" />
+    <Compile Include="Converters\ToShortDateConverter.cs" />
     <Compile Include="CustomControls\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
@@ -94,6 +96,7 @@
     <Compile Include="CustomControls\SearchTextBox.xaml.cs">
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataValidation\DateTImeValidation.cs" />
     <Compile Include="DataValidation\PositiveNumberValidation.cs" />
     <Compile Include="Events\FilterEventArgs.cs" />
     <Compile Include="Events\ItemAddedEventArgs.cs" />
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DatePickerStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

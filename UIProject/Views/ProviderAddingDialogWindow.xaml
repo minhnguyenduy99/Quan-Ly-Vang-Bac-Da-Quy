@@ -68,7 +68,6 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -89,9 +88,6 @@
                             <Label Grid.Row="4" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Email"/>
-                            <Label Grid.Row="5" Grid.Column="0"
-                                   Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Giới tính"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
@@ -106,19 +102,6 @@
                                       ItemsSource="{Binding LocalArea}"/>
                             <TextBox Grid.Row="4" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"/>
-                            <ComboBox Grid.Row="5" Grid.Column="1"
-                                      HorizontalAlignment="Left"
-                                      Margin="10"
-                                      Width="100"
-                                      Height="30"
-                                      MaxWidth="150">
-                                <ComboBoxItem>
-                                    Nam
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Nữ
-                                </ComboBoxItem>
-                            </ComboBox>
                         </Grid>
                     </StackPanel>
                 </Grid>

@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.Styles"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:converters="clr-namespace:UIProject.Converters"
+                    xmlns:validations="clr-namespace:UIProject.DataValidation">
+    <converters:InnerControlHeightConverter x:Key="InnerControlHeightConverter"/>
+    <converters:ToShortDateConverter x:Key="ToShortDateConverter"/>
+    <validations:DateTImeValidation x:Key="DateTimeValidation"/>
+    <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectDatePickerStyle">
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="Padding" Value="7"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Grid x:Name="PART_ROOT"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_TextBox"
+                                     Style="{StaticResource UIProjectTextBoxStyle}"
+                                     Background="{TemplateBinding Background}"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed">
+                                <TextBox.Text>
+                                    <Binding Path="SelectedDate" UpdateSourceTrigger="LostFocus" Mode="TwoWay" RelativeSource="{RelativeSource Mode=FindAncestorm, AncestorType={x:Type DatePicker}}" Converter="{StaticResource ToShortDateConverter}">
+                                        <Binding.ValidationRules>
+                                            <validations:DateTImeValidation ValidationStep="RawProposedValue"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                                <Validation.ErrorTemplate>
+                                    <ControlTemplate>
+                                        <Border BorderBrush="Red"
+                                                BorderThickness="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                                                       Content="{Binding [0].ErrorContent}"/>
+                                                <AdornedElementPlaceholder/>
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Validation.ErrorTemplate>
+                            </TextBox>
+                            <Button x:Name="PART_Button"
+                                    Grid.Column="1"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                    VerticalAlignment="Center"
+                                    Padding="5"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center"
+                                    BorderThickness="0"
+                                    Command="{Binding}">
+                                <materialDesign:PackIcon Kind="DateRange"
+                                                         Foreground="Black"
+                                                         Margin="0"
+                                                         Width="auto"
+                                                         Height="auto"/>
+                            </Button>
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                   StaysOpen="False"
+                                   />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectNoTextBoxStyleDatePickerStyle">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="0">
+                        <Grid x:Name="PART_ROOT"
+                              Height="auto"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_TextBox"
+                                     Height="auto"
+                                     Style="{StaticResource UIProjectNormalTextBoxStyle}"
+                                     Background="{TemplateBinding Background}"
+                                     Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}, Converter={StaticResource ToShortDateConverter}}">
+                            </TextBox>
+                            <Button x:Name="PART_Button"
+                                    Height="auto"
+                                    Grid.Column="1"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                    VerticalAlignment="Center"
+                                    Padding="{Binding Padding,ElementName=PART_TextBox}"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center"
+                                    BorderThickness="0"
+                                    Command="{Binding}"
+                                    Tag="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                <materialDesign:PackIcon Kind="DateRange"
+                                                         Foreground="Black"
+                                                         Margin="0"
+                                                         Height="20"
+                                                         Width="20">
+                                </materialDesign:PackIcon>
+                            </Button>
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                   StaysOpen="False" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

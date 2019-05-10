@@ -32,7 +32,8 @@
                     Click="OpenAddNewCustomerDialog">
                 <materialDesign:PackIcon Kind="PersonAdd"
                                          Height="auto"
-                                         Width="auto"/>
+                                         Width="auto"
+                                         Foreground="White"/>
             </Button>
         </Grid>
         <Separator Grid.Row="1"
@@ -56,10 +57,10 @@
                     _Lọc khách hàng
                 </Button>
                 <customControls:SearchTextBox Margin="20 0 0 0"
+                                              Style="{StaticResource CustomSearchTextBoxStyle}"
                                               Hint="Tìm kiếm khách hàng"
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"
-                                              IconBackground="{StaticResource AirForceBlue}"
                                               Width="500"/>
             </StackPanel>
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2"

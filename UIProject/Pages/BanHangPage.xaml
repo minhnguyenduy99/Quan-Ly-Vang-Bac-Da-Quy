@@ -381,7 +381,7 @@
                                      Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
                                      materialDesign:HintAssist.Hint="Thuế"
                                      Margin="5"
-                                     Text="{Binding PhieuHang.ChietKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding PhieuHang.Thue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <Grid Grid.Row="1" Grid.Column="1"
                                   VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>
@@ -405,8 +405,14 @@
                                          Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
                                          HorizontalAlignment="Stretch"
                                          Margin="5"
-                                         materialDesign:HintAssist.Hint="Chiết khấu"/>
+                                         materialDesign:HintAssist.Hint="Chiết khấu"
+                                         />
                             </Grid>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   Content="{Binding PhieuBan.ThanhTien, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalAlignment="Right"
+                                   Margin="10"/>
                         </Grid>
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
@@ -424,7 +430,8 @@
                                      VerticalAlignment="Center"
                                      Margin="15 5 10 5"
                                      materialDesign:HintAssist.Hint="Nhập số tiền khách trả"
-                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"/>
+                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                     Text="{Binding SoTienKhachTra, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
@@ -439,7 +446,7 @@
                                        Margin="0 10 0 0"
                                        VerticalAlignment="Center"
                                        Style="{StaticResource SmallDefinedLabelStyle}"
-                                       Content="{Binding ModelData.MoneyBack}"/>
+                                       Content="{Binding SoTienThoiLai,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                             <Button Grid.Row="3"
                                     Content="Thanh toán"

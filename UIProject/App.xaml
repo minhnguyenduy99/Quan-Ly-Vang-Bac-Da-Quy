@@ -48,6 +48,7 @@
                         <ResourceDictionary Source="./Styles/ListBoxStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/DataGridStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/ButtonStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/DatePickerStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

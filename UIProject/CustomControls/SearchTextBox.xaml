@@ -49,15 +49,19 @@
                       Background="Transparent"
                       Padding="{Binding TextBoxPadding, ElementName=uc}">
             </TextBox>
-            <Grid Grid.Column="1"
-                  Background="{Binding IconBackground,ElementName=uc}"
-                  Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
-                  Height="auto">
+            <Border Grid.Column="1"
+                    BorderThickness="0"
+                    Visibility="{Binding IconVisibility}"
+                    Background="{Binding IconBackground,ElementName=uc}"
+                    Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+                    Height="auto"
+                    Padding="10">
                 <Image Source="{Binding IconSource,ElementName=uc}"
                        Stretch="Uniform"
                        Height="{Binding IconHeight, ElementName=uc}"
-                       Margin="15 10 15 10"/>
-            </Grid>
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            </Border>
         </Grid>
         <Canvas Grid.Row="1"
                 Height="auto"               

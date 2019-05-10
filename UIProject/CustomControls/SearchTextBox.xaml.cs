@@ -177,6 +177,25 @@ namespace UIProject.CustomControls
 
         }
 
+        /// <summary>
+        /// Set the visibility of icon part
+        /// </summary>
+        public Visibility IconVisibility
+        {
+            get => (Visibility)GetValue(IconVisibilityProperty);
+            set => SetValue(IconVisibilityProperty, value);
+        }
+
+        /// <summary>
+        /// Set the style of PART_TextBox
+        /// </summary>
+        public Style TextBoxStyle
+        {
+            get => (Style)GetValue(TextBoxPaddingProperty);
+            set => SetValue(TextBoxStyleProperty, value);
+        }
+
+
         #region Dependency Properties
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
             "IconSource", 
@@ -238,6 +257,16 @@ namespace UIProject.CustomControls
         public static readonly DependencyProperty ListBoxMaxHeightProperty = DependencyProperty.Register(
             "ListBoxMaxHeight",
             typeof(double),
+            typeof(SearchTextBox));
+
+        public static readonly DependencyProperty IconVisibilityProperty = DependencyProperty.Register(
+            "IconVisibility",
+            typeof(Visibility),
+            typeof(SearchTextBox));
+
+        public static readonly DependencyProperty TextBoxStyleProperty = DependencyProperty.Register(
+            "TextBoxStyle",
+            typeof(Style),
             typeof(SearchTextBox));
 
         #endregion

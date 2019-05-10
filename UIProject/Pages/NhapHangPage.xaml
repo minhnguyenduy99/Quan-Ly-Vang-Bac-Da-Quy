@@ -31,7 +31,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
@@ -69,57 +69,69 @@
                     SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120"
-                                            Binding="{Binding No}"
-                                            CanUserSort="False"
-                                            TextBlock.TextAlignment="Center"
-                                            IsReadOnly="False"
-                                            Header="Mã sản phẩm"
-                                            HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                            CellStyle="{StaticResource LeftDataGridCell}"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                    Binding="{Binding No}"
+                                    CanUserSort="False"
+                                    TextBlock.TextAlignment="Center"
+                                    IsReadOnly="False"
+                                    Header="Mã sản phẩm"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                 <DataGridTextColumn Width="130"
-                                            Binding="{Binding OrderCode}"
-                                            Header="Tên sản phẩm"
-                                            TextBlock.TextAlignment="Right"
-                                            IsReadOnly="False"
-                                            CanUserSort="False"
-                                            HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                            CellStyle="{StaticResource CenteredDataGridCell}"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                    Binding="{Binding OrderCode}"
+                                    Header="Tên sản phẩm"
+                                    TextBlock.TextAlignment="Right"
+                                    IsReadOnly="False"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="130"
+                                    Binding="{Binding OrderCode}"
+                                    Header="Đơn vị tính"
+                                    TextBlock.TextAlignment="Right"
+                                    IsReadOnly="False"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                 <DataGridTextColumn Width="80"
-                                            TextBlock.TextAlignment="Center"
-                                            IsReadOnly="False"
-                                            Binding="{Binding ProductName}"
-                                            Header="Số lượng"
-                                            HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                    TextBlock.TextAlignment="Center"
+                                    IsReadOnly="False"
+                                    Binding="{Binding ProductName}"
+                                    Header="Số lượng"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                 <DataGridTextColumn Width="130"
-                                            CanUserSort="False"
-                                            Binding="{Binding ProductType}"
-                                            Header="Đơn giá"                                           
-                                            IsReadOnly="False"
-                                            HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
-                <DataGridTextColumn Width="70"
-                                            Binding="{Binding Unit}"
-                                            CanUserSort="False"
-                                            Header="Thuế"
-                                            TextBlock.TextAlignment="Center"
-                                            IsReadOnly="False"
-                                            HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                            CellStyle="{StaticResource CenteredDataGridCell}"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                    CanUserSort="False"
+                                    Binding="{Binding ProductType}"
+                                    Header="Đơn giá"                                           
+                                    IsReadOnly="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                 <DataGridTextColumn Width="100"
-                                            Header="Thành tiền"
-                                            HeaderStyle="{StaticResource RightDataGridHeader}"
-                                            CellStyle="{StaticResource RightDataGridCell}"
-                                            IsReadOnly="False"
-                                            EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                    Binding="{Binding Unit}"
+                                    CanUserSort="False"
+                                    Header="Lợi nhuận"
+                                    TextBlock.TextAlignment="Center"
+                                    IsReadOnly="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                <DataGridTextColumn Width="100"
+                                    Binding="{Binding Unit}"
+                                    CanUserSort="False"
+                                    Header="Thành tiền"
+                                    TextBlock.TextAlignment="Center"
+                                    IsReadOnly="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"
+                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                 <DataGridTemplateColumn Width="30"
-                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
@@ -171,54 +183,8 @@
                            Content="Ngày nhập hàng"/>
                     <DatePicker FontSize="15"
                                 Name="LocaleDatePicker"
-                                materialDesign:HintAssist.Hint="Locale Date">
-                        <DatePicker.Style>
-                            <Style TargetType="DatePicker">
-                                <Setter Property="Background" Value="LightGray"/>
-                                <Setter Property="Padding" Value="7"/>
-                                <Setter Property="FontSize" Value="13"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <Border>
-                                                <Grid x:Name="PART_ROOT"
-                                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition/>
-                                                        <ColumnDefinition Width="auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBox x:Name="PART_TextBox"
-                                                             Style="{StaticResource CustomTextBoxStyle}"
-                                                             Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}}"/>
-                                                    <Button x:Name="PART_Button"
-                                                            Grid.Column="1"
-                                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                            VerticalAlignment="Center"
-                                                            Padding="5"
-                                                            Background="Transparent"
-                                                            BorderBrush="Transparent"
-                                                            HorizontalAlignment="Center"
-                                                            BorderThickness="0"
-                                                            Command="{Binding}">
-                                                        <materialDesign:PackIcon Kind="DateRange"
-                                                                                 Foreground="Black"
-                                                                                 Margin="0"
-                                                                                 Width="auto"
-                                                                                 Height="auto"/>
-                                                    </Button>
-                                                    <Popup x:Name="PART_Popup"
-                                                           AllowsTransparency="True"
-                                                           Placement="Bottom"
-                                                           PlacementTarget="{Binding ElementName=PART_TextBox}"
-                                                           StaysOpen="False" />
-                                                </Grid>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DatePicker.Style>
+                                materialDesign:HintAssist.Hint="Locale Date"
+                                Style="{StaticResource UIProjectDatePickerStyle}">
                     </DatePicker>
                 </StackPanel>
             </Grid>
@@ -236,27 +202,19 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource CustomOrderInfoLabelStyle}">
                         <Setter Property="Margin" Value="10"/>
                     </Style>
                 </Grid.Resources>
-                <Label Grid.Row="0" Grid.Column="0"
-                       Content="Tags"/>
-                <TextBox Grid.Row="0" Grid.Column="1"
-                         Style="{StaticResource CustomTextBoxStyle}"
-                         Margin="10"/>
                 <Label Grid.Row="1" Grid.Column="0"
-                       Margin="10 12 10 10"
+                       Margin="10 18 10 10"
                        VerticalAlignment="Top"
                        Content="Ghi chú"/>
                 <TextBox Grid.Row="1" Grid.Column="1"
                          Margin="10"
-                         Height="100"
+                         Height="auto"
+                         VerticalAlignment="Stretch"
                          Style="{StaticResource CustomTextBoxStyle}"/>
             </Grid>
             <Grid Grid.Column="1">

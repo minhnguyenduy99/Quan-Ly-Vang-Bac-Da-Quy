@@ -5,6 +5,7 @@
                     xmlns:customControls="clr-namespace:UIProject.CustomControls">
 
     <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="CustomSearchTextBoxStyle">
+        <Setter Property="IconVisibility" Value="Visible"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -29,6 +30,16 @@
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
     </Style>
+
+    <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="NoIconSearchTextBoxStyle" BasedOn="{StaticResource CustomSearchTextBoxStyle}">
+        <Setter Property="IconVisibility" Value="Collapsed"/>
+    </Style>
+
+    <Style TargetType="{x:Type customControls:SearchTextBox}" x:Key="NoFieldNoIconSearchTextBoxStyle" BasedOn="{StaticResource NoFieldSearchTextBoxStyle}">
+        <Setter Property="IconVisibility" Value="Collapsed"/>
+        <Setter Property="IconBackground" Value="{Binding Background}"/>
+        <Setter Property="IconSource" Value="{x:Null}"/>
+    </Style>
     
     <Style x:Key="UIProjectTextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -48,9 +59,9 @@
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetProperty="Background.Color">
                             <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                                From="WhiteSmoke"
-                                                To="#dddddd"
-                                                Duration="0:0:0.3"/>
+                                            From="WhiteSmoke"
+                                            To="#dddddd"
+                                            Duration="0:0:0.3"/>
                             <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
                                             From="Transparent"
                                             To="#111E6C"
@@ -75,6 +86,14 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="UIProjectSearchTextBoxStyle" TargetType="{x:Type customControls:SearchTextBox}" BasedOn="{StaticResource CustomSearchTextBoxStyle}">
+        <Setter Property="IconVisibility" Value="Collapsed"/>
+        <Setter Property="IconHeight" Value="0"/>
+        <Setter Property="TextBoxStyle" Value="{StaticResource UIProjectTextBoxStyle}"/>
+        <Setter Property="IconBackground" Value="{Binding Background}"/>
+    </Style>
+
+
     <Style x:Key="UIProjectMultipleLineTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
         <Setter Property="AcceptsReturn" Value="True"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -96,6 +115,13 @@
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+    </Style>
+
+    <Style x:Key="UIProjectNormalTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
 </ResourceDictionary>
