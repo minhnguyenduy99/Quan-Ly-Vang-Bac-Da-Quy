@@ -24,6 +24,9 @@ namespace ModelProject
         private string ngayGiao;
         private string maTinhTrang;
 
+        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
+        private bool isUpdated = false;
+
         public string MaPhieu
         {
             get => maPhieu;
