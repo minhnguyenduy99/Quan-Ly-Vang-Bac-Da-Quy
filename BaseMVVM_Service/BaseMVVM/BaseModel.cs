@@ -10,7 +10,8 @@ namespace BaseMVVM_Service.BaseMVVM
     /// <summary>
     /// Base model class for model type
     /// </summary>
-    public class BaseModel : ObservableObject
+    public abstract class BaseModel : ObservableObject, ISubmitable
     {
+        public abstract bool Submit();
     }
 }
