@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
 using UIProject.ViewModels.LayoutViewModels;
+using UIProject.ViewModels.PageViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -25,11 +26,13 @@ namespace UIProject.Pages
     /// </summary>
     public partial class DanhSachDonHangPage : Page
     {
+        public DanhSachDonHangPageVM ViewModel { get; set; }
         public DanhSachDonHangPage()
         {
             InitializeComponent();
 
             this.Loaded += DanhSachDonHangPage_Loaded;
+            this.ViewModel = new DanhSachDonHangPageVM();
             
         }
 
@@ -40,7 +43,7 @@ namespace UIProject.Pages
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)
         {
-            OrderFilterDialogWindow orderFilterWnd = new OrderFilterDialogWindow();
+            OrderFilterDialogWindow orderFilterWnd = new OrderFilterDialogWindow(ViewModel.LocDonHangVM);
             orderFilterWnd.ShowDialog();
         }
     }

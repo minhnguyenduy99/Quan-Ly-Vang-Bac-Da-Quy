@@ -66,7 +66,7 @@ namespace UIProject.ViewModels.PageViewModels
             set => SetProperty(ref phieuBan, value);
         }
 
-        public EnumFilterViewModel<SanPhamModel> LoaiSanPhamFilterVM;
+        public EnumFilterViewModel<SanPhamModel> LocSanPhamVM { get; set; }
         
         /// <summary>
         /// Số tiền khách hàng đã trả
@@ -137,8 +137,13 @@ namespace UIProject.ViewModels.PageViewModels
                 new SanPhamModel(){MaSP = "SP006", TenSP = "B", DonGiaMuaVao = 100000, MaLoaiSP = "LSP001"},
             });
 
-            LoaiSanPhamFilterVM = new EnumFilterViewModel<SanPhamModel>(
-                LocLoaiSanPhamCallBack, 
+            TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
+
+            LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
+                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
+                {
+                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
+                }, 
                 new ObservableCollection<LoaiSanPhamModel>()
                 {
                     new LoaiSanPhamModel(){TenLoaiSP = "Đá quý", MaLoaiSP = "LSP001"},
@@ -146,15 +151,9 @@ namespace UIProject.ViewModels.PageViewModels
                     new LoaiSanPhamModel(){TenLoaiSP = "Vàng bạc", MaLoaiSP = "LSP003"},
                 });
 
-            var KhongLoc = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
-            LoaiSanPhamFilterVM.Collection.Add(KhongLoc);
+            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
 
-            TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
-            TimKiemSanPhamVM.AdditionFilters.Add
-                (
-                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
-                );
-
+            TimKiemSanPhamVM.AdditionFilters = LocSanPhamVM.FilterCallBacks;
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
         }
 
@@ -169,18 +168,21 @@ namespace UIProject.ViewModels.PageViewModels
                 new KhachHangModel(){MaKH = "KH005", TenKH = "Nguyễn Duy Tâm", DiaChi = "abc faghz ght", CongNo = 10000000},
             });
             TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
+            TimKiemKhachHangVM.SelectedValuePath = "TenKH";
         }
 
         #region Callback cho bộ lọc tìm kiếm 
         private bool LocLoaiSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
         {
-            var loaiSanPhamDaChon = LoaiSanPhamFilterVM.Collection.SelectedItem as ItemViewModel<object>;
+            var loaiSanPhamDaChon = LocSanPhamVM.Collection.SelectedItem as ItemViewModel<object>;
             if (loaiSanPhamDaChon == null)
             {
                 return true;
             }
             var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
-            if (castLoaiSanPhamDaChon.MaLoaiSP == "LSP-1")
+            var chonTatCa = LocSanPhamVM.NonApplyFilterItem.Model as LoaiSanPhamModel;
+
+            if (chonTatCa == null || castLoaiSanPhamDaChon.MaLoaiSP == chonTatCa.MaLoaiSP)
                 return true;
             return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
         }
