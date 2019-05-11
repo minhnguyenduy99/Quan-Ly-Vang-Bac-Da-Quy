@@ -19,11 +19,12 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// A view model provides functionalities for data searching and item selection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SearchTextBoxViewModel<T> : BaseViewModel, IAsyncCurrentSelectedItem
+    public class SearchTextBoxViewModel<T> : BaseViewModel, IAsyncCurrentSelectedItem, IConditionalDisplayCollection<ItemViewModel<T>>
     {
         #region Private Fields
         private ItemViewModel<T> selectedItem;
         private ItemCollectionViewModel<T> itemsSource;
+        private bool isTextChangedFromUI = true;
         #endregion
 
         /// <summary>
@@ -40,6 +41,8 @@ namespace UIProject.ViewModels.LayoutViewModels
             private set
             {
                 SetProperty(value);
+                if (!DisplayItems.Equals(value))
+                    OnDisplayItemsChanged(new DisplayItemsChangedEventArgs<T>(value));
                 if (value.Count() == 0)
                     OnDisplayItemsEmpty();
             }
@@ -75,6 +78,15 @@ namespace UIProject.ViewModels.LayoutViewModels
         public List<Func<ItemViewModel<T>, bool>> AdditionFilters { get; set; }
 
         /// <summary>
+        /// All filters applied to the searching
+        /// </summary>
+        public IEnumerable<Func<ItemViewModel<T>, bool>> Filters
+        {
+            get => GetAllFilters();
+            set { }
+        }
+
+        /// <summary>
         /// The text for searching
         /// </summary>
         public string Text
@@ -87,11 +99,22 @@ namespace UIProject.ViewModels.LayoutViewModels
             {
                 string oldValue = GetPropertyValue<string>();
                 SetProperty(value);
-                if (string.IsNullOrEmpty(value))
-                    selectedItem = null;
-                OnTextPropertyChanged(oldValue, value);
+                if (isTextChangedFromUI)
+                    OnTextPropertyChanged(oldValue, value);
+                else
+                {
+                    isTextChangedFromUI = true;
+                }
             }
         }
+
+        public string SelectedValuePath
+        {
+            get => GetPropertyValue<string>();
+            set => SetProperty(value);
+        }
+
+        
 
         /// <summary>
         /// The text notified the state of empty displayed items
@@ -128,8 +151,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             if (!string.IsNullOrEmpty(newValue))
             {
-                var filters = GetAllFilters();
-                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(filters));                  
+                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(Filters.ToArray()));                  
             }
             else
             {
@@ -165,9 +187,21 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         protected virtual void OnSelectedItem(SelectedItemChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Text))
-                Text = string.Empty;
+            var castSelectedItem = SelectedItem as ItemViewModel<T>;
+            if (castSelectedItem != null)
+            {
+                isTextChangedFromUI = false;
+                if (string.IsNullOrEmpty(SelectedValuePath))
+                    Text = string.Empty;
+                else
+                    Text = ObservableObject.GetPropValue(castSelectedItem.Model, SelectedValuePath).ToString();             
+            }
             SelectedItemChanged?.Invoke(this, e);
+        }
+
+        protected virtual void OnDisplayItemsChanged(DisplayItemsChangedEventArgs<T> e)
+        {
+            DisplayItemsChanged?.Invoke(this, e);
         }
         #endregion
 
@@ -175,6 +209,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         public event EventHandler<TextValueChangedEventArgs> TextChanged;
         public event EventHandler DisplayItemsEmpty;
         public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
+        public event EventHandler<DisplayItemsChangedEventArgs<T>> DisplayItemsChanged;
         #endregion
     }
 

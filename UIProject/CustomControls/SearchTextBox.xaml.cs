@@ -196,6 +196,15 @@ namespace UIProject.CustomControls
         }
 
 
+        /// <summary>
+        /// The selected value to display in the <see cref="SearchTextBox"/>
+        /// </summary>
+        public object SelectedValue
+        {
+            get => GetValue(SelectedValueProperty);
+            set => SetValue(SelectedValueProperty, value);
+        }
+
         #region Dependency Properties
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
             "IconSource", 
@@ -268,6 +277,12 @@ namespace UIProject.CustomControls
             "TextBoxStyle",
             typeof(Style),
             typeof(SearchTextBox));
+
+        public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
+            "SelectedValue",
+            typeof(object),
+            typeof(SearchTextBox));
+
 
         #endregion
 

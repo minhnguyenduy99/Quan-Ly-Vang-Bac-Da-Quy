@@ -72,9 +72,5 @@ namespace UIProject.ViewModels
         {
             base.OnExitWindow(window);
         }
-
-
-
-
     }
 }

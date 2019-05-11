@@ -41,6 +41,7 @@
                                           IconHeight="20"
                                           Margin="10"
                                           SearchBoxItemTemplate="{StaticResource ProductItemSearchTemplate}"
+                                          SelectedValue="{Binding TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Hint="Nhập tên sản phẩm" 
                                           SearchBoxItemSource="{Binding DisplayItems}"
                                           Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -57,7 +58,7 @@
                         Margin="30 10 10 10">
                 <ComboBox x:Name="PART_LoaiSanPham"
                           FontSize="15"
-                          ItemsSource="{Binding Collection.Items}"
+                          ItemsSource="{Binding Collection.Items, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           DisplayMemberPath="Model.TenLoaiSP"
                           materialDesign:HintAssist.Hint="Loại sản phẩm">
@@ -255,6 +256,7 @@
                                                             ListBoxMaxHeight="150"
                                                             SearchBoxItemTemplate="{StaticResource SearchKhachHangTemplate}"
                                                             SearchBoxItemSource="{Binding DisplayItems}"
+                                                            SelectedValue="{Binding TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                             SearchListBoxBackground="WhiteSmoke"
                                                             Margin="10"
                                                             FontWeight="Normal"

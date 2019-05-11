@@ -96,8 +96,9 @@
     <Compile Include="CustomControls\SearchTextBox.xaml.cs">
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataValidation\DateTImeValidation.cs" />
+    <Compile Include="DataValidation\DateTimeValidation.cs" />
     <Compile Include="DataValidation\PositiveNumberValidation.cs" />
+    <Compile Include="Events\DisplayItemsChangedEventArgs.cs" />
     <Compile Include="Events\FilterEventArgs.cs" />
     <Compile Include="Events\ItemAddedEventArgs.cs" />
     <Compile Include="Events\ItemEventArgs.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FunctionInterfaces\IConditionalDisplayCollection.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISubmitViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\AddingWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IAsyncCurrentSelectedItem.cs" />
@@ -157,6 +159,8 @@
     <Compile Include="ViewModels\LayoutViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\PaymentTabItemVM.cs" />
     <Compile Include="ViewModels\LayoutViewModels\SearchTextBoxViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\ValueFilterViewModel.cs" />
+    <Compile Include="ViewModels\LocDonHangWindowVM.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\BanHangPageVM.cs" />

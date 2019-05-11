@@ -39,7 +39,7 @@ namespace UIProject.Pages
             //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
             ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
             ViewModel.ThucThiThemKhachHang += ViewModel_ThucThiThemKhachHang;
-            PART_LoaiSanPham.DataContext = ViewModel.LoaiSanPhamFilterVM;
+            PART_LoaiSanPham.DataContext = ViewModel.LocSanPhamVM;
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 

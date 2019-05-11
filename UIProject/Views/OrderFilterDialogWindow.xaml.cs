@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.Views
@@ -21,16 +23,23 @@ namespace UIProject.Views
     /// </summary>
     public partial class OrderFilterDialogWindow : Window, IWindow
     {
-        public OrderFilterDialogWindow()
+        public LocDonHangWindowVM ViewModel { get; set; }
+        public OrderFilterDialogWindow(LocDonHangWindowVM viewModel)
         {
             InitializeComponent();
-            this.DataContext = new DialogWindowViewModel();
+            DataContext = ViewModel = viewModel;
+            PART_SearchTextBox.DataContext = viewModel.TimKiemKhachHangVM;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             this.Close();
+        }
+
+        private void SearchTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }

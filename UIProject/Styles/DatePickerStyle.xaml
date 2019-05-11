@@ -6,7 +6,7 @@
                     xmlns:validations="clr-namespace:UIProject.DataValidation">
     <converters:InnerControlHeightConverter x:Key="InnerControlHeightConverter"/>
     <converters:ToShortDateConverter x:Key="ToShortDateConverter"/>
-    <validations:DateTImeValidation x:Key="DateTimeValidation"/>
+    <validations:DateTimeValidation x:Key="DateTimeValidation"/>
     <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectDatePickerStyle">
         <Setter Property="Background" Value="WhiteSmoke"/>
         <Setter Property="Padding" Value="7"/>
@@ -27,21 +27,22 @@
                                      Background="{TemplateBinding Background}"
                                      materialDesign:TextFieldAssist.DecorationVisibility="Collapsed">
                                 <TextBox.Text>
-                                    <Binding Path="SelectedDate" UpdateSourceTrigger="LostFocus" Mode="TwoWay" RelativeSource="{RelativeSource Mode=FindAncestorm, AncestorType={x:Type DatePicker}}" Converter="{StaticResource ToShortDateConverter}">
-                                        <Binding.ValidationRules>
-                                            <validations:DateTImeValidation ValidationStep="RawProposedValue"/>
-                                        </Binding.ValidationRules>
+                                    <Binding Path="SelectedDate"
+                                             UpdateSourceTrigger="PropertyChanged"
+                                             Mode="TwoWay" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}" 
+                                             Converter="{StaticResource ToShortDateConverter}">
                                     </Binding>
                                 </TextBox.Text>
                                 <Validation.ErrorTemplate>
                                     <ControlTemplate>
                                         <Border BorderBrush="Red"
                                                 BorderThickness="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                                            <DockPanel>
+                                                <Label DockPanel.Dock="Top"
+                                                       Style="{StaticResource SmallDefinedLabelStyle}"
                                                        Content="{Binding [0].ErrorContent}"/>
-                                                <AdornedElementPlaceholder/>
-                                            </StackPanel>
+                                                <AdornedElementPlaceholder DockPanel.Dock="Bottom"/>
+                                            </DockPanel>
                                         </Border>
                                     </ControlTemplate>
                                 </Validation.ErrorTemplate>
@@ -73,6 +74,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="Error"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectNoTextBoxStyleDatePickerStyle">
@@ -94,7 +100,10 @@
                                      Height="auto"
                                      Style="{StaticResource UIProjectNormalTextBoxStyle}"
                                      Background="{TemplateBinding Background}"
-                                     Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}, Converter={StaticResource ToShortDateConverter}}">
+                                     Text="{Binding Path=SelectedDate, 
+                                                    ValidatesOnDataErrors=True,
+                                                    RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}, 
+                                                    Converter={StaticResource ToShortDateConverter}}">
                             </TextBox>
                             <Button x:Name="PART_Button"
                                     Height="auto"
@@ -125,5 +134,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Mode=Self}}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

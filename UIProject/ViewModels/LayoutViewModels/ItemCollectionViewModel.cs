@@ -12,7 +12,7 @@ namespace UIProject.ViewModels.LayoutViewModels
 {
     public class ItemCollectionViewModel<Model> : BaseViewModel
     {
-        private ObservableCollection<ItemViewModel<Model>> items;
+        protected ObservableCollection<ItemViewModel<Model>> items;
 
         public ObservableCollection<ItemViewModel<Model>> Items
         {

@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace UIProject.DataValidation
 {
-    public class DateTImeValidation : ValidationRule
+    public class DateTimeValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
