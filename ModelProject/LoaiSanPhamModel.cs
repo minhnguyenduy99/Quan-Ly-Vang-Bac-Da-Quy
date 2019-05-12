@@ -14,6 +14,9 @@ namespace ModelProject
         private string maDVT;
         private double phanTramLoiNhuan;
 
+        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
+        private bool isUpdated = false;
+
         public string MaLoaiSP
         {
             get => maLoaiSP;

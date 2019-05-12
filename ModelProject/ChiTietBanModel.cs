@@ -25,6 +25,9 @@ namespace ModelProject
         
         private long thue;
 
+        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
+        private bool isUpdated = false;
+
         //Constructor tự động tạo 1 chi tiết bán từ object sản phẩm và object hoá đơn.
         public ChiTietBanModel(PhieuBanModel _hoaDon, SanPhamModel _sanPham, int _soLuong)
         {
@@ -42,6 +45,8 @@ namespace ModelProject
             donViTinh = dvtModel.TenDVT;
         }
 
+
+
         public string MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
@@ -52,11 +57,35 @@ namespace ModelProject
             get => maSP;
             set => SetProperty(ref maSP, value);
         }
+
+        public double PhanTramLoiNhuan
+        {
+            get
+            {
+                if (phanTramLoiNhuan != null && phanTramLoiNhuan >= 0)
+                    return phanTramLoiNhuan;
+                else if (maSP != null && maSP.Length > 0)
+                {
+                    SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
+                    LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
+                    phanTramLoiNhuan = productType.PhanTramLoiNhuan;
+                    return phanTramLoiNhuan;
+                }
+                else
+                {
+                    Console.WriteLine("Please set masp before retrieve the phanTramLoiNhuan value !");
+                    return -1;
+                }
+            }
+        }
+
         public string TenSP
         {
             get
             {
-                if (maSP != null && maSP.Length > 0)
+                if (tenSP != null && tenSP.Length > 0)
+                    return tenSP;
+                else if (maSP != null && maSP.Length > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     tenSP = product.TenSP;
@@ -69,11 +98,14 @@ namespace ModelProject
                 }
             }
         }
+
         public string LoaiSP
         {
             get
             {
-                if (maSP != null && maSP.Length > 0)
+                if (loaiSP != null && loaiSP.Length > 0)
+                    return loaiSP;
+                else if (maSP != null && maSP.Length > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
@@ -91,7 +123,9 @@ namespace ModelProject
         {
             get
             {
-                if (maSP != null && maSP.Length > 0)
+                if (donViTinh != null && donViTinh.Length > 0)
+                    return donViTinh;
+                else if (maSP != null && maSP.Length > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
@@ -110,7 +144,8 @@ namespace ModelProject
         {
             get
             {
-                donGiaBanRa = donGiaMuaVao + (donGiaMuaVao * phanTramLoiNhuan);
+                if (donGiaBanRa >= 0)
+                donGiaBanRa = donGiaMuaVao + (donGiaMuaVao * PhanTramLoiNhuan);
                 return donGiaBanRa;
             }
         }
@@ -147,7 +182,6 @@ namespace ModelProject
 
         public override bool Submit()
         {
-
             return false;
         }
     }
