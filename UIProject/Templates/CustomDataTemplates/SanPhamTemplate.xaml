@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
-                    xmlns:conveters="clr-namespace:UIProject.Converters">
+                    xmlns:conveters="clr-namespace:UIProject.Converters"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <conveters:LongStringToThreeDotConverter x:Key="stringConverter"
                                              MaxLength="15"/>
     <DataTemplate x:Key="ProductItemDataTemplate">
@@ -87,5 +88,71 @@
                 </Grid>
             </Grid>
         </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DanhSachSanPhamTemplate">
+        <DataGrid Grid.Row="0"
+                  CanUserSortColumns="True"
+                  ItemsSource="{Binding}"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  AutoGenerateColumns="False"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="50"
+                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
+                <DataGridTextColumn Width="70"
+                                    Binding="{Binding CustomerID}"
+                                    CanUserSort="False"
+                                    IsReadOnly="True"
+                                    Header="Mã SP"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    Binding="{Binding Name}"
+                                    Header="Tên sản phẩm"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="120"
+                                    Binding="{Binding Gender}"
+                                    Header="Loại sản phẩm"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="120"
+                                    Binding="{Binding Gender}"
+                                    Header="Nhà cung cấp"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Area}"
+                                    Header="Số lượng"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTemplateColumn Width="50"
+                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
+                                    Height="30"
+                                    Width="30"
+                                    ToolTip="Xóa sản phẩm khỏi đơn hàng">
+                                <materialDesign:PackIcon Kind="MoreCircleOutline"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </DataTemplate>
 </ResourceDictionary>

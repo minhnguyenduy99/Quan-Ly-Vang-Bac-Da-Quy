@@ -48,6 +48,8 @@ namespace UIProject.Converters
                 return new NhapHangPage();
             if (pageVM is NhaCungCapPageVM)
                 return new DoiTacPage();
+            if (pageVM is SanPhamPageVM)
+                return new SanPhamPage();
             return null;
         }
     }

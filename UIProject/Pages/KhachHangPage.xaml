@@ -63,12 +63,123 @@
                                               IconHeight="25"
                                               Width="500"/>
             </StackPanel>
-            <ContentControl Grid.Row="1" Grid.ColumnSpan="2"
-                            x:Name="PART_CustomerList"
-                            VerticalAlignment="Stretch"
-                            ContentTemplate="{StaticResource DanhSachKhachHangTemplate}">
-                
-            </ContentControl>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="350"/>
+                </Grid.ColumnDefinitions>
+                <ContentControl Grid.Row="0"
+                                x:Name="PART_CustomerList"
+                                VerticalAlignment="Stretch"
+                                ContentTemplate="{StaticResource DanhSachKhachHangTemplate}">
+                </ContentControl>
+                <Border Grid.Column="1"
+                        Margin="10 0 0 0"
+                        Padding="10"
+                        Background="{StaticResource MaterialDesignPaper}">
+                    <DockPanel 
+                               VerticalAlignment="Top">
+                        <DockPanel.Resources>
+                            <Style TargetType="Label" BasedOn="{StaticResource MediumLabelStyle}" x:Key="ValueLabelStyle">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="15 10 10 10"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Style>
+
+                        </DockPanel.Resources>
+                        
+                        <StackPanel DockPanel.Dock="Bottom">
+                            <Label Content="THÔNG TIN KHÁCH HÀNG"
+                                   Margin="0"
+                                   FontWeight="Bold"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Content="Giới tính"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="Giới tính"/>
+                            </Grid>
+                            <Separator Margin="0 15 10 15"
+                                       Background="LightGray"/>
+                            <Label Content="THÔNG TIN LIÊN HỆ"
+                                   FontWeight="Bold"
+                                   Margin="0"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Content="SĐT"/>
+                                <Label Grid.Row="1" Grid.Column="0"
+                                       Content="Địa chỉ"/>
+                                <Label Grid.Row="2" Grid.Column="0"
+                                       Content="Khu vực"/>
+                                <Label Grid.Row="3" Grid.Column="0"
+                                       Content="Email"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="0346146128"/>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="abc xyz hgt"/>
+                                <Label Grid.Row="2" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="Quận Thủ Đức, TP HCM"/>
+                                <Label Grid.Row="3" Grid.Column="1"
+                                   Style="{StaticResource ValueLabelStyle}"
+                                   Content="vidu@gmail.com"/>
+                            </Grid>
+                        </StackPanel>
+                        <Separator DockPanel.Dock="Bottom"
+                                   Margin="5 10 10 15"
+                                   Background="LightGray"/>
+                        <Image DockPanel.Dock="Left"
+                               Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Source="/Images/software_icon.png"
+                               Margin="10 0 20 10"
+                               Width="70"
+                               Height="70"/>
+                        <StackPanel DockPanel.Dock="Right">
+                            <TextBlock DockPanel.Dock="Right"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Stretch"
+                                       FontSize="20"
+                                       TextWrapping="Wrap"
+                                       Text="TeamWorkFirst"/>
+                            <Label Content="KH001"
+                                   Margin="0 10"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            
         </Grid>
 
     </Grid>

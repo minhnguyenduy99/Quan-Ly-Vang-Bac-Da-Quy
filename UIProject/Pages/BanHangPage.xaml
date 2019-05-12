@@ -24,15 +24,6 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     Panel.ZIndex="99">
-            <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
-                    Margin="15"
-                    Padding="0"
-                    Background="Transparent">
-                <Image 
-                       VerticalAlignment="Stretch"
-                       Stretch="Uniform"
-                       Source="/Images/software_icon.png"/>
-            </Button>
             <customControls:SearchTextBox x:Name="PART_ProductSearch"
                                           Style="{StaticResource CustomSearchTextBoxStyle}"
                                           Width="300"
@@ -231,8 +222,8 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <TabControl HorizontalAlignment="Stretch"
-                            Style="{StaticResource CustomTabControlStyle}"
-                            Margin="5 5 5 10">
+                        Style="{StaticResource CustomTabControlStyle}"
+                        Margin="5 5 5 10">
                 <TabItem x:Name="TabKhachHang"
                              Header="Khách hàng">
                     <Grid>
@@ -445,8 +436,9 @@
                                        Content="Tiền thối lại"
                                        VerticalAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Margin="0 10 0 0"
+                                       Margin="0 10 10 0"
                                        VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
                                        Style="{StaticResource SmallDefinedLabelStyle}"
                                        Content="{Binding SoTienThoiLai,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>

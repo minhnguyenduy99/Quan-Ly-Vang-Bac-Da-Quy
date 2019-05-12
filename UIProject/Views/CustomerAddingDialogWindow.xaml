@@ -132,9 +132,13 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
-                            Content="Lưu"
+                            Margin="0 20"
+                            Style="{StaticResource UIProjectAcceptButtonStyle}"
+                            Content="Lưu"                          
                             Command="{Binding SubmitCommand}"/>
                     <Button Grid.Column="1"
+                            Margin="0 20"
+                            Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"/>
                 </Grid>

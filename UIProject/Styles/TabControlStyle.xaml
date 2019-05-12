@@ -20,7 +20,7 @@
 
     <Style TargetType="TabControl" x:Key="CustomTabControlStyle">
         <Setter Property="ItemContainerStyle" Value="{DynamicResource CustomTabItemStyle}"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 </ResourceDictionary>

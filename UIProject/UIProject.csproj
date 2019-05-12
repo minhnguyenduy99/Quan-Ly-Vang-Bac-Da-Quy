@@ -124,6 +124,9 @@
     <Compile Include="Pages\NhapHangPage.xaml.cs">
       <DependentUpon>NhapHangPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SanPhamPage.xaml.cs">
+      <DependentUpon>SanPhamPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
     <Compile Include="ServiceProviders\AsynchorousPerformHelper.cs" />
     <Compile Include="ServiceProviders\DialogControlExtension.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="ViewModels\PageViewModels\KhachHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\NhaCungCapPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\NhapHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\SanPhamPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\TongQuanPageVM.cs" />
     <Compile Include="ServiceProviders\IWindow.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
@@ -187,6 +191,9 @@
     <Compile Include="Views\OrderFilterDialogWindow.xaml.cs">
       <DependentUpon>OrderFilterDialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductFilterDialogWindow.xaml.cs">
+      <DependentUpon>ProductFilterDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProviderAddingDialogWindow.xaml.cs">
       <DependentUpon>ProviderAddingDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -202,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Colors\Purple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Colors\White.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,6 +252,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\SanPhamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TongQuanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ExpanderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ImageStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderFilterDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductFilterDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

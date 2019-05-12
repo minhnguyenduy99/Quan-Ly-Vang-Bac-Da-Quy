@@ -125,7 +125,7 @@ namespace UIProject.ViewModels
             TabPageVM.Add(ListTabNames[2], new DanhSachDonHangPageVM());
             TabPageVM.Add(ListTabNames[3], new KhachHangPageVM());
             TabPageVM.Add(ListTabNames[4], new NhaCungCapPageVM());
-            TabPageVM.Add(ListTabNames[5], null);
+            TabPageVM.Add(ListTabNames[5], new SanPhamPageVM());
             TabPageVM.Add(ListTabNames[6], null);
             TabPageVM.Add(ListTabNames[7], new NhapHangPageVM());
 

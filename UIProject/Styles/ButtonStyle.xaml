@@ -60,10 +60,12 @@
 
     <Style TargetType="{x:Type Button}" x:Key="UIProjectLightIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
         <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
+        <Setter Property="Padding" Value="8"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="UIProjectDarkIconButtonStyle" BasedOn="{StaticResource UIProjectIconButtonStyle}">
         <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+        <Setter Property="Padding" Value="8"/>
     </Style>
     
     <!-- This style is used for any control that wants to have the clickable behavior -->
@@ -84,5 +86,17 @@
     <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MaterialDesignRadioButton}">
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}" x:Key="UIProjectAcceptButtonStyle">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectAcceptButtonStyle}" x:Key="UIProjectCancelButtonStyle">
+        <Setter Property="Background" Value="#ED2939"/>
     </Style>
 </ResourceDictionary>
