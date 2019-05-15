@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UIProject.ServiceProviders;
 
-namespace UIProject.Pages
+namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for SanPhamPage.xaml
+    /// Interaction logic for ServiceSearchingDialogWindow.xaml
     /// </summary>
-    public partial class SanPhamPage : Page
+    public partial class ServiceSearchingDialogWindow : Window
     {
-        public SanPhamPage()
+        public ServiceSearchingDialogWindow()
         {
             InitializeComponent();
-            this.Loaded += SanPhamPage_Loaded;
-        }
-
-        private async void SanPhamPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
     }
 }

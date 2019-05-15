@@ -7,10 +7,16 @@
     <converters:InnerControlHeightConverter x:Key="InnerControlHeightConverter"/>
     <converters:ToShortDateConverter x:Key="ToShortDateConverter"/>
     <validations:DateTimeValidation x:Key="DateTimeValidation"/>
+    
+    <Style TargetType="{x:Type Calendar}" BasedOn="{StaticResource MaterialDesignDatePickerCalendarPortrait}" x:Key="VietNamCalendar">
+        <Setter Property="Language" Value="vi-VN"/>
+    </Style>
+
     <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectDatePickerStyle">
         <Setter Property="Background" Value="WhiteSmoke"/>
         <Setter Property="Padding" Value="7"/>
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="CalendarStyle" Value="{StaticResource VietNamCalendar}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -65,10 +71,10 @@
                             </Button>
                             <Popup x:Name="PART_Popup"
                                    AllowsTransparency="True"
-                                   Placement="Bottom"
+                                   Placement="Center"
                                    PlacementTarget="{Binding ElementName=PART_TextBox}"
                                    StaysOpen="False"
-                                   />
+                                   PopupAnimation="Fade"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -80,7 +86,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    
     <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectNoTextBoxStyleDatePickerStyle">
         <Setter Property="Background" Value="LightGray"/>
         <Setter Property="FontSize" Value="13"/>
@@ -140,4 +146,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
 </ResourceDictionary>

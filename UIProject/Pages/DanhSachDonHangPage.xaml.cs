@@ -38,7 +38,7 @@ namespace UIProject.Pages
 
         private async void DanhSachDonHangPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await this.FadeIn(0.5f, 0.5f);
+            await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)

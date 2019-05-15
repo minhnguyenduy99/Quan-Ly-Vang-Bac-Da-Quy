@@ -66,6 +66,7 @@
                     <Separator/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <Separator/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
                     <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>

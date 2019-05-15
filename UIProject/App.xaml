@@ -50,6 +50,8 @@
                         <ResourceDictionary Source="./Styles/ButtonStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/DatePickerStyle.xaml"/>
                         <ResourceDictionary Source="./Styles/ImageStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/BorderStyle.xaml"/>
+                        <ResourceDictionary Source="./Styles/MaterialDesignCardStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

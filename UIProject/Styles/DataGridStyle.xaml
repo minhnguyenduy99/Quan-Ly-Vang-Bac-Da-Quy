@@ -93,6 +93,10 @@
         <Setter Property="HeaderStyle" Value="{StaticResource RightDataGridHeader}"/>
         <Setter Property="CellStyle" Value="{StaticResource RightDataGridCell}"/>
     </Style>
+
+    <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+        <Setter Property="Background" Value="White"/>
+    </Style>
     
     
 

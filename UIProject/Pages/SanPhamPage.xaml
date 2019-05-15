@@ -66,17 +66,17 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <ContentControl Grid.Column="0"
-                                x:Name="PART_CustomerList"
-                                VerticalAlignment="Stretch"
-                                ContentTemplate="{StaticResource DanhSachSanPhamTemplate}">
-                </ContentControl>
-                <Border Grid.Column="1"
-                        Margin="10 0 0 0"
-                        Padding="10"
-                        Background="{StaticResource MaterialDesignPaper}">
-                    <DockPanel 
-                               VerticalAlignment="Top">
+                <materialDesign:Card Grid.Column="0"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     x:Name="PART_CustomerList"
+                                     VerticalAlignment="Stretch"
+                                     ContentTemplate="{StaticResource DanhSachSanPhamTemplate}">
+                </materialDesign:Card>
+                <materialDesign:Card Grid.Column="1"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     Margin="10 0 0 0"
+                                     Padding="10">
+                    <DockPanel VerticalAlignment="Top">
                         <DockPanel.Resources>
                             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}" x:Key="ValueLabelStyle">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -144,7 +144,7 @@
                                    TextWrapping="Wrap"
                                    Text="Nhẫn vàng quý hiếm"/>
                     </DockPanel>
-                </Border>
+                </materialDesign:Card>
                 
             </Grid>
 

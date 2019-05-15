@@ -68,17 +68,16 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="350"/>
                 </Grid.ColumnDefinitions>
-                <ContentControl Grid.Row="0"
-                                x:Name="PART_CustomerList"
-                                VerticalAlignment="Stretch"
-                                ContentTemplate="{StaticResource DanhSachKhachHangTemplate}">
-                </ContentControl>
-                <Border Grid.Column="1"
-                        Margin="10 0 0 0"
-                        Padding="10"
-                        Background="{StaticResource MaterialDesignPaper}">
-                    <DockPanel 
-                               VerticalAlignment="Top">
+                <materialDesign:Card Grid.Row="0"
+                                     x:Name="PART_CustomerList"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     ContentTemplate="{StaticResource DanhSachKhachHangTemplate}">
+                </materialDesign:Card>
+                <materialDesign:Card Grid.Column="1"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     Margin="10 0 0 0"
+                                     Padding="10">
+                    <DockPanel VerticalAlignment="Top">
                         <DockPanel.Resources>
                             <Style TargetType="Label" BasedOn="{StaticResource MediumLabelStyle}" x:Key="ValueLabelStyle">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -176,7 +175,7 @@
                                    Margin="0 10"/>
                         </StackPanel>
                     </DockPanel>
-                </Border>
+                </materialDesign:Card>
             </Grid>
 
             

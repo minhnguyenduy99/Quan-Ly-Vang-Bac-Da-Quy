@@ -28,17 +28,11 @@ namespace UIProject.Pages
             InitializeComponent();
 
             this.Loaded += TongQuanPage_Loaded;
-            this.Unloaded += TongQuanPage_Unloaded;
-        }
-
-        private async void TongQuanPage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            await AnimationHelper.SlideAsync(this, SlideAnimationMode.LeftToRight);
         }
 
         private async void TongQuanPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await this.FadeIn(0.5f, 0.5f);
+            await this.SlideFromRightToLeftAndFadeIn(0.3f);
         }
     }
 }

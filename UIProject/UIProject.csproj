@@ -112,6 +112,9 @@
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DanhSachDichVuPage.xaml.cs">
+      <DependentUpon>DanhSachDichVuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DanhSachDonHangPage.xaml.cs">
       <DependentUpon>DanhSachDonHangPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
     </Compile>
     <Compile Include="Pages\KhachHangPage.xaml.cs">
       <DependentUpon>KhachHangPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LamDichVuPage.xaml.cs">
+      <DependentUpon>LamDichVuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\NhapHangPage.xaml.cs">
       <DependentUpon>NhapHangPage.xaml</DependentUpon>
@@ -170,6 +176,7 @@
     <Compile Include="ViewModels\PageViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\DanhSachDonHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\KhachHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\LamDichVuPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\NhaCungCapPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\NhapHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\SanPhamPageVM.cs" />
@@ -178,6 +185,9 @@
     <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="Pages\TongQuanPage.xaml.cs">
       <DependentUpon>TongQuanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddressEditDialogWindow.xaml.cs">
+      <DependentUpon>AddressEditDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerAddingDialogWindow.xaml.cs">
       <DependentUpon>CustomerAddingDialogWindow.xaml</DependentUpon>
@@ -199,6 +209,9 @@
     </Compile>
     <Compile Include="Views\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceSearchingDialogWindow.xaml.cs">
+      <DependentUpon>ServiceSearchingDialogWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
       <SubType>Designer</SubType>
@@ -236,6 +249,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DanhSachDichVuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DanhSachDonHangPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +265,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\LamDichVuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\NhapHangPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TongQuanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\BorderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +310,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MaterialDesignCardStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -317,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\CustomControlTemplates\TabItemControlTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachDichVuTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,6 +386,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddressEditDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -400,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceSearchingDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

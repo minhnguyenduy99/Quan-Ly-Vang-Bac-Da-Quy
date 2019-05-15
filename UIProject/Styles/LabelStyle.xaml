@@ -4,7 +4,7 @@
     <Style TargetType="Label" x:Key="BaseLabelStyle">
         <Setter Property="FontFamily" Value="Helvetica"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="{Binding}"/>
     </Style>
@@ -13,8 +13,6 @@
     <Style TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}" x:Key="DefinedLabelStyle">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="10 0 0 0"/>
-        <Setter Property="Foreground" Value="Purple"/>
     </Style>
 
     <!-- Label for header title -->

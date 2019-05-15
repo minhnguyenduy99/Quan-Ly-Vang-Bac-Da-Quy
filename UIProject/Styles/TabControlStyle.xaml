@@ -6,7 +6,7 @@
 
     <Style TargetType="TabItem" x:Key="CustomTabItemStyle">
         <Setter Property="Template" Value="{DynamicResource TabItemControlTemplate}"/>
-        <Setter Property="Background" Value="{Binding Background}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="15"/>
@@ -21,6 +21,7 @@
     <Style TargetType="TabControl" x:Key="CustomTabControlStyle">
         <Setter Property="ItemContainerStyle" Value="{DynamicResource CustomTabItemStyle}"/>
         <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 </ResourceDictionary>

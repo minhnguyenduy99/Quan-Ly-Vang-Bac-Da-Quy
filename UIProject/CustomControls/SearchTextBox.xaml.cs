@@ -283,7 +283,6 @@ namespace UIProject.CustomControls
             typeof(object),
             typeof(SearchTextBox));
 
-
         #endregion
 
     }

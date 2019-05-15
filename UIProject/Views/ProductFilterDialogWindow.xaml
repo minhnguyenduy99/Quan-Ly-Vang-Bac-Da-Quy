@@ -26,6 +26,7 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
                        Style="{StaticResource LargeLabelStyle}"
                        Content="Lọc sản phẩm"/>
                 <Separator Grid.Row="1" Grid.ColumnSpan="2"
@@ -72,12 +73,6 @@
                            Content="Loại sản phẩm"
                            Margin="10 10 10 5"/>
                     <ComboBox Margin="10 0 10 5"/>
-                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
-                           Content="Đến"
-                           Margin="10 10 10 5"/>
-                    <DatePicker Style="{StaticResource UIProjectNoTextBoxStyleDatePickerStyle}"
-                                Background="White"
-                                Margin="10 0 10 5"/>
                 </StackPanel>
                 <Grid Grid.Row="3" Grid.ColumnSpan="2"
                       Panel.ZIndex="1">

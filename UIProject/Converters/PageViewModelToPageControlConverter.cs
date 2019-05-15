@@ -40,6 +40,8 @@ namespace UIProject.Converters
                 return new TongQuanPage() { DataContext = pageVM };
             if (pageVM is BanHangPageVM)
                 return new BanHangPage();
+            if (pageVM is LamDichVuPageVM)
+                return new LamDichVuPage();
             if (pageVM is DanhSachDonHangPageVM)
                 return new DanhSachDonHangPage();
             if (pageVM is KhachHangPageVM)
@@ -50,6 +52,7 @@ namespace UIProject.Converters
                 return new DoiTacPage();
             if (pageVM is SanPhamPageVM)
                 return new SanPhamPage();
+
             return null;
         }
     }
