@@ -29,6 +29,13 @@ namespace ModelProject
             }
         }
 
+        public static void UpdateSanPham(SanPhamModel sanPham)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update SanPham set (TENSP,MALOAISP,DONGIAMUAVAO) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+            }
+        }
   
 
         //Chi tiet ban
@@ -47,6 +54,15 @@ namespace ModelProject
                 cnn.Execute("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue", ctb);
             }
         }
+
+        public static void UpdateChiTietBan(ChiTietBanModel ctb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update chitietban set (SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue", ctb);
+            }
+        }
+
         //Chi tiet dich vu
         public static List<ChiTietDichVuModel> LoadChiTietDichVu()
         {
@@ -61,6 +77,14 @@ namespace ModelProject
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang ", ctdv);
+            }
+        }
+
+        public static void UpdateChiTietDichVu(ChiTietDichVuModel ctdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update ChiTietDichVu set (CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang ", ctdv);
             }
         }
 
@@ -81,6 +105,15 @@ namespace ModelProject
                 cnn.Execute("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia) ", ctm);
             }
         }
+
+        public static void UpdateChiTietMua(ChiTietMuaModel ctm)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update ChiTietMua set (SOLUONG,DONGIA) values (@SoLuong,@DonGia) ", ctm);
+            }
+        }
+
         // Don vi tinh
 
         public static List<DonViTinhModel> LoadDonViTinh()
@@ -98,6 +131,14 @@ namespace ModelProject
                 cnn.Execute("insert into DonViTinh(MADVT,TENDVT) values (@MaDVT,@TenDVT) ", dvt);
             }
         }
+        public static void UpdateDonViTinh(DonViTinhModel dvt)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update DonViTinh set (TENDVT) values (@TenDVT) ", dvt);
+            }
+        }
+
         // Loai dich vu 
         public static List<LoaiDichVuModel> LoadLoaiDichVu()
         {
@@ -112,6 +153,14 @@ namespace ModelProject
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into LoaiDichVu(MALOAIDV,TENLOAIDV,DONGIADV) values (@MaLoaiDV,@TenLoaiDV,@DonGiaDV) ", loaiDV);
+            }
+        }
+
+        public static void UpdateLoaiDichVu(LoaiDichVuModel loaiDV)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update LoaiDichVu set (TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV) ", loaiDV);
             }
         }
         // Loai san pham
@@ -131,6 +180,14 @@ namespace ModelProject
                 cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan) ", loaiSP);
             }
         }
+
+        public static void UpdateLoaiSanPham(LoaiSanPhamModel loaiSP)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update LoaiSanPham set (MADVT,PHANTRAMLOINHUAN) values (@MaDVT,@PhanTramLoiNhuan) ", loaiSP);
+            }
+        }
         // Nha cung cap
 
         public static List<PhieuBanModel> LoadPhieuBan()
@@ -148,6 +205,15 @@ namespace ModelProject
                 cnn.Execute("insert into PhieuBan(MAPHIEU,SOPHIEU,NGAYLAP,MAKH) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH) ", phieuBan);
             }
         }
+
+        public static void UpdatePhieuBan(PhieuBanModel phieuBan)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update PhieuBan set (SOPHIEU,NGAYLAP,MAKH) values (@SoPhieu,@NgayLap,@MaKH) ", phieuBan);
+            }
+        }
+
         // Phieu Mua
         public static List<PhieuMuaModel> LoadPhieuMua()
         {
@@ -165,6 +231,14 @@ namespace ModelProject
                 cnn.Execute("insert into PhieuMua(MAPHIEU,SOPHIEU,NGAYLAP,MANCC) values (@MaPhieu,@SoPhieu,@NgayLap,@MaNCC) ", PhieuMua);
             }
         }
+        public static void UpdatePhieuMua(PhieuMuaModel PhieuMua)
+
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update PhieuMua set (SOPHIEU,NGAYLAP,MANCC) values (@SoPhieu,@NgayLap,@MaNCC) ", PhieuMua);
+            }
+        }
         //Phieu dich vu
         public static List<PhieuDichVuModel> LoadPhieuDichVu()
         {
@@ -179,6 +253,14 @@ namespace ModelProject
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into PhieuDichVu(MAPHIEU,SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc) ", PhieuDichVu);
+            }
+        }
+
+        public static void UpdateLoaiPhieuDichVu(PhieuDichVuModel PhieuDichVu)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update PhieuDichVu set (SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc) ", PhieuDichVu);
             }
         }
         // Tinh trang
@@ -198,6 +280,13 @@ namespace ModelProject
             }
         }
 
+        public static void UpdateTinhTrang(TinhTrangModel TinhTrang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update TinhTrang set (TENTINHTRANG) values (@TenTinhTrang) ", TinhTrang);
+            }
+        }
         // khach hang 
         public static List<KhachHangModel> LoadKhachHang()
         {
@@ -215,6 +304,13 @@ namespace ModelProject
             }
         }
 
+        public static void UpdateKhachHang(KhachHangModel KhachHang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update KhachHang set (TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", KhachHang);
+            }
+        }
         // khu vuc
         public static List<KhuVucModel> LoadKhuVuc()
         {
@@ -231,7 +327,13 @@ namespace ModelProject
                 cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
             }
         }
-
+        public static void UpdateKhuVuc(KhuVucModel KhuVuc)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update KhuVuc set (TENKHUVUC) values (@TenKhuVuc) ", KhuVuc);
+            }
+        }
         //Loc theo ten (cum tu) 
         public static List<SanPhamModel> FilterSPByName(string query)
         {
