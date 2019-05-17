@@ -210,6 +210,9 @@
     <Compile Include="Views\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ServiceFilterDialogWindow.xaml.cs">
+      <DependentUpon>ServiceFilterDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ServiceSearchingDialogWindow.xaml.cs">
       <DependentUpon>ServiceSearchingDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -437,6 +440,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceFilterDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
