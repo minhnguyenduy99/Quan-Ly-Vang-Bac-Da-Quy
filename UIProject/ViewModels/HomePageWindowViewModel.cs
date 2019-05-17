@@ -30,7 +30,8 @@ namespace UIProject.ViewModels
             "Nhà cung cấp",
             "Sản phẩm",
             "Dịch vụ",
-            "Nhập hàng"
+            "Nhập hàng",
+            "Báo cáo tồn kho"
         };
         #endregion
 
@@ -117,6 +118,7 @@ namespace UIProject.ViewModels
                 CreateTabViewModel(ListTabNames[6], "SoftwareIcon", TabState.New),
                 CreateTabViewModel(ListTabNames[7], "SoftwareIcon", TabState.New),
                 CreateTabViewModel(ListTabNames[8], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[9], "SoftwareIcon", TabState.New),
             };
 
             //  Set up pages to corresponding tabs
@@ -131,6 +133,7 @@ namespace UIProject.ViewModels
             TabPageVM.Add(ListTabNames[6], new SanPhamPageVM());
             TabPageVM.Add(ListTabNames[7], null);
             TabPageVM.Add(ListTabNames[8], new NhapHangPageVM());
+            TabPageVM.Add(ListTabNames[9], new BaoCaoTonKhoPageVM());
 
             SubcribeTabChangedEvent();
         }

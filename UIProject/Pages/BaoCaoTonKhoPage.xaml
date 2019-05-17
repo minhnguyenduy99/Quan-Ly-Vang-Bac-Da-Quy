@@ -1,0 +1,158 @@
+﻿<Page x:Class="UIProject.Pages.BaoCaoTonKhoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UIProject.Pages"
+      xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Title="BaoCaoTonKhoPage">
+    <Border Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Style="{StaticResource LargeLabelStyle}"
+                   Content="Báo cáo tồn kho"/>
+            <Separator Grid.Row="1"
+                       Margin="0 10"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Grid.Column="1"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     Padding="10">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type StackPanel}">
+                                <Setter Property="Margin" Value="5 10 30 10"/>
+                                <Setter Property="Width" Value="200"/>
+                                <Setter Property="Orientation" Value="Vertical"/>
+                            </Style>
+                            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                                <Setter Property="Padding" Value="0 5"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   FontWeight="Bold"
+                                   Content="Sản phẩm"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <Label Content="Loại sản phẩm"/>
+                                <ComboBox Height="35"
+                                      FontSize="15">
+                                    <ComboBoxItem Content="Vàng bạc"/>
+                                    <ComboBoxItem Content="Đá quý"/>
+                                    <ComboBoxItem Content="Vòng tay"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0">
+                                <Label Content="Nhà cung cấp"/>
+                                <customControls:SearchTextBox Style="{StaticResource UIProjectSearchTextBoxStyle}"
+                                                          Height="40"
+                                                          Background="WhiteSmoke"
+                                                          FontSize="15"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="1"
+                                Style="{StaticResource MediumLabelStyle}"
+                               FontWeight="Bold"
+                                Content="Thời gian"/>
+
+                            <StackPanel Grid.Row="1" Grid.Column="1">
+                                <Label Content="Từ"/>
+                                <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1">
+                                <Label Content="Đến"/>
+                                <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Grid.Column="2"
+                                    Style="{x:Null}"
+                                    Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+                                    <Setter Property="Margin" Value="10 5"/>
+                                    <Setter Property="Width" Value="150"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button Content="Thêm"/>
+                            <Button Content="Xóa"/>
+                            <Button Content="Sửa"/>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+                <materialDesign:Card Grid.Column="0"
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                     Padding="5">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}" x:Key="ValueLabelStyle">
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryHueLightBrush}"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                            </Style>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Content="Số lượng tồn kho"/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Content="Gía trị tồn kho"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource ValueLabelStyle}"
+                               Content="10"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Style="{StaticResource ValueLabelStyle}"
+                               Content="12,250,000"/>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+                
+            <Border Grid.Row="3"
+                    Padding="0 10">
+                <ContentControl ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}">
+                    
+                </ContentControl>
+            </Border>
+        </Grid>
+    </Border>
+</Page>

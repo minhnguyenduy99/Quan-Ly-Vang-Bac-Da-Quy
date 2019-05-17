@@ -14,6 +14,11 @@
 
     <Style TargetType="{x:Type DatePicker}" x:Key="UIProjectDatePickerStyle">
         <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="7"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="CalendarStyle" Value="{StaticResource VietNamCalendar}"/>
@@ -30,6 +35,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="PART_TextBox"
                                      Style="{StaticResource UIProjectTextBoxStyle}"
+                                     Height="{TemplateBinding Height}"
                                      Background="{TemplateBinding Background}"
                                      materialDesign:TextFieldAssist.DecorationVisibility="Collapsed">
                                 <TextBox.Text>

@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     >
     <Style TargetType="Label" x:Key="BaseLabelStyle">
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="FontFamily" Value="Helvetica"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

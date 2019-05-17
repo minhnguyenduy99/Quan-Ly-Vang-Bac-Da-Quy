@@ -94,8 +94,30 @@
     <Style x:Key="UIProjectSearchTextBoxStyle" TargetType="{x:Type customControls:SearchTextBox}" BasedOn="{StaticResource CustomSearchTextBoxStyle}">
         <Setter Property="IconVisibility" Value="Collapsed"/>
         <Setter Property="IconHeight" Value="0"/>
-        <Setter Property="TextBoxStyle" Value="{StaticResource UIProjectTextBoxStyle}"/>
         <Setter Property="IconBackground" Value="{Binding Background}"/>
+        <Setter Property="Focusable" Value="True"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="true">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                            From="White" To="#dddddd"
+                                            Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                            From="#dddddd" To="White"
+                                            Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 

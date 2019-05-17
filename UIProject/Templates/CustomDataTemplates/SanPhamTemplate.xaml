@@ -155,4 +155,76 @@
             </DataGrid.Columns>
         </DataGrid>
     </DataTemplate>
+
+    <DataTemplate x:Key="DanhSachSanPhamBaoCaoTonKhoTemplate">
+        <DataGrid 
+                  CanUserSortColumns="True"
+                  ItemsSource="{Binding}"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  AutoGenerateColumns="False"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="70"
+                                    Binding="{Binding CustomerID}"
+                                    CanUserSort="False"
+                                    IsReadOnly="True"
+                                    Header="STT"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                <DataGridTextColumn Width="70"
+                                    Binding="{Binding CustomerID}"
+                                    CanUserSort="False"
+                                    IsReadOnly="True"
+                                    Header="Mã SP"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="100"
+                                    Binding="{Binding Name}"
+                                    Header="Tồn đầu"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="120"
+                                    Binding="{Binding Gender}"
+                                    Header="SL mua vào"
+                                    ToolTipService.ToolTip="Số lượng mua vào"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="120"
+                                    Binding="{Binding Gender}"
+                                    Header="SL bán ra"
+                                    ToolTipService.ToolTip="Số lượng bán ra"
+                                    IsReadOnly="True"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="100"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Area}"
+                                    Header="Tồn cuối"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Area}"
+                                    Header="Nhà cung cấp"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Area}"
+                                    Header="Đơn vị tính"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DataTemplate>
 </ResourceDictionary>

@@ -52,6 +52,8 @@ namespace UIProject.Converters
                 return new DoiTacPage();
             if (pageVM is SanPhamPageVM)
                 return new SanPhamPage();
+            if (pageVM is BaoCaoTonKhoPageVM)
+                return new BaoCaoTonKhoPage();
 
             return null;
         }

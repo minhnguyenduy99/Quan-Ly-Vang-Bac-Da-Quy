@@ -112,6 +112,9 @@
     <Compile Include="Pages\BanHangPage.xaml.cs">
       <DependentUpon>BanHangPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BaoCaoTonKhoPage.xaml.cs">
+      <DependentUpon>BaoCaoTonKhoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DanhSachDichVuPage.xaml.cs">
       <DependentUpon>DanhSachDichVuPage.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,7 @@
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\BanHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\BaoCaoTonKhoPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\DanhSachDonHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\KhachHangPageVM.cs" />
@@ -249,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BanHangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BaoCaoTonKhoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
