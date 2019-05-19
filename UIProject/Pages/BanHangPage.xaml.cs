@@ -1,4 +1,5 @@
-﻿using ModelProject;
+﻿using BaseMVVM_Service.BaseMVVM;
+using ModelProject;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +44,7 @@ namespace UIProject.Pages
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
-        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<KhachHangModel> e)
+        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<BaseModel> e)
         {
             CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow();
         }

@@ -99,4 +99,5 @@
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectAcceptButtonStyle}" x:Key="UIProjectCancelButtonStyle">
         <Setter Property="Background" Value="#ED2939"/>
     </Style>
+    
 </ResourceDictionary>

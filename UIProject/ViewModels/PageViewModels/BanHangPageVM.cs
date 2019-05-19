@@ -54,7 +54,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// <summary>
         /// View model của việc thêm khách hàng
         /// </summary>
-        public AddingWindowViewModel<KhachHangModel> ThemKhachHangVM { get; set; }
+        public AddingWindowViewModel<BaseModel> ThemKhachHangVM { get; set; }
 
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace UIProject.ViewModels.PageViewModels
             remove { DanhSachChiTietBan.ContainsItemModel -= value; }
         }
 
-        public event EventHandler<AddingWindowViewModel<KhachHangModel>> ThucThiThemKhachHang;
+        public event EventHandler<AddingWindowViewModel<BaseModel>> ThucThiThemKhachHang;
 
         private void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
@@ -200,7 +200,7 @@ namespace UIProject.ViewModels.PageViewModels
         protected override void LoadPageComponents()
         {
             PhieuBan = new PhieuBanModel();
-            ThemKhachHangVM = new AddingWindowViewModel<KhachHangModel>();
+            ThemKhachHangVM = new AddingWindowViewModel<BaseModel>();
 
 
             SetUpBolocTimKiemSanPham();
