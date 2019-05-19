@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class SanPhamModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class SanPhamModel : BaseModel
     {
         private string maSP;
         private string maLoaiSP;
@@ -46,9 +46,19 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+        protected override void Add()
         {
-            return false;
+            DataAccess.SaveSanPham(this);
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 

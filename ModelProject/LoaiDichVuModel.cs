@@ -39,9 +39,19 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+        protected override void Add()
         {
-            return false;
+            DataAccess.SaveLoaiDichVu(this);
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class ChiTietDichVuModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class ChiTietDichVuModel : BaseModel
     {
         private string maPhieu;
         private string maLoaiDV;
@@ -132,6 +133,8 @@ namespace ModelProject
             }
         }
 
+        
+
         public override bool Equals(object obj)
         {
             if (obj is ChiTietDichVuModel)
@@ -142,9 +145,20 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+
+        protected override void Add()
         {
-            return false;
+            DataAccess.SaveChiTietDichVu(this);
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }

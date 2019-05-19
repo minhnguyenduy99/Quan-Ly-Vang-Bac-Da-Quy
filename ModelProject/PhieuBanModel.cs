@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,34 +8,12 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuBanModel : BaseMVVM_Service.BaseMVVM.BaseModel, IDataErrorInfo
+    public class PhieuBanModel : BaseModel
     {
         private string maPhieu;
         private string soPhieu;
         private string ngayLap;
         private string maKH;
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (columnName.Equals("NgayLap"))
-                {
-                    try
-                    {
-                        DateTime castDate = Convert.ToDateTime(this.ngayLap);
-                        if (castDate.Year <= 2000)
-                            return "Ngày không hợp lệ";
-                        return null;
-                    }
-                    catch
-                    {
-                        return "Ngày không hợp lệ";
-                    }
-                }
-                return null;
-            }
-        }
 
         public string MaPhieu
         {
@@ -70,9 +49,19 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+        protected override void Add()
         {
-            return false;
+            DataAccess.SavePhieuBan(this);
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuDichVuModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class PhieuDichVuModel : BaseModel
     {
         private string maPhieu;
         private string soPhieu;
@@ -57,9 +58,20 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+
+        protected override void Add()
         {
-            return false;
+            DataAccess.SavePhieuDichVu(this);
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

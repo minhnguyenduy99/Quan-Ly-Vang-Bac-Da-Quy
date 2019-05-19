@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class NhaCungCapModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class NhaCungCapModel : BaseModel
     {
         private string maNCC;
         private string tenNCC;
@@ -46,9 +47,21 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+
+
+        protected override void Add()
         {
-            return false;
+            
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

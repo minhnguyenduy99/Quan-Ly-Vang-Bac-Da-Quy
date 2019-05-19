@@ -42,7 +42,7 @@ namespace UIProject.ViewModels
 
         public bool Submit()
         {
-            bool submitSuccess = Data.Submit();
+            bool submitSuccess = Data.Submit(SubmitType.Add);
             OnSubmitedData(new SubmitedDataEventArgs(Data, submitSuccess));
             return submitSuccess;
         }

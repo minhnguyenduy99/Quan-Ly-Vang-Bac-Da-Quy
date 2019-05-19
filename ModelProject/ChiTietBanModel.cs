@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseMVVM_Service;
+using BaseMVVM_Service.BaseMVVM;
 
 namespace ModelProject
 {
-    public class ChiTietBanModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class ChiTietBanModel : BaseModel
     {
         private string maPhieuMuaHang;
         private string maSP;
@@ -44,9 +45,6 @@ namespace ModelProject
             DonViTinhModel dvtModel = DataAccess.LoadDonViTinhByMADVT(_loaiSP.MaDVT);
             donViTinh = dvtModel.TenDVT;
         }
-
-
-
         public string MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
@@ -57,12 +55,11 @@ namespace ModelProject
             get => maSP;
             set => SetProperty(ref maSP, value);
         }
-
         public double PhanTramLoiNhuan
         {
             get
             {
-                if (phanTramLoiNhuan != null && phanTramLoiNhuan >= 0)
+                if (phanTramLoiNhuan >= 0)
                     return phanTramLoiNhuan;
                 else if (maSP != null && maSP.Length > 0)
                 {
@@ -78,7 +75,6 @@ namespace ModelProject
                 }
             }
         }
-
         public string TenSP
         {
             get
@@ -98,7 +94,6 @@ namespace ModelProject
                 }
             }
         }
-
         public string LoaiSP
         {
             get
@@ -139,7 +134,6 @@ namespace ModelProject
                 }
             }
         }
-
         public double DonGiaBanRa
         {
             get
@@ -149,7 +143,6 @@ namespace ModelProject
                 return donGiaBanRa;
             }
         }
-
         public int SoLuong
         {
             get => soLuong;
@@ -170,6 +163,8 @@ namespace ModelProject
             get => thue;
             set => SetProperty(ref thue, value);
         }
+
+
         public override bool Equals(object obj)
         {
             if (obj is ChiTietBanModel)
@@ -180,9 +175,22 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+
+
+
+        protected override void Add()
         {
-            return false;
+            DataAccess.SaveChiTietBan(this);
+        }
+
+        protected override void Update()
+        {
+            
+        }
+
+        protected override void Delete()
+        {
+            
         }
     }
 }

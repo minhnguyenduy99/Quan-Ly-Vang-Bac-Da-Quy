@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseMVVM_Service.BaseMVVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class ChiTietMuaModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class ChiTietMuaModel : BaseModel
     {
         private string maPhieuMuaHang;
         private string maSP;
@@ -62,9 +63,20 @@ namespace ModelProject
             return false;
         }
 
-        public override bool Submit()
+
+        protected override void Add()
         {
-            return false;
+            DataAccess.SaveChiTietMua(this);
+        }
+
+        protected override void Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }
