@@ -14,7 +14,7 @@ namespace ModelProject
             list = DataAccess.LoadPhieuBan();
             for (int i = 0; i < list.LongCount<PhieuBanModel>(); i++)
             {
-                //Console.WriteLine(list[i].MaPhieu + " " + list[i].NgayLap);
+                Console.WriteLine(list[i].MaPhieu + " " + list[i].NgayLap);
             }
             // string to datetime type
             //DateTime d = DateTime.Parse(p.NgayLap);

@@ -6,20 +6,60 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuDichVuModel
+    public class PhieuDichVuModel : BaseMVVM_Service.BaseMVVM.BaseModel
     {
-        private int maPhieu;
-        private int soPhieu;
+        private string maPhieu;
+        private string soPhieu;
         private string ngayLap;
-        private int maKH;
+        private string maKH;
         private long tongTien;
         private long tongTienTraTruoc;
 
-        public int MaPhieu { get => maPhieu; set => maPhieu = value; }
-        public int SoPhieu { get => soPhieu; set => soPhieu = value; }
-        public string NgayLap { get => ngayLap; set => ngayLap = value; }
-        public int MaKH { get => maKH; set => maKH = value; }
-        public long TongTien { get => tongTien; set => tongTien = value; }
-        public long TongTienTraTruoc { get => tongTienTraTruoc; set => tongTienTraTruoc = value; }
+        public string MaPhieu
+        {
+            get => maPhieu;
+            set => SetProperty(ref maPhieu, value);
+        }
+        public string SoPhieu
+        {
+            get => soPhieu;
+            set => SetProperty(ref soPhieu, value);
+        }
+        public string NgayLap
+        {
+            get => ngayLap;
+            set => SetProperty(ref ngayLap, value);
+        }
+        public string MaKH
+        {
+            get => maKH;
+            set => SetProperty(ref maKH, value);
+        }
+        public long TongTien
+        {
+            get => tongTien;
+            set => SetProperty(ref tongTien, value);
+        }
+        public long TongTienTraTruoc
+        {
+            get => tongTienTraTruoc;
+            set => SetProperty(ref tongTienTraTruoc, value);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is PhieuDichVuModel)
+            {
+                PhieuDichVuModel secondObj = (PhieuDichVuModel)obj;
+                //Two service receipt only match if and only if they both have the same maPhieu.
+                return (maPhieu.Equals(secondObj.maPhieu));
+            }
+            return false;
+        }
+
+        public override bool Submit()
+        {
+            return false;
+        }
     }
 }
