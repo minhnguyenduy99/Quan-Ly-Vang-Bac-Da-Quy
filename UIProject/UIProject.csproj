@@ -52,12 +52,14 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -199,14 +201,20 @@
     <Compile Include="Views\DialogPopupWindow.xaml.cs">
       <DependentUpon>DialogPopupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DocumentPrintViewerWindow.xaml.cs">
+      <DependentUpon>DocumentPrintViewerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderFilterDialogWindow.xaml.cs">
       <DependentUpon>OrderFilterDialogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductFilterDialogWindow.xaml.cs">
-      <DependentUpon>ProductFilterDialogWindow.xaml</DependentUpon>
+    <Compile Include="Views\ProviderFilterDialogWindow.xaml.cs">
+      <DependentUpon>ProviderFilterDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceFilterDialogWindow.xaml.cs">
+      <DependentUpon>ServiceFilterDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProviderAddingDialogWindow.xaml.cs">
       <DependentUpon>ProviderAddingDialogWindow.xaml</DependentUpon>
@@ -214,8 +222,8 @@
     <Compile Include="Views\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ServiceFilterDialogWindow.xaml.cs">
-      <DependentUpon>ServiceFilterDialogWindow.xaml</DependentUpon>
+    <Compile Include="Views\ProductFilterDialogWindow.xaml.cs">
+      <DependentUpon>ProductFilterDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServiceSearchingDialogWindow.xaml.cs">
       <DependentUpon>ServiceSearchingDialogWindow.xaml</DependentUpon>
@@ -289,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TongQuanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintTemplate\HoaDonPrintTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,6 +424,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DocumentPrintViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -439,7 +455,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductFilterDialogWindow.xaml">
+    <Page Include="Views\ProviderFilterDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceFilterDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -451,7 +471,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ServiceFilterDialogWindow.xaml">
+    <Page Include="Views\ProductFilterDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -516,6 +536,10 @@
     <ProjectReference Include="..\ModelProject\ModelProject.csproj">
       <Project>{9d62fd0e-1bfd-49a6-8426-a06ca9d6e69b}</Project>
       <Name>ModelProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{41d25cf9-2c3c-4f70-a7bc-1e96de3bf2c6}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

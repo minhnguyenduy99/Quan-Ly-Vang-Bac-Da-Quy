@@ -5,4 +5,12 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="Red"/>
     </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="PrintTextBoxStyle">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
 </ResourceDictionary>

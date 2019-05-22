@@ -70,7 +70,7 @@
                     <DataGridTextColumn Width="150"
                                         IsReadOnly="True"
                                         Binding="{Binding CustomerName}"
-                                        Header="Dơn giá"
+                                        Header="Đơn giá"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"/>
                     <DataGridTextColumn Width="130"

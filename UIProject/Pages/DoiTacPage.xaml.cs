@@ -42,5 +42,10 @@ namespace UIProject.Pages
             providerWindow.DataContext = new AddingWindowViewModel<NhaCungCapModel>();
             providerWindow.ShowDialog(PART_ProviderAddButton, -500, 50);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

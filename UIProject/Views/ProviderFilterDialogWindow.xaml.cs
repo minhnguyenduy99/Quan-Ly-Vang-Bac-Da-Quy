@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UIProject.Pages
+namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for BaoCaoTonKhoPage.xaml
+    /// Interaction logic for ProviderFilterDialogWindow.xaml
     /// </summary>
-    public partial class BaoCaoTonKhoPage : Page
+    public partial class ProviderFilterDialogWindow : Window
     {
-        public BaoCaoTonKhoPage()
+        public ProviderFilterDialogWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            PrintDialog dlg = new PrintDialog();
-            dlg.PageRangeSelection = PageRangeSelection.AllPages;
-            dlg.ShowDialog();
         }
     }
 }

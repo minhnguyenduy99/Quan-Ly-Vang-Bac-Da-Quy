@@ -1,0 +1,194 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.PrintTemplate">
+    <FlowDocument Background="White" x:Key="HoaDonPrintTemplate"
+                  PageHeight="600"
+                  PageWidth="550">
+        <FlowDocument.Resources>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}" x:Key="ValueLabelStyle">
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Width" Value="auto"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource PrintTextBoxStyle}"></Style>
+        </FlowDocument.Resources>
+        <Section Name="GeneralInfo">
+            <BlockUIContainer>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Công ty TNHH MTV TeamWorkFirst"/>
+                    <TextBlock Text="Uy tín - chất lượng - An toàn - Hạnh phúc"/>
+                    <TextBlock Text="Địa chỉ: Khu phố 6 - Linh Trung - Thủ Đức - TP Hồ Chí Minh"/>
+                </StackPanel>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph Margin="0"
+                   TextAlignment="Center">=================================================</Paragraph>
+        <Section Name="OrderInfo">
+            <BlockUIContainer>
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}"></Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Content="Hóa đơn bán hàng"
+                               HorizontalContentAlignment="Center"
+                               FontWeight="Bold"/>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                                   Content="Mã hóa đơn"/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                                       Content="Thời gian"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource ValueLabelStyle}"
+                               HorizontalContentAlignment="Left"
+                               Content=":  HD001"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Style="{StaticResource ValueLabelStyle}"
+                               HorizontalContentAlignment="Left"
+                               Content=":  21/5/2019 8:58AM"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                                       HorizontalContentAlignment="Right"
+                                       Content="Khách hàng : "/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                                       HorizontalContentAlignment="Right"
+                                       Content="Nhân viên : "/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="TeamWorkFirst"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="Nguyễn Duy Minh"/>
+                    </Grid>
+                </Grid>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph Margin="0 10"
+                       TextAlignment="Center">==========================================</Paragraph>
+        <Section Name="OrderDetailInfo">
+            <BlockUIContainer>
+                <DataGrid Grid.Row="0"
+                              HorizontalAlignment="Center"
+                              Width="auto"
+                              Style="{StaticResource PrintDataGridStyle}"
+                              x:Name="OrderDetailView"
+                              DataContext="{Binding DanhSachChiTietBan}"
+                              ItemsSource="{Binding Items}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto"
+                                                Binding="{Binding OrderNumber}"
+                                                Header="STT"/>
+                        <DataGridTextColumn Width="80"
+                                                Binding="{Binding Model.MaSP}"
+                                                Header="Mã SP"/>
+                        <DataGridTextColumn Width="150"
+                                                Binding="{Binding Model.MaSP}"
+                                                Header="Tên SP"/>
+                        <DataGridTextColumn Width="50"
+                                                Binding="{Binding Model.MaSP}"
+                                                Header="SL"/>
+                        <DataGridTextColumn Width="100"
+                                                Binding="{Binding Model.MaSP}" 
+                                                Header="Đơn giá"/>
+                        <DataGridTextColumn Width="100"
+                                                Binding="{Binding Model.MaSP}" 
+                                                Header="Thành tiền"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph TextAlignment="Center">==========================================</Paragraph>
+        <Section Name="Summary">
+            <BlockUIContainer>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}">
+                        </Style>
+                    </StackPanel.Resources>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Thành tiền"/>
+                                <Label Content="Thuế"/>
+                                <Label Content="Tổng tiền"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ValueLabelStyle}">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="1,000,000"/>
+                                <Label Content="10%"/>
+                                <Label Content="1,100,000"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Nhận tiền khách"/>
+                                <Label Content="Tiền trả lại"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ValueLabelStyle}">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="1,500,000"/>
+                                <Label Content="400,000"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph TextAlignment="Center">=================================================</Paragraph>
+        <Section>
+            <Paragraph TextAlignment="Center">Cảm ơn quý khách</Paragraph>
+            <Paragraph TextAlignment="Center">Xin chào và hẹn gặp lại !</Paragraph>
+        </Section>
+    </FlowDocument>
+</ResourceDictionary>

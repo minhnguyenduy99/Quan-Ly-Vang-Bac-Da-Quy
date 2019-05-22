@@ -9,7 +9,7 @@
         WindowStyle="None"
         Style="{StaticResource CustomDialogWindowStyle}"
         WindowStartupLocation="CenterScreen">
-    <Border CornerRadius="15"
+    <Border 
             Background="WhiteSmoke"
             BorderBrush="LightGray"
             BorderThickness="1">

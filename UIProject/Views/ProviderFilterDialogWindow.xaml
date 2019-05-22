@@ -1,4 +1,4 @@
-﻿<Window x:Class="UIProject.Views.ServiceFilterDialogWindow"
+﻿<Window x:Class="UIProject.Views.ProviderFilterDialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:UIProject.Views"
         xmlns:customControls="clr-namespace:UIProject.CustomControls"
         mc:Ignorable="d"
-        Title="ServiceFilterDialogWindow"        
-        Style="{StaticResource CustomDialogWindowStyle}"
-        WindowStartupLocation="Manual">
+        Title="ProviderFilterDialogWindow"
+        WindowStyle="None"
+        Style="{StaticResource CustomDialogWindowStyle}">
     <Border CornerRadius="15"
-            Background="{StaticResource MaterialDesignPaper}"
+            Background="WhiteSmoke"
             BorderBrush="LightGray"
             BorderThickness="1">
         <Grid>
@@ -26,9 +26,8 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center"
                        Style="{StaticResource LargeLabelStyle}"
-                       Content="Lọc sản phẩm"/>
+                       Content="Lọc nhà cung cấp"/>
                 <Separator Grid.Row="1" Grid.ColumnSpan="2"
                            Margin="20 10 20 30"
                            BorderThickness="3"
@@ -39,7 +38,7 @@
                                 Margin="20 0 0 0"
                                 Panel.ZIndex="1">
                         <Label Style="{StaticResource MediumLabelStyle}"
-                               Content="Nhà cung cấp"
+                               Content="Chọn điều kiện lọc"
                                HorizontalAlignment="Left"/>
                         <Label Style="{StaticResource SmallDefinedLabelStyle}"
                                Content="Tên nhà cung cấp"
@@ -56,23 +55,32 @@
                                                       FontSize="13"
                                                       Background="White"
                                                       Foreground="Black"
-                                                      TextChanged="SearchTextBox_TextChanged"
-                                                      />
-                        <Label Style="{StaticResource SmallDefinedLabelStyle}"
-                               Content="Khu vực"
-                               Margin="10 10 10 5"/>
+                                                      TextChanged="SearchTextBox_TextChanged"/>
+                        <Label Style="{StaticResource BelowMediumLabelStyle}"
+                               Margin="10 10 10 5"
+                               Content="Khu vực"/>
                         <ComboBox Margin="10 0 10 5"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="2" Grid.Column="1"
                             Orientation="Vertical">
                     <Label Style="{StaticResource MediumLabelStyle}"
-                           Content="Sản phẩm"
+                           Content="Thời gian"
                            HorizontalAlignment="Left"/>
                     <Label Style="{StaticResource SmallDefinedLabelStyle}"
-                           Content="Loại sản phẩm"
+                           Content="Từ"
                            Margin="10 10 10 5"/>
-                    <ComboBox Margin="10 0 10 5"/>
+                    <DatePicker Style="{StaticResource UIProjectNoTextBoxStyleDatePickerStyle}"
+                                Background="White"
+                                Margin="10 0 10 5"
+                                SelectedDate="{Binding NgayLap, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}">
+                    </DatePicker>
+                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                           Content="Đến"
+                           Margin="10 10 10 5"/>
+                    <DatePicker Style="{StaticResource UIProjectNoTextBoxStyleDatePickerStyle}"
+                                Background="White"
+                                Margin="10 0 10 5"/>
                 </StackPanel>
                 <Grid Grid.Row="3" Grid.ColumnSpan="2"
                       Panel.ZIndex="1">
@@ -90,6 +98,7 @@
                             Margin="0 30"
                             Content="_Hủy"/>
                 </Grid>
+
             </Grid>
         </Grid>
     </Border>

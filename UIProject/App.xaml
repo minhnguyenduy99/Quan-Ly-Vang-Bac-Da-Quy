@@ -83,6 +83,13 @@
                     <system:String x:Key="Tab_TongQuan">/Images/tab_tongquan.png</system:String>
                 </ResourceDictionary>
                 
+                <!-- Print template -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="./PrintTemplate/HoaDonPrintTemplate.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
                 <!-- Color pallete -->
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

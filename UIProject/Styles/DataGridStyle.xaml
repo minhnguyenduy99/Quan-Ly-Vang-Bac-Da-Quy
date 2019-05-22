@@ -97,7 +97,30 @@
     <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
         <Setter Property="Background" Value="White"/>
     </Style>
-    
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="PrintColumnHeaderStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridCell}" x:Key="PrintCellStyle">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGrid}" x:Key="PrintDataGridStyle">
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource PrintColumnHeaderStyle}"/>
+        <Setter Property="CellStyle" Value="{StaticResource PrintCellStyle}"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="0 1"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="FontSize" Value="13"/>
+
+    </Style>
     
 
 </ResourceDictionary>

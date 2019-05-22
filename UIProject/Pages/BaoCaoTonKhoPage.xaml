@@ -106,7 +106,8 @@
                             </StackPanel.Resources>
                             <Button Content="Thêm"/>
                             <Button Content="Xóa"/>
-                            <Button Content="Sửa"/>
+                            <Button Content="In" Click="Button_Click"/>
+                            <Button Content="Xuất file"/>
                         </StackPanel>
                     </Grid>
                 </materialDesign:Card>
@@ -147,12 +148,19 @@
                 </materialDesign:Card>
             </Grid>
                 
-            <Border Grid.Row="3"
-                    Padding="0 10">
-                <ContentControl ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}">
-                    
-                </ContentControl>
-            </Border>
+            <materialDesign:Card Grid.Row="3"
+                                 Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                 Margin="0 10 0 10">
+                <TabControl Style="{StaticResource CustomTabControlStyle}">
+                    <TabItem Header="Bản 1"
+                             Style="{StaticResource CustomTabItemStyle}"
+                             ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}"/>
+                    <TabItem Header="Bản 2"
+                             Style="{StaticResource CustomTabItemStyle}"
+                             ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}"/>
+                </TabControl>
+
+            </materialDesign:Card>
         </Grid>
     </Border>
 </Page>

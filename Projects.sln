@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelProject", "ModelProjec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseMVVM_Service", "BaseMVVM_Service\BaseMVVM_Service.csproj", "{7E11786A-F16C-4AF2-A654-33E0B0EF43C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E11786A-F16C-4AF2-A654-33E0B0EF43C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E11786A-F16C-4AF2-A654-33E0B0EF43C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E11786A-F16C-4AF2-A654-33E0B0EF43C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
