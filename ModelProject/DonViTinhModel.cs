@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace ModelProject
 {
-    public class DonViTinhModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class DonViTinhModel : BaseMVVM_Service.BaseMVVM.BaseSubmitableModel
     {
         private string maDVT;
         private string tenDVT;

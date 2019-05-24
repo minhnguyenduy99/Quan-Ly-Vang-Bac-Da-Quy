@@ -29,6 +29,7 @@
             <FlowDocumentPageViewer Grid.Column="1"
                                     x:Name="documentViewer"           
                                     Padding="10"
+                                    DataContext="{Binding Model}"
                                     Document="{StaticResource HoaDonPrintTemplate}"/>
         </Grid>
     </Border>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class LoaiSanPhamModel : BaseModel
+    public class LoaiSanPhamModel : BaseSubmitableModel
     {
 
         private string maLoaiSP;

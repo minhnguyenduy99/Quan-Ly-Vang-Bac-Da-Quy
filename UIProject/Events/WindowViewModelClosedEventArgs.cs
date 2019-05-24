@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UIProject.Events
 {
-    public class WindowViewModelClosedEventArgs<T> : EventArgs where T: BaseModel
+    public class WindowViewModelClosedEventArgs<T> : EventArgs where T: BaseSubmitableModel
     {
         public T Model { get; private set; }    
         public WindowViewModelClosedEventArgs(T model)

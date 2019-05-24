@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class NhaCungCapModel : BaseModel
+    public class NhaCungCapModel : BaseSubmitableModel
     {
         private string maNCC;
         private string tenNCC;

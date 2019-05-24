@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class TinhTrangModel : BaseModel
+    public class TinhTrangModel : BaseSubmitableModel
     {
         private string maTinhTrang;
         private string tenTinhTrang;

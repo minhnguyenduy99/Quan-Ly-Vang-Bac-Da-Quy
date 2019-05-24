@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class KhuVucModel : BaseModel
+    public class KhuVucModel : BaseSubmitableModel
     {
         private string maKhuVuc;
         private string tenKhuVuc;

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.Views
@@ -27,15 +28,11 @@ namespace UIProject.Views
         {
             InitializeComponent();
 
-            this.DataContext = new BaseWindowViewModel();
+            this.DataContext = new PrintWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var documentCast = documentViewer.Document as FlowDocument;
-            Size documentSize = new Size(documentCast.PageWidth, documentCast.PageHeight);
-            IPrinter printer = new PrintHelper(documentViewer.Document, documentSize.Width, documentSize.Height);
-            printer.Print();
         }
     }
 }

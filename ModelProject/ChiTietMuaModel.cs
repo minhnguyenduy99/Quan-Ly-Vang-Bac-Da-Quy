@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class ChiTietMuaModel : BaseModel
+    public class ChiTietMuaModel : BaseSubmitableModel
     {
         private string maPhieuMuaHang;
         private string maSP;

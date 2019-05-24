@@ -13,48 +13,96 @@ using System.Windows.Xps.Packaging;
 
 namespace Services.PrintService
 {
+    /// <summary>
+    /// Provides the printing functionalities 
+    /// </summary>
     public class PrintHelper : IPrinter
     {
         private PageMediaSize pageSizer;
-        public DocumentPaginator Document { get; set; }
-
+        private PrintDialog printDlg;
 
         public string DocumentName { get; set; }
-        public double PageWidth { get; set; }
-        public double PageHeight { get; set; }
+        public double? PageWidth 
+        {
+            get => pageSizer?.Width;
+        }
+        public double? PageHeight
+        {
+            get => pageSizer?.Height;
+        }
 
-        public PrintHelper(IDocumentPaginatorSource document) : this(document, double.NaN, double.NaN)
+        /// <summary>
+        /// Create an instance of <see cref="PrintHelper"/>
+        /// </summary>
+        /// <param name="document">The document source to print</param>
+        public PrintHelper() : this(double.NaN, double.NaN)
         {
             pageSizer = new PageMediaSize(PageMediaSizeName.ISOA4);
         }
 
-        public PrintHelper(IDocumentPaginatorSource document, double pageWidth, double pageHeight)
-                       : this(document, pageWidth, pageHeight, null) { }
+        /// <summary>
+        /// Create an instance of <see cref="PrintHelper"/>
+        /// </summary>
+        /// <param name="document">The document source to print</param>
+        /// <param name="pageWidth">The width of page to print out</param>
+        /// <param name="pageHeight">The height of page to print out</param>
+        public PrintHelper(double pageWidth, double pageHeight)
+                       : this(pageWidth, pageHeight, null) { }
 
-        public PrintHelper(IDocumentPaginatorSource document, double pageWidth, double pageHeight, string title)
+        /// <summary>
+        /// Create an instance of <see cref="PrintHelper"/>
+        /// </summary>
+        /// <param name="document">The document source to print</param>
+        /// <param name="pageWidth">The width of page to print out</param>
+        /// <param name="pageHeight">The height of page to print out</param>
+        /// <param name="title">The title of the print file</param>
+        public PrintHelper(double pageWidth, double pageHeight, string title)
         {
-            if (document != null)
-                Document = document.DocumentPaginator;
-            Document.PageSize = new System.Windows.Size(PageWidth, PageHeight);
-            PageWidth = pageWidth;
-            PageHeight = pageHeight;
+            printDlg = new PrintDialog();
 
-            pageSizer = new PageMediaSize(PageWidth, PageHeight);
+            pageSizer = new PageMediaSize(pageWidth, pageHeight);
 
             this.DocumentName = title;
         }
 
-        public void Print()
+        public PrintHelper(Visual visual, double width, double height)
+        {
+            printDlg = new PrintDialog();
+
+            var printerCabilities = printDlg.PrintQueue.GetPrintCapabilities();
+            double heightScale = height / printerCabilities.PageImageableArea.ExtentHeight;
+            double widthScale = width / printerCabilities.PageImageableArea.ExtentWidth;       
+        }
+
+        /// <summary>
+        /// Activate the print method
+        /// </summary>
+        public void PrintDocument(IDocumentPaginatorSource document)
         {
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintTicket.PageMediaSize = pageSizer;
             if (printDlg.ShowDialog() == true)
             {
-                printDlg.PrintDocument(Document, DocumentName);
+                printDlg.PrintDocument(document.DocumentPaginator, DocumentName);
             }
         }
 
-        public FixedDocumentSequence GetFixedDocumentFromVisual(Visual v)
+        public void PrintVisual(Visual visual)
+        {
+            PrintDialog printDlg = new PrintDialog();
+            printDlg.PrintTicket.PageMediaSize = pageSizer;
+            if (printDlg.ShowDialog() == true)
+            {
+                printDlg.PrintVisual(visual, DocumentName);
+            }
+        }
+
+        public void Print(IPrintable printableObject)
+        {
+            PrintDocument(printableObject.ConvertToPrintableObject());
+        }
+
+        private FixedDocumentSequence GetFixedDocumentFromVisual(Visual v)
         {
             if (File.Exists("sample.xps"))
                 File.Delete("sample.xps");
@@ -66,7 +114,6 @@ namespace Services.PrintService
                 return doc.GetFixedDocumentSequence();
             }
         }
-
         private Visual PerformTransform(Visual visual, PrintTicket ticket)
         {
             ContainerVisual root = new ContainerVisual();

@@ -14,7 +14,7 @@ using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels
 {
-    public class AddingWindowViewModel<T> : BaseWindowViewModel, ISubmitViewModel where T:BaseModel 
+    public class AddingWindowViewModel<T> : BaseWindowViewModel, ISubmitViewModel where T:BaseSubmitableModel 
     {
         private ICommand submitCmd;
         private ICommand cancelCmd;

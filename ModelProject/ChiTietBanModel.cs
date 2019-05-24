@@ -8,7 +8,7 @@ using BaseMVVM_Service.BaseMVVM;
 
 namespace ModelProject
 {
-    public class ChiTietBanModel : BaseModel
+    public class ChiTietBanModel : BaseSubmitableModel
     {
         private string maPhieuMuaHang;
         private string maSP;

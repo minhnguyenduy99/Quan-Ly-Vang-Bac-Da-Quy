@@ -41,6 +41,7 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoTonKhoModel.cs" />
     <Compile Include="ChiTietBanModel.cs" />
     <Compile Include="ChiTietDichVuModel.cs" />
     <Compile Include="ChiTietMuaModel.cs" />
@@ -84,6 +86,10 @@
     <ProjectReference Include="..\BaseMVVM_Service\BaseMVVM_Service.csproj">
       <Project>{7e11786a-f16c-4af2-a654-33e0b0ef43c6}</Project>
       <Name>BaseMVVM_Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{41D25CF9-2C3C-4F70-A7BC-1E96DE3BF2C6}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

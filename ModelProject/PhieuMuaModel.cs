@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuMuaModel : BaseModel
+    public class PhieuMuaModel : BaseSubmitableModel
     {
         private string maPhieu;
         private string soPhieu;

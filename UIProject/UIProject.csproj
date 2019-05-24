@@ -106,6 +106,7 @@
     <Compile Include="Events\ItemEventArgs.cs" />
     <Compile Include="Events\ItemRemovedEventArgs.cs" />
     <Compile Include="Events\ItemSelectedEventArgs.cs" />
+    <Compile Include="Events\PrintedEventArgs.cs" />
     <Compile Include="Events\SelectedEventArgs.cs" />
     <Compile Include="Events\SelectedItemChangedEventArgs.cs" />
     <Compile Include="Events\SubmitedDataEventArgs.cs" />
@@ -152,6 +153,7 @@
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FunctionInterfaces\IConditionalDisplayCollection.cs" />
+    <Compile Include="ViewModels\FunctionInterfaces\IPrintSupporter.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISubmitViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\AddingWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IAsyncCurrentSelectedItem.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="ViewModels\LayoutViewModels\ItemCollectionViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\PaymentTabItemVM.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\PrintViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\SearchTextBoxViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ValueFilterViewModel.cs" />
     <Compile Include="ViewModels\LocDonHangWindowVM.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="ViewModels\PageViewModels\SanPhamPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\TongQuanPageVM.cs" />
     <Compile Include="ServiceProviders\IWindow.cs" />
+    <Compile Include="ViewModels\PrintWindowViewModel.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="Pages\TongQuanPage.xaml.cs">
       <DependentUpon>TongQuanPage.xaml</DependentUpon>

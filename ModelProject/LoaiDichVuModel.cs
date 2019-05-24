@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class LoaiDichVuModel : BaseMVVM_Service.BaseMVVM.BaseModel
+    public class LoaiDichVuModel : BaseMVVM_Service.BaseMVVM.BaseSubmitableModel
     {
         private string maLoaiDV;
         private string tenLoaiDV;

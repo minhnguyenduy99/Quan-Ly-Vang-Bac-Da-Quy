@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrintService\IPrintable.cs" />
     <Compile Include="PrintService\IPrinter.cs" />
     <Compile Include="PrintService\PrintHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

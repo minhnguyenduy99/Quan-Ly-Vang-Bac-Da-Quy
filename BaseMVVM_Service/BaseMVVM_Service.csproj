@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BaseMVVM\BaseCommand.cs" />
     <Compile Include="BaseMVVM\BaseModel.cs" />
+    <Compile Include="BaseMVVM\BaseSubmitableModel.cs" />
     <Compile Include="BaseMVVM\BaseViewModel.cs" />
     <Compile Include="BaseMVVM\Interfaces\IAsynchronousable.cs" />
     <Compile Include="BaseMVVM\Interfaces\IDataLoader.cs" />

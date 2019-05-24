@@ -48,7 +48,7 @@ namespace UIProject.Pages
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
-        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<BaseModel> e)
+        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<BaseSubmitableModel> e)
         {
             CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow();
         }

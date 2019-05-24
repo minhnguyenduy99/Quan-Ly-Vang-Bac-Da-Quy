@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuBanModel : BaseModel
+    public class PhieuBanModel : BaseSubmitableModel
     {
         private string maPhieu;
         private string soPhieu;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class KhachHangModel : BaseModel
+    public class KhachHangModel : BaseSubmitableModel
     {
         private string maKH;
         private int SDT;

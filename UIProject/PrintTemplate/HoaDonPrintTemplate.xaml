@@ -61,11 +61,13 @@
                         <Label Grid.Row="0" Grid.Column="1"
                                Style="{StaticResource ValueLabelStyle}"
                                HorizontalContentAlignment="Left"
-                               Content=":  HD001"/>
+                               Content="{Binding MaHD}"
+                               ContentStringFormat=": {0}"/>
                         <Label Grid.Row="1" Grid.Column="1"
                                Style="{StaticResource ValueLabelStyle}"
                                HorizontalContentAlignment="Left"
-                               Content=":  21/5/2019 8:58AM"/>
+                               Content="{Binding NgayLap}"
+                               ContentStringFormat=": {0}"/>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -84,10 +86,10 @@
                                        Content="Nhân viên : "/>
                         <Label Grid.Row="0" Grid.Column="1"
                                        Style="{StaticResource ValueLabelStyle}"
-                                       Content="TeamWorkFirst"/>
+                                       Content="{Binding KhachHang.TenKH}"/>
                         <Label Grid.Row="1" Grid.Column="1"
                                        Style="{StaticResource ValueLabelStyle}"
-                                       Content="Nguyễn Duy Minh"/>
+                                       Content="{Binding NhanVien.TenNV}"/>
                     </Grid>
                 </Grid>
             </BlockUIContainer>
@@ -105,23 +107,23 @@
                               ItemsSource="{Binding Items}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="auto"
-                                                Binding="{Binding OrderNumber}"
-                                                Header="STT"/>
+                                            Binding="{Binding STT}"
+                                            Header="STT"/>
                         <DataGridTextColumn Width="80"
-                                                Binding="{Binding Model.MaSP}"
-                                                Header="Mã SP"/>
+                                            Binding="{Binding MaSP}"
+                                            Header="Mã SP"/>
                         <DataGridTextColumn Width="150"
-                                                Binding="{Binding Model.MaSP}"
-                                                Header="Tên SP"/>
+                                            Binding="{Binding TenSP}"
+                                            Header="Tên SP"/>
                         <DataGridTextColumn Width="50"
-                                                Binding="{Binding Model.MaSP}"
-                                                Header="SL"/>
+                                            Binding="{Binding SoLuong}"
+                                            Header="SL"/>
                         <DataGridTextColumn Width="100"
-                                                Binding="{Binding Model.MaSP}" 
-                                                Header="Đơn giá"/>
+                                            Binding="{Binding DonGia}" 
+                                            Header="Đơn giá"/>
                         <DataGridTextColumn Width="100"
-                                                Binding="{Binding Model.MaSP}" 
-                                                Header="Thành tiền"/>
+                                            Binding="{Binding ThanhTien}" 
+                                            Header="Thành tiền"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </BlockUIContainer>
