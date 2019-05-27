@@ -8,6 +8,7 @@ namespace UIProject.ServiceProviders
 {
     public interface IWindow
     {
+        object DataContext { get; set; }
         void Show();
         bool? ShowDialog();
         void Close();

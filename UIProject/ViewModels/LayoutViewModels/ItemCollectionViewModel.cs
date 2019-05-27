@@ -19,6 +19,20 @@ namespace UIProject.ViewModels.LayoutViewModels
             get => items;
         }
 
+        /// <summary>
+        /// Retrieves the list of models only 
+        /// </summary>
+        public IEnumerable<Model> Models
+        {
+            get
+            {
+                foreach(var item in Items)
+                {
+                    yield return item.Model;
+                }
+            }
+        }
+
         public ItemViewModel<Model> this[int index]
         {
             get => Items[index];

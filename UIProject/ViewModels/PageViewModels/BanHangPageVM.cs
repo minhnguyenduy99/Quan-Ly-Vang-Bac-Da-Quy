@@ -1,6 +1,7 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using BaseMVVM_Service.BaseMVVM.Interfaces;
 using ModelProject;
+using ModelProject.AggregationalModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.Events;
+using UIProject.ServiceProviders;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -19,6 +21,8 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand thanhToanCommand;
         private PhieuBanModel phieuBan;
         private List<ChiTietBanModel> dsChiTietBan;
+
+        public HoaDonModel HoaDon { get; set; }
 
         /// <summary>
         /// Thông tin khách hàng 
@@ -101,7 +105,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThemKhachHangCommand
         {
-            get => new BaseCommand(OnThucThiThemKhachHang);
+            get => new BaseCommand<IWindow>(OnThemKhachHangCommandExecute);
         }
 
         public BanHangPageVM() : base() { }
@@ -200,24 +204,27 @@ namespace UIProject.ViewModels.PageViewModels
         protected override void LoadPageComponents()
         {
             PhieuBan = new PhieuBanModel();
+            HoaDon = new HoaDonModel(PhieuBan);
+            
             ThemKhachHangVM = new AddingWindowViewModel<BaseSubmitableModel>();
 
 
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
 
-            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>();
-
-
+            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(HoaDon.DSChiTietBan);
         }
 
-        private void OnThucThiThemKhachHang()
+        private void OnThemKhachHangCommandExecute(IWindow window)
         {
+            window.DataContext = new AddingWindowViewModel<KhachHangModel>();
+            window.ShowDialog();
             ThucThiThemKhachHang?.Invoke(this, ThemKhachHangVM);
         }
         protected virtual void OnThanhToanCommandExecute()
         {
-
+            HoaDon.DSChiTietBan = DanhSachChiTietBan.Models.ToList();
+            HoaDon.Submit(SubmitType.Add);
         }
     }
 }
