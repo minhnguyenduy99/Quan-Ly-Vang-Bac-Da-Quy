@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.Pages;
 using UIProject.ServiceProviders;
+using UIProject.UIConnector;
 
 namespace UIProject.Views
 {

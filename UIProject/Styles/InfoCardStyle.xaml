@@ -15,62 +15,14 @@
         <Setter Property="ContentInfoForeground" Value="{DynamicResource AirForceBlue}"/>
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
         <Setter Property="materialDesign:ShadowAssist.ShadowEdges" Value="All"/>
-        <Setter Property="Template">
+        <Setter Property="Effect">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border x:Name="PART_OuterBorder"
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                            Effect="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
-                                                 Path=(materialDesign:ShadowAssist.ShadowDepth), 
-                                                 Converter={x:Static converters:ShadowConverter.Instance}}">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                <DropShadowEffect ShadowDepth="4" Color="LightGray" Direction="-50"/>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Cursor" Value="Hand"/>
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Effect).(DropShadowEffect.Color)"
-                                            From="LightGray" To="Gray"
-                                            Duration="0:0:0.3"
-                                            />
-                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
-                                             From=".95" To="1"
-                                             Duration="0:0:0.3"/>
-                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
-                                             From=".95" To="1"
-                                             Duration="0:0:0.3"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Effect).(DropShadowEffect.Color)"
-                                            From="Gray" To="LightGray"
-                                            Duration="0:0:0.3"
-                                            />
-                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
-                                             From="1" To=".95"
-                                             Duration="0:0:0.3"/>
-                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
-                                             From="1" To=".95"
-                                             Duration="0:0:0.3"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
     </Style>

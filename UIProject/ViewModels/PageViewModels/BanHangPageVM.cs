@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.Events;
 using UIProject.ServiceProviders;
+using UIProject.UIConnector;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -21,8 +22,7 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand thanhToanCommand;
         private PhieuBanModel phieuBan;
         private List<ChiTietBanModel> dsChiTietBan;
-
-        public HoaDonModel HoaDon { get; set; }
+        private HoaDonModel hoaDon { get; set; }
 
         /// <summary>
         /// Thông tin khách hàng 
@@ -54,13 +54,6 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBan { get; set; }
 
-
-        /// <summary>
-        /// View model của việc thêm khách hàng
-        /// </summary>
-        public AddingWindowViewModel<BaseSubmitableModel> ThemKhachHangVM { get; set; }
-
-
         /// <summary>
         /// Model của phiếu bán hàng
         /// </summary>
@@ -70,6 +63,9 @@ namespace UIProject.ViewModels.PageViewModels
             set => SetProperty(ref phieuBan, value);
         }
 
+        /// <summary>
+        /// Định nghĩa bộ lọc sản phẩm
+        /// </summary>
         public EnumFilterViewModel<SanPhamModel> LocSanPhamVM { get; set; }
         
         /// <summary>
@@ -81,6 +77,9 @@ namespace UIProject.ViewModels.PageViewModels
             set => SetProperty(value);
         }
 
+        /// <summary>
+        /// Số tiền thối lại
+        /// </summary>
         public long SoTienThoiLai { get; set; }
 
         /// <summary>
@@ -108,17 +107,60 @@ namespace UIProject.ViewModels.PageViewModels
             get => new BaseCommand<IWindow>(OnThemKhachHangCommandExecute);
         }
 
-        public BanHangPageVM() : base() { }
-
-
+        /// <summary>
+        /// Event xảy ra khi chọn 1 sản phẩm đã có từ trước
+        /// </summary>
         public event EventHandler<ItemEventArgs<ChiTietBanModel>> SanPhamDaCo
         {
             add { DanhSachChiTietBan.ContainsItemModel += value; }
             remove { DanhSachChiTietBan.ContainsItemModel -= value; }
         }
 
-        public event EventHandler<AddingWindowViewModel<BaseSubmitableModel>> ThucThiThemKhachHang;
+        public BanHangPageVM() : base() { }
+        public BanHangPageVM(INavigator navigator) : base(navigator) { }
 
+        protected override void LoadPageComponents()
+        {
+            PhieuBan = new PhieuBanModel();
+            hoaDon = new HoaDonModel(PhieuBan);
+
+            SetUpBolocTimKiemSanPham();
+            SetUpBoLocTimKiemKhachHang();
+
+            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(hoaDon.DSChiTietBan);
+        }
+        private void SetUpBolocTimKiemSanPham()
+        {
+            var sanPhamSource = DataAccess.LoadSanPham();
+
+            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(sanPhamSource);
+
+            TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
+
+            LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
+                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
+                {
+                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
+                },
+                new ObservableCollection<LoaiSanPhamModel>(DataAccess.LoadLoaiSanPham()));
+
+            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
+
+            TimKiemSanPhamVM.AdditionFilters = LocSanPhamVM.FilterCallBacks;
+
+            TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
+        }
+        private void SetUpBoLocTimKiemKhachHang()
+        {
+            var khachHangSource = DataAccess.LoadKhachHang();
+            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(khachHangSource);
+            TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
+            TimKiemKhachHangVM.SelectedValuePath = "TenKH";
+        }
+
+
+
+        #region Event Handler
         private void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
             var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
@@ -127,53 +169,8 @@ namespace UIProject.ViewModels.PageViewModels
                 DanhSachChiTietBan.Add(new ChiTietBanModel(PhieuBan, sanPhamDaChon.Model, 1));
             }
         }
+        #endregion
 
-      
-        private void SetUpBolocTimKiemSanPham()
-        {
-            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(new ObservableCollection<SanPhamModel>()
-            {
-                new SanPhamModel(){MaSP = "SP001", TenSP = "A", DonGiaMuaVao = 50000, MaLoaiSP = "LSP001"},
-                new SanPhamModel(){MaSP = "SP002", TenSP = "B", DonGiaMuaVao = 10000, MaLoaiSP = "LSP003"},
-                new SanPhamModel(){MaSP = "SP003", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP004"},
-                new SanPhamModel(){MaSP = "SP004", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP002"},
-                new SanPhamModel(){MaSP = "SP005", TenSP = "C", DonGiaMuaVao = 100000, MaLoaiSP = "LSP002"},
-                new SanPhamModel(){MaSP = "SP006", TenSP = "B", DonGiaMuaVao = 100000, MaLoaiSP = "LSP001"},
-            });
-
-            TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
-
-            LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
-                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
-                {
-                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
-                }, 
-                new ObservableCollection<LoaiSanPhamModel>()
-                {
-                    new LoaiSanPhamModel(){TenLoaiSP = "Đá quý", MaLoaiSP = "LSP001"},
-                    new LoaiSanPhamModel(){TenLoaiSP = "Trang sức", MaLoaiSP = "LSP002"},
-                    new LoaiSanPhamModel(){TenLoaiSP = "Vàng bạc", MaLoaiSP = "LSP003"},
-                });
-
-            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
-
-            TimKiemSanPhamVM.AdditionFilters = LocSanPhamVM.FilterCallBacks;
-            TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
-        }
-
-        private void SetUpBoLocTimKiemKhachHang()
-        {
-            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(new ObservableCollection<KhachHangModel>()
-            {
-                new KhachHangModel(){MaKH = "KH001", TenKH = "Nguyễn Duy Minh", DiaChi = "abc xyz ght", CongNo = 100000},
-                new KhachHangModel(){MaKH = "KH002", TenKH = "Nguyễn Văn B", DiaChi = "abc gfgfght", CongNo = 0},
-                new KhachHangModel(){MaKH = "KH003", TenKH = "Nguyễn Duy Hào", DiaChi = "abc xyfgâz ght", CongNo = 20},
-                new KhachHangModel(){MaKH = "KH004", TenKH = "Nguyễn Duy Bảo", DiaChi = "abc xhka ght", CongNo = 1000},
-                new KhachHangModel(){MaKH = "KH005", TenKH = "Nguyễn Duy Tâm", DiaChi = "abc faghz ght", CongNo = 10000000},
-            });
-            TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
-            TimKiemKhachHangVM.SelectedValuePath = "TenKH";
-        }
 
         #region Callback cho bộ lọc tìm kiếm 
         private bool LocLoaiSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
@@ -201,30 +198,18 @@ namespace UIProject.ViewModels.PageViewModels
         #endregion
 
 
-        protected override void LoadPageComponents()
-        {
-            PhieuBan = new PhieuBanModel();
-            HoaDon = new HoaDonModel(PhieuBan);
-            
-            ThemKhachHangVM = new AddingWindowViewModel<BaseSubmitableModel>();
-
-
-            SetUpBolocTimKiemSanPham();
-            SetUpBoLocTimKiemKhachHang();
-
-            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(HoaDon.DSChiTietBan);
-        }
-
-        private void OnThemKhachHangCommandExecute(IWindow window)
+        #region Command Execution 
+        protected virtual void OnThemKhachHangCommandExecute(IWindow window)
         {
             window.DataContext = new AddingWindowViewModel<KhachHangModel>();
             window.ShowDialog();
-            ThucThiThemKhachHang?.Invoke(this, ThemKhachHangVM);
         }
+
         protected virtual void OnThanhToanCommandExecute()
         {
-            HoaDon.DSChiTietBan = DanhSachChiTietBan.Models.ToList();
-            HoaDon.Submit(SubmitType.Add);
+            hoaDon.DSChiTietBan = DanhSachChiTietBan.Models.ToList();
+            hoaDon.Submit(SubmitType.Add);
         }
+        #endregion
     }
 }

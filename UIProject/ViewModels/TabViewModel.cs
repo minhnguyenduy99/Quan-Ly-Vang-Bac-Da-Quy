@@ -9,21 +9,23 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using UIProject.ViewModels.FunctionInterfaces;
+using BaseMVVM_Service.BaseMVVM;
 
 namespace UIProject.ViewModels
 {
     /// <summary>
     /// View model of tab control
     /// </summary>
-    public class TabViewModel : BaseContentViewModel
+    public class TabViewModel : BaseContentViewModel, ISelectable
     {
 
 
         #region Private Fields
         private string tabName;
         private TabState state;
-        private bool isChecked;
+        private bool isSelected;
+        private ICommand selectItemCmd;
         #endregion
 
 
@@ -56,18 +58,26 @@ namespace UIProject.ViewModels
         }
 
         /// <summary>
-        /// Weither the tab is selected
+        /// Indicate weither the tab is selected
         /// </summary>
-        public bool IsChecked
+        public bool IsSelected
         {
-            get => isChecked;
+            get => isSelected;
             set
             {
-                isChecked = value;
-                SetProperty(ref isChecked, value);
-                if (isChecked == true)
+                SetProperty(ref isSelected, value);
+                if (value == true)
                     OnTabSelected(this.tabName);
             }
+        }
+        
+        /// <summary>
+        /// The command executes when the item is selected
+        /// </summary>
+        public ICommand SelectItemCommand
+        {
+            get => selectItemCmd ?? new BaseCommand(OnSelectItemCommandExecute);
+            set => selectItemCmd = value;
         }
 
         /// <summary>
@@ -75,6 +85,15 @@ namespace UIProject.ViewModels
         /// </summary>
         public TabViewModel() : base()
         {
+            this.IsSelected = false;
+        }
+
+        /// <summary>
+        /// Select this tab 
+        /// </summary>
+        public void Select()
+        {
+            IsSelected = true;
         }
 
         /// <summary>
@@ -94,7 +113,6 @@ namespace UIProject.ViewModels
                 Background = (Brush)Application.Current.FindResource("RoyalBlue"),
                 Foreground = Brushes.White,
                 FocusBackground = (Brush)Application.Current.FindResource("AzureBlue"),
-                IsChecked = false
             };
         }
 
@@ -111,12 +129,17 @@ namespace UIProject.ViewModels
         {
             
         }
+        protected virtual void OnSelectItemCommandExecute()
+        {
+            Select();
+        }
 
 
         /// <summary>
         /// Event raises when the focus tab changed
         /// </summary>
         public event EventHandler<TabSelectedEventArgs> TabSelected;
+        public event EventHandler<EventArgs> Selected;
     }
 
 

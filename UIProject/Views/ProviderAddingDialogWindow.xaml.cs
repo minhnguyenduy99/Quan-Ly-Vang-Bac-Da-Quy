@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.UIConnector;
 
 namespace UIProject.Views
 {

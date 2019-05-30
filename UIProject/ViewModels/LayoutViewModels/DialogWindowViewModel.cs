@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UIProject.UIConnector;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
@@ -136,6 +137,12 @@ namespace UIProject.ViewModels.LayoutViewModels
             set => SetProperty(ref okText, value);
         }
 
+        /// <summary>
+        /// The window that owns this view model
+        /// </summary>
+        public IWindow OwnerWindow { get; set; }
+
+
         public DialogWindowViewModel()
         {
             // Set up default contents of buttons in dialog window
@@ -189,9 +196,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             this.DialogResult = result;
             ButtonPressed?.Invoke(this, new DialogButtonPressedEventArgs(result));
-
         }
-
 
         public event EventHandler<DialogButtonPressedEventArgs> ButtonPressed;
     }

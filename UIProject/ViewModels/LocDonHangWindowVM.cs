@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.Events;
 using UIProject.ServiceProviders;
+using UIProject.UIConnector;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels

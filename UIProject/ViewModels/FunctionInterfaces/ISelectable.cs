@@ -14,6 +14,7 @@ namespace UIProject.ViewModels.FunctionInterfaces
     {
         bool IsSelected { get; set; }
         ICommand SelectItemCommand { get; set; }
+        void Select();
 
         event EventHandler<EventArgs> Selected;
     }

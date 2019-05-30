@@ -7,10 +7,10 @@ using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.PageViewModels
 {
-    public class NhaCungCapPageVM : BasePageViewModel
+    public class DichVuPageVM : BasePageViewModel
     {
-        public NhaCungCapPageVM() : base() { }
-        public NhaCungCapPageVM(INavigator navigator) : base(navigator) { }
+        public DichVuPageVM() : base() { }
+        public DichVuPageVM(INavigator navigator) : base(navigator) { }
         protected override void LoadPageComponents()
         {
             

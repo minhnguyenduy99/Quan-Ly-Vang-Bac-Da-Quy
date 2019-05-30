@@ -52,6 +52,8 @@ namespace UIProject.ViewModels.LayoutViewModels
             this.IsSelected = false;
         }
 
+        public void Select() { }
+
         /// <summary>
         /// Event occurs when <see cref="ItemViewModel{T}"/> is selected
         /// </summary>

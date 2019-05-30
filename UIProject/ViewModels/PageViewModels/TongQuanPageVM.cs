@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using BaseMVVM_Service.BaseMVVM;
 using ModelProject;
-
+using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.PageViewModels
 {
@@ -17,15 +17,16 @@ namespace UIProject.ViewModels.PageViewModels
     public class TongQuanPageVM : BasePageViewModel
     {
 
-        #region Models
+        #region Private Fields
         private List<PhieuBanModel> dsPhieuBan;
         private List<KhachHangModel> dsKhachHang;
         private long doanhThu;
-        #endregion
-
         private ICommand getMoreInfoCommand;
         private ICommand logoutCommand;
-       
+
+        private ICommand navigateNhapHangPageCmd;
+        #endregion
+
         public int SoLuongHoaDon
         {
             get => this.dsPhieuBan.Count;
@@ -55,7 +56,14 @@ namespace UIProject.ViewModels.PageViewModels
             get => logoutCommand ?? (logoutCommand = new BaseCommand(OnLogOut));
         }
 
+        public ICommand NavigateNhapHangPageCommand
+        {
+            get => navigateNhapHangPageCmd ?? new BaseCommand(OnNavigateNhapHangPageCommandExecute);
+            set => navigateNhapHangPageCmd = value;
+        }
+
         public TongQuanPageVM() : base() { }
+        public TongQuanPageVM(INavigator navigator) : base(navigator) { }
 
         private void OnLogOut()
         {
@@ -66,6 +74,11 @@ namespace UIProject.ViewModels.PageViewModels
         private void OpenInfoDialog()
         {
 
+        }
+
+        protected virtual void OnNavigateNhapHangPageCommandExecute()
+        {
+            this.Navigator.Navigate("Nhập hàng");
         }
 
         protected override void LoadPageComponents()

@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 
 using static UIProject.ViewModels.TabViewModel;
 using UIProject.ViewModels.LayoutViewModels;
+using UIProject.UIConnector;
 
 namespace UIProject.Views
 {

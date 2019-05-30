@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.Events;
+using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.PageViewModels
@@ -21,7 +22,10 @@ namespace UIProject.ViewModels.PageViewModels
         public SearchTextBoxViewModel<PhieuBanModel> TimKiemPhieuBanVM { get; set; }
 
         public ObservableCollectionViewModel<PhieuBanModel> DanhSachPhieuBanVM { get; set; }
-        
+
+        public DanhSachDonHangPageVM() : base() { }
+        public DanhSachDonHangPageVM(INavigator navigator) : base(navigator) { }
+
 
         protected override void LoadPageComponents()
         {

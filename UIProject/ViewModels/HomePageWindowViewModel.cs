@@ -10,14 +10,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 using static UIProject.ViewModels.TabViewModel;
-using static UIProject.ViewModels.LayoutViewModels.ExpandTabViewModel;
+using UIProject.ViewModels.FunctionInterfaces;
+using System.Collections.ObjectModel;
 
 namespace UIProject.ViewModels
 {
     /// <summary>
     /// View model for home page window
     /// </summary>
-    public class HomePageWindowViewModel : BaseWindowViewModel
+    public class HomePageWindowViewModel : BaseWindowViewModel, INavigator
     {
         #region List tab names of the HomePage window
         public static readonly List<string> ListTabNames = new List<string>()
@@ -40,10 +41,6 @@ namespace UIProject.ViewModels
         private BasePageViewModel currentPageVM;
         #endregion
 
-        /// <summary>
-        /// Set of tabs represents the multi-tab layout of Homepage Window
-        /// </summary>
-        public Dictionary<string, BasePageViewModel> TabPageVM { get; set; }
         
         /// <summary>
         /// List of tab view models represents the menu tab on window
@@ -60,13 +57,18 @@ namespace UIProject.ViewModels
         }
 
         /// <summary>
-        /// The current page displayed on the Main Window
+        /// The current object which is currently navigated
         /// </summary>
-        public BasePageViewModel CurrentPageVM
+        public BasePageViewModel CurrentNavigatedPage
         {
-            get => currentPageVM;
-            set => SetProperty(ref currentPageVM, value);
+            get => GetPropertyValue<BasePageViewModel>();
+            set => SetProperty(value);
         }
+
+        /// <summary>
+        /// A dictionary to store the navigated objects
+        /// </summary>
+        public Dictionary<object, BasePageViewModel> NavigatedPages { get; set; }
 
         public HomePageWindowViewModel()
         {
@@ -74,7 +76,32 @@ namespace UIProject.ViewModels
 
             InitializeTabs();
 
-            ListTabs[0].IsChecked = true;
+            //  Set up pages to corresponding tabs
+            NavigatedPages = new Dictionary<object, BasePageViewModel>();
+
+            ListTabs[0].Select();
+        }
+
+        /// <summary>
+        /// Navigate to the page corresponding with the key
+        /// </summary>
+        /// <param name="key">The value of key which represents for the navigated page</param>
+        public void Navigate(object key)
+        {
+            if (!NavigatedPages.ContainsKey(key))
+            {
+                NavigatedPages.Add(key, GetCorrespondingPage((string)key));
+            }
+            CurrentNavigatedPage = NavigatedPages[key];
+            CurrentTabVM = ListTabs.Where(tab => tab.TabName == (string)key).ElementAt(0);
+            if (!CurrentTabVM.IsSelected)
+                CurrentTabVM.Select();
+        }
+
+
+        private void OnCurrentTabChanged(object sender, TabSelectedEventArgs e)
+        {
+            Navigate(e.TabName);
         }
 
         private void SetUpWindowLayout()
@@ -85,26 +112,7 @@ namespace UIProject.ViewModels
             IconSource = (string)Application.Current.FindResource("SoftwareIcon");
             BackgroundSource = (string)Application.Current.FindResource("LoginBackground");
         }
-        
-
-        private void OnCurrentTabChanged(object sender, TabSelectedEventArgs e)
-        {
-            UpdateCurrentPageWithSelectedTab(e.TabName);
-        }
-
-        private void UpdateCurrentPageWithSelectedTab(string tabName)
-        {
-            if (TabPageVM.ContainsKey(tabName))
-            {
-                CurrentTabVM = ListTabs.Where(tab => tab.TabName == tabName).ElementAt(0);
-                CurrentPageVM = TabPageVM[tabName];
-            }
-        }
-
-        /// <summary>
-        /// Initialize default view models of tabs
-        /// </summary>
-        protected virtual void InitializeTabs()
+        private void InitializeTabs()
         {
             //  Initialize the content present layout of tabs
             this.ListTabs = new List<TabViewModel>()
@@ -121,26 +129,8 @@ namespace UIProject.ViewModels
                 CreateTabViewModel(ListTabNames[9], "SoftwareIcon", TabState.New),
             };
 
-            //  Set up pages to corresponding tabs
-            TabPageVM = new Dictionary<string, BasePageViewModel>();
-
-            TabPageVM.Add(ListTabNames[0], new TongQuanPageVM());
-            TabPageVM.Add(ListTabNames[1], new BanHangPageVM());
-            TabPageVM.Add(ListTabNames[2], new LamDichVuPageVM());
-            TabPageVM.Add(ListTabNames[3], new DanhSachDonHangPageVM());
-            TabPageVM.Add(ListTabNames[4], new KhachHangPageVM());
-            TabPageVM.Add(ListTabNames[5], new NhaCungCapPageVM());
-            TabPageVM.Add(ListTabNames[6], new SanPhamPageVM());
-            TabPageVM.Add(ListTabNames[7], null);
-            TabPageVM.Add(ListTabNames[8], new NhapHangPageVM());
-            TabPageVM.Add(ListTabNames[9], new BaoCaoTonKhoPageVM());
-
             SubcribeTabChangedEvent();
-        }
-
-        /// <summary>
-        /// Subcribe the <see cref="TabViewModel.TabSelected"/> event for updating the <see cref="CurrentTabVM"/> and <see cref="currentPageVM"/>
-        /// </summary>
+        }    
         private void SubcribeTabChangedEvent()
         {
             //  Subcribe the FocusTabChanged event of tab by hooking the OnCurrentTabChanged method 
@@ -149,5 +139,31 @@ namespace UIProject.ViewModels
                 tab.TabSelected += OnCurrentTabChanged;
             }
         }
+        private BasePageViewModel GetCorrespondingPage(string tabName)
+        {
+            if (tabName.Equals(ListTabNames[0]))
+                return new TongQuanPageVM(this);
+            if (tabName.Equals(ListTabNames[1]))
+                return new BanHangPageVM(this);
+            if (tabName.Equals(ListTabNames[2]))
+                return new LamDichVuPageVM(this);
+            if (tabName.Equals(ListTabNames[3]))
+                return new DanhSachDonHangPageVM(this);
+            if (tabName.Equals(ListTabNames[4]))
+                return new KhachHangPageVM(this);
+            if (tabName.Equals(ListTabNames[5]))
+                return new NhaCungCapPageVM(this);
+            if (tabName.Equals(ListTabNames[6]))
+                return new SanPhamPageVM(this);
+            if (tabName.Equals(ListTabNames[7]))
+                return new DichVuPageVM(this);
+            if (tabName.Equals(ListTabNames[8]))
+                return new NhapHangPageVM(this);
+            if (tabName.Equals(ListTabNames[9]))
+                return new BaoCaoTonKhoPageVM(this);
+            return null;
+        }
+
+
     }
 }

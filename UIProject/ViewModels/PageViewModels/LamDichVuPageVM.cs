@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.PageViewModels
 {
@@ -12,5 +13,8 @@ namespace UIProject.ViewModels.PageViewModels
         {
             this.TakeFullScreen = true;       
         }
+
+        public LamDichVuPageVM() : base() { }
+        public LamDichVuPageVM(INavigator navigator) : base(navigator) { }
     }
 }

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UIProject.ServiceProviders;
+using UIProject.UIConnector;
+using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.PageViewModels
@@ -22,6 +24,9 @@ namespace UIProject.ViewModels.PageViewModels
             get => themSPCmd ?? new BaseCommand<IWindow>(OnThemSanPhamCommandExecute);
             set => themSPCmd = value;
         }
+
+        public SanPhamPageVM(): base() { }
+        public SanPhamPageVM(INavigator navigator) : base(navigator) { }
         protected override void LoadPageComponents()
         {
             

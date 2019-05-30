@@ -19,6 +19,7 @@ using UIProject.ServiceProviders;
 using UIProject.Views;
 
 using MaterialDesignThemes.Wpf;
+using UIProject.UIConnector;
 
 namespace UIProject
 {
@@ -74,14 +75,7 @@ namespace UIProject
             this.txbPassword.Text = this.PasswordBox.Password;
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.UpdateTypingPassword(PasswordBox.Password);
-
-            ProcessLogin();
-        }
-
-        private async void ProcessLogin()
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             DialogPopupWindow waitingDialog = new DialogPopupWindow(
                 new DialogWindowViewModel()
@@ -90,39 +84,37 @@ namespace UIProject
                     CanMinimized = false,
                     MessageText = "Vui lòng đợi",
                     Background = Brushes.White,
-                    DialogType = DialogWindowType.WaitingMessage,                   
+                    DialogType = DialogWindowType.WaitingMessage,
                 });
 
-            waitingDialog.Owner = this;
+            // For the weird behave of PasswordBox, its value cannot be used in binding with 
+            // Text property of normal textbox. Therefore, this is a must-have function to update
+            // the password in view model last time before login process
+            viewModel.UpdateTypingPassword(PasswordBox.Password);
 
-            Task<bool> loginTask = new Task<bool>(viewModel.Login);
-
-            loginTask.Start();
-            waitingDialog.Show();
-            bool loginSuccess = await loginTask;
-
-            waitingDialog.Close();
-            if (loginSuccess)
+            bool? result = await viewModel.LoginAsync(waitingDialog);
+            if (result != null && result == true)
             {
                 InitializeHomepageWindow();
                 this.Close();
             }
         }
 
-        private void DialogOpened(object sender, DialogOpenedEventArgs e)
-        {
-            var currentSession = e.Session;
-            if (viewModel.Login())
-                InitializeHomepageWindow();
-            currentSession.Close();
-        }
 
         private void InitializeHomepageWindow()
         {
             MainWindow homepageWnd = new MainWindow();
             homepageWnd.DataContext = new HomePageWindowViewModel();
 
+            homepageWnd.Closed += HomepageWnd_Closed;
+
             homepageWnd.Show();
+        }
+
+        private void HomepageWnd_Closed(object sender, EventArgs e)
+        {
+            // When the Homepage window is closed, close this one then.
+            this.Close();
         }
     }
 }

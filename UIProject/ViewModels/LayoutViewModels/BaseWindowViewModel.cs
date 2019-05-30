@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BaseMVVM_Service.BaseMVVM;
 using UIProject.Events;
+using UIProject.UIConnector;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {

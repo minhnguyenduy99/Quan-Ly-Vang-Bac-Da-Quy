@@ -1,5 +1,6 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using ModelProject;
+using Services.PrintService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +44,6 @@ namespace UIProject.Pages
             this.DataContext = ViewModel;
             //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
             ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
-            ViewModel.ThucThiThemKhachHang += ViewModel_ThucThiThemKhachHang;
             PART_LoaiSanPham.DataContext = ViewModel.LocSanPhamVM;
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
@@ -61,18 +61,6 @@ namespace UIProject.Pages
         private async void BanHangPage_Loaded(object sender, RoutedEventArgs e)
         {
             await this.FadeIn(0.5f, 0.5f);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow()
-            {
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-
-            customerWindow.DataContext = ViewModel.ThemKhachHangVM;
-
-            customerWindow.ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

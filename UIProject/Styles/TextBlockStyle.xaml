@@ -1,16 +1,39 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Styles">
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectTextBlockStyle">
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectSmallTextBlockStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">
+        <Setter Property="FontSize" Value="10"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectBelowMediumTextBlockStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectMediumTextBlockStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">
+        <Setter Property="FontSize" Value="17"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectLargeTextBlockStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">
+        <Setter Property="FontSize" Value="21"/>
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="ErrorTextBlockStyle">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="Red"/>
     </Style>
-
-    <Style TargetType="{x:Type TextBlock}" x:Key="PrintTextBoxStyle">
+    
+    <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectPrintTextBoxStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="TextAlignment" Value="Center"/>
-        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
         <Setter Property="Padding" Value="3"/>
         <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="DescriptionTextBlockStyle" BasedOn="{StaticResource UIProjectMediumTextBlockStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

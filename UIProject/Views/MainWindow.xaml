@@ -32,7 +32,7 @@
               Width="250"
               x:Name="IconGrid"
               Margin="5 0 10 5"
-              Visibility="{Binding CurrentPageVM.TakeFullScreen, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+              Visibility="{Binding CurrentNavigatedPage.TakeFullScreen, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -90,7 +90,7 @@
                    VerticalContentAlignment="Stretch"
                    HorizontalContentAlignment="Stretch"
                    NavigationUIVisibility="Hidden"
-                   Content="{Binding CurrentPageVM, Converter={StaticResource ViewModelToPageConverter}}">
+                   Content="{Binding CurrentNavigatedPage, Converter={StaticResource ViewModelToPageConverter}}">
             </Frame>
         </Grid>
     </Grid>

@@ -10,68 +10,172 @@
       mc:Ignorable="d"      
       Title="TongQuanPage"
       HorizontalAlignment="Stretch">
-    <Grid>
+    <Grid Background="{StaticResource MaterialDesignPaper}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="246*"/>
+            <RowDefinition Height="119*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="850"/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0"
-                    Margin="20 15 20 15"
-                    Orientation="Vertical"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel>
+        <Border Grid.Column="0"
+                Background="WhiteSmoke" 
+                Grid.RowSpan="2">
+            <StackPanel
+                        Margin="20 15 20 15"
+                        Orientation="Vertical"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}"
+                               FontFamily="Time New Roman"
                                Text="Xin chào quý khách">
                     </TextBlock>
-                    <TextBlock Margin="0 10 0 0"
-                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                               Text="Đây là thông tin kinh doanh của cửa hàng trong ngày hôm nay"
-                               Foreground="Gray">
-                    </TextBlock>
-                </StackPanel>
-            </Grid>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource UIProjectLightIconButtonStyle}" 
+                            Padding="0"
+                            Height="30"
+                            Width="30"
+                            ToolTip="Xem thông tin cửa hàng">
+                        <materialDesign:PackIcon Kind="Information"
+                                                 Foreground="White"
+                                                 Height="auto"
+                                                 Width="auto"/>
+                    </Button>
+                </Grid>
+                <Grid Margin="0 30 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Style="{StaticResource LargeLabelStyle}"
+                           Margin="0 10 0 15"
+                           Padding="0"
+                           Content="Thông tin kinh doanh"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <customControls:InfoCardLabel Grid.Column="0"
+                                                  Margin="0 0 5 0"
+                                                  IconInfoSource="/Images/tongquan_donhang.png"
+                                                  Title="Đơn hàng"
+                                                  ContentInfo="0"
+                                                  Style="{StaticResource BaseInfoCardStyle}"/>
+                        <customControls:InfoCardLabel Grid.Column="1"
+                                                  Margin="5 0 5 0"
+                                                  IconInfoSource="/Images/tongquan_thunhap.png"
+                                                  Title="Doanh thu"
+                                                  ContentInfo="0"
+                                                  Style="{StaticResource BaseInfoCardStyle}"/>
+                        <customControls:InfoCardLabel Grid.Column="2"
+                                                  Margin="5 0 0 0"
+                                                  IconInfoSource="/Images/tongquan_khachhangmoi.png"
+                                                  Title="Khách hàng mới"
+                                                  ContentInfo="0"
+                                                  Style="{StaticResource BaseInfoCardStyle}"/>
+                    </Grid>
 
-            <Grid Margin="0 30 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Margin="0 50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Style="{StaticResource LargeLabelStyle}"
+                           Margin="0 10 0 15"
+                           Padding="0"
+                           Content="Bắt đầu dễ dàng hơn với các bước sau"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:Card Grid.Column="0" 
+                                     Margin="0 0 5 0"
+                                     Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/them_sanpham.png"/>
+                                <Label Content="1. Thêm nhà cung cấp"/>
+                                <TextBlock Text="Thêm nhà cung cấp cho cửa hàng của bạn"/>
+                                <Button Content="Thêm nhà cung cấp"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                        <materialDesign:Card Grid.Column="1"
+                                     Margin="5 0 5 0"
+                                     Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/them_sanpham.png"/>
+                                <Label Content="2. Nhập hàng"/>
+                                <TextBlock Text="Nhập các sản phẩm từ nhà cung cấp của cửa hàng"/>
+                                <Button Content="Nhập hàng"
+                                        Command="{Binding NavigateNhapHangPageCommand}"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                        <materialDesign:Card Grid.Column="2"
+                                     Margin="5 0 5 0"
+                                     Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/them_hoadon.png"/>
+                                <Label Content="3. Bổ sung dịch vụ"/>
+                                <TextBlock Text="Cung cấp các dich vụ hỗ trợ khách hàng"/>
+                                <Button Content="Thêm dịch vụ"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                        <materialDesign:Card Grid.Column="3"
+                                             Margin="5 0 0 0"
+                                             Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/them_hoadon.png"/>
+                                <Label Content="4. Bán hàng"/>
+                                <TextBlock Text="Bán các sản phẩm của bạn tới người dùng"/>
+                                <Button Content="Tạo hóa đơn mới"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </Grid>
 
-                <customControls:InfoCardLabel Grid.Column="0"
-                                              Margin="0 0 10 0"
-                                              IconInfoSource="/Images/tongquan_donhang.png"
-                                              Title="Đơn hàng"
-                                              ContentInfo="0"
-                                              Style="{StaticResource BaseInfoCardStyle}"/>
-                <customControls:InfoCardLabel Grid.Column="1"
-                                              Margin="10 0 10 0"
-                                              IconInfoSource="/Images/tongquan_thunhap.png"
-                                              Title="Doanh thu"
-                                              ContentInfo="0"
-                                              Style="{StaticResource BaseInfoCardStyle}"/>
-                <customControls:InfoCardLabel Grid.Column="2"
-                                              Margin="10 0 0 0"
-                                              IconInfoSource="/Images/tongquan_khachhangmoi.png"
-                                              Title="Khách hàng mới"
-                                              ContentInfo="0"
-                                              Style="{StaticResource BaseInfoCardStyle}"/>
-            </Grid>
-            <materialDesign:Card Margin="0 50 0 0"
-                             materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                <ListBox ItemTemplate="{StaticResource TinhTrangDonHangTemplate}"
-                         ItemsSource="{Binding ListOrderStatus}"/>
-            </materialDesign:Card>
-        </StackPanel>
-        <StackPanel Grid.Column="2"
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type materialDesign:Card}" BasedOn="{StaticResource UIProjectMaterialDesignCardStyle}"></Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Margin" Value="0 10"/>
+                            <Setter Property="Stretch" Value="Uniform"/>
+                            <Setter Property="Width" Value="60"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource UIProjectBelowMediumTextBlockStyle}">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="0 0 0 20"/>
+                        </Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+                            <Setter Property="Margin" Value="0 20"/>
+                            <Setter Property="Padding" Value="20 5"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </Grid.Resources>
+
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Column="1"
                     Background="WhiteSmoke"
-                    Margin="10 0 10 5">
+                    Margin="10 0 10 5" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>

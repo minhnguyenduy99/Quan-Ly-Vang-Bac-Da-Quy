@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using BaseMVVM_Service.BaseMVVM;
+using UIProject.ServiceProviders;
+using UIProject.UIConnector;
 
 namespace UIProject.ViewModels
 {
@@ -26,7 +29,7 @@ namespace UIProject.ViewModels
         private bool isPasswordShow = false;
         private string errorText = string.Empty;
         private int loginCount = 0;
-
+        private ICommand loginCmd;
         #endregion
 
 
@@ -97,11 +100,21 @@ namespace UIProject.ViewModels
             }
         }
 
+        public ICommand LoginCommand
+        {
+            get => loginCmd ?? new BaseCommand<IWindow>(OnLoginCommandExecute);
+            set => loginCmd = value;
+        }
+
         public LoginWindowViewModel() : base()
         {
 
         }
 
+        /// <summary>
+        /// Performs the login process
+        /// </summary>
+        /// <returns></returns>
         public bool Login()
         {
             IsAccountValid = true;
@@ -114,6 +127,28 @@ namespace UIProject.ViewModels
         {
             if (!IsPasswordShow)
                 this.TypingPassword = password;
+        }
+
+        protected virtual void OnLoginCommandExecute(IWindow waitingDialogWindow)
+        {
+            // No return-result required
+            LoginAsync(waitingDialogWindow);
+        }
+
+        /// <summary>
+        /// Perform a waiting dialog window while trying to process the login
+        /// </summary>
+        /// <param name="waitingDialogWindow">The window to perform</param>
+        public async Task<bool?> LoginAsync(IWindow waitingDialogWindow)
+        {
+            Task<bool> loginTask = new Task<bool>(this.Login);
+            bool? result = await LoginService.PerformLoginAndWaitingDialog(loginTask, waitingDialogWindow);
+            if (result != null)
+            {
+                IsAccountValid = result.Value;
+            }
+            return result;
+
         }
     }
 }

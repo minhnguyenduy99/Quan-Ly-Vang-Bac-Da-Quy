@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.ViewModels.LayoutViewModels;
 using BaseMVVM_Service.BaseMVVM;
+using UIProject.UIConnector;
 
 namespace UIProject.Views
 {
