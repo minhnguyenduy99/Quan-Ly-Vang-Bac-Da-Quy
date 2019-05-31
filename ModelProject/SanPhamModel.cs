@@ -14,6 +14,13 @@ namespace ModelProject
         private long donGiaMuaVao;
         private string tenSP;
 
+        //public SanPhamModel(string MASP, string TENSP, string MALOAISP, long DONGIA)
+        //{
+        //    maSP = MASP;
+        //    maLoaiSP = MALOAISP;
+        //    donGiaMuaVao = DONGIA;
+        //    tenSP = TENSP;
+        //}
         public string MaSP
         {
             get => maSP;

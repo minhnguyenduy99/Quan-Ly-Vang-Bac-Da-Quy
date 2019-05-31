@@ -12,115 +12,44 @@ namespace ModelProject
 {
     public class DataAccess
     {
-        //San pham
+        //Đã test
+        #region SANPHAM_DataAcess
         public static List<SanPhamModel> LoadSanPham()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<SanPhamModel>("select * from sanpham", new DynamicParameters());
+                var output = cnn.Query<SanPhamModel>("select * from SANPHAM", new DynamicParameters());
                 return output.ToList();
             }
         }
-        public static void SaveSanPham(SanPhamModel sanPham)
+
+        public static void SaveSanPham(SanPhamModel sanPham)        //Đã check
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into  SanPham (MASP,TENSP,MALOAISP,DONGIAMUAVAO) values (@MaSP,@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+                cnn.Execute("insert into  SANPHAM (MASP,TENSP,MALOAISP,DONGIAMUAVAO) values (@MaSP,@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+            }
+           
+        }
+
+        public static void UpdateSanPham(SanPhamModel sanPham)      //Đã check
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update SANPHAM set TENSP = @tenSP, MALOAISP = @MaLoaiSP, DONGIAMUAVAO = @DonGiaMuaVao ", sanPham);
             }
         }
 
-        public static void UpdateSanPham(SanPhamModel sanPham)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update SanPham set (TENSP,MALOAISP,DONGIAMUAVAO) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
-            }
-        }
-  
+        #endregion SANPHAM_DataAcess 
 
-        //Chi tiet ban
-        public static List<ChiTietBanModel> LoadChiTietBan()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<ChiTietBanModel>("select * from chitietban", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveChiTietBan(ChiTietBanModel ctb)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue", ctb);
-            }
-        }
-
-        public static void UpdateChiTietBan(ChiTietBanModel ctb)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update chitietban set (SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue", ctb);
-            }
-        }
-
-        //Chi tiet dich vu
-        public static List<ChiTietDichVuModel> LoadChiTietDichVu()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<ChiTietDichVuModel>("select * from ChiTietDichVu", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveChiTietDichVu(ChiTietDichVuModel ctdv)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang ", ctdv);
-            }
-        }
-
-        public static void UpdateChiTietDichVu(ChiTietDichVuModel ctdv)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update ChiTietDichVu set (CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang ", ctdv);
-            }
-        }
-
-        //Chi tiet mua
-
-        public static List<ChiTietMuaModel> LoadChiTietMua()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<ChiTietMuaModel>("select * from ChiTietMua", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveChiTietMua(ChiTietMuaModel ctm)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia) ", ctm);
-            }
-        }
-
-        public static void UpdateChiTietMua(ChiTietMuaModel ctm)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update ChiTietMua set (SOLUONG,DONGIA) values (@SoLuong,@DonGia) ", ctm);
-            }
-        }
-
-        // Don vi tinh
+        //Đã test
+        #region DONVITINH_DataAcess
 
         public static List<DonViTinhModel> LoadDonViTinh()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<DonViTinhModel>("select * from DonViTinh", new DynamicParameters());
+                var output = cnn.Query<DonViTinhModel>("select * from DONVITINH", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -135,11 +64,99 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update DonViTinh set (TENDVT) values (@TenDVT) ", dvt);
+                cnn.Execute("update DonViTinh set TENDVT = @TenDVT ", dvt);
             }
         }
 
-        // Loai dich vu 
+        #endregion DONVITINH_DataAcess
+
+        //Chưa test
+        #region KHACHHANG_DataAcess
+
+        public static List<KhachHangModel> LoadKhachHang()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<KhachHangModel>("select * from KhachHang", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static void SaveKhachHang(KhachHangModel khachHang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into KhachHang(MAKH,TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@MaKH,@TenKH,@DiaChi,@SDT1,@CongNo,@MaKhuVuc,@Email) ", khachHang);
+            }
+        }
+
+        public static void UpdateKhachHang(KhachHangModel KhachHang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update KhachHang set TENKH = @TenKH,DIACHI = @DiaChi ,SDT = @SDT1,CONGNO = @CongNo ,MAKHUVUC = @MaKhuVuc ,EMAIL = @Email ) ", KhachHang);
+            }
+        }
+
+        #endregion KHACHHANG_DataAcess
+
+        //Đã test
+        #region KHUVUC_DataAcess
+        public static List<KhuVucModel> LoadKhuVuc()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<KhuVucModel>("select * from KhuVuc", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveKhuVuc(KhuVucModel khuVuc)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
+            }
+        }
+        public static void UpdateKhuVuc(KhuVucModel KhuVuc)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update KhuVuc set TENKHUVUC= @TenKhuVuc ", KhuVuc);
+            }
+        }
+
+        #endregion KHUVUC_DataAcess
+
+        //Đã test
+        #region TINHTRANG_DataAcess
+        public static List<TinhTrangModel> LoadTinhTrang()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<TinhTrangModel>("select * from TinhTrang", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveTinhTrang(TinhTrangModel TinhTrang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into TinhTrang(MATINHTRANG,TENTINHTRANG) values (@MaTinhTrang, @TenTinhTrang) ", TinhTrang);
+            }
+        }
+
+        public static void UpdateTinhTrang(TinhTrangModel TinhTrang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update TinhTrang set TENTINHTRANG = @TenTinhTrang ", TinhTrang);
+            }
+        }
+
+        #endregion TINHTRANG_DataAcess
+
+        //Đã test
+        #region LOAIDICHVU_DataAcess
         public static List<LoaiDichVuModel> LoadLoaiDichVu()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -160,10 +177,96 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update LoaiDichVu set (TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV) ", loaiDV);
+                cnn.Execute("update LoaiDichVu set TENLOAIDV = @TenLoaiDV , DONGIADV = @DonGiaDV  ", loaiDV);
             }
         }
-        // Loai san pham
+        #endregion LOAIDICHVU_DataAcess
+
+        //Đã test
+        #region CHITIETBAN_DataAcess
+        public static List<ChiTietBanModel> LoadChiTietBan()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<ChiTietBanModel>("select * from chitietban", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveChiTietBan(ChiTietBanModel ctb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue)", ctb);
+            }
+        }
+
+        public static void UpdateChiTietBan(ChiTietBanModel ctb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update chitietban set SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,DONGIAMUAVAO=@DonGiaMuaVao,CHIETKHAU=@ChietKhau,THUE=@Thue", ctb);
+            }
+        }
+        #endregion CHITIETBAN_DataAcess
+
+        //Đã test
+        #region CHITIETMUA_DataAcess
+        public static List<ChiTietMuaModel> LoadChiTietMua()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<ChiTietMuaModel>("select * from ChiTietMua", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveChiTietMua(ChiTietMuaModel ctm)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia) ", ctm);
+            }
+        }
+
+        public static void UpdateChiTietMua(ChiTietMuaModel ctm)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update ChiTietMua set SOLUONG = @SoLuong ,DONGIA = @DonGia ", ctm);
+            }
+        }
+
+        #endregion CHITIETMUA_DataAcess
+
+        //Đã test
+        #region CHITIETDICHVU_DataAcess
+        public static List<ChiTietDichVuModel> LoadChiTietDichVu()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<ChiTietDichVuModel>("select * from ChiTietDichVu", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveChiTietDichVu(ChiTietDichVuModel ctdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang) ", ctdv);
+            }
+        }
+
+        public static void UpdateChiTietDichVu(ChiTietDichVuModel ctdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update ChiTietDichVu set CHIPHIRIENG=@ChiPhiRieng,SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,TRATRUOC=@TraTruoc,NGAYGIAO=@NgayGiao,MATINHTRANG=@MaTinhTrang" , ctdv);
+            }
+        }
+
+        #endregion CHITIETDICHVU_DataAcess
+
+        //Đã test
+        #region LOAISANPHAM_DataAcess
 
         public static List<LoaiSanPhamModel> LoadLoaiSanPham()
         {
@@ -177,7 +280,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan) ", loaiSP);
+                cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP) ", loaiSP);
             }
         }
 
@@ -185,10 +288,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update LoaiSanPham set (MADVT,PHANTRAMLOINHUAN) values (@MaDVT,@PhanTramLoiNhuan) ", loaiSP);
+                cnn.Execute("update LoaiSanPham set MADVT=@MaDVT,PHANTRAMLOINHUAN=@PhanTramLoiNhuan, TENLOAISP = @TenLoaiSP ", loaiSP);
             }
         }
-        // Nha cung cap
+
+        #endregion LOAISANPHAM_DataAcess
+
+        //Đã test
+        #region PHIEUBAN_DataAcess
 
         public static List<PhieuBanModel> LoadPhieuBan()
         {
@@ -210,11 +317,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuBan set (SOPHIEU,NGAYLAP,MAKH) values (@SoPhieu,@NgayLap,@MaKH) ", phieuBan);
+                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH ", phieuBan);
             }
         }
 
-        // Phieu Mua
+        #endregion PHIEUBAN_DataAcess
+
+        //Đã test
+        #region PHIEUMUA_DataAcess
         public static List<PhieuMuaModel> LoadPhieuMua()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -236,10 +346,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuMua set (SOPHIEU,NGAYLAP,MANCC) values (@SoPhieu,@NgayLap,@MaNCC) ", PhieuMua);
+                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC ", PhieuMua);
             }
         }
-        //Phieu dich vu
+
+        #endregion PHIEUMUA_DataAcess
+
+        //Đã test
+        #region PHIEUDICHVU_DataAcess
         public static List<PhieuDichVuModel> LoadPhieuDichVu()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -252,7 +366,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuDichVu(MAPHIEU,SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc) ", PhieuDichVu);
+                cnn.Execute("insert into PhieuDichVu(MAPHIEU,SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang) ", PhieuDichVu);
             }
         }
 
@@ -260,86 +374,18 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuDichVu set (SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc) ", PhieuDichVu);
+                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc ", PhieuDichVu);
             }
         }
-        // Tinh trang
-        public static List<TinhTrangModel> LoadTinhTrang()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<TinhTrangModel>("select * from TinhTrang", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveTinhTrang(TinhTrangModel TinhTrang)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into TinhTrang(MATINHTRANG,TENTINHTRANG) values (@MaTinhTrang,@TenTinhTrang) ", TinhTrang);
-            }
-        }
+        #endregion PHIEUDICHVU_DataAcess
 
-        public static void UpdateTinhTrang(TinhTrangModel TinhTrang)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update TinhTrang set (TENTINHTRANG) values (@TenTinhTrang) ", TinhTrang);
-            }
-        }
-        // khach hang 
-        public static List<KhachHangModel> LoadKhachHang()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<KhachHangModel>("select * from KhachHang", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveKhachHang(KhachHangModel khachHang)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into KhachHang(MAKH,TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@MaKH,@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
-            }
-        }
 
-        public static void UpdateKhachHang(KhachHangModel KhachHang)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update KhachHang set (TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", KhachHang);
-            }
-        }
-        // khu vuc
-        public static List<KhuVucModel> LoadKhuVuc()
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<KhuVucModel>("select * from KhuVuc", new DynamicParameters());
-                return output.ToList();
-            }
-        }
-        public static void SaveKhuVuc(KhuVucModel khuVuc)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
-            }
-        }
-        public static void UpdateKhuVuc(KhuVucModel KhuVuc)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("update KhuVuc set (TENKHUVUC) values (@TenKhuVuc) ", KhuVuc);
-            }
-        }
-        //Loc theo ten (cum tu) 
+        //Đã test 
         public static List<SanPhamModel> FilterSPByName(string query)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<SanPhamModel>("select * from SanPham where TENSP like @n ", new { n = "%" + query + "%" });
+                var output = cnn.Query<SanPhamModel>("select * from SanPham where TENSP like @n ", new { n = '%' +query + '%' });
                 return output.ToList();
             }
         }
@@ -352,7 +398,7 @@ namespace ModelProject
                 var output = cnn.Query<SanPhamModel>("select * " +
                     "from SanPham SP join LOAISANPHAM LSP " +
                     "on SP.MALOAISP = LSP.MALOAISP " +
-                    "where TENLOAISP like @q ", new { q = "%" + query + "%" });
+                    "where LSP.TENLOAISP like @q ", new { q = '%' + query + '%' });
                 return output.ToList();
             }
         }
@@ -363,7 +409,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<KhachHangModel>("select * from KhachHang where TENKH like @q ", new { q = "%" + query + "%" });
+                var output = cnn.Query<KhachHangModel>("select * from KhachHang where TENKH like @q ", new { q = '%' + query + '%' });
                 return output.ToList();
             }
         }
@@ -376,7 +422,7 @@ namespace ModelProject
                 var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang kh join KhuVuc kv " +
                     "on kh.MAKHUVUC = kv.MAKHUVUC" +
-                    " where kv.TENKHUVUC like @q ", new { q = "%" + query + "%" });
+                    " where kv.TENKHUVUC like @q ", new { q = '%' + query + '%' });
                 return output.ToList();
             }
         }
@@ -388,43 +434,46 @@ namespace ModelProject
             {
                 var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang " +
-                    "where SDT like @q ", new { q = "%" + query + "%" });
+                    "where SDT like @q ", new { q = '%' + query + '%' });
                 return output.ToList();
             }
         }
 
-        //loc theo Ma 
-
+        //Đã test
         public static SanPhamModel LoadSPByMaSP(string masp)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<SanPhamModel>("select * " +
                     "from SanPham " +
-                    "where MASP=@masp ", masp);
-                return (SanPhamModel)output;
+                    "where MASP=@n ", new { n = masp});
+
+                return output. ElementAt<SanPhamModel>(0);
             }
         }
 
+        //Đã test
         public static KhachHangModel LoadKHByMaKH(string makh)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<KhachHangModel>("select * " +
                     "from KhachHang " +
-                    "where MAKH=@makh ", makh);
-                return (KhachHangModel)output;
+                    "where MAKH=@m ",new { m = makh });
+                return output.ElementAt<KhachHangModel>(0);
             }
         }
 
+
+        //Đã test
         public static NhaCungCapModel LoadNCCByMaNCC(string mancc)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<NhaCungCapModel>("select * " +
                     "from NhaCungCap " +
-                    "where MANCC=@mancc ", mancc);
-                return (NhaCungCapModel)output;
+                    "where MANCC=@m ",new { m = mancc });
+                return output.ElementAt<NhaCungCapModel>(0);
             }
         }
 
@@ -435,8 +484,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<KhuVucModel>("select * " +
                     "from KhuVuc " +
-                    "where MAKHUVUC=@makv ", makv);
-                return (KhuVucModel)output;
+                    "where MAKHUVUC=@m ", new { m = makv });
+                return output.ElementAt<KhuVucModel>(0);
             }
         }
 
@@ -446,8 +495,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<PhieuBanModel>("select * " +
                     "from PhieuBan " +
-                    "where MAPHIEU=@mapb ", mapb);
-                return (PhieuBanModel)output;
+                    "where MAPHIEU=@m ",new { m = mapb });
+                return output.ElementAt<PhieuBanModel>(0);
             }
         }
 
@@ -457,8 +506,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<PhieuMuaModel>("select * " +
                     "from PhieuMua " +
-                    "where MAPHIEU=@mapb ", mapb);
-                return (PhieuMuaModel)output;
+                    "where MAPHIEU=@m ",new { m = mapb });
+                return output.ElementAt<PhieuMuaModel>(0);
             }
         }
 
@@ -470,8 +519,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<DonViTinhModel>("select * " +
                     "from DonViTinh " +
-                    "where MADVT=@madvt ", madvt);
-                return (DonViTinhModel)output;
+                    "where MADVT=@m ",new { m = madvt });
+                return output.ElementAt<DonViTinhModel>(0);
             }
         }
 
@@ -481,8 +530,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<LoaiDichVuModel>("select * " +
                     "from LoaiDichVu " +
-                    "where MALOAIDICHVU=@madv ", madv);
-                return (LoaiDichVuModel)output;
+                    "where MALOAIDICHVU=@m ",new { m = madv });
+                return output.ElementAt<LoaiDichVuModel>(0);
             }
         }
 
@@ -492,8 +541,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +
                     "from LoaiSanPham " +
-                    "where MALOAISANPHAM=@malsp ", malsp);
-                return (LoaiSanPhamModel)output;
+                    "where MALOAISANPHAM=@m ",new { m = malsp });
+                return output.ElementAt<LoaiSanPhamModel>(0);
             }
         }
 
@@ -503,8 +552,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<PhieuDichVuModel>("select * " +
                     "from PhieuDichVu " +
-                    "where MAPHIEU=@mapdv ", mapdv);
-                return (PhieuDichVuModel)output;
+                    "where MAPHIEU=@m ", new { m = mapdv });
+                return output.ElementAt<PhieuDichVuModel>(0);
             }
         }
 
@@ -514,8 +563,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<TinhTrangModel>("select * " +
                     "from TinhTrang " +
-                    "where MATINHTRANG=@matt ", matt);
-                return (TinhTrangModel)output;
+                    "where MATINHTRANG=@m ",new { m = matt });
+                return output.ElementAt<TinhTrangModel>(0) ;
             }
         }
 
@@ -528,8 +577,8 @@ namespace ModelProject
             {
                 var output = cnn.Query<ChiTietBanModel>("select * " +
                     "from ChiTietBan " +
-                    "where MAPHIEUMUAHANG=@mactb ", mactb);
-                return (ChiTietBanModel)output;
+                    "where MAPHIEUMUAHANG=@m ", new { m = mactb });
+                return output.ElementAt<ChiTietBanModel>(0);
             }
         }
 
@@ -540,8 +589,8 @@ namespace ModelProject
             {
                 var output= cnn.Query<ChiTietMuaModel>("select * " +
                     "from ChiTietMua " +
-                    "where MAPHIEUMUAHANG=@mactb ", mactb);
-                return (ChiTietMuaModel)output;
+                    "where MAPHIEUMUAHANG=@m ",new { m = mactb });
+                return output.ElementAt<ChiTietMuaModel>(0);
             }
         }
 
@@ -551,13 +600,13 @@ namespace ModelProject
             {
                 var output = cnn.Query<ChiTietDichVuModel>("select * " +
                     "from ChiTietBan " +
-                    "where MAPHIEU=@mactdv ", macctdv);
-                return (ChiTietDichVuModel)output;
+                    "where MAPHIEU=@m ",  new { m = macctdv });
+                return output.ElementAt<ChiTietDichVuModel>(0);
             }
         }
 
         
-        private static string LoadConnectionString(string id = "Default")
+       private  static string LoadConnectionString(string id = "Default")
         {
             return "Data Source=.\\database.db;Version=3;";
         }

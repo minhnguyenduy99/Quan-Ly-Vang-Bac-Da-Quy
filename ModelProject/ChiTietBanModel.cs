@@ -13,6 +13,8 @@ namespace ModelProject
         private string maPhieuMuaHang;
         private string maSP;
 
+        private double chietKhau;
+       
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenSP;
         private string loaiSP;
@@ -45,6 +47,17 @@ namespace ModelProject
             DonViTinhModel dvtModel = DataAccess.LoadDonViTinhByMADVT(_loaiSP.MaDVT);
             donViTinh = dvtModel.TenDVT;
         }
+        public ChiTietBanModel()
+        {
+            MaPhieuMuaHang = "MAPMH1";
+            MaSP = "MASP1";
+            SoLuong = 10;
+            ThanhTien = 1000;
+            DonGiaMuaVao = 1000;
+            ChietKhau = 10;
+            Thue = 10;
+        }
+
         public string MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
@@ -163,7 +176,11 @@ namespace ModelProject
             get => thue;
             set => SetProperty(ref thue, value);
         }
-
+        public double ChietKhau
+        {
+            get => chietKhau;
+            set =>SetProperty( ref chietKhau,value);
+        }
 
         public override bool Equals(object obj)
         {
