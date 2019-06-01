@@ -60,23 +60,33 @@
                                Height="50"
                                Source="{Binding IconSource}"/>
                     </Grid>
-                    
-                    <!-- List tabs -->
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <Separator/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <Separator/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <Separator/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                    <Separator/>
-                    <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
 
+                    <StackPanel Orientation="Vertical"
+                                x:Name="TabContainerStackPanel">
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Expander Style="{StaticResource TabLikeExpanderStyle}"
+                                  Header="Hello">
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                                <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                            </StackPanel>
+                        </Expander>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Separator/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Separator/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Separator/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Separator/>
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                    </StackPanel>
+                    <!-- List tabs -->
                 </StackPanel>
             </Grid>
             

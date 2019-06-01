@@ -12,13 +12,13 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// Base view model of <see cref="HeaderedContentControl"/>
     /// </summary>
-    public class BaseHeaderViewModel: BaseViewModel
+    public class HeaderViewModel: BaseViewModel
     {
         private string header;
         private string iconSource;
         private Brush foreground;
         private Brush background;
-
+        private Brush focusBackground;
 
         /// <summary>
         /// The content of header
@@ -54,6 +54,12 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             get => background;
             set => SetProperty(ref background, value);
+        }
+
+        public Brush FocusBackground
+        {
+            get => focusBackground;
+            set => SetProperty(ref focusBackground, value);
         }
     }
 }

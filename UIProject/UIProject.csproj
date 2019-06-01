@@ -167,7 +167,7 @@
     <Compile Include="ViewModels\LayoutViewModels\ObservableCollectionViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\EnumFilterViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseContentViewModel.cs" />
-    <Compile Include="ViewModels\LayoutViewModels\BaseHeaderViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\HeaderViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseWindowViewModel.cs" />
     <Compile Include="ViewModels\HomePageWindowViewModel.cs" />
     <Compile Include="ServiceProviders\FilterHelper.cs" />

@@ -41,16 +41,10 @@
     </Style>
 
     <Style TargetType="Expander" x:Key="TabLikeExpanderStyle" BasedOn="{StaticResource MaterialDesignExpander}">
-        <Setter Property="HeaderTemplate" Value="{DynamicResource TabButtonStyleDataTemplate}"/>
         <Setter Property="Background" Value="{Binding Background}"/>
-        <Setter Property="IsExpanded" Value="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Setter Property="IsExpanded" Value="False"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Style.Triggers>
-            <Trigger Property="IsExpanded" Value="true">
-                <Setter Property="Background" Value="{Binding FocusBackground}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
     
     

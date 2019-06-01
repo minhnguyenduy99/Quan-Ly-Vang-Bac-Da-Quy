@@ -52,11 +52,54 @@ namespace UIProject.Views
 
         private void SetupBindingTabControl()
         {
-            var tabs = TabsContainer.Children.OfType<RadioButton>();
+            var tabs = GetAllRadioButtons();
             for(int i=0;i<tabs.Count();i++)
-            {               
-                 tabs.ElementAt(i).DataContext = tabs.ElementAt(i).Content = (DataContext as HomePageWindowViewModel).ListTabs[i];
+            {
+                try
+                {
+                    tabs.ElementAt(i).DataContext = tabs.ElementAt(i).Content = (DataContext as HomePageWindowViewModel).ListTabs[i];
+                }
+                catch { break; }
             }
+        }
+
+        private List<RadioButton> GetAllRadioButtons()
+        {
+            List<RadioButton> listRadioBtns = new List<RadioButton>();
+            StackPanel container = TabContainerStackPanel;
+            foreach(var child in container.Children)
+            {
+                if (child is Expander)
+                {
+                    List<RadioButton> subChildren = GetRadioButtonsFromExpander((Expander)child);
+                    listRadioBtns.AddRange(subChildren);
+                }
+                else
+                {
+                    if (child is RadioButton)
+                    {
+                        listRadioBtns.Add((RadioButton)child);
+                    }
+                }
+            }
+            return listRadioBtns;
+        }
+
+        private List<RadioButton> GetRadioButtonsFromExpander(Expander expander)
+        {
+            if (expander == null)
+                return null;
+            List<RadioButton> radioButtons = new List<RadioButton>();
+            var containerCast = expander.Content as StackPanel;
+            if (containerCast != null)
+            {
+                foreach(var child in containerCast.Children)
+                {
+                    if (child is RadioButton)
+                        radioButtons.Add((RadioButton)child);
+                }
+            }
+            return radioButtons;
         }
     }
 }
