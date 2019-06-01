@@ -15,7 +15,7 @@ namespace ModelProject
         private string maKH;
         private long tongTien;
         private long tongTienTraTruoc;
-
+        private int tinhTrang;
         public string MaPhieu
         {
             get => maPhieu;
@@ -45,6 +45,11 @@ namespace ModelProject
         {
             get => tongTienTraTruoc;
             set => SetProperty(ref tongTienTraTruoc, value);
+        }
+        public int TinhTrang
+        {
+            get => tinhTrang;
+            set => SetProperty(ref tinhTrang, value);
         }
 
         public override bool Equals(object obj)
