@@ -22,7 +22,6 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand thanhToanCommand;
         private PhieuBanModel phieuBan;
         private List<ChiTietBanModel> dsChiTietBan;
-        private HoaDonModel hoaDon { get; set; }
 
         /// <summary>
         /// Thông tin khách hàng 
@@ -38,7 +37,21 @@ namespace UIProject.ViewModels.PageViewModels
             }
         }
 
-        
+        /// <summary>
+        /// Hóa đơn tương ứng với phiếu bán
+        /// </summary>
+        public HoaDonModel HoaDon
+        {
+            get
+            {
+                return new HoaDonModel(this.PhieuBan)
+                {
+                    DSChiTietBan = DanhSachChiTietBan?.Models.ToList()
+                };
+            }
+        }
+
+
         /// <summary>
         /// View model của việc tìm kiếm sản phẩm
         /// </summary>
@@ -95,7 +108,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThanhToanCommand
         {
-            get => thanhToanCommand ?? new BaseCommand(OnThanhToanCommandExecute);
+            get => thanhToanCommand ?? new BaseCommand<IWindow>(OnThanhToanCommandExecute);
             set => thanhToanCommand = value;
         }
 
@@ -122,12 +135,11 @@ namespace UIProject.ViewModels.PageViewModels
         protected override void LoadPageComponents()
         {
             PhieuBan = new PhieuBanModel();
-            hoaDon = new HoaDonModel(PhieuBan);
 
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
 
-            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(hoaDon.DSChiTietBan);
+            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(HoaDon.DSChiTietBan);
         }
         private void SetUpBolocTimKiemSanPham()
         {
@@ -205,10 +217,13 @@ namespace UIProject.ViewModels.PageViewModels
             window.ShowDialog();
         }
 
-        protected virtual void OnThanhToanCommandExecute()
+        protected virtual void OnThanhToanCommandExecute(IWindow window)
         {
-            hoaDon.DSChiTietBan = DanhSachChiTietBan.Models.ToList();
-            hoaDon.Submit(SubmitType.Add);
+            window.DataContext = new PrintWindowViewModel();
+            if (window.ShowDialog() == true)
+            {
+                HoaDon.Submit(SubmitType.Add);
+            }
         }
         #endregion
     }

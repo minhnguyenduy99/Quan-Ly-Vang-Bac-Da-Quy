@@ -83,7 +83,6 @@ namespace UIProject
                     CanMaximized = false,
                     CanMinimized = false,
                     MessageText = "Vui lòng đợi",
-                    Background = Brushes.White,
                     DialogType = DialogWindowType.WaitingMessage,
                 });
 

@@ -57,9 +57,29 @@ namespace UIProject.Views
             {
                 try
                 {
-                    tabs.ElementAt(i).DataContext = tabs.ElementAt(i).Content = (DataContext as HomePageWindowViewModel).ListTabs[i];
+                    tabs.ElementAt(i).DataContext = (DataContext as HomePageWindowViewModel).ListTabs[i];
                 }
                 catch { break; }
+            }
+
+            // If a tab (radio button) is checked, its parent (expander) will be expanded
+            tabs.ForEach(tab => tab.Checked += Tab_Checked);
+        }
+
+        private void Tab_Checked(object sender, RoutedEventArgs e)
+        {
+            var tabCast = sender as RadioButton;
+            if (tabCast != null)
+            {
+                var tabParent = tabCast.Parent as StackPanel;
+                if (tabParent != null && tabParent != TabContainerStackPanel)
+                {
+                    var expanderCast = tabParent.Parent as Expander; 
+                    if (expanderCast != null)
+                    {
+                        expanderCast.IsExpanded = true;
+                    }
+                }
             }
         }
 

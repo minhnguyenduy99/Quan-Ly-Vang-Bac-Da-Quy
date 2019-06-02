@@ -24,13 +24,13 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <Button Content="In"
-                    Click="Button_Click"/>
+                        Command="{Binding PrintCommand}"
+                        CommandParameter="{Binding Document, ElementName=documentViewer}"/>
             </StackPanel>
             <FlowDocumentPageViewer Grid.Column="1"
                                     x:Name="documentViewer"           
                                     Padding="10"
-                                    DataContext="{Binding Model}"
-                                    Document="{StaticResource HoaDonPrintTemplate}"/>
+                                    Document="{Binding Document}"/>
         </Grid>
     </Border>
 </Window>

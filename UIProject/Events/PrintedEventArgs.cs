@@ -17,15 +17,18 @@ namespace UIProject.Events
         public IPrinter Printer { get; private set; }
         public IDocumentPaginatorSource Document { get; private set; } = null;
         public Visual Visual { get; private set; } = null;
-        public PrintedEventArgs(IPrinter printer, IDocumentPaginatorSource document)
+        public bool? PrintResult { get; private set; }
+        public PrintedEventArgs(IPrinter printer, IDocumentPaginatorSource document, bool? printResult = null)
         {
             Printer = printer;
             Document = document;
+            PrintResult = printResult;
         }
-        public PrintedEventArgs(IPrinter printer, Visual visual)
+        public PrintedEventArgs(IPrinter printer, Visual visual, bool printResult)
         {
             Printer = printer;
             Visual = visual;
+            PrintResult = printResult;
         }
     }
 }

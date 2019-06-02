@@ -29,12 +29,23 @@ namespace UIProject.Views
         {
             InitializeComponent();
 
-            this.DataContext = new PrintWindowViewModel();
+            var printWndVM = new PrintWindowViewModel(document);
+            this.DataContext = printWndVM;
+
+            printWndVM.PrintFinished += PrintWndVM_PrintFinished;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void PrintWndVM_PrintFinished(object sender, Events.PrintedEventArgs e)
         {
-
+            DialogPopupWindow notifyWnd = new DialogPopupWindow(new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.Info,
+                WindowState = WindowState.Normal,
+                MessageText = "Thanh toán thành công",
+            });
+            notifyWnd.ShowDialog();
+            this.DialogResult = e.PrintResult;
+            this.Close();
         }
     }
 }

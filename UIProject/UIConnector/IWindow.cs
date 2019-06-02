@@ -14,10 +14,13 @@ namespace UIProject.UIConnector
     {
 
         object DataContext { get; set; }
+        bool? DialogResult { get; set; }
 
         void Show();
         bool? ShowDialog();
         void Close();
+
+
 
     }
 }

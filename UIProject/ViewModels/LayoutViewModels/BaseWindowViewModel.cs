@@ -18,7 +18,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// View model of Base window without a specified model
     /// </summary>
-    public class BaseWindowViewModel : BaseContentViewModel
+    public class BaseWindowViewModel : BaseViewModel
     {
         private string _title;
         private WindowState _windowState;

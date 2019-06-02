@@ -17,10 +17,8 @@ namespace UIProject.ViewModels
     /// <summary>
     /// View model of tab control
     /// </summary>
-    public class TabViewModel : BaseContentViewModel, ISelectable
+    public class TabViewModel : BaseViewModel, ISelectable
     {
-
-
         #region Private Fields
         private string tabName;
         private TabState state;
@@ -103,16 +101,12 @@ namespace UIProject.ViewModels
         /// <param name="iconSourceKey">The source key of the icon in the source dictionary</param>
         /// <param name="state">The state of tab</param>
         /// <returns></returns>
-        public static TabViewModel CreateTabViewModel(string tabName, string iconSourceKey, TabState state)
+        public static TabViewModel CreateTabViewModel(string tabName, TabState state)
         {
             return new TabViewModel()
             {
                 TabName = tabName,
-                IconSource = (string)Application.Current.FindResource(iconSourceKey),
                 State = state,
-                Background = (Brush)Application.Current.FindResource("RoyalBlue"),
-                Foreground = Brushes.White,
-                FocusBackground = (Brush)Application.Current.FindResource("AzureBlue"),
             };
         }
 
@@ -125,10 +119,6 @@ namespace UIProject.ViewModels
             TabSelected?.Invoke(this, new TabSelectedEventArgs(tabName));
         }
 
-        protected override void SetDefaultStyle()
-        {
-            
-        }
         protected virtual void OnSelectItemCommandExecute()
         {
             Select();

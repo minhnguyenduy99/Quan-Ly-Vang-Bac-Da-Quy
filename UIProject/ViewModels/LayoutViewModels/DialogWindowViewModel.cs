@@ -153,6 +153,7 @@ namespace UIProject.ViewModels.LayoutViewModels
             waitingText = DEFAULT_WAITING_TEXT;
             NavigationBarVisibility = System.Windows.Visibility.Collapsed;
             DialogType = DialogWindowType.YesNo;
+            CanMaximized = CanMinimized = false;
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public ICommand YesButtonPressedCommand
         {
-            get => yesCmd ?? (yesCmd = new BaseCommand(() => OnButtonPressed(DialogResult.Yes)));
+            get => yesCmd ?? (yesCmd = new BaseCommand(() => OnButtonPressed(DialogResult.Yes, "Yes")));
             set => yesCmd = value;
         }
 
@@ -169,7 +170,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public ICommand NoButtonPressedCommand
         {
-            get => noCmd ?? (noCmd = new BaseCommand(() => OnButtonPressed(DialogResult.No)));
+            get => noCmd ?? (noCmd = new BaseCommand(() => OnButtonPressed(DialogResult.No, "No")));
             set => noCmd = value;
         }
 
@@ -178,7 +179,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public ICommand CancelButtonPressedCommand
         {
-            get => cancelCmd ?? (cancelCmd = new BaseCommand(() => OnButtonPressed(DialogResult.Cancel)));
+            get => cancelCmd ?? (cancelCmd = new BaseCommand(() => OnButtonPressed(DialogResult.Cancel, "Cancel")));
             set => cancelCmd = value;
         }
 
@@ -187,15 +188,15 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public ICommand OKButtonPressedCommand
         {
-            get => okCmd ?? (okCmd = new BaseCommand(() => OnButtonPressed(DialogResult.OK)));
+            get => okCmd ?? (okCmd = new BaseCommand(() => OnButtonPressed(DialogResult.OK, "OK")));
             set => okCmd = value;
         }
 
         
-        protected virtual void OnButtonPressed(DialogResult result)
+        protected virtual void OnButtonPressed(DialogResult result, string buttonName)
         {
             this.DialogResult = result;
-            ButtonPressed?.Invoke(this, new DialogButtonPressedEventArgs(result));
+            ButtonPressed?.Invoke(this, new DialogButtonPressedEventArgs(result, buttonName));
         }
 
         public event EventHandler<DialogButtonPressedEventArgs> ButtonPressed;
@@ -205,10 +206,12 @@ namespace UIProject.ViewModels.LayoutViewModels
     public class DialogButtonPressedEventArgs: EventArgs
     {
         public DialogResult DialogResult { get; private set; }
+        public string ButtonName { get; private set; }
         
-        public DialogButtonPressedEventArgs(DialogResult result)
+        public DialogButtonPressedEventArgs(DialogResult result, string buttonName)
         {
             DialogResult = result;
+            this.ButtonName = buttonName;
         }
     }
 }

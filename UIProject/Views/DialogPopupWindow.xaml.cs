@@ -27,13 +27,21 @@ namespace UIProject.Views
         public BaseViewModel ViewModel { get; set; }
         public DialogPopupWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         public DialogPopupWindow(DialogWindowViewModel dialogWindowVM) : this()
         {
             ApplyViewModel(dialogWindowVM);
             ApplyTemplateForViewModel();
+
+            dialogWindowVM.ButtonPressed += DialogWindowVM_ButtonPressed;
+        }
+
+        private void DialogWindowVM_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
+        {
+            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.OK)
+                this.Close();
         }
 
         private void ApplyTemplateForViewModel()
@@ -44,6 +52,7 @@ namespace UIProject.Views
                 case DialogWindowType.YesNo: this.ContentTemplate = GetDialogContentTemplate("YesNoDialogTemplate");break;
                 case DialogWindowType.WaitingMessage: this.ContentTemplate = GetDialogContentTemplate("WaitingMessageDialogTemplate");break;
                 case DialogWindowType.WaitingMessageCancel: this.ContentTemplate = GetDialogContentTemplate("WaitingMessageCancelTemplate");break;
+                case DialogWindowType.Info: this.ContentTemplate = GetDialogContentTemplate("MessageDialogTemplate");break;
             }
         }
 

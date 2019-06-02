@@ -37,20 +37,21 @@ namespace UIProject.Pages
         {
             InitializeComponent();
 
+            ViewModel = new BanHangPageVM();
+            this.DataContext = ViewModel;
+
+
             this.Loaded += BanHangPage_Loaded;
 
-            ViewModel = new BanHangPageVM();
-
-            this.DataContext = ViewModel;
             //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
             ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
-            PART_LoaiSanPham.DataContext = ViewModel.LocSanPhamVM;
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
         private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<BaseSubmitableModel> e)
         {
             CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow();
+            btnAddCustomer.CommandParameter = customerWindow;
         }
 
         private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)
@@ -65,30 +66,16 @@ namespace UIProject.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            OpenPrintViewer();
+            InitializePrintViewWindow();
         }
 
-        private void OpenPrintViewer()
+        private void InitializePrintViewWindow()
         {
-            if (File.Exists("hoadon.xps"))
-            {
-                File.Delete("hoadon.xps");
-            }
-            using (XpsDocument xpsDoc = new XpsDocument("hoadon.xps", FileAccess.ReadWrite))
-            {
-                XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
-                var printTicket = new PrintTicket();
-                printTicket.PagesPerSheet = 1;
-                printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.NorthAmericaLetter, 500, 500);
-                writer.Write(GetDocumentPage().DocumentPaginator);
-
-                //var fixedDoc = xpsDoc.GetFixedDocumentSequence();
-
-                var fixedDoc = (FlowDocument)GetDocumentPage();
-
-                DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(fixedDoc);
-                printWnd.ShowDialog();
-            }
+            FlowDocument hoadonPrintDoc = (FlowDocument)GetDocumentPage();
+            hoadonPrintDoc.DataContext = ViewModel.HoaDon;
+            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(hoadonPrintDoc);
+            btnThanhToan.CommandParameter = printWnd;
+            
         }
 
         private IDocumentPaginatorSource GetDocumentPage()

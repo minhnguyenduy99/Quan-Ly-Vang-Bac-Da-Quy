@@ -13,7 +13,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Width" Value="auto"/>
             </Style>
-            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource PrintTextBoxStyle}"></Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource UIProjectPrintTextBoxStyle}"></Style>
         </FlowDocument.Resources>
         <Section Name="GeneralInfo">
             <BlockUIContainer>

@@ -49,6 +49,7 @@ namespace UIProject.ViewModels
         #endregion
 
         public List<HeaderViewModel> ListTabHeaders { get; private set; }
+
         
         /// <summary>
         /// List of tab view models represents the menu tab on window
@@ -58,11 +59,7 @@ namespace UIProject.ViewModels
         /// <summary>
         /// Current page displayed on the window
         /// </summary>
-        public TabViewModel CurrentTabVM
-        {
-            get => currentTabVM;
-            set => SetProperty(ref currentTabVM, value);
-        }
+        public TabViewModel CurrentTabVM { get; set; }
 
         /// <summary>
         /// The current object which is currently navigated
@@ -81,8 +78,6 @@ namespace UIProject.ViewModels
         public HomePageWindowViewModel()
         {
             SetUpWindowLayout();
-
-            InitializeTabHeaders();
 
             InitializeTabs();
 
@@ -122,49 +117,21 @@ namespace UIProject.ViewModels
             IconSource = (string)Application.Current.FindResource("SoftwareIcon");
             BackgroundSource = (string)Application.Current.FindResource("LoginBackground");
         }
-        private void InitializeTabHeaders()
-        {
-            ListTabHeaders = new List<HeaderViewModel>()
-            {
-                new HeaderViewModel()
-                {
-                    Header = ListTabHeaderNames[0],
-                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
-                },
-                new HeaderViewModel()
-                {
-                    Header = ListTabHeaderNames[1],
-                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
-                },
-                new HeaderViewModel()
-                {
-                    Header = ListTabHeaderNames[2],
-                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
-                }
-            };
-
-            foreach(var header in ListTabHeaders)
-            {
-                header.Background = (Brush)Application.Current.FindResource("RoyalBlue");
-                header.Foreground = Brushes.White;
-                header.FocusBackground = (Brush)Application.Current.FindResource("AzureBlue");
-            }
-        }
         private void InitializeTabs()
         {
             //  Initialize the content present layout of tabs
             this.ListTabs = new List<TabViewModel>()
             {
-                CreateTabViewModel(ListTabNames[0], "Tab_TongQuan", TabState.New),
-                CreateTabViewModel(ListTabNames[1], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[2], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[3], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[4], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[5], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[6], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[7], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[8], "SoftwareIcon", TabState.New),
-                CreateTabViewModel(ListTabNames[9], "SoftwareIcon", TabState.New),
+                CreateTabViewModel(ListTabNames[0], TabState.New),
+                CreateTabViewModel(ListTabNames[1], TabState.New),
+                CreateTabViewModel(ListTabNames[2], TabState.New),
+                CreateTabViewModel(ListTabNames[3], TabState.New),
+                CreateTabViewModel(ListTabNames[4], TabState.New),
+                CreateTabViewModel(ListTabNames[5], TabState.New),
+                CreateTabViewModel(ListTabNames[6], TabState.New),
+                CreateTabViewModel(ListTabNames[7], TabState.New),
+                CreateTabViewModel(ListTabNames[8], TabState.New),
+                CreateTabViewModel(ListTabNames[9], TabState.New),
             };
 
             SubcribeTabChangedEvent();

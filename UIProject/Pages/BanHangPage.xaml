@@ -8,6 +8,8 @@
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
       xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
       xmlns:services="clr-namespace:UIProject.ServiceProviders"
+      xmlns:vms="clr-namespace:UIProject.ViewModels"
+      xmlns:windows ="clr-namespace:UIProject.Views"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       Title="BanHangPage">
@@ -48,6 +50,7 @@
                         Orientation="Horizontal"
                         Margin="30 10 10 10">
                 <ComboBox x:Name="PART_LoaiSanPham"
+                          DataContext="{Binding LocSanPhamVM}"
                           FontSize="15"
                           ItemsSource="{Binding Collection.Items, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -58,17 +61,17 @@
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0"
               Panel.ZIndex="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid x:Name="PART_PRODUCTS"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="PART_PRODUCTS"
                       Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <!-- Menu grid view -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!-- Menu grid view -->
                 <materialDesign:Card Grid.Row="0"
                                          Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                          VerticalAlignment="Stretch"
@@ -177,26 +180,26 @@
                                      Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                      Margin="10 5 5 5">
                     <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Label Style="{StaticResource MediumLabelStyle}"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Style="{StaticResource MediumLabelStyle}"
                                    Margin="7"
                                    HorizontalAlignment="Center"
                                    Content="Sản phẩm gần đây"/>
-                            <ListBox x:Name="ProductDisplayed"
+                        <ListBox x:Name="ProductDisplayed"
                                      Background="Transparent"
                                      Grid.Row="1"
                                      Style="{StaticResource ProductItemDisplayedListBoxStyle}"
                                      BorderThickness="0"
                                      BorderBrush="Transparent"
                                      ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                            </ListBox>
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
+                        </ListBox>
+                    </Grid>
+                </materialDesign:Card>
             </Grid>
+        </Grid>
         <Grid Grid.Column="1" Grid.Row="1"
                   Width="auto"
                   Height="auto"
@@ -231,23 +234,23 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <customControls:SearchTextBox x:Name="PART_TimKiemKhachHang"
-                                                            DataContext="{Binding TimKiemKhachHangVM}"
-                                                            Style="{StaticResource NoFieldSearchTextBoxStyle}"
-                                                            Grid.Column="0"
-                                                            HorizontalAlignment="Stretch"
-                                                            Panel.ZIndex="99"
-                                                            ListBoxMaxHeight="150"
-                                                            SearchBoxItemTemplate="{StaticResource SearchKhachHangTemplate}"
-                                                            SearchBoxItemSource="{Binding DisplayItems}"
-                                                            SelectedValue="{Binding TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            SearchListBoxBackground="WhiteSmoke"
-                                                            Margin="10"
-                                                            FontWeight="Normal"
-                                                            FontSize="13"
-                                                            IconHeight="17"
-                                                            Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            Hint="Tìm kiếm khách hàng"/>
-                                <Button x:Name="PART_AddCustomerButton"
+                                                                DataContext="{Binding TimKiemKhachHangVM}"
+                                                                Style="{StaticResource NoFieldSearchTextBoxStyle}"
+                                                                Grid.Column="0"
+                                                                HorizontalAlignment="Stretch"
+                                                                Panel.ZIndex="99"
+                                                                ListBoxMaxHeight="150"
+                                                                SearchBoxItemTemplate="{StaticResource SearchKhachHangTemplate}"
+                                                                SearchBoxItemSource="{Binding DisplayItems}"
+                                                                SelectedValue="{Binding TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                SearchListBoxBackground="WhiteSmoke"
+                                                                Margin="10"
+                                                                FontWeight="Normal"
+                                                                FontSize="13"
+                                                                IconHeight="17"
+                                                                Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                Hint="Tìm kiếm khách hàng"/>
+                                <Button x:Name="btnAddCustomer"
                                         Grid.Column="1"
                                         Margin="5 10"
                                         Style="{DynamicResource UIProjectLightIconButtonStyle}"
@@ -432,14 +435,16 @@
                                            Style="{StaticResource SmallDefinedLabelStyle}"
                                            Content="{Binding SoTienThoiLai,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
-                                <Button Grid.Row="3"
+                                <Button Grid.Row="2"
+                                        x:Name="btnThanhToan"
                                         Content="Thanh toán"
                                         Height="60"
                                         FontSize="20"
-                                        Margin="10 5"
+                                        Margin="10,0,10,5"
                                         Command="{Binding ThanhToanCommand}"
                                         Style="{StaticResource UIProjectLightShadowButtonStyle}"
-                                        Click="Button_Click_1"/>
+                                        Click="Button_Click_1"
+                                        VerticalAlignment="Bottom"/>
                             </Grid>
                         </Grid>
                     </TabItem>

@@ -80,6 +80,7 @@
 
     <!-- Dialog Window Style-->
     <Style TargetType="{x:Type Window}" BasedOn="{StaticResource CustomWindowStyle}" x:Key="CustomDialogWindowStyle">
+        <Setter Property="Background" Value="White"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
         <Setter Property="WindowChrome.WindowChrome" Value="{x:Null}"/>

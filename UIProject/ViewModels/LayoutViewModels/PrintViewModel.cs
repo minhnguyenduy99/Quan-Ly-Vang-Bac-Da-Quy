@@ -35,8 +35,16 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         protected virtual void OnPrintCommandExecute(IDocumentPaginatorSource documentSource)
         {
-            Printer?.PrintDocument(documentSource);
-            OnPrintFinished(new PrintedEventArgs(Printer, documentSource));
+            try
+            {
+                Printer?.PrintDocument(documentSource);
+            }
+            catch
+            {
+                //  Print failed for some reasons
+                OnPrintFinished(new PrintedEventArgs(Printer, documentSource, false));
+            }
+            OnPrintFinished(new PrintedEventArgs(Printer, documentSource, true));
         }
         protected virtual void OnPrintFinished(PrintedEventArgs e)
         {

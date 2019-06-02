@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:UIProject.Styles">
+                    xmlns:local="clr-namespace:UIProject.Styles"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <DataTemplate x:Key="TabButtonStyleDataTemplate">
         <Grid x:Name="OuterGrid">
             <Grid.ColumnDefinitions>
@@ -8,7 +9,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0"
-                  Margin="0 0 10 0">
+                  Margin="5 0 10 0">
                 <Image 
                        Source="{Binding IconSource}"
                        Stretch="Fill"
@@ -21,9 +22,9 @@
                 <TextBlock TextAlignment="Center"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Left"
-                           Margin="7"
-                           Text="{Binding TabName}"
-                           Foreground="{Binding Foreground}"
+                           Margin="2 7"
+                           Text="{Binding Content}"
+                           Foreground="White"
                            FontSize="15"/>
             </Grid>
         </Grid>
@@ -32,7 +33,7 @@
     <DataTemplate x:Key="SubtabButtonTemplate">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1"
@@ -40,29 +41,45 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="7"
-                       Text="{Binding TabName}"
-                       Foreground="{Binding Foreground}"
+                       Text="{Binding Content}"
+                       Foreground="White"
                        FontSize="13"/>
         </Grid>
-        
     </DataTemplate>
 
     <Style x:Key="MenuTabRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
-        <Setter Property="Background" Value="{Binding Background}"/>
+        <Setter Property="Background" Value="{DynamicResource RoyalBlue}"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="ContentTemplate" Value="{StaticResource TabButtonStyleDataTemplate}"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Height" Value="auto"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="IsChecked" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Setter Property="BorderBrush" Value="{Binding FocusBackground}"/>
+        <Setter Property="BorderBrush" Value="{Binding Background, RelativeSource={RelativeSource Mode=Self}}"/>
         <Setter Property="Command" Value="{Binding SelectItemCommand}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="GroupName" Value="Group1"/>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="true">
-                <Setter Property="Background" Value="{Binding FocusBackground}"/>
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SubMenuTabRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MenuTabRadioButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+        <Setter Property="ContentTemplate" Value="{StaticResource SubtabButtonTemplate}"/>
+        <Setter Property="GroupName" Value="Group1"/>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Background" Value="{DynamicResource AirForceBlue}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource AirForceBlue}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
             </Trigger>
         </Style.Triggers>
     </Style>

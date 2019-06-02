@@ -2,50 +2,50 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
-    <DataTemplate x:Key="ExpanderHeaderTemplate">
-        <Border Background="{Binding Background}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <Image VerticalAlignment="Stretch"
-                       HorizontalAlignment="Center"
-                       Margin="5"
-                       Height="35"
-                       Stretch="UniformToFill"
-                       Source="{Binding IconSource}"/>
-                <TextBlock Grid.Column="1"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           FontSize="35"
-                           Foreground="Black"
-                           Text="{Binding CountInfo}"/>
-                <TextBlock Grid.Column="2"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Stretch"
-                           TextAlignment="Left"
-                           FontSize="25"
-                           Text="{Binding Text}"/>
+
+    <DataTemplate x:Key="MenuTabExpanderHeaderDataTemplate">
+        <Grid x:Name="OuterGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"
+                  Margin="0 0 15 0">
+                <Image 
+                       Source="{Binding IconSource}"
+                       Stretch="Fill"
+                       Width="25"
+                       Height="25"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
             </Grid>
-        </Border>
+            <Grid Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           Margin="7"
+                           Text="{Binding Content}"
+                           Foreground="White"
+                           FontSize="15"/>
+            </Grid>
+        </Grid>
     </DataTemplate>
 
-    <Style TargetType="{x:Type Expander}" x:Key="InfoExpanderStyle">
-        <Setter Property="HeaderTemplate" Value="{StaticResource ExpanderHeaderTemplate}"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-    </Style>
-
-    <Style TargetType="Expander" x:Key="TabLikeExpanderStyle" BasedOn="{StaticResource MaterialDesignExpander}">
-        <Setter Property="Background" Value="{Binding Background}"/>
+    <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MaterialDesignExpander}" x:Key="UIProjectMenuExpanderStyle">
+        <Setter Property="HeaderTemplate" Value="{StaticResource MenuTabExpanderHeaderDataTemplate}"/>
+        <Setter Property="Background" Value="{DynamicResource RoyalBlue}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="IsExpanded" Value="False"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            </Trigger>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-    
-    
 </ResourceDictionary>

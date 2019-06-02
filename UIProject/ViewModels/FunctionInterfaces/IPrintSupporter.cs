@@ -12,7 +12,7 @@ namespace UIProject.ViewModels.FunctionInterfaces
     /// <summary>
     /// supports the cability to manipulate the print process
     /// </summary>
-    interface IPrintSupporter
+    public interface IPrintSupporter
     {
         IPrinter Printer { get; set; }
 

@@ -8,6 +8,7 @@
         xmlns:converter="clr-namespace:UIProject.Converters"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:pages="clr-namespace:UIProject.Pages"
+        xmlns:vms="clr-namespace:UIProject.ViewModels.LayoutViewModels"
         mc:Ignorable="d"
         Title="HomepageWindow" 
         Height="700"
@@ -21,6 +22,22 @@
             <converter:PageViewModelToPageControlConverter x:Key="ViewModelToPageConverter"/>
             <converter:TabCheckedToVisibilityConverter x:Key="TabCheckedToSubtabVisilityConverter"/>
             <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <!-- Contents of tabs -->
+            <vms:ContentViewModel Content="Tổng quan" IconSource="/Images/software_icon.png" x:Key="TAB_TongQuan"/>
+            <vms:ContentViewModel Content="Bán hàng" IconSource="/Images/software_icon.png" x:Key="TAB_BanHang"/>
+            <vms:ContentViewModel Content="Tạo phiếu dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_TaoPhieuDV"/>
+            <vms:ContentViewModel Content="Danh sách đơn hàng" IconSource="/Images/software_icon.png" x:Key="TAB_DSDonHang"/>
+            <vms:ContentViewModel Content="Khách hàng" IconSource="/Images/software_icon.png" x:Key="TAB_KhachHang"/>
+            <vms:ContentViewModel Content="Nhà cung cấp" IconSource="/Images/software_icon.png" x:Key="TAB_NhaCC"/>
+            <vms:ContentViewModel Content="Sản phẩm" IconSource="/Images/software_icon.png" x:Key="TAB_SanPham"/>
+            <vms:ContentViewModel Content="Dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_DichVu"/>
+            <vms:ContentViewModel Content="Nhập hàng" IconSource="/Images/software_icon.png" x:Key="TAB_NhapHang"/>
+            <vms:ContentViewModel Content="Báo cáo tồn kho" IconSource="/Images/software_icon.png" x:Key="TAB_BCTonKho"/>
+            
+            <!-- Contents of Expander -->
+            <vms:ContentViewModel Content="Tạo phiếu" IconSource="/Images/software_icon.png" x:Key="Exp_TaoPhieu"/>
+            <vms:ContentViewModel Content="Danh sách" IconSource="/Images/software_icon.png" x:Key="Exp_DanhSach"/>
+            <vms:ContentViewModel Content="Quản lý" IconSource="/Images/software_icon.png" x:Key="Exp_QuanLy"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="WhiteSmoke">
@@ -63,28 +80,41 @@
 
                     <StackPanel Orientation="Vertical"
                                 x:Name="TabContainerStackPanel">
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <Expander Style="{StaticResource TabLikeExpanderStyle}"
-                                  Header="Hello">
+                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"
+                                     Content="{StaticResource TAB_TongQuan}"/>
+                        <Expander Style="{StaticResource UIProjectMenuExpanderStyle}"
+                                  Header="{StaticResource Exp_TaoPhieu}">
                             <StackPanel Orientation="Vertical">
-                                <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                                <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_BanHang}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_TaoPhieuDV}"/>
                             </StackPanel>
                         </Expander>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <Separator/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <Separator/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <Separator/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
-                        <Separator/>
-                        <RadioButton Style="{StaticResource MenuTabRadioButtonStyle}"/>
+                        <Expander Style="{StaticResource UIProjectMenuExpanderStyle}"
+                                  Header="{StaticResource Exp_DanhSach}">
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_DSDonHang}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_KhachHang}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_NhaCC}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_SanPham}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_DichVu}"/>
+                            </StackPanel>
+                        </Expander>
+                        <Expander Style="{StaticResource UIProjectMenuExpanderStyle}"
+                                  Header="{StaticResource Exp_QuanLy}">
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_NhapHang}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_BCTonKho}"/>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                     <!-- List tabs -->
                 </StackPanel>
