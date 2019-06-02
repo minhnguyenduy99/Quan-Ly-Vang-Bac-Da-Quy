@@ -21,7 +21,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// The header view model of base  <see cref="HeaderedContentControl"/>
         /// </summary>
-        public BaseHeaderViewModel HeaderVM { get; set; }
+        public HeaderViewModel HeaderVM { get; set; }
         
         /// <summary>
         /// The contents involved in the <see cref="BaseHeaderedControlViewModel"/>

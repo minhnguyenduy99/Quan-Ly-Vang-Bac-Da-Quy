@@ -34,6 +34,13 @@ namespace UIProject.ViewModels
             "Nhập hàng",
             "Báo cáo tồn kho"
         };
+
+        public static readonly List<string> ListTabHeaderNames = new List<string>()
+        {
+            "Tạo phiếu",
+            "Danh sách",
+            "Quản lý",
+        };
         #endregion
 
         #region Private Fields
@@ -41,6 +48,7 @@ namespace UIProject.ViewModels
         private BasePageViewModel currentPageVM;
         #endregion
 
+        public List<HeaderViewModel> ListTabHeaders { get; private set; }
         
         /// <summary>
         /// List of tab view models represents the menu tab on window
@@ -73,6 +81,8 @@ namespace UIProject.ViewModels
         public HomePageWindowViewModel()
         {
             SetUpWindowLayout();
+
+            InitializeTabHeaders();
 
             InitializeTabs();
 
@@ -111,6 +121,34 @@ namespace UIProject.ViewModels
             WindowState = WindowState.Maximized;
             IconSource = (string)Application.Current.FindResource("SoftwareIcon");
             BackgroundSource = (string)Application.Current.FindResource("LoginBackground");
+        }
+        private void InitializeTabHeaders()
+        {
+            ListTabHeaders = new List<HeaderViewModel>()
+            {
+                new HeaderViewModel()
+                {
+                    Header = ListTabHeaderNames[0],
+                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
+                },
+                new HeaderViewModel()
+                {
+                    Header = ListTabHeaderNames[1],
+                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
+                },
+                new HeaderViewModel()
+                {
+                    Header = ListTabHeaderNames[2],
+                    IconSource = (string)Application.Current.FindResource("SoftwareIcon"),
+                }
+            };
+
+            foreach(var header in ListTabHeaders)
+            {
+                header.Background = (Brush)Application.Current.FindResource("RoyalBlue");
+                header.Foreground = Brushes.White;
+                header.FocusBackground = (Brush)Application.Current.FindResource("AzureBlue");
+            }
         }
         private void InitializeTabs()
         {
