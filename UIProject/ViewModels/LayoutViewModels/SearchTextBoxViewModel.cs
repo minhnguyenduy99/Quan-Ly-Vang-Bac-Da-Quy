@@ -126,7 +126,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
 
         #region Constructors
-        public SearchTextBoxViewModel(IEnumerable<T> itemsSource) : this(null) { }
+        public SearchTextBoxViewModel(IEnumerable<T> itemsSource) : this(new ObservableCollection<T>(itemsSource)) { }
 
         /// <summary>
         /// Create an instance of <see cref="SearchTextBoxViewModel{T}"/> 
