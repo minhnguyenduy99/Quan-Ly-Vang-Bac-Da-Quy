@@ -30,7 +30,7 @@ namespace ModelProject
                 MaKH = "MAKH1",
                 TenKH = "TENKH1",
                 DiaChi = "DIACHI1 ",
-                SDT1 = 123,
+                SDT = "123",
                 CongNo = 12312,
                 Email = "email",
                 MaKhuVuc = "MKV "
@@ -73,7 +73,6 @@ namespace ModelProject
                 MaTinhTrang = "dasda",
                 NgayGiao = "sadasd",
                 SoLuong = 133333333,
-                ThanhTien = 10000,
                 TraTruoc = 10
             };
 

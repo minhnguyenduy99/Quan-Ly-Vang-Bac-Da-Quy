@@ -19,8 +19,9 @@ namespace ModelProject
         private string ngayBatDauCungCapDV;
 
         private long chiPhiRieng;
+        //Số lượng không được vượt quá số sản phẩm.
+        //Số lượng không được âm.
         private int soLuong;
-        private long thanhTien;
         private long traTruoc;
         private string ngayGiao;
         private string maTinhTrang;
@@ -49,10 +50,9 @@ namespace ModelProject
             get => soLuong;
             set => SetProperty(ref soLuong, value);
         }
-        public long ThanhTien
+        public double ThanhTien
         {
-            get => thanhTien;
-            set => SetProperty(ref thanhTien, value);
+            get => (soLuong * donGiaDV);
         }
         public long TraTruoc
         {
@@ -153,12 +153,12 @@ namespace ModelProject
 
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateChiTietDichVu(this);
         }
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

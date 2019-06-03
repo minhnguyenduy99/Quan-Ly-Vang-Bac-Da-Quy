@@ -54,12 +54,12 @@ namespace ModelProject
             DataAccess.SavePhieuBan(this);
         }
 
-        protected override void Delete()
+        protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdatePhieuBan(this);
         }
 
-        protected override void Update()
+        protected override void Delete()
         {
             throw new NotImplementedException();
         }

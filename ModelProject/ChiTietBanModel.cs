@@ -202,7 +202,7 @@ namespace ModelProject
 
         protected override void Update()
         {
-        
+            DataAccess.UpdateChiTietBan(this);
         }
 
         protected override void Delete()

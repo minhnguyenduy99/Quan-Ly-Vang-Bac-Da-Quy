@@ -39,12 +39,12 @@ namespace ModelProject
             DataAccess.SaveTinhTrang(this);
         }
 
-        protected override void Delete()
+        protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateTinhTrang(this);
         }
 
-        protected override void Update()
+        protected override void Delete()
         {
             throw new NotImplementedException();
         }

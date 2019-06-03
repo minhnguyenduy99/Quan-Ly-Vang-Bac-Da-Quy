@@ -42,7 +42,7 @@ namespace ModelProject
 
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateKhuVuc(this);
         }
 
         protected override void Delete()

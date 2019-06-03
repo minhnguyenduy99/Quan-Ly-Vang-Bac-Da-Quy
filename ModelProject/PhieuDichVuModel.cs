@@ -69,12 +69,12 @@ namespace ModelProject
             DataAccess.SavePhieuDichVu(this);
         }
 
-        protected override void Delete()
+        protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateLoaiPhieuDichVu(this);
         }
 
-        protected override void Update()
+        protected override void Delete()
         {
             throw new NotImplementedException();
         }
