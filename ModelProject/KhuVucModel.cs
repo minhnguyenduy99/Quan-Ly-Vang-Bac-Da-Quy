@@ -47,7 +47,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveKhuVuc(this);
         }
     }
 }

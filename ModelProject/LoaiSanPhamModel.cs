@@ -64,7 +64,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveLoaiSanPham(this);
         }
     }
 }

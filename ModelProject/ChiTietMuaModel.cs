@@ -76,7 +76,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveChiTietMua(this);
         }
     }
 }

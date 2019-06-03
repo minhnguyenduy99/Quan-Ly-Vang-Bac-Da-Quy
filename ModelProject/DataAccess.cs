@@ -13,6 +13,7 @@ namespace ModelProject
     public class DataAccess
     {
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region SANPHAM_DataAcess
         public static List<SanPhamModel> LoadSanPham()
         {
@@ -36,13 +37,23 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update SANPHAM set TENSP = @tenSP, MALOAISP = @MaLoaiSP, DONGIAMUAVAO = @DonGiaMuaVao ", sanPham);
+                cnn.Execute("update SANPHAM set TENSP = @tenSP, MALOAISP = @MaLoaiSP, DONGIAMUAVAO = @DonGiaMuaVao WHERE MASP = @MaSP", sanPham);
+            }
+        }
+
+
+        public static void RemoveSanPham(SanPhamModel sanPham)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM SANPHAM WHERE MASP = @MaSP", sanPham);
             }
         }
 
         #endregion SANPHAM_DataAcess 
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region DONVITINH_DataAcess
 
         public static List<DonViTinhModel> LoadDonViTinh()
@@ -64,13 +75,21 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update DonViTinh set TENDVT = @TenDVT ", dvt);
+                cnn.Execute("update DonViTinh set TENDVT = @TenDVT WHERE MADVT = @maDVT", dvt);
+            }
+        }
+
+        public static void RemoveDonViTinh(DonViTinhModel dvt)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM DonViTinh WHERE MADVT = @maDVT", dvt);
             }
         }
 
         #endregion DONVITINH_DataAcess
 
-        //Chưa test
+        //Đã duyệt và fix bởi N.
         #region KHACHHANG_DataAcess
 
         public static List<KhachHangModel> LoadKhachHang()
@@ -84,9 +103,10 @@ namespace ModelProject
 
         public static void SaveKhachHang(KhachHangModel khachHang)
         {
+            Console.WriteLine(khachHang.MaKH);
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into KhachHang(MAKH,TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@MaKH,@TenKH,@DiaChi,@SDT1,@CongNo,@MaKhuVuc,@Email) ", khachHang);
+                cnn.Execute("insert into KhachHang(MAKH,TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@MaKH,@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
             }
         }
 
@@ -94,13 +114,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update KhachHang set TENKH = @TenKH,DIACHI = @DiaChi ,SDT = @SDT1,CONGNO = @CongNo ,MAKHUVUC = @MaKhuVuc ,EMAIL = @Email ) ", KhachHang);
+                cnn.Execute("update KhachHang set TENKH = @TenKH,DIACHI = @DiaChi ,SDT = @SDT,CONGNO = @CongNo ,MAKHUVUC = @MaKhuVuc ,EMAIL = @Email WHERE MAKH = @MaKH", KhachHang);
+            }
+        }
+
+        public static void RemoveKhachHang(KhachHangModel KhachHang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM KhachHang WHERE MAKH=@MaKH",KhachHang);
             }
         }
 
         #endregion KHACHHANG_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region KHUVUC_DataAcess
         public static List<KhuVucModel> LoadKhuVuc()
         {
@@ -117,17 +146,26 @@ namespace ModelProject
                 cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
             }
         }
-        public static void UpdateKhuVuc(KhuVucModel KhuVuc)
+        public static void UpdateKhuVuc(KhuVucModel khuVuc)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update KhuVuc set TENKHUVUC= @TenKhuVuc ", KhuVuc);
+                cnn.Execute("update KhuVuc set TENKHUVUC= @TenKhuVuc WHERE MAKHUVUC = @maKhuVuc", khuVuc);
+            }
+        }
+
+        public static void RemoveKhuVuc(KhuVucModel khuVuc)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM KHUVUC WHERE MAKHUVUC = @maKhuVuc", khuVuc);
             }
         }
 
         #endregion KHUVUC_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region TINHTRANG_DataAcess
         public static List<TinhTrangModel> LoadTinhTrang()
         {
@@ -149,13 +187,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update TinhTrang set TENTINHTRANG = @TenTinhTrang ", TinhTrang);
+                cnn.Execute("update TinhTrang set TENTINHTRANG = @TenTinhTrang WHERE MATINHTRANG = @maTinhTrang", TinhTrang);
+            }
+        }
+
+        public static void RemoveTinhTrang(TinhTrangModel TinhTrang)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM TINHTRANG WHERE MATINHTRANG = @maTinhTrang", TinhTrang);
             }
         }
 
         #endregion TINHTRANG_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region LOAIDICHVU_DataAcess
         public static List<LoaiDichVuModel> LoadLoaiDichVu()
         {
@@ -177,12 +224,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update LoaiDichVu set TENLOAIDV = @TenLoaiDV , DONGIADV = @DonGiaDV  ", loaiDV);
+                cnn.Execute("update LoaiDichVu set TENLOAIDV = @TenLoaiDV , DONGIADV = @DonGiaDV WHERE MALOAIDV = @maLoaiDV", loaiDV);
             }
         }
+
+        public static void RemoveLoaiDichVu(LoaiDichVuModel loaiDV)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM LOAIDICHVU WHERE MALOAIDV = @maLoaiDV", loaiDV);
+            }
+        }
+
         #endregion LOAIDICHVU_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region CHITIETBAN_DataAcess
         public static List<ChiTietBanModel> LoadChiTietBan()
         {
@@ -204,12 +261,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update chitietban set SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,DONGIAMUAVAO=@DonGiaMuaVao,CHIETKHAU=@ChietKhau,THUE=@Thue", ctb);
+                cnn.Execute("update chitietban set SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,DONGIAMUAVAO=@DonGiaMuaVao,CHIETKHAU=@ChietKhau,THUE=@Thue WHERE MAPHIEUMUAHANG = @maPhieuMuaHang and MASP = @maSP", ctb);
             }
         }
+
+        public static void RemoveChiTietBan(ChiTietBanModel ctb)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM CHITIETBAN WHERE MAPHIEUMUAHANG = @maPhieuMuaHang and MASP = @maSP", ctb);
+            }
+        }
+
         #endregion CHITIETBAN_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region CHITIETMUA_DataAcess
         public static List<ChiTietMuaModel> LoadChiTietMua()
         {
@@ -231,13 +298,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update ChiTietMua set SOLUONG = @SoLuong ,DONGIA = @DonGia ", ctm);
+                cnn.Execute("update ChiTietMua set SOLUONG = @SoLuong ,DONGIA = @DonGia WHERE MAPHIEUMUAHANG = @maPhieuMuaHang AND MASP = @maSP", ctm);
+            }
+        }
+
+        public static void RemoveChiTietMua(ChiTietMuaModel ctm)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM CHITIETMUA WHERE MAPHIEUMUAHANG = @maPhieuMuaHang AND MASP = @maSP", ctm);
             }
         }
 
         #endregion CHITIETMUA_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region CHITIETDICHVU_DataAcess
         public static List<ChiTietDichVuModel> LoadChiTietDichVu()
         {
@@ -263,9 +339,18 @@ namespace ModelProject
             }
         }
 
+        public static void RemoveChiTietDichVu(ChiTietDichVuModel ctdv)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM ChiTietDichVu WHERE MAPHIEU = @maPhieu and MALOAIDV = @maLoaiDV", ctdv);
+            }
+        }
+
         #endregion CHITIETDICHVU_DataAcess
 
         //Đã test
+        //Đã duyệt và fix bởi N.
         #region LOAISANPHAM_DataAcess
 
         public static List<LoaiSanPhamModel> LoadLoaiSanPham()
@@ -288,13 +373,60 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update LoaiSanPham set MADVT=@MaDVT,PHANTRAMLOINHUAN=@PhanTramLoiNhuan, TENLOAISP = @TenLoaiSP ", loaiSP);
+                cnn.Execute("update LoaiSanPham set MADVT=@MaDVT,PHANTRAMLOINHUAN=@PhanTramLoiNhuan, TENLOAISP = @TenLoaiSP WHERE MALOAISP = @maLoaiSP", loaiSP);
+            }
+        }
+
+        public static void RemoveLoaiSanPham(LoaiSanPhamModel loaiSP)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM LoaiSanPham WHERE MALOAISP = @maLoaiSP", loaiSP);
             }
         }
 
         #endregion LOAISANPHAM_DataAcess
 
+        //Viết bởi N.
+        #region NHACC_DataAcess
+
+        public static List<NhaCungCapModel> LoadNhaCungCap()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<NhaCungCapModel>("select * from NHACUNGCAP", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static void SaveNhaCungCap(NhaCungCapModel nhaCC)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into NHACUNGCAP(MANCC,TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@maNCC,@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email) ", nhaCC);
+            }
+        }
+
+        public static void UpdateNhaCungCap(NhaCungCapModel nhaCC)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update NHACUNGCAP set MANCC=@maNCC,TENNCC=@tenNCC, DIACHI = @diaChi, DIENTHOAI = @dienThoai, MAKHUVUC = @maKhuVuc, EMAIL = @email  WHERE MANCC = @maNCC", nhaCC);
+            }
+        }
+
+        public static void RemoveNhaCungCap(NhaCungCapModel nhaCC)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM NHACUNGCAP WHERE MANCC = @maNCC", nhaCC);
+            }
+        }
+
+        #endregion NHACC_DataAcess
+
         //Đã test
+        //Cần check lại số lượng thuộc tính.
+        //Cần check lại thuộc tính maPhieu.
         #region PHIEUBAN_DataAcess
 
         public static List<PhieuBanModel> LoadPhieuBan()
@@ -317,13 +449,24 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH ", phieuBan);
+                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH WHERE MAPHIEU = @maPhieu", phieuBan);
+            }
+        }
+
+        public static void RemovePhieuBan(PhieuBanModel phieuBan)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM PhieuBan WHERE MAPHIEU = @maPhieu", phieuBan);
             }
         }
 
         #endregion PHIEUBAN_DataAcess
 
         //Đã test
+        //Cần check lại số lượng thuộc tính.
+        //Cần check lại thuộc tính maPhieu.
+        //Đã duyệt và fix bởi N.
         #region PHIEUMUA_DataAcess
         public static List<PhieuMuaModel> LoadPhieuMua()
         {
@@ -342,17 +485,26 @@ namespace ModelProject
             }
         }
         public static void UpdatePhieuMua(PhieuMuaModel PhieuMua)
-
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC ", PhieuMua);
+                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC WHERE MAPHIEU = @maPhieu", PhieuMua);
+            }
+        }
+
+        public static void RemovePhieuMua(PhieuMuaModel PhieuMua)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM PhieuMua WHERE MAPHIEU = @maPhieu", PhieuMua);
             }
         }
 
         #endregion PHIEUMUA_DataAcess
 
         //Đã test
+        //Cần check lại số lượng thuộc tính.
+        //Đã duyệt và fix bởi N.
         #region PHIEUDICHVU_DataAcess
         public static List<PhieuDichVuModel> LoadPhieuDichVu()
         {
@@ -370,13 +522,22 @@ namespace ModelProject
             }
         }
 
-        public static void UpdateLoaiPhieuDichVu(PhieuDichVuModel PhieuDichVu)
+        public static void UpdatePhieuDichVu(PhieuDichVuModel PhieuDichVu)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc ", PhieuDichVu);
+                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc WHERE MAPHIEU = @maPhieu", PhieuDichVu);
             }
         }
+
+        public static void RemovePhieuDichVu(PhieuDichVuModel PhieuDichVu)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM PhieuDichVu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
+            }
+        }
+
         #endregion PHIEUDICHVU_DataAcess
 
 
@@ -541,7 +702,7 @@ namespace ModelProject
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +
                     "from LoaiSanPham " +
-                    "where MALOAISANPHAM=@m ",new { m = malsp });
+                    "where MALOAISP=@m ",new { m = malsp });
                 return output.ElementAt<LoaiSanPhamModel>(0);
             }
         }

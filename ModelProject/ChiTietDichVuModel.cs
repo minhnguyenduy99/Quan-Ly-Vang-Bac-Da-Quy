@@ -158,7 +158,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            
+            DataAccess.RemoveChiTietDichVu(this);
         }
     }
 }

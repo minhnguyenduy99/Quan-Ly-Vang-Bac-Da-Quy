@@ -207,7 +207,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            
+            DataAccess.RemoveChiTietBan(this);
         }
     }
 }

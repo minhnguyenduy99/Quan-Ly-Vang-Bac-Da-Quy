@@ -71,12 +71,12 @@ namespace ModelProject
 
         protected override void Update()
         {
-            DataAccess.UpdateLoaiPhieuDichVu(this);
+            DataAccess.UpdatePhieuDichVu(this);
         }
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemovePhieuDichVu(this);
         }
     }
 }

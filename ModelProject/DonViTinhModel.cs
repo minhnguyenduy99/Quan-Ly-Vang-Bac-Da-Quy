@@ -43,7 +43,7 @@ namespace ModelProject
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveDonViTinh(this);
         }
     }
 }
