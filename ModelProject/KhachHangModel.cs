@@ -71,14 +71,14 @@ namespace ModelProject
             DataAccess.SaveKhachHang(this);
         }
 
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateKhachHang(this);
+        }
+
+        protected override void Delete()
+        {
+            DataAccess.RemoveKhachHang(this);
         }
     }
 }

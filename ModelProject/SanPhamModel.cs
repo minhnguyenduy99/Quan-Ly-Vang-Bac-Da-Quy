@@ -58,15 +58,17 @@ namespace ModelProject
             DataAccess.SaveSanPham(this);
         }
 
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateSanPham(this);
         }
+
+        protected override void Delete()
+        {
+            DataAccess.RemoveSanPham(this);
+        }
+
+        
     }
 
 }

@@ -42,12 +42,12 @@ namespace ModelProject
 
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateKhuVuc(this);
         }
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveKhuVuc(this);
         }
     }
 }

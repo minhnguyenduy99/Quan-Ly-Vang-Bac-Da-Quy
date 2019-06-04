@@ -51,14 +51,14 @@ namespace ModelProject
             DataAccess.SavePhieuMua(this);
         }
 
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdatePhieuMua(this);
+        }
+
+        protected override void Delete()
+        {
+            DataAccess.RemovePhieuMua(this);
         }
     }
 }

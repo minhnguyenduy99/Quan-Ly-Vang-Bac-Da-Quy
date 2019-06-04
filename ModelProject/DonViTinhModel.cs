@@ -36,14 +36,14 @@ namespace ModelProject
             DataAccess.SaveDonViTinh(this);
         }
 
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateDonViTinh(this);
+        }
+
+        protected override void Delete()
+        {
+            DataAccess.RemoveDonViTinh(this);
         }
     }
 }

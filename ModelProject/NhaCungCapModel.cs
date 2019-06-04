@@ -13,6 +13,20 @@ namespace ModelProject
         private string tenNCC;
         private string diaChi;
         private string dienThoai;
+        private string maKhuVuc;
+        private string email;
+
+        public string MaKhuVuc
+        {
+            get => maKhuVuc;
+            set => SetProperty(ref maKhuVuc, value);
+        }
+
+        public string Email
+        {
+            get => email;
+            set => SetProperty(ref email, value);
+        }
 
         public string MaNCC
         {
@@ -51,17 +65,17 @@ namespace ModelProject
 
         protected override void Add()
         {
-            
-        }
-
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
+            DataAccess.SaveNhaCungCap(this);
         }
 
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateNhaCungCap(this);
+        }
+
+        protected override void Delete()
+        {
+            DataAccess.RemoveNhaCungCap(this);
         }
     }
 }

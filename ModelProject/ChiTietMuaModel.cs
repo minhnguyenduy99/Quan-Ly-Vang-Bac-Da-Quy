@@ -71,12 +71,12 @@ namespace ModelProject
 
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateChiTietMua(this);
         }
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess.RemoveChiTietMua(this);
         }
     }
 }

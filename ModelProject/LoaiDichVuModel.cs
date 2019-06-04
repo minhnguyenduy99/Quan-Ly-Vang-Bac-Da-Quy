@@ -44,14 +44,14 @@ namespace ModelProject
             DataAccess.SaveLoaiDichVu(this);
         }
 
-        protected override void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void Update()
         {
-            throw new NotImplementedException();
+            DataAccess.UpdateLoaiDichVu(this);
         }
+
+        protected override void Delete()
+        {
+            DataAccess.RemoveLoaiDichVu(this);
+        } 
     }
 }
