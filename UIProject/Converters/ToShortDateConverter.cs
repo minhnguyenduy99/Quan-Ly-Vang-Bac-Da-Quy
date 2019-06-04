@@ -14,24 +14,35 @@ namespace UIProject.Converters
     [ValueConversion(typeof(string),typeof(DateTime))]
     public class ToShortDateConverter : IValueConverter
     {
+        public readonly string[] DateTimeFormats =
+        {
+            "dd/MM/yyyy",
+            "dd/M/yyyy",
+            "d/M/yyyy",
+            "d/MM/yyyy"
+        };
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return Binding.DoNothing;
             try
             {
-                DateTime castShortDate = (DateTime)value;
-                return castShortDate.ToString("dd/MM/yyyy");
+                string castDateStr = ((DateTime)value).ToString("dd/MM/yyyy");
+                return castDateStr;
             }
-            catch { return Binding.DoNothing; }
+            catch { }
+            return Binding.DoNothing;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try
-            {
-                DateTime castShortDate = DateTime.ParseExact(value.ToString(), "dd/MM/yyyy", null);
+            DateTime castShortDate;
+            string castDateStr = (string)value;
+            bool parseSuccess = DateTime.TryParseExact(castDateStr, DateTimeFormats, null, DateTimeStyles.None, out castShortDate);
+            if (parseSuccess)
                 return castShortDate;
-            }
-            catch { return Binding.DoNothing; }
+            return Binding.DoNothing;
         }
     }
 }

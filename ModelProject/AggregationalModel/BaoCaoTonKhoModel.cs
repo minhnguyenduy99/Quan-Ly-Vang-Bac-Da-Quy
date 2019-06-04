@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 
-namespace ModelProject
+namespace ModelProject.AggregationalModel
 {
     public class BaoCaoTonKhoModel : BaseModel
     {

@@ -32,7 +32,6 @@ namespace UIProject.Pages
             InitializeComponent();
 
             this.Loaded += DanhSachDonHangPage_Loaded;
-            this.ViewModel = new DanhSachDonHangPageVM();
             
         }
 
@@ -43,8 +42,6 @@ namespace UIProject.Pages
 
         private void OpenFilterWindow(object sender, RoutedEventArgs e)
         {
-            OrderFilterDialogWindow orderFilterWnd = new OrderFilterDialogWindow(ViewModel.LocDonHangVM);
-            orderFilterWnd.ShowDialog();
         }
     }
 }

@@ -24,7 +24,9 @@ namespace UIProject.ViewModels.PageViewModels
         public ObservableCollectionViewModel<PhieuBanModel> DanhSachPhieuBanVM { get; set; }
 
         public DanhSachDonHangPageVM() : base() { }
-        public DanhSachDonHangPageVM(INavigator navigator) : base(navigator) { }
+        public DanhSachDonHangPageVM(INavigator navigator) : base(navigator)
+        {
+        }
 
 
         protected override void LoadPageComponents()
@@ -38,10 +40,27 @@ namespace UIProject.ViewModels.PageViewModels
                  new PhieuBanModel(){MaPhieu = "PH005", MaKH = "KH01", NgayLap = "11/8/2015"},
                  new PhieuBanModel(){MaPhieu = "PH006", MaKH = "KH01", NgayLap = "29/9/2014"},
                  new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/02/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "4/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
+                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
             };
             SetUpDanhSachPhieuBanVM();
             SetUpBoLocTimKiemPhieuBan();
-            SetUpBoLocPhieuBan();
         }
 
         private void SetUpDanhSachPhieuBanVM()
@@ -55,12 +74,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemPhieuBanVM.DefaultFilter = new Func<ItemViewModel<PhieuBanModel>, bool>(LocTheoMaDonHangCallBack);
             
         }
-        
-        private void SetUpBoLocPhieuBan()
-        {
-            LocDonHangVM = new LocDonHangWindowVM();
-            LocDonHangVM.BoLocHoanThanh += LocDonHangVM_BoLocHoanThanh;
-        }
+       
 
         private void TimKiemPhieuBanVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
         {

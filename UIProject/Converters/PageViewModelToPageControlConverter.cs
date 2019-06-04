@@ -39,21 +39,21 @@ namespace UIProject.Converters
             if (pageVM is TongQuanPageVM)
                 return new TongQuanPage() { DataContext = pageVM };
             if (pageVM is BanHangPageVM)
-                return new BanHangPage();
+                return new BanHangPage() { DataContext = pageVM };
             if (pageVM is LamDichVuPageVM)
-                return new LamDichVuPage();
+                return new LamDichVuPage() { DataContext = pageVM };
             if (pageVM is DanhSachDonHangPageVM)
-                return new DanhSachDonHangPage();
+                return new DanhSachDonHangPage() { DataContext = pageVM };
             if (pageVM is KhachHangPageVM)
-                return new KhachHangPage();
+                return new KhachHangPage() { DataContext = pageVM };
             if (pageVM is NhapHangPageVM)
-                return new NhapHangPage();
+                return new NhapHangPage() { DataContext = pageVM };
             if (pageVM is NhaCungCapPageVM)
-                return new DoiTacPage();
+                return new DoiTacPage() { DataContext = pageVM };
             if (pageVM is SanPhamPageVM)
-                return new SanPhamPage();
+                return new SanPhamPage() { DataContext = pageVM };
             if (pageVM is BaoCaoTonKhoPageVM)
-                return new BaoCaoTonKhoPage();
+                return new BaoCaoTonKhoPage() { DataContext = pageVM };
 
             return null;
         }

@@ -30,7 +30,7 @@ namespace ModelProject
                 MaKH = "MAKH1",
                 TenKH = "TENKH1",
                 DiaChi = "DIACHI1 ",
-                SDT1 = 123,
+                SDT = "123",
                 CongNo = 12312,
                 Email = "email",
                 MaKhuVuc = "MKV "

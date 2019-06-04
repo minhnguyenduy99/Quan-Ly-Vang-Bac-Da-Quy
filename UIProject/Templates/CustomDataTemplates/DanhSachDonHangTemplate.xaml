@@ -1,67 +1,59 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:behavior="clr-namespace:UIProject.Behaviors"
+                    xmlns:services="clr-namespace:UIProject.ServiceProviders"
+                    xmlns:converters="clr-namespace:UIProject.Converters">
+    <services:DateTimeComparer x:Key="dateSorter"/>
+    <converters:IEnumerableToListCollectionViewConverter x:Key="itemsSourceConverter"/>
+    <converters:ToShortDateConverter x:Key="StandardDateConverter"/>
     <DataTemplate x:Key="DanhSachDonHangTemplate">
         <DataGrid Grid.Row="0"
-                  CanUserSortColumns="True"
-                  CanUserAddRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  AutoGenerateColumns="False"
-                  materialDesign:DataGridAssist.CellPadding="8"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                  SelectionUnit="FullRow">
+                  Height="auto"
+                    Background="#f8f8f8"
+                  behavior:DataGridCustomSortingBehavior.AllowCustomSort="True"
+                    DataContext="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentControl}}}"
+                    ItemsSource="{Binding Items, Converter={StaticResource itemsSourceConverter}}"
+                    CanUserSortColumns="True"
+                    CanUserAddRows="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    AutoGenerateColumns="False"
+                    materialDesign:DataGridAssist.CellPadding="8"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                    SelectionUnit="FullRow"
+                    VerticalScrollBarVisibility="Auto"
+                    Width="500">
             <DataGrid.Columns>
                 <DataGridHyperlinkColumn Width="120"
-                                         Binding="{Binding OrderCode}"
+                                         Binding="{Binding Model.MaPhieu}"
                                          CanUserSort="False"
                                          IsReadOnly="True"
                                          Header="Mã đơn hàng"
                                          HeaderStyle="{StaticResource LeftDataGridHeader}"
                                          CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="120"
-                                    Binding="{Binding DateEstablished}"
+                                    Binding="{Binding Model.NgayLap}"
+                                    behavior:DataGridCustomSortingBehavior.CustomSorter="{StaticResource dateSorter}"
                                     Header="Ngày tạo đơn"
                                     IsReadOnly="True"
-                                    CanUserSort="True"
+                                    CanUserSort="True"                             
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="150"
+                <DataGridTextColumn Width="70"
                                     IsReadOnly="True"
-                                    Binding="{Binding CustomerName}"
-                                    Header="Tên khách hàng"
+                                    Binding="{Binding Model.MaKH}"
+                                    Header="Mã KH"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="130"
                                     CanUserSort="True"
-                                    Binding="{Binding TotalMoney}"
+                                    Binding="{Binding Model.ThanhTien}"
                                     Header="Tổng tiền"                                           
                                     IsReadOnly="True"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
-                <DataGridTemplateColumn Width="30"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource UIProjectIconButtonStyle}"
-                                                ToolTip="Xóa sản phẩm khỏi đơn hàng"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Background="Transparent"
-                                                Foreground="Black"
-                                                Width="30"
-                                                Height="30"
-                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}}">
-                                <materialDesign:PackIcon Kind="RemoveCircle"
-                                                                     Height="auto"
-                                                                     Width="auto"/>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </DataTemplate>

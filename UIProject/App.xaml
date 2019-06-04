@@ -67,6 +67,7 @@
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachKhachHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachDoiTacTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/KhachHangTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachChiTietBanTemplate.xaml"/>
                         <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>

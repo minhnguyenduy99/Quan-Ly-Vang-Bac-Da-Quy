@@ -10,7 +10,7 @@ namespace ModelProject
     public class KhachHangModel : BaseSubmitableModel
     {
         private string maKH;
-        private int SDT;
+        private string sdt;
         private string tenKH;
         private string diaChi;
         private long congNo;
@@ -23,10 +23,10 @@ namespace ModelProject
             set => SetProperty(ref maKH, value);
         }
 
-        public int SDT1
+        public string SDT
         {
-            get => SDT;
-            set => SetProperty(ref SDT, value);
+            get => sdt;
+            set => SetProperty(ref sdt, value);
         }
         public string TenKH
         {

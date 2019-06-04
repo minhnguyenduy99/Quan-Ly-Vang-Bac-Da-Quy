@@ -36,6 +36,11 @@ namespace ModelProject
             set => SetProperty(ref maKH, value);
         }
 
+        public long TongTien
+        {
+            get => 10000;
+        }
+
         public string Error => throw new NotImplementedException();
 
         public override bool Equals(object obj)

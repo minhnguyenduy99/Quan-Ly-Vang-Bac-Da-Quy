@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregationalModel\HoaDonModel.cs" />
-    <Compile Include="BaoCaoTonKhoModel.cs" />
+    <Compile Include="AggregationalModel\BaoCaoTonKhoModel.cs" />
     <Compile Include="ChiTietBanModel.cs" />
     <Compile Include="ChiTietDichVuModel.cs" />
     <Compile Include="ChiTietMuaModel.cs" />

@@ -43,6 +43,8 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
 
         }
+
+
         public ItemCollectionViewModel(IEnumerable<Model> itemsSource) : base()
         {
             this.items = new ObservableCollection<ItemViewModel<Model>>();
