@@ -13,7 +13,12 @@ namespace ModelProject
         private string maPhieu;
         private string soPhieu;
         private string ngayLap;
+        private string maNV;
         private string maKH;
+        private int thue;
+        private int chietKhau;
+        private string ghichu;
+
 
         public string MaPhieu
         {
@@ -36,12 +41,45 @@ namespace ModelProject
             set => SetProperty(ref maKH, value);
         }
 
-        public long TongTien
+        public int Thue
         {
-            get => 10000;
+            get => thue;
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    throw new Exception("Thuế (đơn vị %) có giá trị từ 0 đến 100");
+                }
+                SetProperty(ref thue, value);
+                OnThueThayDoi();
+            }
         }
 
-        public string Error => throw new NotImplementedException();
+        public int ChietKhau
+        {
+            get => chietKhau;
+            set
+            {
+                if (value < 0 || value > 100)
+                    throw new Exception("Chiết khấu (đơn vị %) có giá trị từ 0 đến 100");
+                SetProperty(ref chietKhau, value);
+                OnChietKhauThayDoi();
+            }
+        }
+        public string MaNV
+        {
+            get => maNV;
+            set => SetProperty(ref maNV, value);
+        }
+
+        public string GhiChu
+        {
+            get => ghichu;
+            set => SetProperty(ref ghichu, value);
+        }
+
+
+        public long TongTien { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -54,6 +92,20 @@ namespace ModelProject
             return false;
         }
 
+
+        public event EventHandler ThueThayDoi;
+        public event EventHandler ChietKhauThayDoi;
+        
+
+        protected virtual void OnThueThayDoi()
+        {
+            ThueThayDoi?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnChietKhauThayDoi()
+        {
+            ChietKhauThayDoi?.Invoke(this, EventArgs.Empty);
+        }
         protected override void Add()
         {
             DataAccess.SavePhieuBan(this);

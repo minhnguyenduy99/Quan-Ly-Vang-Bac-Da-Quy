@@ -295,17 +295,14 @@ namespace ModelProject
             Console.WriteLine("Load : ");
             foreach (ChiTietBanModel ldv in list)
             {
-                Console.WriteLine(ldv.ChietKhau);
             }
 
             //Test update.
-            model.ChietKhau = -1;
             DataAccess.UpdateChiTietBan(model);
             list = DataAccess.LoadChiTietBan();
             Console.WriteLine("Update : ");
             foreach (ChiTietBanModel ldv in list)
             {
-                Console.WriteLine(ldv.ChietKhau);
             }
 
             //Test xoá.
@@ -315,7 +312,6 @@ namespace ModelProject
             Console.WriteLine("Remove : ");
             foreach (ChiTietBanModel ldv in list)
             {
-                Console.WriteLine(ldv.ChietKhau);
             }
         }
 

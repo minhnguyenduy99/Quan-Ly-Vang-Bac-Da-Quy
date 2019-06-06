@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseMVVM_Service;
 using BaseMVVM_Service.BaseMVVM;
+using ModelProject.ExtensionFunctions;
 
 namespace ModelProject
 {
@@ -24,7 +25,7 @@ namespace ModelProject
 
         private int soLuong;
         private long thanhTien;
-        private double donGiaMuaVao;
+        private long donGiaMuaVao;
         
         private long thue;
 
@@ -37,15 +38,18 @@ namespace ModelProject
             maPhieuMuaHang = _hoaDon.MaPhieu;
             maSP = _sanPham.MaSP;
             soLuong = _soLuong;
+            donGiaMuaVao = _sanPham.DonGiaMuaVao;
 
             LoaiSanPhamModel _loaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(_sanPham.MaLoaiSP);
             tenSP = _sanPham.TenSP;
             loaiSP = _loaiSP.TenLoaiSP;
-            donGiaBanRa = DonGiaBanRa;
             phanTramLoiNhuan = _loaiSP.PhanTramLoiNhuan;
 
             DonViTinhModel dvtModel = DataAccess.LoadDonViTinhByMADVT(_loaiSP.MaDVT);
             donViTinh = dvtModel.TenDVT;
+
+            ThanhTien = _sanPham.DonGiaMuaVao * SoLuong;
+
         }
         public ChiTietBanModel()
         {
@@ -54,8 +58,6 @@ namespace ModelProject
             SoLuong = 10;
             ThanhTien = 1000;
             DonGiaMuaVao = 1000;
-            ChietKhau = 10;
-            Thue = 10;
         }
 
         public string MaPhieuMuaHang
@@ -147,40 +149,40 @@ namespace ModelProject
                 }
             }
         }
-        public double DonGiaBanRa
-        {
-            get
-            {
-                if (donGiaBanRa >= 0)
-                donGiaBanRa = donGiaMuaVao + (donGiaMuaVao * PhanTramLoiNhuan);
-                return donGiaBanRa;
-            }
-        }
         public int SoLuong
         {
             get => soLuong;
-            set => SetProperty(ref soLuong,value);
+            set
+            {
+                SetProperty(ref soLuong, value);
+                OnSoLuongThayDoi();
+            }
         }
+
         public long ThanhTien
         {
             get => thanhTien;
-            set => SetProperty(ref thanhTien, value);
+            private set => SetProperty(ref thanhTien, value);
         }
-        public double DonGiaMuaVao
+
+
+        public long DonGiaMuaVao
         {
             get => donGiaMuaVao;
             set => SetProperty(ref donGiaMuaVao, value);
         }
-        public long Thue
+
+
+        #region Converts from normal type to money format with comma separation
+        public string ThanhTienMoneyFormat
         {
-            get => thue;
-            set => SetProperty(ref thue, value);
+            get => MoneyConverter.ConvertToMoneyFormat(ThanhTien);
         }
-        public double ChietKhau
+        public string DonGiaMuaVaoMoneyFormat
         {
-            get => chietKhau;
-            set =>SetProperty( ref chietKhau,value);
+            get => MoneyConverter.ConvertToMoneyFormat(DonGiaMuaVao);
         }
+        #endregion
 
         public override bool Equals(object obj)
         {
@@ -192,9 +194,16 @@ namespace ModelProject
             return false;
         }
 
+        public event EventHandler SoLuongThayDoi;
+        
+        protected virtual void OnSoLuongThayDoi()
+        {
+            ThanhTien = (long)DonGiaMuaVao * SoLuong;
+            SoLuongThayDoi?.Invoke(this, EventArgs.Empty);
+        }
 
 
-
+        #region Access Database methods
         protected override void Add()
         {
             DataAccess.SaveChiTietBan(this);
@@ -209,5 +218,6 @@ namespace ModelProject
         {
             DataAccess.RemoveChiTietBan(this);
         }
+        #endregion
     }
 }

@@ -5,7 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UIProject.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:UIProject.Converters"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:dataGridAttach="clr-namespace:UIProject.Behaviors"
       xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
       xmlns:services="clr-namespace:UIProject.ServiceProviders"
       xmlns:vms="clr-namespace:UIProject.ViewModels"
@@ -13,6 +15,9 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       Title="BanHangPage">
+    <Page.Resources>
+        <converters:MoneyRuleConverter x:Key="moneyConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -73,76 +78,68 @@
                 </Grid.RowDefinitions>
                 <!-- Menu grid view -->
                 <materialDesign:Card Grid.Row="0"
-                                         Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                         VerticalAlignment="Stretch"
-                                         Margin="10 5 5 5">
+                                    Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                    VerticalAlignment="Stretch"
+                                    Margin="10 5 5 5">
                     <DataGrid Grid.Row="0"
-                            x:Name="ProductView"
-                            DataContext="{Binding DanhSachChiTietBan}"
-                            ItemsSource="{Binding Items}"
-                            CanUserSortColumns="True"
-                            CanUserAddRows="False"
-                            CanUserResizeColumns="False"
-                            CanUserResizeRows="False"
-                            AutoGenerateColumns="False"
-                            materialDesign:DataGridAssist.CellPadding="8"
-                            materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                            SelectionUnit="FullRow" Panel.ZIndex="-1" Grid.RowSpan="2">
+                                x:Name="ProductView"
+                                DataContext="{Binding HoaDonVM.DanhSachChiTietBan}"
+                                ItemsSource="{Binding Items}"
+                                dataGridAttach:DataGridSetColumnStyle.Elementstyle="{StaticResource UIProjectDataGridElementStyle}"
+                                CanUserSortColumns="True"
+                                CanUserAddRows="False"
+                                CanUserResizeColumns="False"
+                                CanUserResizeRows="False"
+                                AutoGenerateColumns="False"
+                                materialDesign:DataGridAssist.CellPadding="8"
+                                materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                                SelectionUnit="FullRow" Panel.ZIndex="-1" Grid.RowSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="50"
-                                                    Binding="{Binding OrderNumber}"
-                                                    CanUserSort="False"
-                                                    TextBlock.TextAlignment="Center"
-                                                    IsReadOnly="True"
-                                                    Header="STT"
-                                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
                             <DataGridTextColumn Width="80"
-                                                    Binding="{Binding Model.MaSP}"
-                                                    Header="Mã hàng"
-                                                    TextBlock.TextAlignment="Right"
-                                                    IsReadOnly="True"
-                                                    CanUserSort="False"
-                                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                                                Binding="{Binding Model.MaSP}"
+                                                Header="Mã hàng"
+                                                TextBlock.TextAlignment="Right"
+                                                IsReadOnly="True"
+                                                CanUserSort="False"
+                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                CellStyle="{StaticResource CenteredDataGridCell}"/>
+                            <DataGridTextColumn Width="120"
+                                                IsReadOnly="True"
+                                                Binding="{Binding Model.TenSP}"
+                                                Header="Tên sản phẩm"
+                                                HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                                CellStyle="{StaticResource LeftDataGridCell}"/>
                             <DataGridTextColumn Width="130"
-                                                    TextBlock.TextAlignment="Center"
-                                                    IsReadOnly="True"
-                                                    Binding="{Binding Model.TenSP}"
-                                                    Header="Tên sản phẩm"
-                                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                                    CellStyle="{StaticResource LeftDataGridCell}"/>
-                            <DataGridTextColumn Width="130"
-                                                    CanUserSort="False"
-                                                    Binding="{Binding Model.LoaiSP}"
-                                                    Header="Loại sản phẩm"                                           
-                                                    IsReadOnly="True"
-                                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                                                CanUserSort="False"
+                                                Binding="{Binding Model.LoaiSP}"
+                                                Header="Loại sản phẩm"                                           
+                                                IsReadOnly="True"
+                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                CellStyle="{StaticResource CenteredDataGridCell}"/>
                             <DataGridTextColumn Width="90"
-                                                    Binding="{Binding Model.DonViTinh}"
-                                                    CanUserSort="False"
-                                                    Header="Đơn vị tính"
-                                                    TextBlock.TextAlignment="Center"
-                                                    IsReadOnly="True"
-                                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                                                Binding="{Binding Model.DonViTinh}"
+                                                CanUserSort="False"
+                                                Header="Đơn vị tính"
+                                                TextBlock.TextAlignment="Center"
+                                                IsReadOnly="True"
+                                                HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                CellStyle="{StaticResource CenteredDataGridCell}"/>
                             <DataGridTextColumn Width="80"
                                                 Header="Số lượng"
-                                                Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                                 HeaderStyle="{StaticResource RightDataGridHeader}"
                                                 CellStyle="{StaticResource RightDataGridCell}"
                                                 EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"
                                                 IsReadOnly="False"/>
-                            <DataGridTextColumn Width="100"
-                                                Binding="{Binding Model.DonGiaMuaVao}"
+                            <DataGridTextColumn Width="150"
+                                                Binding="{Binding Model.DonGiaMuaVao, Converter={StaticResource moneyConverter}}"
                                                 Header="Đơn giá"
                                                 TextBlock.TextAlignment="Right"
                                                 IsReadOnly="True"
                                                 HeaderStyle="{StaticResource RightDataGridHeader}"
                                                 CellStyle="{StaticResource RightDataGridCell}"/>
-                            <DataGridTextColumn Width="120"
-                                                Binding="{Binding Model.ThanhTien}"
+                            <DataGridTextColumn Width="150"
+                                                Binding="{Binding Model.ThanhTien, UpdateSourceTrigger=LostFocus, Converter={StaticResource moneyConverter}}"
                                                 Header="Thành tiền"
                                                 TextBlock.TextAlignment="Right"
                                                 IsReadOnly="True"
@@ -151,8 +148,8 @@
                                                 CellStyle="{StaticResource RightDataGridCell}"
                                                 EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                             <DataGridTemplateColumn Width="30"
-                                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
+                                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                                    CellStyle="{StaticResource ButtonDataGridCellStyle}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Style="{StaticResource UIProjectIconButtonStyle}"
@@ -256,13 +253,13 @@
                                         Style="{DynamicResource UIProjectLightIconButtonStyle}"
                                         ToolTip="Thêm khách hàng mới">
                                     <materialDesign:PackIcon Kind="PersonAdd"
-                                                         Height="auto"
-                                                         Width="auto"
-                                                         Foreground="White"/>
+                                                             Height="auto"
+                                                             Width="auto"
+                                                             Foreground="White"/>
                                 </Button>
                             </Grid>
                             <Grid Grid.Row="1" Grid.ColumnSpan="2"
-                              DataContext="{Binding TimKiemKhachHangVM.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                  DataContext="{Binding HoaDonVM.KhachHang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
@@ -274,21 +271,22 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0"
-                                   Content="Họ tên"/>
+                                       Content="Họ tên"/>
                                 <Label Grid.Row="1" Grid.Column="0"
-                                   Content="Điện thoại"/>
+                                       Content="Điện thoại"/>
                                 <Label Grid.Row="2" Grid.Column="0"
-                                   Content="Địa chỉ"/>
+                                       Content="Địa chỉ"/>
                                 <Label Grid.Row="3" Grid.Column="0"
-                                   Content="Công nợ"/>
+                                       Content="Công nợ"/>
                                 <Label Grid.Row="0" Grid.Column="1"
-                                   Content="{Binding Model.TenKH}"/>
+                                       x:Name="Ten"
+                                       Content="{Binding TenKH}"/>
                                 <Label Grid.Row="1" Grid.Column="1"
-                                   Content="{Binding Model.SDT1}"/>
+                                   Content="{Binding SDT}"/>
                                 <Label Grid.Row="2" Grid.Column="1"
-                                   Content="{Binding Model.DiaChi}"/>
+                                   Content="{Binding DiaChi}"/>
                                 <Label Grid.Row="3" Grid.Column="1"
-                                   Content="{Binding Model.CongNo}"/>
+                                   Content="{Binding CongNo}"/>
                             </Grid>
                         </Grid>
                     </TabItem>
@@ -308,18 +306,18 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0"
-                               Content="Nhân viên"/>
+                                   Content="Nhân viên"/>
                             <Label Grid.Row="1" Grid.Column="0"
-                               VerticalAlignment="Top"
-                               Margin="5 10 5 5"
-                               Content="Ghi chú"/>
+                                   VerticalAlignment="Top"
+                                   Margin="5 10 5 5"
+                                   Content="Ghi chú"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
-                                 IsEnabled="False"/>
+                                     IsEnabled="False"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
-                                 Style="{StaticResource UIProjectMultipleLineTextBoxStyle}"
-                                 Margin="7"
-                                 Height="auto"
-                                 VerticalAlignment="Stretch"/>
+                                     Style="{StaticResource UIProjectMultipleLineTextBoxStyle}"
+                                     Margin="7"
+                                     Height="auto"
+                                     VerticalAlignment="Stretch"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
@@ -353,57 +351,49 @@
                                     <RowDefinition Height="50"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0"
-                                   Content="VAT"/>
+                                       Content="VAT (%)"/>
                                 <Label Grid.Row="1" Grid.Column="0"
-                                   Content="Chiết khấu"/>
-                                <Label Grid.Row="2" Grid.Column="0"
-                                   Content="Tổng tiền"/>
-                                <Label Grid.Row="2" Grid.Column="1"
-                                   Style="{StaticResource SmallDefinedLabelStyle}"
-                                   Content="{Binding PhieuHang.ThanhTien}"/>
+                                       Content="Chiết khấu (%)"/>
+
+                                <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
+                                    <Label Grid.Row="2" Grid.Column="0"
+                                           DockPanel.Dock="Left"
+                                           Content="Tổng tiền"/>
+                                    <Label Grid.Row="2" Grid.Column="1"
+                                           HorizontalContentAlignment="Right"
+                                           Style="{StaticResource MediumLabelStyle}"
+                                           FontWeight="Normal"
+                                           Content="{Binding HoaDonVM.TongTienHoaDon, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource moneyConverter}}"/>
+                                </DockPanel>
+
                                 <TextBox Grid.Row="0" Grid.Column="1"
-                                     HorizontalAlignment="Right"
-                                     Width="70"
-                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
-                                     materialDesign:HintAssist.Hint="Thuế"
-                                     Margin="5"
-                                     Text="{Binding PhieuHang.Thue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                         HorizontalAlignment="Right"
+                                         TextAlignment="Right"
+                                         Width="70"
+                                         Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                         materialDesign:HintAssist.Hint="Thuế"
+                                         Margin="5"
+                                         Text="{Binding HoaDonVM.Thue, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                 <Grid Grid.Row="1" Grid.Column="1"
-                                  VerticalAlignment="Center">
+                                      VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Right">
-                                        <RadioButton VerticalAlignment="Center"
-                                                     Content="đ"
-                                                     FontSize="13"
-                                                     Margin="0 0 5 0"
-                                                     IsChecked="true"
-                                                     VerticalContentAlignment="Center"/>
-                                        <RadioButton VerticalAlignment="Center"
-                                                 FontSize="13"
-                                                 Content="%"
-                                                 VerticalContentAlignment="Center"/>
-                                    </StackPanel>
                                     <TextBox Grid.Column="1"
-                                         Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
-                                         HorizontalAlignment="Stretch"
-                                         Margin="5"
-                                         materialDesign:HintAssist.Hint="Chiết khấu"
-                                         />
+                                             x:Name="txbChietKhau"
+                                             Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                             HorizontalAlignment="Stretch"
+                                             TextAlignment="Right"
+                                             Margin="5"
+                                             materialDesign:HintAssist.Hint="Chiết khấu"
+                                             Text="{Binding HoaDonVM.ChietKhau, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource moneyConverter}}"/>
                                 </Grid>
-                                <Label Grid.Row="2" Grid.Column="1"
-                                   Style="{StaticResource MediumLabelStyle}"
-                                   Content="{Binding PhieuBan.ThanhTien, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   HorizontalAlignment="Right"
-                                   Margin="10"/>
                             </Grid>
                             <Grid Grid.Row="2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50"/>
-                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="2*"/>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
@@ -413,35 +403,35 @@
                                     </Grid.ColumnDefinitions>
                                 </Grid>
                                 <TextBox Grid.Row="0"
-                                     VerticalAlignment="Center"
-                                     Margin="10 5 10 5"
-                                     materialDesign:HintAssist.Hint="Nhập số tiền khách trả"
-                                     Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
-                                     Text="{Binding SoTienKhachTra, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                         VerticalAlignment="Center"
+                                         Margin="10 5 10 5"
+                                         materialDesign:HintAssist.Hint="Nhập số tiền khách trả"
+                                         Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
+                                         Text="{Binding HoaDonVM.SoTienKhachTra, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
                                 <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0"
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
                                            Margin="10 10 0 0"
-                                           Style="{StaticResource SmallDefinedLabelStyle}"
                                            Content="Tiền thối lại"
                                            VerticalAlignment="Center"/>
-                                    <Label Grid.Column="1"
-                                           Margin="0 10 10 0"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Style="{StaticResource SmallDefinedLabelStyle}"
-                                           Content="{Binding SoTienThoiLai,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Label Grid.Row="1"
+                                           Margin="10"
+                                           HorizontalAlignment="Left"
+                                           Style="{StaticResource MediumLabelStyle}"
+                                           FontWeight="Normal"
+                                           Content="{Binding HoaDonVM.SoTienThoiLai, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
                                 </Grid>
                                 <Button Grid.Row="2"
                                         x:Name="btnThanhToan"
                                         Content="Thanh toán"
                                         Height="60"
                                         FontSize="20"
-                                        Margin="10,0,10,5"
+                                        Margin="10 0 10 5"
                                         Command="{Binding ThanhToanCommand}"
+                                        IsEnabled="{Binding HoaDonVM.IsDataValid, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource UIProjectLightShadowButtonStyle}"
                                         Click="Button_Click_1"
                                         VerticalAlignment="Bottom"/>

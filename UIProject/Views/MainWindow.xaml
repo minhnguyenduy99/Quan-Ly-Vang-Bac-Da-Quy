@@ -23,7 +23,7 @@
             <converter:TabCheckedToVisibilityConverter x:Key="TabCheckedToSubtabVisilityConverter"/>
             <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <!-- Contents of tabs -->
-            <vms:ContentViewModel Content="Tổng quan" IconSource="/Images/software_icon.png" x:Key="TAB_TongQuan"/>
+            <vms:ContentViewModel Content="Tổng quan" IconSource="/Images/tab_tongquan.png" x:Key="TAB_TongQuan"/>
             <vms:ContentViewModel Content="Bán hàng" IconSource="/Images/software_icon.png" x:Key="TAB_BanHang"/>
             <vms:ContentViewModel Content="Tạo phiếu dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_TaoPhieuDV"/>
             <vms:ContentViewModel Content="Danh sách đơn hàng" IconSource="/Images/software_icon.png" x:Key="TAB_DSDonHang"/>
@@ -35,9 +35,9 @@
             <vms:ContentViewModel Content="Báo cáo tồn kho" IconSource="/Images/software_icon.png" x:Key="TAB_BCTonKho"/>
             
             <!-- Contents of Expander -->
-            <vms:ContentViewModel Content="Tạo phiếu" IconSource="/Images/software_icon.png" x:Key="Exp_TaoPhieu"/>
-            <vms:ContentViewModel Content="Danh sách" IconSource="/Images/software_icon.png" x:Key="Exp_DanhSach"/>
-            <vms:ContentViewModel Content="Quản lý" IconSource="/Images/software_icon.png" x:Key="Exp_QuanLy"/>
+            <vms:ContentViewModel Content="Tạo phiếu" IconSource="/Images/banhang.png" x:Key="Exp_TaoPhieu"/>
+            <vms:ContentViewModel Content="Danh sách" IconSource="/Images/product.png" x:Key="Exp_DanhSach"/>
+            <vms:ContentViewModel Content="Quản lý" IconSource="/Images/report.png" x:Key="Exp_QuanLy"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="WhiteSmoke">

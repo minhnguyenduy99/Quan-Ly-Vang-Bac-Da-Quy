@@ -8,7 +8,6 @@
     <!-- Required resources for using in custom data templates -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
-            <converters:DialogWindowTypeConverter x:Key="dialogTypeConverter"/>
             <sys:String x:Key="YesNoDialog">YesNo</sys:String>
             <sys:String x:Key="WaitingDialog">Waiting</sys:String>
             <sys:String x:Key="WaitingCancelDialog">WaitingCancel</sys:String>

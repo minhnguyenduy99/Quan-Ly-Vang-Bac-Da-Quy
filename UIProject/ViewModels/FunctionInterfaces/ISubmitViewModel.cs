@@ -15,6 +15,8 @@ namespace UIProject.ViewModels.FunctionInterfaces
     {
         ISubmitable Data { get; set; }
 
+        bool IsDataValid { get; }
+
         event EventHandler<SubmitedDataEventArgs> SubmitedData;
 
         bool Submit();

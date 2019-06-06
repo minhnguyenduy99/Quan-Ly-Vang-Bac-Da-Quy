@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:UIProject.PrintTemplate">
+                    xmlns:local="clr-namespace:UIProject.PrintTemplate"
+                    xmlns:dataGridAttach="clr-namespace:UIProject.Behaviors">
     <FlowDocument Background="White" x:Key="HoaDonPrintTemplate"
-                  PageHeight="600"
-                  PageWidth="550">
+                  PageHeight="auto"
+                  PageWidth="560">
         <FlowDocument.Resources>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}" x:Key="ValueLabelStyle">
                 <Setter Property="FontWeight" Value="Normal"/>
@@ -41,10 +42,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Grid.ColumnSpan="2"
-                               Style="{StaticResource MediumLabelStyle}"
-                               Content="Hóa đơn bán hàng"
-                               HorizontalContentAlignment="Center"
-                               FontWeight="Bold"/>
+                           Style="{StaticResource MediumLabelStyle}"
+                           Content="Hóa đơn bán hàng"
+                           HorizontalContentAlignment="Center"
+                           FontWeight="Bold"/>
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -55,15 +56,17 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0"
-                                   Content="Mã hóa đơn"/>
+                               Content="Mã hóa đơn"/>
                         <Label Grid.Row="1" Grid.Column="0"
-                                       Content="Thời gian"/>
+                               Content="Thời gian"/>
                         <Label Grid.Row="0" Grid.Column="1"
+                               x:Name="phieuban"
                                Style="{StaticResource ValueLabelStyle}"
                                HorizontalContentAlignment="Left"
-                               Content="{Binding MaHD}"
+                               Content="{Binding PhieuBan.MaPhieu}"
                                ContentStringFormat=": {0}"/>
                         <Label Grid.Row="1" Grid.Column="1"
+                               DataContext="{Binding PhieuBan}"
                                Style="{StaticResource ValueLabelStyle}"
                                HorizontalContentAlignment="Left"
                                Content="{Binding NgayLap}"
@@ -79,55 +82,76 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0"
-                                       HorizontalContentAlignment="Right"
-                                       Content="Khách hàng : "/>
+                               HorizontalContentAlignment="Right"
+                               Content="Khách hàng : "/>
                         <Label Grid.Row="1" Grid.Column="0"
-                                       HorizontalContentAlignment="Right"
-                                       Content="Nhân viên : "/>
+                               HorizontalContentAlignment="Right"
+                               Content="Nhân viên : "/>
                         <Label Grid.Row="0" Grid.Column="1"
-                                       Style="{StaticResource ValueLabelStyle}"
-                                       Content="{Binding KhachHang.TenKH}"/>
+                               x:Name="khachhang"
+                               DataContext="{Binding KhachHang}"
+                               Style="{StaticResource ValueLabelStyle}"
+                               Content="{Binding TenKH}"/>
                         <Label Grid.Row="1" Grid.Column="1"
-                                       Style="{StaticResource ValueLabelStyle}"
-                                       Content="{Binding NhanVien.TenNV}"/>
+                               Style="{StaticResource ValueLabelStyle}"
+                               Content="{Binding KhachHang.MaKH}"/>
                     </Grid>
                 </Grid>
             </BlockUIContainer>
         </Section>
-        <Paragraph Margin="0 10"
-                       TextAlignment="Center">==========================================</Paragraph>
-        <Section Name="OrderDetailInfo">
-            <BlockUIContainer>
-                <DataGrid Grid.Row="0"
-                              HorizontalAlignment="Center"
-                              Width="auto"
-                              Style="{StaticResource PrintDataGridStyle}"
-                              x:Name="OrderDetailView"
-                              DataContext="{Binding DanhSachChiTietBan}"
-                              ItemsSource="{Binding Items}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto"
-                                            Binding="{Binding STT}"
-                                            Header="STT"/>
-                        <DataGridTextColumn Width="80"
-                                            Binding="{Binding MaSP}"
-                                            Header="Mã SP"/>
-                        <DataGridTextColumn Width="150"
-                                            Binding="{Binding TenSP}"
-                                            Header="Tên SP"/>
-                        <DataGridTextColumn Width="50"
-                                            Binding="{Binding SoLuong}"
-                                            Header="SL"/>
-                        <DataGridTextColumn Width="100"
-                                            Binding="{Binding DonGia}" 
-                                            Header="Đơn giá"/>
-                        <DataGridTextColumn Width="100"
-                                            Binding="{Binding ThanhTien}" 
-                                            Header="Thành tiền"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </BlockUIContainer>
-        </Section>
+        <Paragraph TextAlignment="Center"
+                   FontWeight="Bold">Chi tiết hóa đơn</Paragraph>
+        <Paragraph TextAlignment="Center">==========================================</Paragraph>
+        <Table x:Name="chiTietHoaDon">
+            <Table.Resources>
+                <Style TargetType="{x:Type Table}">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="FontFamily" Value="Arial"/>
+                    <Setter Property="CellSpacing" Value="0"/>
+                </Style>
+                <Style TargetType="{x:Type TableCell}">
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="Padding" Value="7"/>
+                    <Setter Property="TextAlignment" Value="{Binding}"/>
+                </Style>
+            </Table.Resources>
+            <Table.Columns>
+                <TableColumn/>
+                <TableColumn Width="120"/>
+                <TableColumn/>
+                <TableColumn/>
+                <TableColumn/>
+            </Table.Columns>
+            <TableRowGroup>
+                <TableRow>
+                    <TableRow.Resources>
+                        <Style TargetType="TableCell">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Padding" Value="7"/>
+                            <Setter Property="TextAlignment" Value="{Binding}"/>
+                        </Style>
+                    </TableRow.Resources>
+                    <TableCell TextAlignment="Center">
+                        <Paragraph>Mã SP</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Left">
+                        <Paragraph>Tên SP</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>SL</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>Đơn giá</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>Thành tiền</Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
         <Paragraph TextAlignment="Center">==========================================</Paragraph>
         <Section Name="Summary">
             <BlockUIContainer>
@@ -148,7 +172,8 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label Content="Thành tiền"/>
-                                <Label Content="Thuế"/>
+                                <Label Content="Thuế (VAT)"/>
+                                <Label Content="Chiết khấu"/>
                                 <Label Content="Tổng tiền"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1">
@@ -157,9 +182,10 @@
                                         <Setter Property="FontWeight" Value="Bold"/>
                                     </Style>
                                 </StackPanel.Resources>
-                                <Label Content="1,000,000"/>
-                                <Label Content="10%"/>
-                                <Label Content="1,100,000"/>
+                                <Label Content="{Binding TongTienChiTietBan, Converter={StaticResource moneyConverter}}"/>
+                                <Label Content="{Binding Thue}"/>
+                                <Label Content="{Binding ChietKhau}"/>
+                                <Label Content="{Binding TongTienHoaDon, Converter={StaticResource moneyConverter}}"/> 
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -179,8 +205,8 @@
                                         <Setter Property="FontWeight" Value="Bold"/>
                                     </Style>
                                 </StackPanel.Resources>
-                                <Label Content="1,500,000"/>
-                                <Label Content="400,000"/>
+                                <Label Content="{Binding SoTienKhachTra, Converter={StaticResource moneyConverter}}"/>
+                                <Label Content="{Binding SoTienThoiLai, Converter={StaticResource moneyConverter}}"/>
                             </StackPanel>
                         </Grid>
                     </Border>

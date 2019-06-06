@@ -12,6 +12,7 @@ using System.Windows.Input;
 using UIProject.Events;
 using UIProject.ServiceProviders;
 using UIProject.UIConnector;
+using UIProject.ViewModels.DataViewModels;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -20,7 +21,6 @@ namespace UIProject.ViewModels.PageViewModels
     public class BanHangPageVM : BasePageViewModel
     {
         private ICommand thanhToanCommand;
-        private PhieuBanModel phieuBan;
         private List<ChiTietBanModel> dsChiTietBan;
 
         /// <summary>
@@ -38,18 +38,9 @@ namespace UIProject.ViewModels.PageViewModels
         }
 
         /// <summary>
-        /// Hóa đơn tương ứng với phiếu bán
+        /// View model của hóa đơn
         /// </summary>
-        public HoaDonModel HoaDon
-        {
-            get
-            {
-                return new HoaDonModel(this.PhieuBan)
-                {
-                    DSChiTietBan = DanhSachChiTietBan?.Models.ToList()
-                };
-            }
-        }
+        public HoaDonViewModel HoaDonVM { get; set; }
 
 
         /// <summary>
@@ -63,46 +54,10 @@ namespace UIProject.ViewModels.PageViewModels
         public SearchTextBoxViewModel<KhachHangModel> TimKiemKhachHangVM { get; set; }
 
         /// <summary>
-        /// Danh sách chi tiết phiếu bán
-        /// </summary>
-        public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBan { get; set; }
-
-        /// <summary>
-        /// Model của phiếu bán hàng
-        /// </summary>
-        public PhieuBanModel PhieuBan
-        {
-            get => phieuBan;
-            set => SetProperty(ref phieuBan, value);
-        }
-
-        /// <summary>
         /// Định nghĩa bộ lọc sản phẩm
         /// </summary>
         public EnumFilterViewModel<SanPhamModel> LocSanPhamVM { get; set; }
         
-        /// <summary>
-        /// Số tiền khách hàng đã trả
-        /// </summary>
-        public long SoTienKhachTra
-        {
-            get => GetPropertyValue<long>();
-            set => SetProperty(value);
-        }
-
-        /// <summary>
-        /// Số tiền thối lại
-        /// </summary>
-        public long SoTienThoiLai { get; set; }
-
-        /// <summary>
-        /// Danh sách chi tiết bán
-        /// </summary>
-        public List<ChiTietBanModel> DSChiTietBan
-        {
-            get => this.dsChiTietBan;
-        }
-
         /// <summary>
         /// Command thực hiện việc tính toán
         /// </summary>
@@ -120,27 +75,39 @@ namespace UIProject.ViewModels.PageViewModels
             get => new BaseCommand<IWindow>(OnThemKhachHangCommandExecute);
         }
 
-        /// <summary>
-        /// Event xảy ra khi chọn 1 sản phẩm đã có từ trước
-        /// </summary>
-        public event EventHandler<ItemEventArgs<ChiTietBanModel>> SanPhamDaCo
-        {
-            add { DanhSachChiTietBan.ContainsItemModel += value; }
-            remove { DanhSachChiTietBan.ContainsItemModel -= value; }
-        }
-
         public BanHangPageVM() : base() { }
         public BanHangPageVM(INavigator navigator) : base(navigator) { }
 
+
+        public event EventHandler<ItemEventArgs<ChiTietBanModel>> SanPhamDaTonTai
+        {
+            add { HoaDonVM.SanPhamDaTonTai += value; }
+            remove { HoaDonVM.SanPhamDaTonTai -= value; }
+        }
+
+        #region Setup components
         protected override void LoadPageComponents()
         {
-            PhieuBan = new PhieuBanModel();
-
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
-
-            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>(HoaDon.DSChiTietBan);
+            SetUpHoaDonVM();
         }
+        #endregion
+
+
+
+
+        private void SetUpHoaDonVM()
+        {
+            PhieuBanModel phieuBan = new PhieuBanModel()
+            {
+                MaPhieu = "PH001",
+                MaNV = "NV001",
+            };
+
+            HoaDonVM = new HoaDonViewModel(phieuBan);
+        }
+
         private void SetUpBolocTimKiemSanPham()
         {
             var sanPhamSource = DataAccess.LoadSanPham();
@@ -161,6 +128,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemSanPhamVM.AdditionFilters = LocSanPhamVM.FilterCallBacks;
 
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
+
         }
         private void SetUpBoLocTimKiemKhachHang()
         {
@@ -168,6 +136,8 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(khachHangSource);
             TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
             TimKiemKhachHangVM.SelectedValuePath = "TenKH";
+
+            TimKiemKhachHangVM.SelectedItemChanged += TimKiemKhachHangVM_SelectedItemChanged;
         }
 
 
@@ -178,7 +148,17 @@ namespace UIProject.ViewModels.PageViewModels
             var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
             if (sanPhamDaChon != null)
             {
-                DanhSachChiTietBan.Add(new ChiTietBanModel(PhieuBan, sanPhamDaChon.Model, 1));
+                var chiTietBan = new ChiTietBanModel(HoaDonVM.PhieuBan, sanPhamDaChon.Model, 1);
+                HoaDonVM.ThemChiTietBan(chiTietBan);
+            }
+        }
+
+        private void TimKiemKhachHangVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+        {
+            var khachHangDaChon = e.SelectedItem as ItemViewModel<KhachHangModel>;
+            if (khachHangDaChon != null)
+            {
+                HoaDonVM.KhachHang = khachHangDaChon.Model;
             }
         }
         #endregion
@@ -210,19 +190,18 @@ namespace UIProject.ViewModels.PageViewModels
         #endregion
 
 
+
         #region Command Execution 
         protected virtual void OnThemKhachHangCommandExecute(IWindow window)
         {
             window.DataContext = new AddingWindowViewModel<KhachHangModel>();
             window.ShowDialog();
         }
-
         protected virtual void OnThanhToanCommandExecute(IWindow window)
         {
-            window.DataContext = new PrintWindowViewModel();
             if (window.ShowDialog() == true)
             {
-                HoaDon.Submit(SubmitType.Add);
+                bool submitSuccess = HoaDonVM.Submit();
             }
         }
         #endregion

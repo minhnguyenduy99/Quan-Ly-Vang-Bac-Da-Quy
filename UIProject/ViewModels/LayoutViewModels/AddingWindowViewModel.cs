@@ -22,6 +22,7 @@ namespace UIProject.ViewModels
         private ICommand cancelCmd;
 
         public ISubmitable Data { get; set; }
+        public bool IsDataValid { get; private set; }
 
         public ICommand SubmitCommand
         {

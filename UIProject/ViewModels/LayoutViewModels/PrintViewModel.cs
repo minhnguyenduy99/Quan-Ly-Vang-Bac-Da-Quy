@@ -27,6 +27,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             Printer = printer;
         }
+
         public PrintViewModel() : this(null) { }
 
 
@@ -37,7 +38,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             try
             {
-                Printer?.PrintDocument(documentSource);
+                Printer.PrintDocument(documentSource);
             }
             catch
             {

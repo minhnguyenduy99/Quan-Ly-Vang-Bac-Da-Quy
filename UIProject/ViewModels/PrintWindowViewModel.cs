@@ -22,19 +22,7 @@ namespace UIProject.ViewModels
         public PrintWindowViewModel() : base()
         {
             this.PrintVM = new PrintViewModel();
-
             this.PrintVM.PrintFinished += PrintVM_PrintFinished;
-        }
-
-        public event EventHandler<PrintedEventArgs> PrintFinished
-        {
-            add { PrintVM.PrintFinished += value; }
-            remove { PrintVM.PrintFinished -= value; }
-        }
-
-        private void PrintVM_PrintFinished(object sender, PrintedEventArgs e)
-        {
-            PrintResult = e.PrintResult;
         }
 
         public PrintWindowViewModel(IDocumentPaginatorSource document)
@@ -55,13 +43,23 @@ namespace UIProject.ViewModels
                 };
             }
 
-
-            IPrinter printer = new PrintHelper(pageSize.Width, pageSize.Height);
-
-            this.PrintVM = new PrintViewModel(printer);
+            this.PrintVM = new PrintViewModel(new PrintHelper(pageSize.Width, pageSize.Height));
 
             this.Document = document;
         }
+
+        public event EventHandler<PrintedEventArgs> PrintFinished
+        {
+            add { PrintVM.PrintFinished += value; }
+            remove { PrintVM.PrintFinished -= value; }
+        }
+
+        private void PrintVM_PrintFinished(object sender, PrintedEventArgs e)
+        {
+            PrintResult = e.PrintResult;
+        }
+
+       
 
         public ICommand PrintCommand
         {

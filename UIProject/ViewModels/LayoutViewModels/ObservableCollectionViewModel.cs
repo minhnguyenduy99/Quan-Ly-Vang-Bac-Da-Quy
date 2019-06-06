@@ -129,7 +129,7 @@ namespace UIProject.ViewModels.LayoutViewModels
             ItemViewModel<T> castItem = item as ItemViewModel<T>;
             if (castItem != null)
             {
-                Items.Remove(castItem);
+                this.Remove(castItem);
             }
         }
 

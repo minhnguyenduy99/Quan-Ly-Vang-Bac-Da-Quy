@@ -56,13 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregationalModel\HoaDonModel.cs" />
     <Compile Include="AggregationalModel\BaoCaoTonKhoModel.cs" />
     <Compile Include="ChiTietBanModel.cs" />
     <Compile Include="ChiTietDichVuModel.cs" />
     <Compile Include="ChiTietMuaModel.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="DonViTinhModel.cs" />
+    <Compile Include="ExtensionFunctions\MoneyConverter.cs" />
     <Compile Include="KhachHangModel.cs" />
     <Compile Include="KhuVucModel.cs" />
     <Compile Include="LoaiDichVuModel.cs" />

@@ -25,12 +25,13 @@
             <StackPanel Grid.Column="0">
                 <Button Content="In"
                         Command="{Binding PrintCommand}"
-                        CommandParameter="{Binding Document, ElementName=documentViewer}"/>
+                        CommandParameter="{Binding Document, ElementName=documentViewer}"
+                        Click="Button_Click"/>
             </StackPanel>
             <FlowDocumentPageViewer Grid.Column="1"
                                     x:Name="documentViewer"           
-                                    Padding="10"
-                                    Document="{Binding Document}"/>
+                                    Padding="10"/>
+
         </Grid>
     </Border>
 </Window>

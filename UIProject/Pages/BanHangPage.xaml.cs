@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using UIProject.Converters;
 using UIProject.ServiceProviders;
 using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ViewModels.PageViewModels;
@@ -32,19 +33,16 @@ namespace UIProject.Pages
     /// </summary>
     public partial class BanHangPage : Page
     {
-        public BanHangPageVM ViewModel { get; private set; }
+        public FlowDocument HoaDonPrintDoc { get; set; }
         public BanHangPage()
         {
             InitializeComponent();
 
-            ViewModel = new BanHangPageVM();
-            this.DataContext = ViewModel;
 
 
             this.Loaded += BanHangPage_Loaded;
 
             //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
-            ViewModel.SanPhamDaCo += ViewModel_SanPhamDaCo;
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
@@ -61,6 +59,7 @@ namespace UIProject.Pages
 
         private async void BanHangPage_Loaded(object sender, RoutedEventArgs e)
         {
+            (this.DataContext as BanHangPageVM).SanPhamDaTonTai += ViewModel_SanPhamDaCo;
             await this.FadeIn(0.5f, 0.5f);
         }
 
@@ -71,11 +70,10 @@ namespace UIProject.Pages
 
         private void InitializePrintViewWindow()
         {
-            FlowDocument hoadonPrintDoc = (FlowDocument)GetDocumentPage();
-            hoadonPrintDoc.DataContext = ViewModel.HoaDon;
-            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(hoadonPrintDoc);
-            btnThanhToan.CommandParameter = printWnd;
-            
+            HoaDonPrintDoc = (FlowDocument)GetDocumentPage();
+            HoaDonPrintDoc.DataContext = (DataContext as BanHangPageVM).HoaDonVM;
+            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(HoaDonPrintDoc);
+            btnThanhToan.CommandParameter = printWnd;           
         }
 
         private IDocumentPaginatorSource GetDocumentPage()

@@ -13,6 +13,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     public class ItemCollectionViewModel<Model> : BaseViewModel
     {
         protected ObservableCollection<ItemViewModel<Model>> items;
+        
 
         public ObservableCollection<ItemViewModel<Model>> Items
         {
@@ -22,14 +23,16 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// Retrieves the list of models only 
         /// </summary>
-        public IEnumerable<Model> Models
+        public List<Model> Models
         {
             get
             {
-                foreach(var item in Items)
+                List<Model> models = new List<Model>();
+                foreach (var item in Items)
                 {
-                    yield return item.Model;
+                    models.Add(item.Model);
                 }
+                return models;
             }
         }
 
@@ -85,13 +88,14 @@ namespace UIProject.ViewModels.LayoutViewModels
             {
                 item = new ItemViewModel<Model>(itemModel);
                 Items.Add(item);
+                OnItemAdded(new ItemAddedEventArgs<Model>(item));
             }
             else
             {
                 var containedItem = Items.Where(currrentItem => currrentItem.Model.Equals(itemModel)).ElementAt(0);
                 OnContainsItemModel(new ItemEventArgs<Model>(containedItem));
             }
-            OnItemAdded(new ItemAddedEventArgs<Model>(item));
+
         }
 
         /// <summary>

@@ -85,12 +85,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviors\DataGridCustomSortingBehavior.cs" />
+    <Compile Include="Behaviors\DataGridSetColumnStyle.cs" />
+    <Compile Include="Behaviors\MoneyRuleApplier.cs" />
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DialogWindowTypeConverter.cs" />
     <Compile Include="Converters\IEnumerableToListCollectionViewConverter.cs" />
     <Compile Include="Converters\InnerControlHeightConverter.cs" />
     <Compile Include="Converters\LongStringToThreeDotConverter.cs" />
+    <Compile Include="Converters\MoneyRuleConverter.cs" />
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
     <Compile Include="Converters\TabCheckedToVisibilityConverter.cs" />
     <Compile Include="Converters\TabNameToTabViewModelConverter.cs" />
@@ -148,6 +151,7 @@
     </Compile>
     <Compile Include="ServiceProviders\AnimationHelper.cs" />
     <Compile Include="ServiceProviders\AsynchorousPerformHelper.cs" />
+    <Compile Include="ServiceProviders\CollectionToTableConverter.cs" />
     <Compile Include="ServiceProviders\DateTimeComparer.cs" />
     <Compile Include="ServiceProviders\DialogControlExtension.cs" />
     <Compile Include="ServiceProviders\IAnimationService.cs" />
@@ -162,6 +166,7 @@
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DataViewModels\HoaDonViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IConditionalDisplayCollection.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\INavigatable.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\INavigator.cs" />
@@ -574,11 +579,19 @@
   <ItemGroup>
     <Resource Include="Images\paymethod_icon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\customer.png" />
+    <Resource Include="Images\product.png" />
+    <Resource Include="Images\report.png" />
+    <Resource Include="Images\setting.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\them_dichvu.png" />
     <Resource Include="Images\them_hoadon.png" />
     <Resource Include="Images\them_sanpham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banhang.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />
