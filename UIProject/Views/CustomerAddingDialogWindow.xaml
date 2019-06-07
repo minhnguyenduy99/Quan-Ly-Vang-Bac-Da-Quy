@@ -89,40 +89,26 @@
                             <Label Grid.Row="4" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Email"/>
-                            <Label Grid.Row="5" Grid.Column="0"
-                                   Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Giới tính"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding TenKH}"/>
+                                     Text="{Binding Data.TenKH}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding SDT}"/>
+                                     Text="{Binding Data.SDT}"/>
                             <TextBox Grid.Row="2" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding DiaChi}"/>
+                                     Text="{Binding Data.DiaChi}"/>
                             <ComboBox x:Name="PART_Combobox"
+                                      ItemsSource="{Binding AdditionData[0]}"
                                       Grid.Row="3" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       Margin="10"                                    
                                       Height="30"
-                                      SelectedItem="{Binding KhuVuc}"/>
+                                      DisplayMemberPath="TenKhuVuc"
+                                      SelectedItem="{Binding Data.KhuVuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Row="4" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     />
-                            <ComboBox Grid.Row="5" Grid.Column="1"
-                                      HorizontalAlignment="Left"
-                                      Margin="10"
-                                      Width="100"
-                                      Height="30"
-                                      MaxWidth="150">
-                                <ComboBoxItem>
-                                    Nam
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Nữ
-                                </ComboBoxItem>
-                            </ComboBox>
+                                     Text="{Binding Data.Email, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

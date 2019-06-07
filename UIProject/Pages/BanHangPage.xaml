@@ -17,6 +17,7 @@
       Title="BanHangPage">
     <Page.Resources>
         <converters:MoneyRuleConverter x:Key="moneyConverter"/>
+        <windows:CustomerAddingDialogWindow x:Key="customerAddingWnd"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -251,7 +252,9 @@
                                         Grid.Column="1"
                                         Margin="5 10"
                                         Style="{DynamicResource UIProjectLightIconButtonStyle}"
-                                        ToolTip="Thêm khách hàng mới">
+                                        ToolTip="Thêm khách hàng mới"
+                                        Command="{Binding ThemKhachHangCommand}"
+                                        CommandParameter="{StaticResource customerAddingWnd}">
                                     <materialDesign:PackIcon Kind="PersonAdd"
                                                              Height="auto"
                                                              Width="auto"
@@ -312,12 +315,14 @@
                                    Margin="5 10 5 5"
                                    Content="Ghi chú"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
+                                     Text="{Binding TenNhanVien}"
                                      IsEnabled="False"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
                                      Style="{StaticResource UIProjectMultipleLineTextBoxStyle}"
                                      Margin="7"
                                      Height="auto"
-                                     VerticalAlignment="Stretch"/>
+                                     VerticalAlignment="Stretch"
+                                     Text="{Binding HoaDon.PhieuBan.GhiChu, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                         </Grid>
                     </TabItem>
                 </TabControl>

@@ -22,7 +22,10 @@ namespace UIProject.ViewModels
         private ICommand cancelCmd;
 
         public ISubmitable Data { get; set; }
-        public bool IsDataValid { get; private set; }
+
+        public bool IsDataValid { get; private set; } 
+
+        public List<IEnumerable<BaseSubmitableModel>> AdditionData { get; set; }
 
         public ICommand SubmitCommand
         {
@@ -39,13 +42,23 @@ namespace UIProject.ViewModels
         public AddingWindowViewModel() : base()
         {
             this.NavigationBarVisibility = System.Windows.Visibility.Collapsed;
+
+            // Automatically create an instance of data
+            Data = (ISubmitable)Activator.CreateInstance(typeof(T), null);
+            AdditionData = new List<IEnumerable<BaseSubmitableModel>>();
+            IsDataValid = true;
         }
 
         public event EventHandler<SubmitedDataEventArgs> SubmitedData;
 
+        /// <summary>
+        /// Submit data to database
+        /// </summary>
+        /// <returns></returns>
         public bool Submit()
         {
             bool submitSuccess = Data.Submit(SubmitType.Add);
+            IsDataValid = submitSuccess;
             OnSubmitedData(new SubmitedDataEventArgs(Data, submitSuccess));
             return submitSuccess;
         }
@@ -73,6 +86,7 @@ namespace UIProject.ViewModels
 
         protected override void OnExitWindow(IWindow window)
         {
+
             base.OnExitWindow(window);
         }
     }

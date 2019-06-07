@@ -144,6 +144,22 @@ namespace UIProject.ViewModels.LayoutViewModels
             AdditionFilters = new List<Func<ItemViewModel<T>, bool>>();
         }
 
+        /// <summary>
+        /// Refresh the items source 
+        /// </summary>
+        /// <param name="itemsSource">The new items source applied to the <see cref="SearchTextBoxViewModel{T}"/></param>
+        public void RefreshItemSource(IEnumerable<T> itemsSource)
+        {
+            this.itemsSource = new ItemCollectionViewModel<T>(itemsSource);
+            if (itemsSource != null)
+                foreach (var item in itemsSource)
+                {
+                    this.itemsSource.Add(new ItemViewModel<T>(item));
+                }
+
+            this.SelectedItem = null;
+        }
+
         #endregion
 
         #region Method executes the Event
@@ -211,6 +227,8 @@ namespace UIProject.ViewModels.LayoutViewModels
         public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
         public event EventHandler<DisplayItemsChangedEventArgs<T>> DisplayItemsChanged;
         #endregion
+
+
     }
 
 

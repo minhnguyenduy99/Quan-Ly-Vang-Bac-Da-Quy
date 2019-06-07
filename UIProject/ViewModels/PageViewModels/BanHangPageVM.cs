@@ -194,8 +194,19 @@ namespace UIProject.ViewModels.PageViewModels
         #region Command Execution 
         protected virtual void OnThemKhachHangCommandExecute(IWindow window)
         {
-            window.DataContext = new AddingWindowViewModel<KhachHangModel>();
-            window.ShowDialog();
+            AddingWindowViewModel<KhachHangModel> themKhachHangVM = new AddingWindowViewModel<KhachHangModel>();
+
+            // Load khu vực để lựa chọn khi thêm khách hàng
+            themKhachHangVM.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            window.DataContext = themKhachHangVM;
+
+            if (window.ShowDialog() == true)
+            {
+                // load danh sách khách hàng lên lại
+                TimKiemKhachHangVM.RefreshItemSource(DataAccess.LoadKhachHang());
+            }
+            window.Close();
         }
         protected virtual void OnThanhToanCommandExecute(IWindow window)
         {

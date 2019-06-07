@@ -25,6 +25,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         private bool _canMinimized;
         private bool _canMaximized;
         private string _name;
+        private bool? dialogResult;
 
         protected ICommand _minimizedCmd;
         protected ICommand _maximizedCmd;
@@ -88,6 +89,14 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public double Top { get; set; } = 0f;
 
+        /// <summary>
+        /// The dialog result of the window after closing
+        /// </summary>
+        public bool? DialogResult
+        {
+            get => dialogResult;
+            set => SetProperty(ref dialogResult, value);
+        }
         public ICommand MinimizedCommand
         {
             get => _minimizedCmd ?? (_minimizedCmd = new BaseCommand(OnMinimizedWindow, OnCanMinimized));

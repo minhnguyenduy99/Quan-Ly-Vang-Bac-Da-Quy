@@ -16,6 +16,7 @@ namespace ModelProject
         private long congNo;
         private string maKhuVuc;
         private string email;
+        private KhuVucModel khuVuc;
 
         public string MaKH
         {
@@ -47,6 +48,16 @@ namespace ModelProject
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);
+        }
+
+        public KhuVucModel KhuVuc
+        {
+            get => khuVuc;
+            set
+            {
+                SetProperty(ref khuVuc, value);
+                MaKhuVuc = khuVuc.MaKhuVuc;
+            }
         }
         public string Email
         {

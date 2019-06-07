@@ -29,11 +29,6 @@ namespace UIProject.Views
         public CustomerAddingDialogWindow()
         {
             InitializeComponent();
-            ViewModel = new AddingWindowViewModel<KhachHangModel>();
-
-            DataContext = ViewModel;
-
-            PART_Combobox.ItemsSource = DataAccess.LoadKhuVuc();
         }
     }
 }

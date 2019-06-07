@@ -14,6 +14,12 @@ namespace BaseMVVM_Service.BaseMVVM
     public abstract class BaseSubmitableModel : BaseModel, ISubmitable
     {
         public bool IsDataValid { get; private set; }
+
+        public BaseSubmitableModel()
+        {
+            IsDataValid = true;
+        }
+
         public virtual bool Submit(SubmitType submitType)
         {
             if (!IsDataValid)

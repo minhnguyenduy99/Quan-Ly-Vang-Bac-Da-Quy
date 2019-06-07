@@ -22,6 +22,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using UIProject.Converters;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels;
 using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ViewModels.PageViewModels;
 using UIProject.Views;
@@ -37,8 +38,6 @@ namespace UIProject.Pages
         public BanHangPage()
         {
             InitializeComponent();
-
-
 
             this.Loaded += BanHangPage_Loaded;
 
@@ -63,6 +62,11 @@ namespace UIProject.Pages
             await this.FadeIn(0.5f, 0.5f);
         }
 
+        private void ThemKhachHangMoiHandler(object sender, RoutedEventArgs e)
+        {
+            CustomerAddingDialogWindow customerAddingWnd = new CustomerAddingDialogWindow();
+            btnAddCustomer.CommandParameter = customerAddingWnd;
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             InitializePrintViewWindow();
@@ -80,5 +84,7 @@ namespace UIProject.Pages
         {
             return (IDocumentPaginatorSource)FindResource("HoaDonPrintTemplate");
         }
+
+
     }
 }
