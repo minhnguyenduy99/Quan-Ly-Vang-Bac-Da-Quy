@@ -28,7 +28,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into  SANPHAM (MASP,TENSP,MALOAISP,DONGIAMUAVAO) values (@MaSP,@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+                cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
             }
            
         }
@@ -68,7 +68,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into DonViTinh(MADVT,TENDVT) values (@MaDVT,@TenDVT) ", dvt);
+                cnn.Execute("insert into DonViTinh(TENDVT) values (@TenDVT) ", dvt);
             }
         }
         public static void UpdateDonViTinh(DonViTinhModel dvt)
@@ -106,7 +106,7 @@ namespace ModelProject
             Console.WriteLine(khachHang.MaKH);
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into KhachHang(MAKH,TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@MaKH,@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
+                cnn.Execute("insert into KhachHang(TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
             }
         }
 
@@ -143,7 +143,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into KhuVuc(MAKHUVUC,TENKHUVUC) values (@MaKhuVuc,@TenKhuVuc) ", khuVuc);
+                cnn.Execute("insert into KhuVuc(TENKHUVUC) values (@TenKhuVuc) ", khuVuc);
             }
         }
         public static void UpdateKhuVuc(KhuVucModel khuVuc)
@@ -179,7 +179,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into TinhTrang(MATINHTRANG,TENTINHTRANG) values (@MaTinhTrang, @TenTinhTrang) ", TinhTrang);
+                cnn.Execute("insert into TinhTrang(TENTINHTRANG) values (@TenTinhTrang) ", TinhTrang);
             }
         }
 
@@ -216,7 +216,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiDichVu(MALOAIDV,TENLOAIDV,DONGIADV) values (@MaLoaiDV,@TenLoaiDV,@DonGiaDV) ", loaiDV);
+                cnn.Execute("insert into LoaiDichVu(TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV) ", loaiDV);
             }
         }
 
@@ -365,7 +365,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiSanPham(MALOAISP,MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaLoaiSP,@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP) ", loaiSP);
+                cnn.Execute("insert into LoaiSanPham(MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP) ", loaiSP);
             }
         }
 
@@ -402,7 +402,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into NHACUNGCAP(MANCC,TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@maNCC,@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email) ", nhaCC);
+                cnn.Execute("insert into NHACUNGCAP(TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email) ", nhaCC);
             }
         }
 
@@ -410,7 +410,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update NHACUNGCAP set MANCC=@maNCC,TENNCC=@tenNCC, DIACHI = @diaChi, DIENTHOAI = @dienThoai, MAKHUVUC = @maKhuVuc, EMAIL = @email  WHERE MANCC = @maNCC", nhaCC);
+                cnn.Execute("update NHACUNGCAP set TENNCC=@tenNCC, DIACHI = @diaChi, DIENTHOAI = @dienThoai, MAKHUVUC = @maKhuVuc, EMAIL = @email  WHERE MANCC = @maNCC", nhaCC);
             }
         }
 
@@ -425,8 +425,8 @@ namespace ModelProject
         #endregion NHACC_DataAcess
 
         //Đã test
-        //Cần check lại số lượng thuộc tính.
-        //Cần check lại thuộc tính maPhieu.
+        //Cần check lại số lượng thuộc tính. //Đã check.
+        //Cần check lại thuộc tính maPhieu. //Done.
         #region PHIEUBAN_DataAcess
 
         public static List<PhieuBanModel> LoadPhieuBan()
@@ -441,7 +441,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuBan(MAPHIEU,SOPHIEU,NGAYLAP,MAKH) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH) ", phieuBan);
+                cnn.Execute("insert into PhieuBan(SOPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu) ", phieuBan);
             }
         }
 
@@ -449,7 +449,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH WHERE MAPHIEU = @maPhieu", phieuBan);
+                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH, MANV = @MaNV, CHIETKHAU = @ChietKhau, THUE = @Thue, THANHTIEN = @ThanhTien, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", phieuBan);
             }
         }
 
@@ -464,8 +464,8 @@ namespace ModelProject
         #endregion PHIEUBAN_DataAcess
 
         //Đã test
-        //Cần check lại số lượng thuộc tính.
-        //Cần check lại thuộc tính maPhieu.
+        //Cần check lại số lượng thuộc tính. //Done.
+        //Cần check lại thuộc tính maPhieu. //Done.
         //Đã duyệt và fix bởi N.
         #region PHIEUMUA_DataAcess
         public static List<PhieuMuaModel> LoadPhieuMua()
@@ -481,14 +481,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuMua(MAPHIEU,SOPHIEU,NGAYLAP,MANCC) values (@MaPhieu,@SoPhieu,@NgayLap,@MaNCC) ", PhieuMua);
+                cnn.Execute("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC, GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu) ", PhieuMua);
             }
         }
         public static void UpdatePhieuMua(PhieuMuaModel PhieuMua)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC WHERE MAPHIEU = @maPhieu", PhieuMua);
+                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuMua);
             }
         }
 
@@ -503,7 +503,7 @@ namespace ModelProject
         #endregion PHIEUMUA_DataAcess
 
         //Đã test
-        //Cần check lại số lượng thuộc tính.
+        //Cần check lại số lượng thuộc tính. //Done.
         //Đã duyệt và fix bởi N.
         #region PHIEUDICHVU_DataAcess
         public static List<PhieuDichVuModel> LoadPhieuDichVu()
@@ -518,7 +518,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuDichVu(MAPHIEU,SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG) values (@MaPhieu,@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang) ", PhieuDichVu);
+                cnn.Execute("insert into PhieuDichVu(SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu) ", PhieuDichVu);
             }
         }
 
@@ -526,7 +526,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc WHERE MAPHIEU = @maPhieu", PhieuDichVu);
+                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc, TINHTRANG = @TinhTrang, MANV = @MaNV, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
             }
         }
 

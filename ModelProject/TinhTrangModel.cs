@@ -34,6 +34,7 @@ namespace ModelProject
             return false;
         }
 
+        #region ACCESS_DB_REGION
         protected override void Add()
         {
             DataAccess.SaveTinhTrang(this);
@@ -48,5 +49,6 @@ namespace ModelProject
         {
             DataAccess.RemoveTinhTrang(this);
         }
+        #endregion
     }
 }

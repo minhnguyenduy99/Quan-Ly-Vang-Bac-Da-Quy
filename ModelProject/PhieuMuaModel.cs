@@ -13,6 +13,13 @@ namespace ModelProject
         private string soPhieu;
         private string ngayLap;
         private string maNCC;
+        private string ghiChu;
+
+        public string GhiChu
+        {
+            get => ghiChu;
+            set => SetProperty(ref ghiChu, value);
+        }
 
         public string MaPhieu
         {
@@ -46,6 +53,7 @@ namespace ModelProject
             return false;
         }
 
+        #region ACCESS_DB_REGION
         protected override void Add()
         {
             DataAccess.SavePhieuMua(this);
@@ -60,5 +68,6 @@ namespace ModelProject
         {
             DataAccess.RemovePhieuMua(this);
         }
+        #endregion
     }
 }

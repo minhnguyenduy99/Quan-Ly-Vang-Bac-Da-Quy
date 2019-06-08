@@ -145,7 +145,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveChiTietDichVu(this);
@@ -160,5 +160,6 @@ namespace ModelProject
         {
             DataAccess.RemoveChiTietDichVu(this);
         }
+        #endregion ACCESS_DB_METHOD
     }
 }

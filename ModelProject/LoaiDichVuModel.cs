@@ -39,6 +39,7 @@ namespace ModelProject
             return false;
         }
 
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveLoaiDichVu(this);
@@ -52,6 +53,7 @@ namespace ModelProject
         protected override void Delete()
         {
             DataAccess.RemoveLoaiDichVu(this);
-        } 
+        }
+        #endregion
     }
 }

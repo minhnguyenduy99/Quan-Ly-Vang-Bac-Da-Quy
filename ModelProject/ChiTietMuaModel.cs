@@ -63,7 +63,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveChiTietMua(this);
@@ -78,5 +78,6 @@ namespace ModelProject
         {
             DataAccess.RemoveChiTietMua(this);
         }
+        #endregion
     }
 }

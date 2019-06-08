@@ -51,7 +51,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveLoaiSanPham(this);
@@ -66,5 +66,6 @@ namespace ModelProject
         {
             DataAccess.RemoveLoaiSanPham(this);
         }
+        #endregion
     }
 }
