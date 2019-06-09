@@ -30,7 +30,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveDonViTinh(this);
@@ -45,5 +45,6 @@ namespace ModelProject
         {
             DataAccess.RemoveDonViTinh(this);
         }
+        #endregion
     }
 }

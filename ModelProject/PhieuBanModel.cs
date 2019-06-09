@@ -18,7 +18,14 @@ namespace ModelProject
         private int thue;
         private int chietKhau;
         private string ghichu;
+        private double thanhTien;
 
+
+        public double ThanhTien
+        {
+            get => thanhTien;
+            set => SetProperty(ref thanhTien, value);
+        }
 
         public string MaPhieu
         {
@@ -106,6 +113,8 @@ namespace ModelProject
         {
             ChietKhauThayDoi?.Invoke(this, EventArgs.Empty);
         }
+
+        #region ACCESS_DB_REGION
         protected override void Add()
         {
             DataAccess.SavePhieuBan(this);
@@ -120,5 +129,6 @@ namespace ModelProject
         {
             DataAccess.RemovePhieuBan(this);
         }
+        #endregion
     }
 }

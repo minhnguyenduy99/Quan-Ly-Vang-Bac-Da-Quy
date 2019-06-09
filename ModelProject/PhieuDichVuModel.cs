@@ -16,6 +16,21 @@ namespace ModelProject
         private long tongTien;
         private long tongTienTraTruoc;
         private int tinhTrang;
+        private string maNV;
+        private string ghiChu;
+
+        public string MaNV
+        {
+            get => maNV;
+            set => SetProperty(ref maNV, value);
+        }
+
+        public string GhiChu
+        {
+            get => ghiChu;
+            set => SetProperty(ref ghiChu, value);
+        }
+
         public string MaPhieu
         {
             get => maPhieu;
@@ -63,7 +78,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_REGION
         protected override void Add()
         {
             DataAccess.SavePhieuDichVu(this);
@@ -78,5 +93,6 @@ namespace ModelProject
         {
             DataAccess.RemovePhieuDichVu(this);
         }
+        #endregion
     }
 }

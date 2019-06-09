@@ -80,7 +80,7 @@ namespace ModelProject
             return false;
         }
 
-
+        #region ACCESS_DB_METHOD
         protected override void Add()
         {
             DataAccess.SaveKhachHang(this);
@@ -95,5 +95,6 @@ namespace ModelProject
         {
             DataAccess.RemoveKhachHang(this);
         }
+        #endregion
     }
 }
