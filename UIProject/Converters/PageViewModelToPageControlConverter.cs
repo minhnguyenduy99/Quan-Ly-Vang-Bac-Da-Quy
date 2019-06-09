@@ -17,6 +17,7 @@ namespace UIProject.Converters
     /// </summary>)
     class PageViewModelToPageControlConverter : IValueConverter
     {
+        Dictionary<object, Page> PageDict = new Dictionary<object, Page>();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
@@ -36,26 +37,37 @@ namespace UIProject.Converters
         /// <returns></returns>
         private Page GetPageInstance(object pageVM)
         {
-            if (pageVM is TongQuanPageVM)
-                return new TongQuanPage() { DataContext = pageVM };
-            if (pageVM is BanHangPageVM)
-                return new BanHangPage() { DataContext = pageVM };
-            if (pageVM is LamDichVuPageVM)
-                return new LamDichVuPage() { DataContext = pageVM };
-            if (pageVM is DanhSachDonHangPageVM)
-                return new DanhSachDonHangPage() { DataContext = pageVM };
-            if (pageVM is KhachHangPageVM)
-                return new KhachHangPage() { DataContext = pageVM };
-            if (pageVM is NhapHangPageVM)
-                return new NhapHangPage() { DataContext = pageVM };
-            if (pageVM is NhaCungCapPageVM)
-                return new DoiTacPage() { DataContext = pageVM };
-            if (pageVM is SanPhamPageVM)
-                return new SanPhamPage() { DataContext = pageVM };
-            if (pageVM is BaoCaoTonKhoPageVM)
-                return new BaoCaoTonKhoPage() { DataContext = pageVM };
+            if (PageDict.ContainsKey(pageVM))
+            {
+                return PageDict[pageVM];
+            }
+            else
+            {
+                switch (pageVM)
+                {
+                    case TongQuanPageVM vm:
+                        PageDict.Add(pageVM, new TongQuanPage());break;
+                    case BanHangPageVM vm:
+                        PageDict.Add(pageVM, new BanHangPage()); break;
+                    case LamDichVuPageVM vm:
+                        PageDict.Add(pageVM, new LamDichVuPage()); break;
+                    case DanhSachDonHangPageVM vm:
+                        PageDict.Add(pageVM, new DanhSachDonHangPage()); break;
+                    case KhachHangPageVM vm:
+                        PageDict.Add(pageVM, new KhachHangPage()); break;
+                    case NhapHangPageVM vm:
+                        PageDict.Add(pageVM, new NhapHangPage()); break;
+                    case NhaCungCapPageVM vm:
+                        PageDict.Add(pageVM, new DoiTacPage()); break;
+                    case SanPhamPageVM vm:
+                        PageDict.Add(pageVM, new SanPhamPage()); break;
+                    case BaoCaoTonKhoPageVM vm:
+                        PageDict.Add(pageVM, new BaoCaoTonKhoPage()); break;
+                }
 
-            return null;
+                PageDict[pageVM].DataContext = pageVM;
+                return PageDict[pageVM];
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// A view model provides functionalities for data searching and item selection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SearchTextBoxViewModel<T> : BaseViewModel, IAsyncCurrentSelectedItem, IConditionalDisplayCollection<ItemViewModel<T>>
+    public class SearchTextBoxViewModel<T> : BaseViewModel, ISearcher, IAsyncCurrentSelectedItem, IConditionalDisplayCollection<ItemViewModel<T>>
     {
         #region Private Fields
         private ItemViewModel<T> selectedItem;
@@ -160,6 +160,10 @@ namespace UIProject.ViewModels.LayoutViewModels
             this.SelectedItem = null;
         }
 
+        public void Filter()
+        {
+
+        }
         #endregion
 
         #region Method executes the Event
@@ -182,6 +186,11 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <returns></returns>
         private Func<ItemViewModel<T>, bool>[] GetAllFilters()
         {
+            // return empty array of filters
+            if (DefaultFilter == null)
+                return new Func<ItemViewModel<T>, bool>[] { };
+
+
             if (AdditionFilters == null)
                 return new Func<ItemViewModel<T>, bool>[] { DefaultFilter };
 

@@ -16,7 +16,6 @@ namespace ModelProject
         private long congNo;
         private string maKhuVuc;
         private string email;
-        private KhuVucModel khuVuc;
 
         public string MaKH
         {
@@ -47,23 +46,28 @@ namespace ModelProject
         public string MaKhuVuc
         {
             get => maKhuVuc;
-            set => SetProperty(ref maKhuVuc, value);
-        }
-
-        public KhuVucModel KhuVuc
-        {
-            get => khuVuc;
             set
             {
-                SetProperty(ref khuVuc, value);
-                MaKhuVuc = khuVuc.MaKhuVuc;
+                SetProperty(ref maKhuVuc, value);
+                TenKhuVuc = DataAccess.LoadKhuVucByMKV(maKhuVuc).TenKhuVuc;   
             }
         }
+
+        public string TenKhuVuc
+        {
+            get => GetPropertyValue<string>();
+            private set
+            {
+                SetProperty(value);
+            }
+        }
+
         public string Email
         {
             get => email;
             set => SetProperty(ref email, value);
         }
+
 
         public override bool Equals(object obj)
         {

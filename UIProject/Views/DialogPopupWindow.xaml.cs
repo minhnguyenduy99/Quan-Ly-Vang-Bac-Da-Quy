@@ -41,7 +41,14 @@ namespace UIProject.Views
         private void DialogWindowVM_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
         {
             if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.OK)
+            {
                 this.Close();
+                return;
+            }
+            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.Yes)
+                DialogResult = true;
+            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.No)
+                DialogResult = false;
         }
 
         private void ApplyTemplateForViewModel()

@@ -41,12 +41,12 @@ namespace UIProject.ViewModels
 
         public ICommand LocPhieuBanCommand
         {
-            get => locPhieuBanCmd ?? new BaseCommand<IWindow>(OnLocPhieuBanCommandExecute);
+            get => locPhieuBanCmd ?? new BaseCommand<IWindowExtension>(OnLocPhieuBanCommandExecute);
         }
 
         public ICommand HuyCommand
         {
-            get => huyCmd ?? new BaseCommand<IWindow>(OnHuyCommandExecute);
+            get => huyCmd ?? new BaseCommand<IWindowExtension>(OnHuyCommandExecute);
         }
 
 
@@ -123,7 +123,7 @@ namespace UIProject.ViewModels
         }
         #endregion
 
-        protected virtual void OnLocPhieuBanCommandExecute(IWindow window)
+        protected virtual void OnLocPhieuBanCommandExecute(IWindowExtension window)
         {
             if (LocPhieuBanVM.FilterCallBacks == null)
                 OnBoLocHoanThanh(new FilterEventArgs<PhieuBanModel>(new List<Func<ItemViewModel<PhieuBanModel>, bool>>()));
@@ -134,7 +134,7 @@ namespace UIProject.ViewModels
             }
         }
 
-        protected virtual void OnHuyCommandExecute(IWindow window)
+        protected virtual void OnHuyCommandExecute(IWindowExtension window)
         {
             OnClosed(EventArgs.Empty);
         }

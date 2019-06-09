@@ -1,6 +1,7 @@
 ﻿using ModelProject;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,40 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for CustomerAddingDialogWindow.xaml
     /// </summary>
-    public partial class CustomerAddingDialogWindow : Window, IWindow
+    public partial class CustomerAddingDialogWindow : Window, IWindowExtension
     {
-        public AddingWindowViewModel<KhachHangModel> ViewModel { get; set; }
-        public CustomerAddingDialogWindow()
+        public CustomerAddingDialogWindow(FrameworkElement activator)
         {
             InitializeComponent();
+
+            this.Activator = activator;
+
+            var addingCustomerVM = new AddingWindowViewModel<KhachHangModel>();
+            addingCustomerVM.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            this.DataContext = addingCustomerVM;
+        }
+
+        public FrameworkElement Activator { get; set; }
+
+        public bool? ShowDialog(Point position)
+        {
+            return this.ShowDialog(position);
+        }
+
+        public bool? ShowDialog(double dentaX, double dentaY)
+        {
+            return this.ShowDialog(Activator, dentaX, dentaY);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
         }
     }
 }

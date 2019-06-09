@@ -7,17 +7,18 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:converters="clr-namespace:UIProject.Converters"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
-      xmlns:dataGridAttach="clr-namespace:UIProject.Behaviors"
+      xmlns:attacher="clr-namespace:UIProject.Behaviors"
       xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
       xmlns:services="clr-namespace:UIProject.ServiceProviders"
       xmlns:vms="clr-namespace:UIProject.ViewModels"
       xmlns:windows ="clr-namespace:UIProject.Views"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
+      Tag="{Binding RelativeSource={RelativeSource Mode=Self}}"
+      x:Name="pageBanHang"
       Title="BanHangPage">
     <Page.Resources>
         <converters:MoneyRuleConverter x:Key="moneyConverter"/>
-        <windows:CustomerAddingDialogWindow x:Key="customerAddingWnd"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -86,7 +87,7 @@
                                 x:Name="ProductView"
                                 DataContext="{Binding HoaDonVM.DanhSachChiTietBan}"
                                 ItemsSource="{Binding Items}"
-                                dataGridAttach:DataGridSetColumnStyle.Elementstyle="{StaticResource UIProjectDataGridElementStyle}"
+                                attacher:DataGridSetColumnStyle.Elementstyle="{StaticResource UIProjectDataGridElementStyle}"
                                 CanUserSortColumns="True"
                                 CanUserAddRows="False"
                                 CanUserResizeColumns="False"
@@ -254,7 +255,7 @@
                                         Style="{DynamicResource UIProjectLightIconButtonStyle}"
                                         ToolTip="Thêm khách hàng mới"
                                         Command="{Binding ThemKhachHangCommand}"
-                                        CommandParameter="{StaticResource customerAddingWnd}">
+                                        Click="BtnAddCustomer_Click">
                                     <materialDesign:PackIcon Kind="PersonAdd"
                                                              Height="auto"
                                                              Width="auto"

@@ -50,10 +50,11 @@ namespace UIProject.ViewModels.LayoutViewModels
             {
                 if (Filters == null)
                     return items;
-                return GetUpdatedDisplayItems();
+                return GetPropertyValue<ObservableCollection<ItemViewModel<T>>>();
             }
             private set
             {
+                SetProperty(value);
                 OnDisplayItemsChanged(new DisplayItemsChangedEventArgs<T>(value));
             }
         }
@@ -64,7 +65,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         public IEnumerable<Func<ItemViewModel<T>, bool>> Filters
         {
             get => GetPropertyValue<IEnumerable<Func<ItemViewModel<T>, bool>>>();
-            set
+            private set
             {
                 SetProperty(value);
                 OnFilterUpdated();
@@ -85,6 +86,7 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         public ObservableCollectionViewModel(IEnumerable<T> itemsSource) : base(itemsSource)
         {
+            Filters = new List<Func<ItemViewModel<T>, bool>>();
         }
 
         /// <summary>
@@ -102,9 +104,39 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public event EventHandler FiltersUpdated;
 
-        public void UpdateDisplayItems()
+
+        /// <summary>
+        /// Filter the collection with available <see cref="ObservableCollectionViewModel{T}.Filters"/>
+        /// </summary>
+        public void Filter()
         {
             DisplayItems = GetUpdatedDisplayItems();
+        }
+
+        /// <summary>
+        /// Refresh the item source with new source
+        /// </summary>
+        /// <param name="itemsSource">The new source</param>
+        public void RefreshItemsSource(IEnumerable<T> itemsSource)
+        {
+            ObservableCollection<ItemViewModel<T>> newItems = new ObservableCollection<ItemViewModel<T>>();
+            foreach(var item in itemsSource)
+            {
+                newItems.Add(new ItemViewModel<T>(item));
+            }
+            this.items = newItems;
+            OnItemsSourceChanged();
+        }
+
+        protected virtual void OnItemsSourceChanged()
+        {
+            Filter();
+        }
+
+        protected virtual void OnItemsSourceRefresh()
+        {
+            SelectedItem = null;
+            DisplayItems = null;
         }
 
         protected virtual void OnSelectedItemChanged(SelectedItemChangedEventArgs e)
@@ -119,7 +151,7 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         protected virtual void OnFilterUpdated()
         {
-            UpdateDisplayItems();
+            Filter();
             FiltersUpdated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -137,7 +169,7 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         private ObservableCollection<ItemViewModel<T>> GetUpdatedDisplayItems()
         {
-            return (ObservableCollection<ItemViewModel<T>>)this.Filter(Filters.ToArray());
+            return new ObservableCollection<ItemViewModel<T>>(this.Filter(Filters.ToArray()));
         }
     }
 }

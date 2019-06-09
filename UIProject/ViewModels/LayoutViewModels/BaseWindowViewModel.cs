@@ -139,6 +139,7 @@ namespace UIProject.ViewModels.LayoutViewModels
             if (window != null)
             {
                 OnClosed(EventArgs.Empty);
+                // The current closed window is the main window
                 window.Close();
             }
         }

@@ -31,7 +31,8 @@ namespace BaseMVVM_Service.BaseMVVM
             }
             catch
             {
-                throw new Exception("Submit into database failed");
+                //throw new Exception("Submit into database failed");
+                return false;
             }
         }
 

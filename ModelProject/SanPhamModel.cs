@@ -13,6 +13,8 @@ namespace ModelProject
         private string maLoaiSP;
         private long donGiaMuaVao;
         private string tenSP;
+        private string maNCC;
+        private int soLuong;
 
         //public SanPhamModel(string MASP, string TENSP, string MALOAISP, long DONGIA)
         //{
@@ -29,7 +31,21 @@ namespace ModelProject
         public string MaLoaiSP
         {
             get => maLoaiSP;
-            set => SetProperty(ref maLoaiSP, value);
+            set
+            {
+                SetProperty(ref maLoaiSP, value);
+                TenLoaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(maLoaiSP).TenLoaiSP;
+            }
+        }
+
+        public string MaNCC
+        {
+            get => maNCC;
+            set
+            {
+                SetProperty(ref maNCC, value);
+                TenNhaCC = DataAccess.LoadNCCByMaNCC(maNCC).TenNCC;
+            }
         }
         public long DonGiaMuaVao
         {
@@ -41,6 +57,28 @@ namespace ModelProject
             get => tenSP;
             set => SetProperty(ref tenSP, value);
         }
+
+        public int SoLuong
+        {
+            get => soLuong;
+            set => SetProperty(ref soLuong, value);
+        }
+
+
+        #region Additional Properties
+        public string TenLoaiSP
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+
+        public string TenNhaCC
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+        #endregion
+
 
         public override bool Equals(object obj)
         {

@@ -13,8 +13,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     public class ItemCollectionViewModel<Model> : BaseViewModel
     {
         protected ObservableCollection<ItemViewModel<Model>> items;
-        
-
+       
         public ObservableCollection<ItemViewModel<Model>> Items
         {
             get => items;
@@ -44,7 +43,6 @@ namespace UIProject.ViewModels.LayoutViewModels
         #region Constructors
         public ItemCollectionViewModel() : this(null)
         {
-
         }
 
 
@@ -59,7 +57,6 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
 
         #endregion
-
 
         #region Methods provides functionalities for DataGridViewModel
         /// <summary>

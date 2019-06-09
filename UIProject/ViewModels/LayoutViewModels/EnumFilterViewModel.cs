@@ -26,7 +26,7 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
-        public ItemViewModel<object> NonApplyFilterItem { get; set; } = new ItemViewModel<object>(new object());
+        public ItemViewModel<object> NonApplyFilterItem { get; private set; } = new ItemViewModel<object>(new object());
 
         public EnumFilterViewModel(List<Func<ItemViewModel<T>, bool>> filterCallbacks, IEnumerable<object> itemsSource) : base(filterCallbacks)
         {

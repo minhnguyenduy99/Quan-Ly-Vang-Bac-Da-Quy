@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:UIProject"
+             xmlns:windows="clr-namespace:UIProject.Views"
              StartupUri="./Views/LoginWindow.xaml"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
@@ -54,11 +55,11 @@
                         <ResourceDictionary Source="./Styles/MaterialDesignCardStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
+
                 
                 <!-- Custom templates for data displayed -->
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        
                         <!-- Data templates -->
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/TinhTrangDonHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/SanPhamTemplate.xaml"/>
@@ -68,6 +69,7 @@
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachDoiTacTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/KhachHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachChiTietBanTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/NhaCungCapTemplate.xaml"/>
                         <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>
@@ -83,6 +85,7 @@
                     <system:String x:Key="TongQuan_ThuNhap">/Images/tongquan_thunhap.png</system:String>
                     <system:String x:Key="Tab_TongQuan">/Images/tab_tongquan.png</system:String>
                 </ResourceDictionary>
+
                 
                 <!-- Print template -->
                 <ResourceDictionary>

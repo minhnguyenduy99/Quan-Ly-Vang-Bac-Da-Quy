@@ -91,7 +91,7 @@ namespace UIProject.ViewModels.PageViewModels
             Func<ItemViewModel<PhieuBanModel>, bool>[] arrayFilters = null;
             e.FilterCallbacks.CopyTo(arrayFilters);
 
-            DanhSachPhieuBanVM.Filters = arrayFilters;
+            //DanhSachPhieuBanVM.Filters = arrayFilters;
 
         }
 

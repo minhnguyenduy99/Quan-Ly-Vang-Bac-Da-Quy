@@ -63,7 +63,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThanhToanCommand
         {
-            get => thanhToanCommand ?? new BaseCommand<IWindow>(OnThanhToanCommandExecute);
+            get => thanhToanCommand ?? new BaseCommand<IWindowExtension>(OnThanhToanCommandExecute);
             set => thanhToanCommand = value;
         }
 
@@ -72,7 +72,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThemKhachHangCommand
         {
-            get => new BaseCommand<IWindow>(OnThemKhachHangCommandExecute);
+            get => new BaseCommand<IWindowExtension>(OnThemKhachHangCommandExecute);
         }
 
         public BanHangPageVM() : base() { }
@@ -179,6 +179,7 @@ namespace UIProject.ViewModels.PageViewModels
                 return true;
             return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
         }
+
         private bool LocTenSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
         {
             return sanPham.Model.TenSP.ToLower().Contains(TimKiemSanPhamVM.Text.ToLower());
@@ -192,23 +193,15 @@ namespace UIProject.ViewModels.PageViewModels
 
 
         #region Command Execution 
-        protected virtual void OnThemKhachHangCommandExecute(IWindow window)
+        protected virtual void OnThemKhachHangCommandExecute(IWindowExtension window)
         {
-            AddingWindowViewModel<KhachHangModel> themKhachHangVM = new AddingWindowViewModel<KhachHangModel>();
-
-            // Load khu vực để lựa chọn khi thêm khách hàng
-            themKhachHangVM.AdditionData.Add(DataAccess.LoadKhuVuc());
-
-            window.DataContext = themKhachHangVM;
-
-            if (window.ShowDialog() == true)
+            if (window.ShowDialog(-400, 0) == true)
             {
-                // load danh sách khách hàng lên lại
                 TimKiemKhachHangVM.RefreshItemSource(DataAccess.LoadKhachHang());
             }
-            window.Close();
         }
-        protected virtual void OnThanhToanCommandExecute(IWindow window)
+
+        protected virtual void OnThanhToanCommandExecute(IWindowExtension window)
         {
             if (window.ShowDialog() == true)
             {

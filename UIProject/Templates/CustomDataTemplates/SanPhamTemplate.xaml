@@ -94,40 +94,39 @@
 
     <DataTemplate x:Key="DanhSachSanPhamTemplate">
         <DataGrid Grid.Row="0"
+                  DataContext="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type materialDesign:Card}}}"
                   CanUserSortColumns="True"
-                  ItemsSource="{Binding}"
+                  ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
                   SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridTextColumn Width="70"
-                                    Binding="{Binding CustomerID}"
+                                    Binding="{Binding Model.MaSP}"
                                     CanUserSort="False"
                                     IsReadOnly="True"
                                     Header="Mã SP"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
-                <DataGridTextColumn Width="170"
-                                    Binding="{Binding Name}"
+                <DataGridTextColumn Width="200"
+                                    Binding="{Binding Model.TenSP}"
                                     Header="Tên sản phẩm"
                                     IsReadOnly="True"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="120"
-                                    Binding="{Binding Gender}"
+                                    Binding="{Binding Model.TenLoaiSP}"
                                     Header="Loại sản phẩm"
                                     IsReadOnly="True"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="120"
-                                    Binding="{Binding Gender}"
+                <DataGridTextColumn Width="150"
+                                    Binding="{Binding Model.TenNhaCC}"
                                     Header="Nhà cung cấp"
                                     IsReadOnly="True"
                                     CanUserSort="False"
@@ -135,25 +134,11 @@
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="170"
                                     IsReadOnly="True"
-                                    Binding="{Binding Area}"
+                                    Binding="{Binding Model.SoLuong}"
                                     Header="Số lượng"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
-                <DataGridTemplateColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
-                                    Height="30"
-                                    Width="30"
-                                    ToolTip="Xóa sản phẩm khỏi đơn hàng">
-                                <materialDesign:PackIcon Kind="MoreCircleOutline"/>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </DataTemplate>

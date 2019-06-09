@@ -19,25 +19,18 @@ namespace UIProject.ViewModels
     public class AddingWindowViewModel<T> : BaseWindowViewModel, ISubmitViewModel where T:BaseSubmitableModel 
     {
         private ICommand submitCmd;
-        private ICommand cancelCmd;
-
         public ISubmitable Data { get; set; }
-
         public bool IsDataValid { get; private set; } 
-
-        public List<IEnumerable<BaseSubmitableModel>> AdditionData { get; set; }
+        public List<IEnumerable<BaseSubmitableModel>> AdditionData { get; private set; }
+        public List<ISearcher> Searchers { get; private set; }
 
         public ICommand SubmitCommand
         {
-            get => submitCmd ?? new BaseCommand<IWindow>(OnSubmitCommandExecute);
+            get => submitCmd ?? new BaseCommand<IWindowExtension>(OnSubmitCommandExecute);
             set => submitCmd = value;
         }
 
-        public ICommand CancelCommand
-        {
-            get => cancelCmd ?? new BaseCommand<IWindow>(OnCancelCommandExecute);
-            set => cancelCmd = value;
-        }
+
 
         public AddingWindowViewModel() : base()
         {
@@ -45,7 +38,10 @@ namespace UIProject.ViewModels
 
             // Automatically create an instance of data
             Data = (ISubmitable)Activator.CreateInstance(typeof(T), null);
+
             AdditionData = new List<IEnumerable<BaseSubmitableModel>>();
+            Searchers = new List<ISearcher>();
+
             IsDataValid = true;
         }
 
@@ -68,26 +64,10 @@ namespace UIProject.ViewModels
             SubmitedData?.Invoke(this, e);
         }
 
-        protected virtual void OnSubmitCommandExecute(IWindow window)
+        protected virtual void OnSubmitCommandExecute(IWindowExtension window)
         {
             Submit();
-            OnExitWindow(window);
         }
 
-        protected virtual void OnCancelCommandExecute(IWindow window)
-        {
-            OnExitWindow(window);
-        }
-
-        protected override void OnShowWindow(IWindow window)
-        {
-           
-        }
-
-        protected override void OnExitWindow(IWindow window)
-        {
-
-            base.OnExitWindow(window);
-        }
     }
 }

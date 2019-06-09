@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:UIProject.Views"
         mc:Ignorable="d"
+        Name="AddCustomerWindow"
         Style="{StaticResource CustomDialogWindowStyle}"
         WindowStartupLocation="Manual"
         MaxWidth="500">
@@ -121,12 +122,16 @@
                             Margin="0 20"
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"                          
-                            Command="{Binding SubmitCommand}"/>
+                            Command="{Binding SubmitCommand}"
+                            CommandParameter="{Binding ElementName=AddCustomerWindow}"
+                            Click="Button_Click"/>
                     <Button Grid.Column="1"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
-                            Command="{Binding CancelCommand}"/>
+                            Command="{Binding CancelCommand}"
+                            CommandParameter="{Binding ElementName=AddCustomerWindow}"
+                            Click="Button_Click_1"/>
                 </Grid>
             </Grid>
         </Grid>

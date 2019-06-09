@@ -15,7 +15,9 @@ namespace UIProject.ViewModels.FunctionInterfaces
     {
         ObservableCollection<T> DisplayItems { get; }
         
-        IEnumerable<Func<T, bool>> Filters { get; set; }
+        IEnumerable<Func<T, bool>> Filters { get ; }
+
+        void Filter();
 
     }
 }

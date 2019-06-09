@@ -1,5 +1,4 @@
-﻿using ModelProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.UIConnector;
-using UIProject.ViewModels;
 using UIProject.ServiceProviders;
-
 
 namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for ProductAddingDialogWindow.xaml
+    /// Interaction logic for EditProductInfoWindow.xaml
     /// </summary>
-    public partial class ProductAddingDialogWindow : Window, IWindowExtension
+    public partial class EditProductInfoWindow : Window, IWindowExtension
     {
-        public ProductAddingDialogWindow()
+        public EditProductInfoWindow()
         {
             InitializeComponent();
         }
@@ -39,8 +36,20 @@ namespace UIProject.Views
         public bool? ShowDialog(double dentaX, double dentaY)
         {
             if (Activator == null)
-                throw new Exception("Activator cannot be null");
+                throw new Exception("Activator cannot be null when using these showing method");
+
             return this.ShowDialog(Activator, dentaX, dentaY);
         }
+
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
     }
 }

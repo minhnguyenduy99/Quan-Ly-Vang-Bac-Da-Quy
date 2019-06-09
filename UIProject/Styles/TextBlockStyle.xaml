@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:UIProject.Styles">
     <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectTextBlockStyle">
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="FontFamily" Value="Arial"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="UIProjectSmallTextBlockStyle" BasedOn="{StaticResource UIProjectTextBlockStyle}">

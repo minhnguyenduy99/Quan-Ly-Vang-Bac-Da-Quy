@@ -45,12 +45,6 @@ namespace UIProject.Pages
            // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
-        private void ViewModel_ThucThiThemKhachHang(object sender, ViewModels.AddingWindowViewModel<BaseSubmitableModel> e)
-        {
-            CustomerAddingDialogWindow customerWindow = new CustomerAddingDialogWindow();
-            btnAddCustomer.CommandParameter = customerWindow;
-        }
-
         private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)
         {
             MessageBox.Show("Sản phẩm này đã được chọn");
@@ -62,11 +56,6 @@ namespace UIProject.Pages
             await this.FadeIn(0.5f, 0.5f);
         }
 
-        private void ThemKhachHangMoiHandler(object sender, RoutedEventArgs e)
-        {
-            CustomerAddingDialogWindow customerAddingWnd = new CustomerAddingDialogWindow();
-            btnAddCustomer.CommandParameter = customerAddingWnd;
-        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             InitializePrintViewWindow();
@@ -85,6 +74,10 @@ namespace UIProject.Pages
             return (IDocumentPaginatorSource)FindResource("HoaDonPrintTemplate");
         }
 
-
+        private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerAddingDialogWindow customerAddingWnd = new CustomerAddingDialogWindow(btnAddCustomer);
+            this.btnAddCustomer.CommandParameter = customerAddingWnd;
+        }
     }
 }

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +50,7 @@
     <Compile Include="BaseMVVM\BaseSubmitableModel.cs" />
     <Compile Include="BaseMVVM\BaseViewModel.cs" />
     <Compile Include="BaseMVVM\Interfaces\IAsynchronousable.cs" />
+    <Compile Include="BaseMVVM\Interfaces\ICloneable.cs" />
     <Compile Include="BaseMVVM\Interfaces\IDataLoader.cs" />
     <Compile Include="BaseMVVM\Interfaces\ISubmitable.cs" />
     <Compile Include="BaseMVVM\ObservableObject.cs" />

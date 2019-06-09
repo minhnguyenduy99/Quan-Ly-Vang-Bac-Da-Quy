@@ -6,10 +6,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ICloneable = BaseMVVM_Service.BaseMVVM.Interfaces.ICloneable;
 
 namespace BaseMVVM_Service.BaseMVVM
 {
-    public abstract class ObservableObject: INotifyPropertyChanged
+    public abstract class ObservableObject: INotifyPropertyChanged, ICloneable
     {
         private readonly Dictionary<string, object> propertyBackingDictionary = new Dictionary<string, object>();
 
@@ -57,6 +58,24 @@ namespace BaseMVVM_Service.BaseMVVM
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void Clone(ObservableObject cloneObj)
+        {
+            if (cloneObj == null)
+                return;
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic;
+            Type objType = this.GetType();
+            var fields = objType.GetFields(bindingFlags);
+
+            for (int i = 0; i < fields.Length; i++)
+            { 
+                var propValue = fields[i].GetValue(this);
+                if (propValue is ObservableObject)
+                    Clone((ObservableObject)fields[i].GetValue(cloneObj));
+                else
+                    fields[i].SetValue(cloneObj, propValue);
+            }           
         }
 
         public static Object GetPropValue(Object obj, String name)

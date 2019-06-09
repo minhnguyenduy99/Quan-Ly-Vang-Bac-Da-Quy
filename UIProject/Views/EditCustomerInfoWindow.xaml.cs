@@ -13,28 +13,44 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UIProject.UIConnector;
-using UIProject.ViewModels;
+using UIProject.ViewModels.FunctionInterfaces;
+using UIProject.ViewModels.LayoutViewModels;
 using UIProject.ServiceProviders;
-
 
 namespace UIProject.Views
 {
     /// <summary>
-    /// Interaction logic for ProductAddingDialogWindow.xaml
+    /// Interaction logic for EditCustomerInfoWindow.xaml
     /// </summary>
-    public partial class ProductAddingDialogWindow : Window, IWindowExtension
+    public partial class EditCustomerInfoWindow : Window, IWindowExtension
     {
-        public ProductAddingDialogWindow()
+        public FrameworkElement Activator { get; set; }
+
+        public EditCustomerInfoWindow(ISubmitViewModel viewModel, FrameworkElement activator)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
+            Activator = activator;
         }
 
-        public FrameworkElement Activator { get; set; }
+
+        private void UpdateInfoHandler(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void CancelUpdateHandler(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
+
 
         public bool? ShowDialog(Point position)
         {
             return this.ShowDialog(position);
         }
+
 
         public bool? ShowDialog(double dentaX, double dentaY)
         {

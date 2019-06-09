@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
 using UIProject.Test;
+using UIProject.ViewModels.LayoutViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -27,13 +29,6 @@ namespace UIProject.Pages
         {
             InitializeComponent();
 
-            PART_CustomerList.Content = new List<Customer>()
-            {
-                new Customer(),
-                new Customer(),
-                new Customer()
-            };
-
             this.Loaded += KhachHangPage_Loaded;
         }
 
@@ -42,12 +37,34 @@ namespace UIProject.Pages
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
-        private void OpenAddNewCustomerDialog(object sender, RoutedEventArgs e)
+        private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var addCustomerBtn = sender as Button;
+            CustomerAddingDialogWindow customerAddingWnd = new CustomerAddingDialogWindow(this.btnAddCustomer);
+            btnAddCustomer.CommandParameter = customerAddingWnd;
+        }
+        private void DeleteCustomerHandler(object sender, RoutedEventArgs e)
+        {
+            DialogPopupWindow notifyWnd = new DialogPopupWindow(new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.YesNo,
+                NoText = "Không",
+                YesText = "Có",
+                MessageText = "Bạn muốn xóa người này khỏi danh sách ?"
+            });
+            btnDelete.CommandParameter = notifyWnd;
+        }
 
-            CustomerAddingDialogWindow dialog = new CustomerAddingDialogWindow();
-            dialog.ShowDialog(addCustomerBtn);        
+        private void BtnEditInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var khachHangItem = this.gridCustomerInfo.DataContext as ItemViewModel<KhachHangModel>;
+            if (khachHangItem == null)
+                return;
+            
+            var editViewModel = new EditWindowViewModel<KhachHangModel>(khachHangItem.Model);
+            editViewModel.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            EditCustomerInfoWindow editInfoWnd = new EditCustomerInfoWindow(editViewModel, btnEditInfo);
+            this.btnEditInfo.CommandParameter = editInfoWnd;
         }
     }
 }
