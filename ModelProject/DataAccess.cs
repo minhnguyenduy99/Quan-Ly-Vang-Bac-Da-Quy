@@ -24,13 +24,16 @@ namespace ModelProject
             }
         }
 
-        public static void SaveSanPham(SanPhamModel sanPham)        //Đã check
+        public static long SaveSanPham(SanPhamModel sanPham)        //Đã check
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
-           
         }
 
         public static void UpdateSanPham(SanPhamModel sanPham)      //Đã check
