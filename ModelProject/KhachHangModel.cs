@@ -9,7 +9,7 @@ namespace ModelProject
 {
     public class KhachHangModel : BaseSubmitableModel
     {
-        private string maKH;
+        private long ? maKH;
         private string sdt;
         private string tenKH;
         private string diaChi;
@@ -17,7 +17,7 @@ namespace ModelProject
         private string maKhuVuc;
         private string email;
 
-        public string MaKH
+        public long ? MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);

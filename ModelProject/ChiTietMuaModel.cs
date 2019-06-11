@@ -9,8 +9,8 @@ namespace ModelProject
 {
     public class ChiTietMuaModel : BaseSubmitableModel
     {
-        private string maPhieuMuaHang;
-        private string maSP;
+        private long maPhieuMuaHang;
+        private long maSP;
 
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenSP;
@@ -21,12 +21,12 @@ namespace ModelProject
         //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
         private bool isUpdated = false;
 
-        public string MaPhieuMuaHang
+        public long MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
         }
-        public string MaSP
+        public long MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);

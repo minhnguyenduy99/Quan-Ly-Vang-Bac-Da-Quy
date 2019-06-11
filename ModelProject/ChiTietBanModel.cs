@@ -11,7 +11,7 @@ namespace ModelProject
 {
     public class ChiTietBanModel : BaseSubmitableModel
     {
-        private string maPhieuMuaHang;
+        private long maPhieuMuaHang;
         private string maSP;
 
         private double chietKhau;
@@ -35,8 +35,13 @@ namespace ModelProject
         //Constructor tự động tạo 1 chi tiết bán từ object sản phẩm và object hoá đơn.
         public ChiTietBanModel(PhieuBanModel _hoaDon, SanPhamModel _sanPham, int _soLuong)
         {
-            maPhieuMuaHang = _hoaDon.MaPhieu;
-            maSP = _sanPham.MaSP;
+            if (_hoaDon.MaPhieu == null)
+            {
+                Console.WriteLine("MaPhieu hoa don null");
+                return;
+            }
+            maPhieuMuaHang = (long)_hoaDon.MaPhieu;
+            maSP = _sanPham.MaSP.ToString();
             soLuong = _soLuong;
             donGiaMuaVao = _sanPham.DonGiaMuaVao;
 
@@ -51,16 +56,8 @@ namespace ModelProject
             ThanhTien = _sanPham.DonGiaMuaVao * SoLuong;
 
         }
-        public ChiTietBanModel()
-        {
-            MaPhieuMuaHang = "MAPMH1";
-            MaSP = "MASP1";
-            SoLuong = 10;
-            ThanhTien = 1000;
-            DonGiaMuaVao = 1000;
-        }
 
-        public string MaPhieuMuaHang
+        public long MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);

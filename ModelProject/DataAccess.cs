@@ -604,7 +604,7 @@ namespace ModelProject
         }
 
         //Đã test
-        public static SanPhamModel LoadSPByMaSP(string masp)
+        public static SanPhamModel LoadSPByMaSP(long masp)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -688,7 +688,7 @@ namespace ModelProject
             }
         }
 
-        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(string madv)
+        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(long madv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -699,8 +699,10 @@ namespace ModelProject
             }
         }
 
-        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(string malsp)
+        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(long malsp)
         {
+            if (malsp == null)
+                return null;
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +

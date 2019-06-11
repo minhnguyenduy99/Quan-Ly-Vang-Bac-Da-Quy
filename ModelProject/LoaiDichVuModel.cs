@@ -8,11 +8,11 @@ namespace ModelProject
 {
     public class LoaiDichVuModel : BaseMVVM_Service.BaseMVVM.BaseSubmitableModel
     {
-        private string maLoaiDV;
+        private long ? maLoaiDV;
         private string tenLoaiDV;
         private long donGiaDV;
 
-        public string MaLoaiDV
+        public long ? MaLoaiDV
         {
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);

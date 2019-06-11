@@ -9,10 +9,10 @@ namespace ModelProject
 {
     public class KhuVucModel : BaseSubmitableModel
     {
-        private string maKhuVuc;
+        private long ? maKhuVuc;
         private string tenKhuVuc;
 
-        public string MaKhuVuc
+        public long ? MaKhuVuc
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);

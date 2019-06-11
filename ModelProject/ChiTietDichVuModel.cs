@@ -9,8 +9,8 @@ namespace ModelProject
 {
     public class ChiTietDichVuModel : BaseSubmitableModel
     {
-        private string maPhieu;
-        private string maLoaiDV;
+        private long maPhieu;
+        private long maLoaiDV;
 
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenDV;
@@ -29,12 +29,12 @@ namespace ModelProject
         //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
         private bool isUpdated = false;
 
-        public string MaPhieu
+        public long MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
         }
-        public string MaLoaiDV
+        public long MaLoaiDV
         {
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
@@ -74,7 +74,7 @@ namespace ModelProject
         {
             get
             {
-                if (maLoaiDV != null && maLoaiDV.Length > 0)
+                if (maLoaiDV != null && maLoaiDV > 0)
                 {
                     LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
                     tenDV = serviceType.TenLoaiDV;
@@ -92,7 +92,7 @@ namespace ModelProject
         {
             get
             {
-                if (maLoaiDV != null && maLoaiDV.Length > 0)
+                if (maLoaiDV != null && maLoaiDV > 0)
                 {
                     LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
                     donGiaDV = serviceType.DonGiaDV;

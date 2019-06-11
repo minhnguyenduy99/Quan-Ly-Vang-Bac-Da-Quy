@@ -9,14 +9,14 @@ namespace ModelProject
 {
     public class NhaCungCapModel : BaseSubmitableModel
     {
-        private string maNCC;
+        private long ? maNCC;
         private string tenNCC;
         private string diaChi;
         private string dienThoai;
-        private string maKhuVuc;
+        private long maKhuVuc;
         private string email;
 
-        public string MaKhuVuc
+        public long MaKhuVuc
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);
@@ -28,7 +28,7 @@ namespace ModelProject
             set => SetProperty(ref email, value);
         }
 
-        public string MaNCC
+        public long ? MaNCC
         {
             get => maNCC;
             set => SetProperty(ref maNCC, value);

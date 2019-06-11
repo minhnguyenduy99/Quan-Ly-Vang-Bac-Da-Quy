@@ -10,7 +10,7 @@ namespace ModelProject
 {
     public class PhieuBanModel : BaseSubmitableModel
     {
-        private string maPhieu;
+        private long ? maPhieu;
         private string soPhieu;
         private string ngayLap;
         private string maNV;
@@ -27,7 +27,7 @@ namespace ModelProject
             set => SetProperty(ref thanhTien, value);
         }
 
-        public string MaPhieu
+        public long ? MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);

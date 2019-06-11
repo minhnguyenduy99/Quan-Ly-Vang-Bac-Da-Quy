@@ -9,10 +9,10 @@ namespace ModelProject
 {
     public class TinhTrangModel : BaseSubmitableModel
     {
-        private string maTinhTrang;
+        private long ? maTinhTrang;
         private string tenTinhTrang;
 
-        public string MaTinhTrang
+        public long ? MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);
