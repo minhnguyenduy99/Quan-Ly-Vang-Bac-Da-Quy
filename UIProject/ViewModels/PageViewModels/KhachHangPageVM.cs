@@ -14,7 +14,12 @@ using UIProject.ViewModels.LayoutViewModels;
 namespace UIProject.ViewModels.PageViewModels
 {
     class KhachHangPageVM : BasePageViewModel
-    { 
+    {
+        #region Resources from database
+        IEnumerable<KhachHangModel> dsKhachHang;
+        IEnumerable<SanPhamModel> dsSanPham;
+        #endregion
+
         /// <summary>
         /// Danh sách khách hàng
         /// </summary>
@@ -58,20 +63,12 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand XoaKhachHangCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnXoaKhachHangCommandExecute);
+            get => new BaseCommand<IWindow>(OnXoaKhachHangCommandExecute);
         }
 
 
         public KhachHangPageVM() : base() { }
         public KhachHangPageVM(INavigator navigator) : base(navigator) { }
-
-
-        protected override void LoadPageComponents()
-        {
-            SetUpDanhSachKhachHangVM();
-            SetUpTimKiemKhachHangVM();
-            SetUpLocKhuVucVM();
-        }
 
 
         private void SetUpDanhSachKhachHangVM()
@@ -101,17 +98,14 @@ namespace UIProject.ViewModels.PageViewModels
         private void SetUpLocKhuVucVM()
         {
             LocKhuVucVM = new EnumFilterViewModel<KhachHangModel>(
-                new List<Func<ItemViewModel<KhachHangModel>, bool>>()
-                {
-                    LocKhachHangTheoKhuVuc
-                },
+                LocKhachHangTheoKhuVuc,
                 DataAccess.LoadKhuVuc());
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocKhuVucVM.NonApplyFilterItem.Model = new KhuVucModel() { MaKhuVuc = "-1", TenKhuVuc = "Chọn tất cả" };
 
             (DanhSachKhachHangVM.Filters as List<Func<ItemViewModel<KhachHangModel>, bool>>)
-                .Add(LocKhuVucVM.FilterCallBacks[0]);
+                .Add(LocKhuVucVM.FilterCallBack);
 
             LocKhuVucVM.SelectedItemChanged += LocKhuVucVM_SelectedItemChanged;
         }
@@ -167,7 +161,7 @@ namespace UIProject.ViewModels.PageViewModels
         #endregion
 
         #region Command execution
-        private void OnXoaKhachHangCommandExecute(IWindowExtension window)
+        private void OnXoaKhachHangCommandExecute(IWindow window)
         {
             if (window.ShowDialog() == true)
             {
@@ -176,11 +170,18 @@ namespace UIProject.ViewModels.PageViewModels
                     return;
                 DataAccess.RemoveKhachHang(deleteKhachHangItem.Model);
                 DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
-                DanhSachKhachHangVM.SelectedItem = null;
             }
         }
+
         private void OnThemKhachHangCommandExecute(IWindowExtension window)
         {
+            var themKhachHangWnd = new AddingWindowViewModel<KhachHangModel>();
+            themKhachHangWnd.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            window.DataContext = themKhachHangWnd;
+
+            window.Closing += (sender, e) => e.Cancel = true;
+
             if (window.ShowDialog(-500, 0) == true)
             {
                 DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
@@ -192,11 +193,33 @@ namespace UIProject.ViewModels.PageViewModels
             EditWindowViewModel<KhachHangModel> chinhSuaThongTin
                 = new EditWindowViewModel<KhachHangModel>(KhachHangDuocChon.Model);
 
-            if (window.ShowDialog(-400, -700) == true)
+            chinhSuaThongTin.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            window.DataContext = chinhSuaThongTin;
+
+            window.Closing += (sender, e) => e.Cancel = true;
+
+            if (window.ShowDialog(-400, -600) == true)
             {
                 DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
-                DanhSachKhachHangVM.SelectedItem = null;
             }
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            SetUpDanhSachKhachHangVM();
+            SetUpTimKiemKhachHangVM();
+            SetUpLocKhuVucVM();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            dsKhachHang = DataAccess.LoadKhachHang();
+            dsSanPham = DataAccess.LoadSanPham();
+
+            DanhSachKhachHangVM.Reload();
+            DanhSachKhachHangVM.RefreshItemsSource(dsKhachHang);
+            TimKiemKhachHangVM.Reload();
         }
 
 

@@ -22,9 +22,9 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for DialogPopupWindow.xaml
     /// </summary>
-    public partial class DialogPopupWindow : Window, IWindow, IViewModelPresenter
+    public partial class DialogPopupWindow : Window, IWindow
     {
-        public BaseViewModel ViewModel { get; set; }
+        public BaseWindowViewModel ViewModel { get; set; }
         public DialogPopupWindow()
         {
             InitializeComponent();
@@ -32,7 +32,9 @@ namespace UIProject.Views
 
         public DialogPopupWindow(DialogWindowViewModel dialogWindowVM) : this()
         {
-            ApplyViewModel(dialogWindowVM);
+            ViewModel = dialogWindowVM;
+            this.DataContext = this.Content = ViewModel;
+
             ApplyTemplateForViewModel();
 
             dialogWindowVM.ButtonPressed += DialogWindowVM_ButtonPressed;
@@ -73,13 +75,5 @@ namespace UIProject.Views
         {
             return (DataTemplate)Application.Current.FindResource(resource);
         }
-
-        
-        public void ApplyViewModel(BaseViewModel viewModel)
-        {
-            this.ViewModel = viewModel;
-            this.DataContext = viewModel;
-            this.Content = viewModel;
-        }      
     }
 }

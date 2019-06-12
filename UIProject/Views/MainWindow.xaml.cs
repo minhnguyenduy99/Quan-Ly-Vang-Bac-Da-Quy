@@ -28,15 +28,16 @@ namespace UIProject.Views
     public partial class MainWindow : Window, IWindow
     {
         public HomePageWindowViewModel HomePageWindowVM { get; private set; }
-        public MainWindow()
+        public Window LoginWindowInstance { get; private set; }
+        public MainWindow(Window loginWindow)
         {
 
             InitializeComponent();
 
-            this.Loaded += MainWindow_Loaded;
-            this.Closed += MainWindow_Closed;
+            this.LoginWindowInstance = loginWindow;
 
-            
+            this.Loaded += MainWindow_Loaded;
+            this.Closed += MainWindow_Closed;        
         }
 
         private async void MainWindow_Closed(object sender, EventArgs e)

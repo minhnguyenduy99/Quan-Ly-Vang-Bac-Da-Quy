@@ -59,6 +59,8 @@ namespace UIProject.Converters
                         PageDict.Add(pageVM, new NhapHangPage()); break;
                     case NhaCungCapPageVM vm:
                         PageDict.Add(pageVM, new DoiTacPage()); break;
+                    case DichVuPageVM vm:
+                        PageDict.Add(pageVM, new DanhSachPhieuDichVuPage());break;
                     case SanPhamPageVM vm:
                         PageDict.Add(pageVM, new SanPhamPage()); break;
                     case BaoCaoTonKhoPageVM vm:

@@ -31,11 +31,6 @@ namespace UIProject.Views
             InitializeComponent();
 
             this.Activator = activator;
-
-            var addingCustomerVM = new AddingWindowViewModel<KhachHangModel>();
-            addingCustomerVM.AdditionData.Add(DataAccess.LoadKhuVuc());
-
-            this.DataContext = addingCustomerVM;
         }
 
         public FrameworkElement Activator { get; set; }
@@ -48,16 +43,6 @@ namespace UIProject.Views
         public bool? ShowDialog(double dentaX, double dentaY)
         {
             return this.ShowDialog(Activator, dentaX, dentaY);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
         }
     }
 }

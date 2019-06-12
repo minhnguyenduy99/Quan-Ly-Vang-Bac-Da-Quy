@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UIProject.Events;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
-    public class ItemCollectionViewModel<Model> : BaseViewModel
+    public class ItemCollectionViewModel<Model> : BaseViewModelObject<Model>, ICollectionViewModel<Model>
     {
         protected ObservableCollection<ItemViewModel<Model>> items;
        
@@ -146,6 +147,11 @@ namespace UIProject.ViewModels.LayoutViewModels
             return FilterHelper.Filter(items, filters);
         }
 
+        public IEnumerable<ItemViewModel<Model>> Filter(IEnumerable<Func<ItemViewModel<Model>, bool>> filters)
+        {
+            return FilterHelper.Filter(items, filters);
+        }
+
         #endregion
 
         #region Event Declaration
@@ -163,6 +169,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// Evenr occurs when model of item is already in the <see cref="DataGridViewModel{T}"/>
         /// </summary>
         public event EventHandler<ItemEventArgs<Model>> ContainsItemModel;
+
         #endregion
 
 
@@ -179,6 +186,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             ContainsItemModel?.Invoke(this, e);
         }
+
+        protected override void LoadComponentsInternal() { }
+
+        protected override void ReloadComponentsInternal() { }
         #endregion
 
     }

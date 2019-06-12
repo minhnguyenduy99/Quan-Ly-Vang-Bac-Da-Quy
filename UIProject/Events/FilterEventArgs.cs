@@ -9,11 +9,11 @@ namespace UIProject.Events
 {
     public class FilterEventArgs<T> : EventArgs
     {
-        public List<Func<ItemViewModel<T>, bool>> FilterCallbacks { get; private set; }
+        public Func<ItemViewModel<T>, bool> FilterCallback { get; private set; }
 
-        public FilterEventArgs(List<Func<ItemViewModel<T>, bool>> filterCallbacks)
+        public FilterEventArgs(Func<ItemViewModel<T>, bool> filterCallback)
         {
-            FilterCallbacks = filterCallbacks;
+            FilterCallback = filterCallback;
         }
     }
 }

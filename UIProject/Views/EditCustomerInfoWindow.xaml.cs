@@ -26,11 +26,10 @@ namespace UIProject.Views
     {
         public FrameworkElement Activator { get; set; }
 
-        public EditCustomerInfoWindow(ISubmitViewModel viewModel, FrameworkElement activator)
+        public EditCustomerInfoWindow(FrameworkElement activator)
         {
             InitializeComponent();
 
-            DataContext = viewModel;
             Activator = activator;
         }
 

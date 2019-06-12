@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
+
 
 namespace UIProject.Pages
 {
@@ -23,6 +25,13 @@ namespace UIProject.Pages
         public BaoCaoTonKhoPage()
         {
             InitializeComponent();
+
+            this.Loaded += BaoCaoTonKhoPage_Loaded;
+        }
+
+        private async void BaoCaoTonKhoPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

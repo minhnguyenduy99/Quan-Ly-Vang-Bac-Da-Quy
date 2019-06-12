@@ -15,7 +15,7 @@ namespace ModelProject
         private string maKH;
         private long tongTien;
         private long tongTienTraTruoc;
-        private int tinhTrang;
+        private string tinhTrang;
         private string maNV;
         private string ghiChu;
 
@@ -61,7 +61,7 @@ namespace ModelProject
             get => tongTienTraTruoc;
             set => SetProperty(ref tongTienTraTruoc, value);
         }
-        public int TinhTrang
+        public string TinhTrang
         {
             get => tinhTrang;
             set => SetProperty(ref tinhTrang, value);

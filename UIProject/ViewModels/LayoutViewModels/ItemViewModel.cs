@@ -15,7 +15,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// View model of item type
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ItemViewModel<T> : BaseViewModel<T>, ISelectable
+    public class ItemViewModel<T> : BaseViewModelObject<T>, ISelectable
     {
         private ICommand selectItemCmd;
         
@@ -75,5 +75,9 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             Selected?.Invoke(this, e);
         }
+
+        protected override void LoadComponentsInternal() { }
+
+        protected override void ReloadComponentsInternal() { }
     }
 }

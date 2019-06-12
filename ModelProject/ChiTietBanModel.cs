@@ -49,7 +49,6 @@ namespace ModelProject
             donViTinh = dvtModel.TenDVT;
 
             ThanhTien = _sanPham.DonGiaMuaVao * SoLuong;
-
         }
         public ChiTietBanModel()
         {

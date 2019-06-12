@@ -95,14 +95,14 @@ namespace UIProject
             if (result != null && result == true)
             {
                 InitializeHomepageWindow();
-                this.Close();
+                this.Hide();
             }
         }
 
 
         private void InitializeHomepageWindow()
         {
-            MainWindow homepageWnd = new MainWindow();
+            MainWindow homepageWnd = new MainWindow(this);
             homepageWnd.DataContext = new HomePageWindowViewModel();
 
             homepageWnd.Closed += HomepageWnd_Closed;
@@ -113,7 +113,7 @@ namespace UIProject
         private void HomepageWnd_Closed(object sender, EventArgs e)
         {
             // When the Homepage window is closed, close this one then.
-            this.Close();
+            this.Show();
         }
     }
 }

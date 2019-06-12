@@ -8,6 +8,7 @@
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="CanResize"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
         <Setter Property="Left" Value="{Binding Left}"/>
@@ -27,8 +28,8 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0"
-                                  Background="White"
-                                  Visibility="{Binding NavigationBarVisibility}">
+                              Background="White"
+                              Visibility="{Binding NavigationBarVisibility}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

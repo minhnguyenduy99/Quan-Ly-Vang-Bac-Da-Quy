@@ -15,7 +15,35 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <typeparam name="T"></typeparam>
     public class EnumFilterViewModel<T> : BaseFilterViewModel<T>
     {
+        #region Private Fields
         private ObservableCollectionViewModel<object> collection;
+        private bool isApplyNonFilterItem;
+        #endregion
+
+
+        /// <summary>
+        /// Indicating weither a non-filter item is used in the filtering
+        /// </summary>
+        public bool IsApplyNonFilterItem
+        {
+            get => isApplyNonFilterItem;
+            set
+            {
+                SetProperty(ref isApplyNonFilterItem, value);
+                if (value == true)
+                {
+                    Collection?.Add(NonApplyFilterItem);
+                }
+                else
+                {
+                    Collection?.Remove(NonApplyFilterItem);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The source item of the filter
+        /// </summary>
         public ObservableCollectionViewModel<object> Collection
         {
             get => collection;
@@ -26,9 +54,17 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
+        /// <summary>
+        /// The non-apply filter item
+        /// </summary>
         public ItemViewModel<object> NonApplyFilterItem { get; private set; } = new ItemViewModel<object>(new object());
 
-        public EnumFilterViewModel(List<Func<ItemViewModel<T>, bool>> filterCallbacks, IEnumerable<object> itemsSource) : base(filterCallbacks)
+        /// <summary>
+        /// Create an instance of <see cref="EnumFilterViewModel{T}"/>, allow collection filter
+        /// </summary>
+        /// <param name="filterCallback">The filter callback applied to this filter</param>
+        /// <param name="itemsSource">The source collection of the filter</param>
+        public EnumFilterViewModel(Func<ItemViewModel<T>, bool> filterCallback, IEnumerable<object> itemsSource) : base(filterCallback)
         {
             if (itemsSource == null)
                 Collection = new ObservableCollectionViewModel<object>();
@@ -38,8 +74,14 @@ namespace UIProject.ViewModels.LayoutViewModels
             this.Collection.Add(NonApplyFilterItem);
         }
 
+        /// <summary>
+        /// Create an instance of <see cref="EnumFilterViewModel{T}"/>
+        /// </summary>
         public EnumFilterViewModel() : this(null, null) { }
 
+        /// <summary>
+        /// Event occurs when the selected item of the collection changed
+        /// </summary>
         public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged
         {
             add { Collection.SelectedItemChanged += value; }

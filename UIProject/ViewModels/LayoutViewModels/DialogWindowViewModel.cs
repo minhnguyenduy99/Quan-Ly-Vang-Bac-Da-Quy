@@ -199,6 +199,14 @@ namespace UIProject.ViewModels.LayoutViewModels
             ButtonPressed?.Invoke(this, new DialogButtonPressedEventArgs(result, buttonName));
         }
 
+        protected override void LoadComponentsInternal()
+        {
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+        }
+
         public event EventHandler<DialogButtonPressedEventArgs> ButtonPressed;
     }
 

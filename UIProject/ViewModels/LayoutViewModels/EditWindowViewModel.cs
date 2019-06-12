@@ -57,18 +57,45 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         protected virtual void OnCancelCommandExecute(IWindowExtension window)
         {
-            OnExitWindow(window);
+            TriggerTheClosingHandler(window);
+            window.DialogResult = false;
+            window.Close();
         }
-
         protected virtual void OnUpdateCommandExecute(IWindowExtension window)
         {
-            Submit();
-            OnExitWindow(window);
+            TriggerTheClosingHandler(window);
+            window.DialogResult = Submit();
+            window.Close();
         }
 
         protected virtual void OnSubmitedData(SubmitedDataEventArgs e)
         {
             SubmitedData?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// When the <see cref="IWindow.ShowDialog"/> is called, there's no way to set the <see cref="IWindow.DialogResult"/>.
+        /// To solve this, first trigger the closing handler to cancel it to do our task, then trigger the closing handler
+        /// back to default.
+        /// </summary>
+        /// <param name="window"></param>
+        private void TriggerTheClosingHandler(IWindowExtension window)
+        {
+            // Remove the cancel handler (if it does exist) 
+            window.Closing -= (sender, e) => e.Cancel = true;
+
+            // Reset the default closing-handler of the window
+            window.Closing += (sender, e) => e.Cancel = false;
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            
         }
     }
 }

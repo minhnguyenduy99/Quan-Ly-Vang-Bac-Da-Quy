@@ -25,7 +25,7 @@ namespace UIProject.ViewModels
             this.PrintVM.PrintFinished += PrintVM_PrintFinished;
         }
 
-        public PrintWindowViewModel(IDocumentPaginatorSource document)
+        public PrintWindowViewModel(IDocumentPaginatorSource document) : base()
         {
             var pageSize = new
             {
@@ -59,11 +59,17 @@ namespace UIProject.ViewModels
             PrintResult = e.PrintResult;
         }
 
-       
-
         public ICommand PrintCommand
         {
             get => PrintVM.Print;
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
         }
     }
 }

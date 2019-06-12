@@ -54,6 +54,23 @@ namespace UIProject.ServiceProviders
         public static IEnumerable<T> Filter<T>(IEnumerable<T> itemsSource, params Func<T,bool>[] filters)
         {
             IEnumerable<T> result = itemsSource;
+            for(int i=0;i<filters.Length;i++)
+            {
+                result = result.Where(filters[i]);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Filtering an items source with a collection of filters
+        /// </summary>
+        /// <typeparam name="T">Type of items source</typeparam>
+        /// <param name="itemsSource">The items source need to be filtered </param>
+        /// <param name="filters">The collection of filters</param>
+        /// <returns>The filter result collection from items source</returns>
+        public static IEnumerable<T> Filter<T>(IEnumerable<T> itemsSource, IEnumerable<Func<T, bool>> filters)
+        {
+            IEnumerable<T> result = itemsSource;
             foreach(var filter in filters)
             {
                 result = result.Where(filter);

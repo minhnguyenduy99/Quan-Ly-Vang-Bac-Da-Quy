@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UIProject.Converters;
 using UIProject.Events;
+using UIProject.UIConnector;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -17,90 +19,118 @@ namespace UIProject.ViewModels.PageViewModels
     {
         private IEnumerable<PhieuBanModel> phieuBanSource;
 
-        public LocDonHangWindowVM LocDonHangVM { get; set; }
-
         public SearchTextBoxViewModel<PhieuBanModel> TimKiemPhieuBanVM { get; set; }
 
         public ObservableCollectionViewModel<PhieuBanModel> DanhSachPhieuBanVM { get; set; }
+
+        public DateTime ThoiGianLapPhieu { get; set; }
+
+        public ICommand BanHangCommand
+        {
+            get => new BaseCommand(OnBanHangCommandExecute);
+        }
+
+
+        public ICommand ChinhSuaThongTinCommand
+        {
+            get => new BaseCommand<IWindowExtension>(OnChinhSuaThongTinCommandExecute);
+        }
+
+        public ICommand XoaPhieuBanCommand
+        {
+            get => new BaseCommand<IWindowExtension>(OnXoaPhieuBanCommandExecute);
+        }
+
 
         public DanhSachDonHangPageVM() : base() { }
         public DanhSachDonHangPageVM(INavigator navigator) : base(navigator)
         {
         }
 
-
-        protected override void LoadPageComponents()
-        {
-            phieuBanSource = new ObservableCollection<PhieuBanModel>()
-            {
-                 new PhieuBanModel(){MaPhieu = "PH001", MaKH = "KH01", NgayLap = "12/2/2018"},
-                 new PhieuBanModel(){MaPhieu = "PH002", MaKH = "KH02", NgayLap = "11/1/2017"},
-                 new PhieuBanModel(){MaPhieu = "PH003", MaKH = "KH03", NgayLap = "13/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH004", MaKH = "KH02", NgayLap = "25/4/2016"},
-                 new PhieuBanModel(){MaPhieu = "PH005", MaKH = "KH01", NgayLap = "11/8/2015"},
-                 new PhieuBanModel(){MaPhieu = "PH006", MaKH = "KH01", NgayLap = "29/9/2014"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/02/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "4/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-                 new PhieuBanModel(){MaPhieu = "PH007", MaKH = "KH03", NgayLap = "04/2/2019"},
-            };
-            SetUpDanhSachPhieuBanVM();
-            SetUpBoLocTimKiemPhieuBan();
-        }
-
         private void SetUpDanhSachPhieuBanVM()
         {
             DanhSachPhieuBanVM = new ObservableCollectionViewModel<PhieuBanModel>(phieuBanSource);
-        }
+            DanhSachPhieuBanVM.SelectedItemChanged += DanhSachPhieuBanVM_SelectedItemChanged;
 
-        private void SetUpBoLocTimKiemPhieuBan()
-        {
-            TimKiemPhieuBanVM = new SearchTextBoxViewModel<PhieuBanModel>(phieuBanSource);
-            TimKiemPhieuBanVM.DefaultFilter = new Func<ItemViewModel<PhieuBanModel>, bool>(LocTheoMaDonHangCallBack);
-            
-        }
-       
+            var tempFilters = DanhSachPhieuBanVM.Filters as List<Func<ItemViewModel<PhieuBanModel>, bool>>;
+            tempFilters.Add(LocTheoMaDonHangCallBack);
+            tempFilters.Add(LocTheoThoiGianCallBack);
 
-        private void TimKiemPhieuBanVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
-        {
-            var castPhieuBan = e.SelectedItem as ItemViewModel<PhieuBanModel>;
-            if (castPhieuBan != null)
+
+            // Local handler
+            void DanhSachPhieuBanVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
-                DanhSachPhieuBanVM.Items.Clear();
-                DanhSachPhieuBanVM.Add(castPhieuBan);
+                
             }
         }
 
-        private void LocDonHangVM_BoLocHoanThanh(object sender, FilterEventArgs<PhieuBanModel> e)
+
+        private void SetUpTimKiemPhieuBanVM()
         {
-            Func<ItemViewModel<PhieuBanModel>, bool>[] arrayFilters = null;
-            e.FilterCallbacks.CopyTo(arrayFilters);
+            TimKiemPhieuBanVM = new SearchTextBoxViewModel<PhieuBanModel>(phieuBanSource);
+            TimKiemPhieuBanVM.TextChanged += TimKiemPhieuBanVM_TextChanged;
 
-            //DanhSachPhieuBanVM.Filters = arrayFilters;
-
+            void TimKiemPhieuBanVM_TextChanged(object sender, TextValueChangedEventArgs e)
+            {
+                if (e.NewValue != e.OldValue)
+                {
+                    DanhSachPhieuBanVM.Filter();
+                }
+            }
         }
 
-        protected virtual bool LocTheoMaDonHangCallBack(ItemViewModel<PhieuBanModel> phieuBan)
+        #region Filter callbacks
+
+        private bool LocTheoMaDonHangCallBack(ItemViewModel<PhieuBanModel> phieuBan)
         {
             var castPhieuBan = TimKiemPhieuBanVM.SelectedItem as ItemViewModel<PhieuBanModel>;
             if (castPhieuBan == null)
                 return true;
-            return castPhieuBan.Model.MaPhieu.ToLower().Equals(phieuBan.Model.MaPhieu.ToLower());
+            return castPhieuBan.Model.MaPhieu.ToLower().StartsWith(phieuBan.Model.MaPhieu.ToLower());
         }
+
+        private bool LocTheoThoiGianCallBack(ItemViewModel<PhieuBanModel> phieuBan)
+        {
+            if (phieuBan == null)
+                return true;
+            if (phieuBan.Model == null)
+                return true;
+
+            DateTime ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuBan.Model.NgayLap, null, null, null);
+            return ngayLap.Date == ThoiGianLapPhieu.Date;
+        }
+        #endregion
+
+
+        #region Command Execution
+        private void OnChinhSuaThongTinCommandExecute(IWindowExtension obj)
+        {
+            throw new NotImplementedException();
+        }
+        private void OnXoaPhieuBanCommandExecute(IWindowExtension obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnBanHangCommandExecute()
+        {
+            this.Navigator.Navigate("Bán hàng");
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            phieuBanSource = DataAccess.LoadPhieuBan();
+
+            SetUpDanhSachPhieuBanVM();
+            SetUpTimKiemPhieuBanVM();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            TimKiemPhieuBanVM.Reload();
+            DanhSachPhieuBanVM.Reload();
+        }
+        #endregion
+
     }
 }

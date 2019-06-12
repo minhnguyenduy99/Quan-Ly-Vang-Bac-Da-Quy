@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:attacher="clr-namespace:UIProject.Behaviors">
     <DataTemplate x:Key="DanhSachDoiTacTemplate">
         <DataGrid HorizontalAlignment="Left"
                   CanUserSortColumns="True"
@@ -10,11 +11,10 @@
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  SelectionUnit="FullRow">
+                  SelectionUnit="FullRow"
+                  attacher:DataGridAttachProperties.AllowAppliedEmptyTemplate="False"
+                  attacher:DataGridAttachProperties.ImageSource="/Images/them_nhacungcap.png">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridHyperlinkColumn Width="70"
                                          Binding="{Binding CustomerID}"
                                          CanUserSort="False"
@@ -26,44 +26,30 @@
                                     Binding="{Binding Name}"
                                     Header="Tên NCC"
                                     IsReadOnly="True"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="80"
+                <DataGridTextColumn Width="120"
                                     Binding="{Binding Gender}"
                                     Header="Địa chỉ"
                                     IsReadOnly="True"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="170"
+                <DataGridTextColumn Width="120"
                                     IsReadOnly="True"
                                     Binding="{Binding Area}"
                                     Header="Số điện thoại"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="130"
+                <DataGridTextColumn Width="120"
                                     CanUserSort="False"
                                     Binding="{Binding PhoneNumber}"
-                                    Header="Trạng thái"                                           
+                                    Header="Email"                                           
                                     IsReadOnly="True"
-                                    HeaderStyle="{StaticResource RightDataGridHeader}"
-                                    CellStyle="{StaticResource RightDataGridCell}"/>
-                <DataGridTemplateColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource ButtonDataGridCellStyle}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
-                                    Height="30"
-                                    Width="30"
-                                    ToolTip="Xóa sản phẩm khỏi đơn hàng">
-                                <materialDesign:PackIcon Kind="MoreCircleOutline"/>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DataTemplate>

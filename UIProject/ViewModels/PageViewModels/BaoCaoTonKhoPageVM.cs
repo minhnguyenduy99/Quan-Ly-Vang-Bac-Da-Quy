@@ -11,9 +11,17 @@ namespace UIProject.ViewModels.PageViewModels
     {
         public BaoCaoTonKhoPageVM(): base() { }
         public BaoCaoTonKhoPageVM(INavigator navigator) : base(navigator) { }
-        protected override void LoadPageComponents()
+
+
+
+        protected override void LoadComponentsInternal()
         {
-            
+            throw new NotImplementedException();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            throw new NotImplementedException();
         }
     }
 }

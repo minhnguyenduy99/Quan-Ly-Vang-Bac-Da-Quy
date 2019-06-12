@@ -86,7 +86,33 @@
                                      Padding="10 0 10 20"
                                      Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                      VerticalAlignment="Top">
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical"
+                                Margin="0 5 0 0">
+                        <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                                    <Setter Property="Margin" Value="10"/>
+
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Content="Kết quả tìm thấy"/>
+                            <Label Grid.Row="1" Grid.Column="0"                                   
+                                   Content="Số lượng"/>
+                            <Label Grid.Row="0" Grid.Column="1"                                  
+                                   Content="{Binding DanhSachSanPhamVM.DisplayItems.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Content="{Binding DanhSachSanPhamVM.Items.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <Separator Margin="0 20 0 20"/>
                         <Label Style="{StaticResource LargeLabelStyle}"
                                Margin="10"
                                Content="Hộp chức năng"/>

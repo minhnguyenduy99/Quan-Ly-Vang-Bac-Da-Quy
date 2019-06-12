@@ -19,7 +19,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// A view model provides functionalities for data searching and item selection
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SearchTextBoxViewModel<T> : BaseViewModel, ISearcher, IAsyncCurrentSelectedItem, IConditionalDisplayCollection<ItemViewModel<T>>
+    public class SearchTextBoxViewModel<T> : BaseViewModelObject<T>, ISearcher, IAsyncCurrentSelectedItem, IConditionalDisplayCollection<ItemViewModel<T>>
     {
         #region Private Fields
         private ItemViewModel<T> selectedItem;
@@ -57,7 +57,18 @@ namespace UIProject.ViewModels.LayoutViewModels
             set
             {
                 if (selectedItem != null)
-                    selectedItem.IsSelected = false;
+                {
+                    // The item is currently selected
+                    if (value != null && value.Equals(selectedItem))
+                    {
+                        // Trigger for notification of selected item changes
+                        selectedItem = null;
+                    }
+                    else
+                    {
+                        selectedItem.IsSelected = false;
+                    }
+                }
                 SetProperty(ref selectedItem, (ItemViewModel<T>)value);
                 if (value != null)
                 {
@@ -67,24 +78,11 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
-        /// <summary>
-        /// The default filter callback for <see cref="SearchTextBoxViewModel{T}"/>
-        /// </summary>
-        public Func<ItemViewModel<T>, bool> DefaultFilter { get; set; }
-
-        /// <summary>
-        /// The array of filter callbacks added for filtering 
-        /// </summary>
-        public List<Func<ItemViewModel<T>, bool>> AdditionFilters { get; set; }
 
         /// <summary>
         /// All filters applied to the searching
         /// </summary>
-        public IEnumerable<Func<ItemViewModel<T>, bool>> Filters
-        {
-            get => GetAllFilters();
-            set { }
-        }
+        public List<Func<ItemViewModel<T>, bool>> Filters { get; private set; }
 
         /// <summary>
         /// The text for searching
@@ -140,8 +138,6 @@ namespace UIProject.ViewModels.LayoutViewModels
                 {
                     this.itemsSource.Add(new ItemViewModel<T>(item));
                 }
-
-            AdditionFilters = new List<Func<ItemViewModel<T>, bool>>();
         }
 
         /// <summary>
@@ -157,12 +153,7 @@ namespace UIProject.ViewModels.LayoutViewModels
                     this.itemsSource.Add(new ItemViewModel<T>(item));
                 }
 
-            this.SelectedItem = null;
-        }
-
-        public void Filter()
-        {
-
+            Reload();
         }
         #endregion
 
@@ -171,7 +162,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             if (!string.IsNullOrEmpty(newValue))
             {
-                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(Filters.ToArray()));                  
+                this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(Filters));                 
             }
             else
             {
@@ -179,31 +170,6 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
             TextChanged?.Invoke(this, new TextValueChangedEventArgs(oldValue, newValue));
         }
-
-        /// <summary>
-        /// Combines the DefaultFilter and AdditionFilters into one array
-        /// </summary>
-        /// <returns></returns>
-        private Func<ItemViewModel<T>, bool>[] GetAllFilters()
-        {
-            // return empty array of filters
-            if (DefaultFilter == null)
-                return new Func<ItemViewModel<T>, bool>[] { };
-
-
-            if (AdditionFilters == null)
-                return new Func<ItemViewModel<T>, bool>[] { DefaultFilter };
-
-            Func<ItemViewModel<T>, bool>[] filters = new Func<ItemViewModel<T>, bool>[AdditionFilters.Count + 1];
-            filters[0] = DefaultFilter;
-            for (int i=1;i< filters.Length; i++)
-            {
-                filters[i] = AdditionFilters[i - 1];
-            }
-
-            return filters;
-        }
-
 
         protected virtual void OnDisplayItemsEmpty()
         {
@@ -227,6 +193,27 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected virtual void OnDisplayItemsChanged(DisplayItemsChangedEventArgs<T> e)
         {
             DisplayItemsChanged?.Invoke(this, e);
+        }
+
+
+
+        protected override void LoadComponentsInternal()
+        {
+            Filters = new List<Func<ItemViewModel<T>, bool>>();
+            DisplayItems = new ObservableCollection<ItemViewModel<T>>();
+            ReloadComponentsInternal();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            Text = string.Empty;
+            SelectedItem = null;
+            if (DisplayItems != null)
+                DisplayItems.Clear();
+            else
+            {
+                DisplayItems = new ObservableCollection<ItemViewModel<T>>();
+            }
         }
         #endregion
 

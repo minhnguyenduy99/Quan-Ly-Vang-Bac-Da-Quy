@@ -24,23 +24,9 @@ namespace UIProject.Views
     /// </summary>
     public partial class OrderFilterDialogWindow : Window, IWindow
     {
-        public LocDonHangWindowVM ViewModel { get; set; }
-        public OrderFilterDialogWindow(LocDonHangWindowVM viewModel)
+        public OrderFilterDialogWindow()
         {
             InitializeComponent();
-            DataContext = ViewModel = viewModel;
-            PART_SearchTextBox.DataContext = viewModel.TimKiemKhachHangVM;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-            this.Close();
-        }
-
-        private void SearchTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
         }
     }
 }

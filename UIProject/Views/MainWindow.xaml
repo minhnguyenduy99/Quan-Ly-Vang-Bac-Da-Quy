@@ -32,7 +32,7 @@
             <vms:ContentViewModel Content="Khách hàng" IconSource="/Images/software_icon.png" x:Key="TAB_KhachHang"/>
             <vms:ContentViewModel Content="Nhà cung cấp" IconSource="/Images/software_icon.png" x:Key="TAB_NhaCC"/>
             <vms:ContentViewModel Content="Sản phẩm" IconSource="/Images/software_icon.png" x:Key="TAB_SanPham"/>
-            <vms:ContentViewModel Content="Dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_DichVu"/>
+            <vms:ContentViewModel Content="Phiếu dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_DichVu"/>
             <vms:ContentViewModel Content="Nhập hàng" IconSource="/Images/software_icon.png" x:Key="TAB_NhapHang"/>
             <vms:ContentViewModel Content="Báo cáo tồn kho" IconSource="/Images/software_icon.png" x:Key="TAB_BCTonKho"/>
             

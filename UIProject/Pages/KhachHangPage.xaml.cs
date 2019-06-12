@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
-using UIProject.Test;
 using UIProject.ViewModels.LayoutViewModels;
 using UIProject.Views;
 
@@ -56,14 +55,7 @@ namespace UIProject.Pages
 
         private void BtnEditInfo_Click(object sender, RoutedEventArgs e)
         {
-            var khachHangItem = this.gridCustomerInfo.DataContext as ItemViewModel<KhachHangModel>;
-            if (khachHangItem == null)
-                return;
-            
-            var editViewModel = new EditWindowViewModel<KhachHangModel>(khachHangItem.Model);
-            editViewModel.AdditionData.Add(DataAccess.LoadKhuVuc());
-
-            EditCustomerInfoWindow editInfoWnd = new EditCustomerInfoWindow(editViewModel, btnEditInfo);
+            EditCustomerInfoWindow editInfoWnd = new EditCustomerInfoWindow(btnEditInfo);
             this.btnEditInfo.CommandParameter = editInfoWnd;
         }
     }

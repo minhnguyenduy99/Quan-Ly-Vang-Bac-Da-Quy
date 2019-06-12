@@ -70,10 +70,12 @@
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/KhachHangTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachChiTietBanTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/NhaCungCapTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachPhieuDichVuTemplate.xaml"/>
                         <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/PopupDialogTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomControlTemplates/EmptyCollectionDisplay.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

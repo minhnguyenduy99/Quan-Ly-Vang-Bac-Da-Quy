@@ -25,6 +25,9 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand logoutCommand;
 
         private ICommand navigateNhapHangPageCmd;
+        private ICommand navigateNhaCungCapPageCmd;
+        private ICommand navigateDichVuPageCmd;
+        private ICommand navigateBanHangPageCmd;
         #endregion
 
         public int SoLuongHoaDon
@@ -53,7 +56,7 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ICommand LogOutCommand
         {
-            get => logoutCommand ?? (logoutCommand = new BaseCommand(OnLogOut));
+            get => logoutCommand ?? (logoutCommand = new BaseCommand(OnLogOutCommandExecute));
         }
 
         public ICommand NavigateNhapHangPageCommand
@@ -62,13 +65,31 @@ namespace UIProject.ViewModels.PageViewModels
             set => navigateNhapHangPageCmd = value;
         }
 
+        public ICommand NavigateNhaCungCapPageCommand
+        {
+            get => navigateNhaCungCapPageCmd ?? new BaseCommand(OnNavigateNhaCungCapPageCommandExecute);
+            set => navigateNhaCungCapPageCmd = value;
+        }
+
+
+
+        public ICommand NavigateDichVuPageCommand
+        {
+            get => navigateDichVuPageCmd ?? new BaseCommand(OnNavigateDichVuPageCommandExecute);
+            set => navigateDichVuPageCmd = value;
+        }
+
+
+        public ICommand NavigateBanHangPageCommand
+        {
+            get => navigateBanHangPageCmd ?? new BaseCommand(OnNavigateBanPageCommandExecute);
+            set => navigateBanHangPageCmd = value;
+        }
+
+
         public TongQuanPageVM() : base() { }
         public TongQuanPageVM(INavigator navigator) : base(navigator) { }
 
-        private void OnLogOut()
-        {
-            
-        }
 
 
         private void OpenInfoDialog()
@@ -76,16 +97,43 @@ namespace UIProject.ViewModels.PageViewModels
 
         }
 
+        protected void OnLogOutCommandExecute()
+        {
+
+        }
+
+
         protected virtual void OnNavigateNhapHangPageCommandExecute()
         {
             this.Navigator.Navigate("Nhập hàng");
         }
 
-        protected override void LoadPageComponents()
+
+        protected virtual void OnNavigateBanPageCommandExecute()
+        {
+            this.Navigator.Navigate("Bán hàng");
+        }
+
+        protected virtual void OnNavigateDichVuPageCommandExecute()
+        {
+            this.Navigator.Navigate("Tạo phiếu dịch vụ");
+        }
+
+        protected virtual void OnNavigateNhaCungCapPageCommandExecute()
+        {
+            this.Navigator.Navigate("Nhà cung cấp");
+        }
+
+        protected override void LoadComponentsInternal()
         {
             // Load all models needed for page
             dsPhieuBan = DataAccess.LoadPhieuBan();
             dsKhachHang = DataAccess.LoadKhachHang();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            
         }
     }
 }

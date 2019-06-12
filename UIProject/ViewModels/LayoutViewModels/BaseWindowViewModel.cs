@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using BaseMVVM_Service.BaseMVVM;
 using UIProject.Events;
 using UIProject.UIConnector;
+using System.ComponentModel;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
@@ -18,7 +19,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// View model of Base window without a specified model
     /// </summary>
-    public class BaseWindowViewModel : BaseViewModel
+    public abstract class BaseWindowViewModel : BaseViewModelObject
     {
         private string _title;
         private WindowState _windowState;
@@ -77,7 +78,11 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// Indicating the visibility mode of Navigation bar
         /// </summary>
-        public Visibility NavigationBarVisibility { get; set; } = Visibility.Visible;
+        public Visibility NavigationBarVisibility
+        {
+            get => GetPropertyValue<Visibility>();
+            set => SetProperty(value);
+        }
 
         /// <summary>
         /// The x-coordinate startup location of the window
@@ -114,7 +119,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             get => _showCmd ?? (_showCmd = new BaseCommand<IWindow>(OnShowWindow));
         }
-        public BaseWindowViewModel() { }
+        public BaseWindowViewModel() : base() { }
 
         public event EventHandler<EventArgs> Closed;
 
@@ -137,16 +142,20 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected virtual void OnExitWindow(IWindow window)
         {
             if (window != null)
-            {
+            {               
                 OnClosed(EventArgs.Empty);
                 // The current closed window is the main window
                 window.Close();
             }
         }
+
         protected virtual void OnShowWindow(IWindow window)
         {
             window.Show();
         }
 
+        protected abstract override void LoadComponentsInternal();
+
+        protected abstract override void ReloadComponentsInternal();
     }
 }

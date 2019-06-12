@@ -59,7 +59,7 @@ namespace UIProject.ViewModels
             }
         }
 
-        public bool IsAccountValid { get; private set; } = true;
+        public bool IsAccountValid { get; private set; }
 
         /// <summary>
         /// Error text to display when username or password is incorrect
@@ -106,10 +106,7 @@ namespace UIProject.ViewModels
             set => loginCmd = value;
         }
 
-        public LoginWindowViewModel() : base()
-        {
-
-        }
+        public LoginWindowViewModel() : base() { }
 
         /// <summary>
         /// Performs the login process
@@ -149,6 +146,18 @@ namespace UIProject.ViewModels
             }
             return result;
 
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            TypingUsername = TypingPassword = string.Empty;
+            IsAccountValid = true;
+            IsPasswordShow = false;
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            LoadComponentsInternal();
         }
     }
 }

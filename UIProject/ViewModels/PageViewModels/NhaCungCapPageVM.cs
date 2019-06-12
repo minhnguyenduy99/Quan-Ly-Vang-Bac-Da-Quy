@@ -11,7 +11,13 @@ namespace UIProject.ViewModels.PageViewModels
     {
         public NhaCungCapPageVM() : base() { }
         public NhaCungCapPageVM(INavigator navigator) : base(navigator) { }
-        protected override void LoadPageComponents()
+
+        protected override void LoadComponentsInternal()
+        {
+            
+        }
+
+        protected override void ReloadComponentsInternal()
         {
             
         }

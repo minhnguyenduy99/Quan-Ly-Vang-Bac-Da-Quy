@@ -67,7 +67,14 @@ namespace UIProject.ViewModels
         public BasePageViewModel CurrentNavigatedPage
         {
             get => GetPropertyValue<BasePageViewModel>();
-            set => SetProperty(value);
+            set
+            {
+                if (CurrentNavigatedPage != null)
+                    CurrentNavigatedPage.IsNavigated = false;
+                SetProperty(value);
+                if (value != null)
+                    value.IsNavigated = true;
+            }
         }
 
         /// <summary>
@@ -75,17 +82,7 @@ namespace UIProject.ViewModels
         /// </summary>
         public Dictionary<object, BasePageViewModel> NavigatedPages { get; set; }
 
-        public HomePageWindowViewModel()
-        {
-            SetUpWindowLayout();
-
-            InitializeTabs();
-
-            //  Set up pages to corresponding tabs
-            NavigatedPages = new Dictionary<object, BasePageViewModel>();
-
-            ListTabs[0].Select();
-        }
+        public HomePageWindowViewModel() : base() { }
 
         /// <summary>
         /// Navigate to the page corresponding with the key
@@ -169,6 +166,20 @@ namespace UIProject.ViewModels
             return null;
         }
 
+        protected override void LoadComponentsInternal()
+        {
+            SetUpWindowLayout();
 
+            InitializeTabs();
+
+            //  Set up pages to corresponding tabs
+            NavigatedPages = new Dictionary<object, BasePageViewModel>();
+
+            ListTabs[0].Select();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+        }
     }
 }

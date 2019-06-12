@@ -14,33 +14,31 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// </summary>
     public abstract class BaseFilterViewModel<T> : BaseViewModel
     {
-        private List<Func<ItemViewModel<T>,bool>> filterCallbacks;
-        private bool isFilterEnabled;
+        private Func<ItemViewModel<T>,bool> filterCallback;
 
         /// <summary>
         /// The filter callback that will be executed 
         /// </summary>
-        public List<Func<ItemViewModel<T>, bool>> FilterCallBacks
+        public Func<ItemViewModel<T>, bool> FilterCallBack
         {
-            get => filterCallbacks;
-            set => SetProperty(ref filterCallbacks, value);
+            get => filterCallback;
+            set => SetProperty(ref filterCallback, value);
         }
 
 
-        public BaseFilterViewModel(List<Func<ItemViewModel<T>, bool>> filterCallbacks) : base()
+        public BaseFilterViewModel(Func<ItemViewModel<T>, bool> filterCallback) : base()
         {
-            if (filterCallbacks == null)
-                this.FilterCallBacks = new List<Func<ItemViewModel<T>, bool>>();
+            if (filterCallback == null)
+                this.FilterCallBack = new Func<ItemViewModel<T>, bool>((item) => true);
             else
-                this.FilterCallBacks = filterCallbacks;
+                this.FilterCallBack = filterCallback;
         }
 
         public BaseFilterViewModel() : this(null) { }
 
 
+
         public event EventHandler<object> FilterExecuted;
-
-
         protected virtual void OnFilterExecuted(FilterEventArgs<T> e)
         {
             FilterExecuted?.Invoke(this, e);

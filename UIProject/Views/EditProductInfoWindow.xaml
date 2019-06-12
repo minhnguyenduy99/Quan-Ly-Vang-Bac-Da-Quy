@@ -8,6 +8,7 @@
         xmlns:customControls="clr-namespace:UIProject.CustomControls"
         mc:Ignorable="d"
         Title="EditProductInfoWindow"
+        x:Name="editProductWnd"
         Style="{StaticResource CustomDialogWindowStyle}">
     <Window.Resources>
         <converters:MaLoaiSanPhamToLoaiSanPhamConverter x:Key="loaiSanPhamConverter"/>
@@ -125,16 +126,14 @@
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Cập nhật"
                             Command="{Binding UpdateCommand}"
-                            CommandParameter="{Binding ElementName=EditProductInfoWnd}"
-                            Click="BtnSubmit_Click"/>
+                            CommandParameter="{Binding ElementName=editProductWnd}"/>
                     <Button Grid.Column="1"
                             x:Name="btnCancel"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=EditProductInfoWnd}"
-                            Click="BtnCancel_Click"/>
+                            CommandParameter="{Binding ElementName=editProductWnd}"/>
                 </Grid>
             </Grid>
         </Grid>

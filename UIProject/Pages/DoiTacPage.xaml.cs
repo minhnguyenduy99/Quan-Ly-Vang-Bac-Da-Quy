@@ -36,13 +36,6 @@ namespace UIProject.Pages
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ProviderAddingDialogWindow providerWindow = new ProviderAddingDialogWindow();
-            providerWindow.DataContext = new AddingWindowViewModel<NhaCungCapModel>();
-            providerWindow.ShowDialog(PART_ProviderAddButton, -500, 50);
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             

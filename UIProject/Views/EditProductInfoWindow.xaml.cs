@@ -40,16 +40,5 @@ namespace UIProject.Views
 
             return this.ShowDialog(Activator, dentaX, dentaY);
         }
-
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
-
     }
 }

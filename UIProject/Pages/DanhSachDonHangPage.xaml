@@ -26,17 +26,13 @@
                Content="Đơn hàng"
                HorizontalAlignment="Left"/>
             <Button Grid.Column="1"
-                    Style="{StaticResource UIProjectLightIconButtonStyle}"
+                    Margin="10"
+                    Padding="10 15"
+                    Style="{StaticResource UIProjectLightButtonStyle}"
                     HorizontalAlignment="Right"
-                    ToolTip="Thêm khách hàng mới"
-                    Margin="10 10 20 10"
-                    Height="40"
-                    Width="40">
-                <materialDesign:PackIcon Kind="FileAccount"
-                                         Height="auto"
-                                         Width="auto"
-                                         Foreground="White"/>
-            </Button>
+                    VerticalAlignment="Center"
+                    Content="Tiếp tục bán hàng"
+                    Command="{Binding BanHangCommand}"/>
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
@@ -57,19 +53,17 @@
                     <DockPanel Margin="5 5 5 20"
                                Grid.Row="0"
                                ScrollViewer.VerticalScrollBarVisibility="Auto">
-
-                        <Button Style="{StaticResource UIProjectLightButtonStyle}"
-                                FontSize="15"
-                                Height="auto">
-                            _Lọc đơn hàng
-                        </Button>
-                        <customControls:SearchTextBox Margin="20 0 0 0"
+                        <customControls:SearchTextBox Margin="0"
+                                                      DockPanel.Dock="Left"
                                                       Style="{StaticResource FieldSearchTextBoxStyle}"
                                                       Hint="Tìm kiếm đơn hàng"
+                                                      HorizontalAlignment="Left"
                                                       IconSource="/Images/search_icon.png"
                                                       IconHeight="25"
-                                                      Width="auto"/>
-
+                                                      Width="250"/>
+                        <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"
+                                    Margin="20 0 0 0"
+                                    SelectedDate="{Binding NgayLapPhieu, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ToShortDateConverter}}"/>
                     </DockPanel>
                     <ContentControl x:Name="PART_CustomerList"
                                     Grid.Row="1"
@@ -131,8 +125,8 @@
                                 <Label Grid.Row="0" Grid.Column="0"
                                        Content="Ngày lập"/>
                                 <Label Grid.Row="0" Grid.Column="1"
-                                           Style="{StaticResource ValueLabelStyle}"
-                                           Content="Ngày lập"/>
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="{Binding Model.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                             <Grid Grid.Row="0" Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -147,12 +141,12 @@
                                            Content="Khách hàng"/>
                                 <Label Grid.Row="0" Grid.Column="1"
                                            Style="{StaticResource ValueLabelStyle}"
-                                           Content="Tên khách hàng"/>
+                                           Content="{Binding Model.TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 <Label Grid.Row="1" Grid.Column="0"
                                            Content="Nhân viên"/>
                                 <Label Grid.Row="1" Grid.Column="1"
                                            Style="{StaticResource ValueLabelStyle}"
-                                           Content="Tên nhân viên"/>
+                                           Content="{Binding Model.MaNV, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </Grid>
                         <Separator Margin="0 10"
@@ -176,12 +170,45 @@
                                Margin="10 0 20 10"
                                Width="70"
                                Height="70"/>
-                    <TextBlock DockPanel.Dock="Right"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Stretch"
-                                   FontSize="20"
-                                   TextWrapping="Wrap"
-                                   Text="TeamWorkFirst"/>
+                    <TextBlock 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                FontSize="20"
+                                TextWrapping="Wrap"
+                                Text="TeamWorkFirst"/>
+                    <Grid DockPanel.Dock="Right"
+                          HorizontalAlignment="Right"
+                          Width="150">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightIconButtonStyle}">
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                x:Name="btnEditInfo"
+                                ToolTip="Chỉnh sửa thông tin"
+                                Command="{Binding ChinhSuaThongTinCommand}"
+                                Click="BtnEditInfo_Click">
+                            <materialDesign:PackIcon Kind="Edit"
+                                                     Width="auto"
+                                                     Height="auto"/>
+                        </Button>
+                        <Button Grid.Column="1"
+                                x:Name="btnDeleteInfo"
+                                Background="{StaticResource DarkGrayBrush}"
+                                ToolTip="Xóa phiếu bán"
+                                Command="{Binding XoaPhieuBanCommand}"
+                                Click="BtnDeleteInfo_Click">
+                            <materialDesign:PackIcon Kind="Delete"
+                                                     Width="auto"
+                                                     Height="auto"/>
+                        </Button>
+                    </Grid>
                 </DockPanel>
             </materialDesign:Card>
         </Grid>

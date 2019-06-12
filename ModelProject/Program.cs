@@ -108,7 +108,7 @@ namespace ModelProject
                 SoPhieu = "asfdsa",
                 TongTien = 1000,
                 TongTienTraTruoc = 10000,
-                TinhTrang = 1
+                TinhTrang = "A"
 
             };
 

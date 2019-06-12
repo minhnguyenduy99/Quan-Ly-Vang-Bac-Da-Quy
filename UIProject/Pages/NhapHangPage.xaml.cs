@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using UIProject.ServiceProviders;
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -18,6 +19,12 @@ namespace UIProject.Pages
         private async void NhapHangPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
+        }
+
+        private void BtnAddProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ProductAddingDialogWindow productAddingWnd = new ProductAddingDialogWindow();
+            btnAddProduct.CommandParameter = productAddingWnd;
         }
     }
 }

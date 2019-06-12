@@ -63,7 +63,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThanhToanCommand
         {
-            get => thanhToanCommand ?? new BaseCommand<IWindowExtension>(OnThanhToanCommandExecute);
+            get => thanhToanCommand ?? new BaseCommand<IWindow>(OnThanhToanCommandExecute);
             set => thanhToanCommand = value;
         }
 
@@ -86,11 +86,18 @@ namespace UIProject.ViewModels.PageViewModels
         }
 
         #region Setup components
-        protected override void LoadPageComponents()
+        protected override void LoadComponentsInternal()
         {
             SetUpBolocTimKiemSanPham();
             SetUpBoLocTimKiemKhachHang();
             SetUpHoaDonVM();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            TimKiemKhachHangVM.Reload();
+            TimKiemSanPhamVM.Reload();
+            HoaDonVM.DanhSachChiTietBan.Reload();        
         }
         #endregion
 
@@ -114,27 +121,24 @@ namespace UIProject.ViewModels.PageViewModels
 
             TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(sanPhamSource);
 
-            TimKiemSanPhamVM.DefaultFilter = new Func<ItemViewModel<SanPhamModel>, bool>(LocTenSanPhamCallBack);
-
             LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
-                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
-                {
-                    new Func<ItemViewModel<SanPhamModel>, bool>(LocLoaiSanPhamCallBack)
-                },
+                LocLoaiSanPhamCallBack,
                 new ObservableCollection<LoaiSanPhamModel>(DataAccess.LoadLoaiSanPham()));
 
             LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
 
-            TimKiemSanPhamVM.AdditionFilters = LocSanPhamVM.FilterCallBacks;
+            TimKiemSanPhamVM.Filters.Add(LocTenSanPhamCallBack);
+            TimKiemSanPhamVM.Filters.Add(LocLoaiSanPhamCallBack);
+            
 
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
-
         }
+
         private void SetUpBoLocTimKiemKhachHang()
         {
             var khachHangSource = DataAccess.LoadKhachHang();
             TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(khachHangSource);
-            TimKiemKhachHangVM.DefaultFilter = new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack);
+            TimKiemKhachHangVM.Filters.ToList().Add(new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack));
             TimKiemKhachHangVM.SelectedValuePath = "TenKH";
 
             TimKiemKhachHangVM.SelectedItemChanged += TimKiemKhachHangVM_SelectedItemChanged;
@@ -175,7 +179,7 @@ namespace UIProject.ViewModels.PageViewModels
             var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
             var chonTatCa = LocSanPhamVM.NonApplyFilterItem.Model as LoaiSanPhamModel;
 
-            if (chonTatCa == null || castLoaiSanPhamDaChon.MaLoaiSP == chonTatCa.MaLoaiSP)
+            if (chonTatCa != null && castLoaiSanPhamDaChon.MaLoaiSP == chonTatCa.MaLoaiSP)
                 return true;
             return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
         }
@@ -195,13 +199,19 @@ namespace UIProject.ViewModels.PageViewModels
         #region Command Execution 
         protected virtual void OnThemKhachHangCommandExecute(IWindowExtension window)
         {
+            var addingCustomerVM = new AddingWindowViewModel<KhachHangModel>();
+            addingCustomerVM.AdditionData.Add(DataAccess.LoadKhuVuc());
+
+            window.DataContext = addingCustomerVM;
+            window.Closing += (sender, e) => e.Cancel = true;
+
             if (window.ShowDialog(-400, 0) == true)
             {
                 TimKiemKhachHangVM.RefreshItemSource(DataAccess.LoadKhachHang());
             }
         }
 
-        protected virtual void OnThanhToanCommandExecute(IWindowExtension window)
+        protected virtual void OnThanhToanCommandExecute(IWindow window)
         {
             if (window.ShowDialog() == true)
             {

@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:UIProject.Converters"
         xmlns:local="clr-namespace:UIProject.Views"
         mc:Ignorable="d"
         Name="AddCustomerWindow"
-        Style="{StaticResource CustomDialogWindowStyle}"
-        WindowStartupLocation="Manual"
-        MaxWidth="500">
+        Style="{StaticResource CustomDialogWindowStyle}">
     <Window.Resources>
+        <converters:MaKhuVucToKhuVucConverter x:Key="khuVucConverter"/>
         <Style x:Key="CustomDefinedLabelStyle" TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -30,10 +30,10 @@
             <Setter Property="Width" Value="100"/>
         </Style>
     </Window.Resources>
-    <Border CornerRadius="15"
+    <Border 
             Background="White"
-            BorderBrush="LightGray"
-            BorderThickness="1">
+            BorderBrush="Gray"
+            BorderThickness="2">
         <Grid>
             <Grid Margin="20 10 20 30">
                 <Grid.RowDefinitions>
@@ -106,7 +106,7 @@
                                       Margin="10"                                    
                                       Height="30"
                                       DisplayMemberPath="TenKhuVuc"
-                                      SelectedItem="{Binding Data.KhuVuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                      SelectedItem="{Binding Data.MaKhuVuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource khuVucConverter}}"/>
                             <TextBox Grid.Row="4" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
                                      Text="{Binding Data.Email, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
@@ -123,15 +123,13 @@
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"                          
                             Command="{Binding SubmitCommand}"
-                            CommandParameter="{Binding ElementName=AddCustomerWindow}"
-                            Click="Button_Click"/>
+                            CommandParameter="{Binding ElementName=AddCustomerWindow}"/>
                     <Button Grid.Column="1"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=AddCustomerWindow}"
-                            Click="Button_Click_1"/>
+                            CommandParameter="{Binding ElementName=AddCustomerWindow}"/>
                 </Grid>
             </Grid>
         </Grid>

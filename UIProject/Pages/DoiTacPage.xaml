@@ -6,10 +6,14 @@
       xmlns:local="clr-namespace:UIProject.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:services="clr-namespace:UIProject.ServiceProviders"
+      xmlns:converters="clr-namespace:UIProject.Converters"
+      xmlns:attacher="clr-namespace:UIProject.Behaviors"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
       mc:Ignorable="d" 
       Title="DoiTacPage">
-
+    <Page.Resources>
+        <converters:EmptyListDisplayConverter x:Key="emptyDatagridConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -25,19 +29,6 @@
                Margin="10"
                Content="Nhà cung cấp"
                HorizontalAlignment="Left"/>
-            <Button x:Name="PART_ProviderAddButton"
-                    Grid.Column="1"
-                    Margin="10 10 20 10"
-                    Style="{StaticResource UIProjectLightIconButtonStyle}"
-                    ToolTip="Thêm nhà cung cấp mới"
-                    HorizontalAlignment="Right"
-                    Click="Button_Click">
-                <materialDesign:PackIcon Kind="AccountMultiplePlus"
-                                         Foreground="White"
-                                         Width="auto"
-                                         Height="auto"/>
-            </Button>
-
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
@@ -54,28 +45,96 @@
             <StackPanel Grid.Row="0"
                         Margin="0 20 10 20" Grid.ColumnSpan="2"
                         Orientation="Horizontal">
-                <Button Style="{StaticResource UIProjectLightButtonStyle}"
-                        FontSize="15"
-                        Height="auto"
-                        Click="Button_Click_1">
-                    _Lọc NCC
-                </Button>
                 <customControls:SearchTextBox Style="{StaticResource CustomSearchTextBoxStyle}"
-                                              Margin="20 0 0 0"
                                               Hint="Tìm kiếm nhà cung cấp"
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"
                                               IconBackground="{StaticResource AirForceBlue}"
-                                              Width="500"/>
+                                              Width="300"/>
+                <ComboBox Margin="25 0 15 0"
+                          Width="100"
+                          DataContext="{Binding LocSanPhamVM}"
+                          FontSize="15"
+                          ItemsSource="{Binding Collection.Items, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Model.TenLoaiSP"
+                          materialDesign:HintAssist.Hint="Khu vực">
+                </ComboBox>
             </StackPanel>
-            <ContentControl Grid.Row="1" Grid.Column="0"
-                            x:Name="PART_CustomerList"
-                            VerticalAlignment="Stretch"
-                            ContentTemplate="{StaticResource DanhSachDoiTacTemplate}">
-            </ContentControl>
-            <Grid Grid.Row="1" Grid.Column="1">
-                
-            </Grid>
+            <materialDesign:Card Grid.Row="1" Grid.Column="0"
+                                 Style="{StaticResource UIProjectMaterialDesignCardStyle}">
+                <Grid>
+                    <ContentControl Grid.Row="1" Grid.Column="0"
+                                    x:Name="gridNhaCungCap"
+                                    VerticalAlignment="Stretch"
+                                    ContentTemplate="{StaticResource DanhSachDoiTacTemplate}">
+                    </ContentControl>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Grid.Column="1"
+                                 Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                 Margin="10 0 0 10"
+                                 Padding="10">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                                <Setter Property="Margin" Value="10"/>
+
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                                   Content="Kết quả tìm thấy"/>
+                        <Label Grid.Row="1" Grid.Column="0"                                   
+                                   Content="Số lượng"/>
+                        <Label Grid.Row="0" Grid.Column="1"                                  
+                                   Content="Số lượng"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                                   Content="Số lượng"/>
+                    </Grid>
+                    <Separator Margin="0 20 0 20"
+                                   />
+                    <Label Style="{StaticResource LargeLabelStyle}"
+                               Margin="0 0 0 30"
+                               Content="Bảng chức năng"/>
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightIconButtonStyle}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0">
+                            <materialDesign:PackIcon Kind="Add"
+                                                         Height="auto"
+                                                         Width="auto"/>
+                        </Button>
+                        <Button Grid.Column="1">
+                            <materialDesign:PackIcon Kind="Edit"
+                                                         Height="auto"
+                                                         Width="auto"/>
+                        </Button>
+                        <Button Grid.Column="2"
+                                    Background="{StaticResource DarkGrayBrush}">
+                            <materialDesign:PackIcon Kind="DeleteForever"
+                                                         Height="auto"
+                                                         Width="auto"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
         </Grid>
     </Grid>
 </Page>

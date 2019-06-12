@@ -69,15 +69,6 @@ namespace UIProject.ViewModels.PageViewModels
         public SanPhamPageVM(INavigator navigator) : base(navigator) { }
 
 
-        protected override void LoadPageComponents()
-        {
-            SetUpDanhSachSanPhamVM();
-            SetUpTimKiemSanPhamVM();
-            SetUpLocLoaiSanPhamVM();
-            SetUpLocNhaCungCapVM();
-        }
-
-
         private void SetUpDanhSachSanPhamVM()
         {
             var sanPhamSource = DataAccess.LoadSanPham();
@@ -98,34 +89,28 @@ namespace UIProject.ViewModels.PageViewModels
         private void SetUpLocLoaiSanPhamVM()
         {
             LocLoaiSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
-                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
-                {
-                    LocSanPhamTheoLoaiSanPham,
-                },
+                LocSanPhamTheoLoaiSanPham,
                 DataAccess.LoadLoaiSanPham());
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocLoaiSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { MaLoaiSP = "MaLSP-1", TenLoaiSP = "Chọn tất cả" };
             
             (DanhSachSanPhamVM.Filters as List<Func<ItemViewModel<SanPhamModel>, bool>>)
-                .Add(LocLoaiSanPhamVM.FilterCallBacks[0]);
+                .Add(LocLoaiSanPhamVM.FilterCallBack);
 
             LocLoaiSanPhamVM.SelectedItemChanged += LocSanPhamVM_SelectedItemChanged;
         }
         private void SetUpLocNhaCungCapVM()
         {
             LocNhaCungCapVM = new EnumFilterViewModel<SanPhamModel>(
-                new List<Func<ItemViewModel<SanPhamModel>, bool>>()
-                {
-                     LocSanPhamTheoNhaCungCap
-                },
+                LocSanPhamTheoNhaCungCap,
                 DataAccess.LoadNhaCungCap());
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocNhaCungCapVM.NonApplyFilterItem.Model = new NhaCungCapModel() { MaNCC = "MaLSP-1", TenNCC = "Chọn tất cả" };
 
             (DanhSachSanPhamVM.Filters as List<Func<ItemViewModel<SanPhamModel>, bool>>)
-                .Add(LocNhaCungCapVM.FilterCallBacks[0]);
+                .Add(LocNhaCungCapVM.FilterCallBack);
 
             LocNhaCungCapVM.SelectedItemChanged += LocSanPhamVM_SelectedItemChanged;
         }
@@ -222,7 +207,6 @@ namespace UIProject.ViewModels.PageViewModels
                     return;
                 DataAccess.RemoveSanPham(deleteSanPhamItem.Model);
                 DanhSachSanPhamVM.RefreshItemsSource(DataAccess.LoadSanPham());
-                DanhSachSanPhamVM.SelectedItem = null;
             }
         }
 
@@ -242,12 +226,12 @@ namespace UIProject.ViewModels.PageViewModels
             chinhSuaThongTin.AdditionData.Add(DataAccess.LoadLoaiSanPham());
             chinhSuaThongTin.Searchers.Add(timKiemNCCVM);
 
-            window.DataContext = chinhSuaThongTin;          
-
-            if (window.ShowDialog(-500, -100) == true)
+            window.DataContext = chinhSuaThongTin;
+            window.Closing += (sender, e) => e.Cancel = true;
+    
+            if (window.ShowDialog(-500, -200) == true)
             {
                 DanhSachSanPhamVM.RefreshItemsSource(DataAccess.LoadSanPham());
-                DanhSachSanPhamVM.SelectedItem = null;
             }
 
 
@@ -260,6 +244,20 @@ namespace UIProject.ViewModels.PageViewModels
                 var castSanPham = chinhSuaThongTin.Data as SanPhamModel;
                 castSanPham.MaNCC = castNhaNCC.Model.MaNCC;
             }
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            SetUpDanhSachSanPhamVM();
+            SetUpTimKiemSanPhamVM();
+            SetUpLocLoaiSanPhamVM();
+            SetUpLocNhaCungCapVM();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            DanhSachSanPhamVM.Reload();
+            TimKiemSanPhamVM.Reload();
         }
 
 

@@ -14,9 +14,6 @@
                   AutoGenerateColumns="False"
                   SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridHyperlinkColumn Width="70"
                                          Binding="{Binding Model.MaSP}"
                                          CanUserSort="False"

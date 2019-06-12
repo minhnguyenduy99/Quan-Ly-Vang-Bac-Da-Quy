@@ -51,8 +51,6 @@ namespace UIProject.ViewModels.DataViewModels
                 UpdateHoaDon();
             }
         }
-
-
         public long SoTienKhachTra
         {
             get => GetPropertyValue<long>();

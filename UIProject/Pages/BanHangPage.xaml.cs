@@ -40,9 +40,6 @@ namespace UIProject.Pages
             InitializeComponent();
 
             this.Loaded += BanHangPage_Loaded;
-
-            //PART_ProductSearch.DataContext = ViewModel.TimKiemSanPhamVM;
-           // PART_TimKiemKhachHang.DataContext = ViewModel.TimKiemKhachHangVM;
         }
 
         private void ViewModel_SanPhamDaCo(object sender, Events.ItemEventArgs<ChiTietBanModel> e)

@@ -147,19 +147,11 @@
                     </Grid>
                 </materialDesign:Card>
             </Grid>
-                
+
             <materialDesign:Card Grid.Row="3"
                                  Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                 Margin="0 10 0 10">
-                <TabControl Style="{StaticResource CustomTabControlStyle}">
-                    <TabItem Header="Bản 1"
-                             Style="{StaticResource CustomTabItemStyle}"
-                             ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}"/>
-                    <TabItem Header="Bản 2"
-                             Style="{StaticResource CustomTabItemStyle}"
-                             ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}"/>
-                </TabControl>
-
+                                 Margin="0 10 0 10"
+                                 ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}">
             </materialDesign:Card>
         </Grid>
     </Border>

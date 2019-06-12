@@ -43,5 +43,15 @@ namespace UIProject.Pages
         private void OpenFilterWindow(object sender, RoutedEventArgs e)
         {
         }
+
+        private void BtnEditInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDeleteInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

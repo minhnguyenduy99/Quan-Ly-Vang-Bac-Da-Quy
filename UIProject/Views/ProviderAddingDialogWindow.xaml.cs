@@ -20,13 +20,24 @@ namespace UIProject.Views
     /// <summary>
     /// Interaction logic for ProviderAddingDialogWindow.xaml
     /// </summary>
-    public partial class ProviderAddingDialogWindow : Window, IWindow
+    public partial class ProviderAddingDialogWindow : Window, IWindowExtension
     {
+        public FrameworkElement Activator { get; set; }
         public ProviderAddingDialogWindow()
         {
             InitializeComponent();
+        }
 
-            PART_Combobox.ItemsSource = DataAccess.LoadKhuVuc();
+        public bool? ShowDialog(Point position)
+        {
+            return this.ShowDialog(position);
+        }
+
+        public bool? ShowDialog(double dentaX, double dentaY)
+        {
+            if (Activator == null)
+                throw new Exception("The activator cannot be null");
+            return this.ShowDialog(Activator, dentaX, dentaY);
         }
     }
 }

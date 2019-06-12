@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using UIProject.ViewModels.FunctionInterfaces;
+using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.PageViewModels
 {
     /// <summary>
     /// A base view model of page
     /// </summary>
-    public abstract class BasePageViewModel : BaseViewModel, INavigatable
+    public abstract class BasePageViewModel : BaseViewModelObject, INavigatable
     {
         #region Private Fields
         private bool takeFullScreen;
@@ -62,7 +63,6 @@ namespace UIProject.ViewModels.PageViewModels
         {
             this.Navigator = navigator;
             takeFullScreen = false;
-            LoadPageComponents();
         }
 
         /// <summary>
@@ -72,12 +72,14 @@ namespace UIProject.ViewModels.PageViewModels
 
         protected virtual void OnNavigated()
         {
+            Reload();
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Load components of page 
         /// </summary>
-        protected abstract void LoadPageComponents();
+        protected abstract override void LoadComponentsInternal();
+        protected abstract override void ReloadComponentsInternal();
     }
 }

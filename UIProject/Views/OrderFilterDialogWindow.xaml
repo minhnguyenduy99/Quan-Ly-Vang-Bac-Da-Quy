@@ -98,13 +98,11 @@
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Margin="0 30"
                             Content="_Lọc"
-                            Click="Button_Click"
                             Panel.ZIndex="1"/>
                     <Button Grid.Column="1"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Margin="0 30"
-                            Content="_Hủy"
-                            Click="Button_Click"/>
+                            Content="_Hủy"/>
                 </Grid>
 
             </Grid>

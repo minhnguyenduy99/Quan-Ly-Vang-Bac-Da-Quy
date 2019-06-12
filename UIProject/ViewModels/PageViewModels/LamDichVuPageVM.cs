@@ -9,12 +9,19 @@ namespace UIProject.ViewModels.PageViewModels
 {
     public class LamDichVuPageVM : BasePageViewModel
     {
-        protected override void LoadPageComponents()
-        {
-            this.TakeFullScreen = true;       
-        }
+
+
 
         public LamDichVuPageVM() : base() { }
         public LamDichVuPageVM(INavigator navigator) : base(navigator) { }
+        protected override void LoadComponentsInternal()
+        {
+            this.TakeFullScreen = true;
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

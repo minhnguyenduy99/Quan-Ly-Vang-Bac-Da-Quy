@@ -85,12 +85,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviors\DataGridCustomSortingBehavior.cs" />
+    <Compile Include="Behaviors\DataGridAttachProperties.cs" />
     <Compile Include="Behaviors\DataGridSetColumnStyle.cs" />
     <Compile Include="Behaviors\MoneyRuleApplier.cs" />
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DialogWindowTypeConverter.cs" />
+    <Compile Include="Converters\EmptyListDisplayConverter.cs" />
     <Compile Include="Converters\IEnumerableToListCollectionViewConverter.cs" />
     <Compile Include="Converters\InnerControlHeightConverter.cs" />
     <Compile Include="Converters\LongStringToThreeDotConverter.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="Pages\DanhSachDonHangPage.xaml.cs">
       <DependentUpon>DanhSachDonHangPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DanhSachPhieuDichVuPage.xaml.cs">
+      <DependentUpon>DanhSachPhieuDichVuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DoiTacPage.xaml.cs">
       <DependentUpon>DoiTacPage.xaml</DependentUpon>
     </Compile>
@@ -163,12 +167,10 @@
     <Compile Include="ServiceProviders\LoadDataHelper.cs" />
     <Compile Include="ServiceProviders\LoginService.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
-    <Compile Include="Test\TestClasses.cs" />
-    <Compile Include="Test\TestConsole.cs" />
-    <Compile Include="Test\TestWindow.xaml.cs">
-      <DependentUpon>TestWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\DataViewModels\HoaDonViewModel.cs" />
+    <Compile Include="ViewModels\DataViewModels\NhapHangViewModel.cs" />
+    <Compile Include="ViewModels\DataViewModels\PhieuDichVuViewModel.cs" />
+    <Compile Include="ViewModels\FunctionInterfaces\ICollectionViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IConditionalDisplayCollection.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\INavigatable.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\INavigator.cs" />
@@ -176,10 +178,12 @@
     <Compile Include="ViewModels\FunctionInterfaces\IPrintWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISearcher.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISubmitViewModel.cs" />
+    <Compile Include="ViewModels\FunctionInterfaces\IViewModelObject.cs" />
     <Compile Include="ViewModels\LayoutViewModels\AddingWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IAsyncCurrentSelectedItem.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISelectable.cs" />
     <Compile Include="ViewModels\LayoutViewModels\BaseTabItemVM.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\BaseViewModelObject.cs" />
     <Compile Include="ViewModels\LayoutViewModels\CustomerTabItemVM.cs" />
     <Compile Include="ViewModels\LayoutViewModels\EditWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ObservableCollectionViewModel.cs" />
@@ -196,7 +200,6 @@
     <Compile Include="ViewModels\LayoutViewModels\PrintViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\SearchTextBoxViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ValueFilterViewModel.cs" />
-    <Compile Include="ViewModels\LocDonHangWindowVM.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\BanHangPageVM.cs" />
@@ -234,6 +237,9 @@
     <Compile Include="Views\EditProductInfoWindow.xaml.cs">
       <DependentUpon>EditProductInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditProviderInfoWindow.xaml.cs">
+      <DependentUpon>EditProviderInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -243,23 +249,11 @@
     <Compile Include="Views\ProductAddingDialogWindow.xaml.cs">
       <DependentUpon>ProductAddingDialogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProviderFilterDialogWindow.xaml.cs">
-      <DependentUpon>ProviderFilterDialogWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ServiceFilterDialogWindow.xaml.cs">
-      <DependentUpon>ServiceFilterDialogWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ProviderAddingDialogWindow.xaml.cs">
       <DependentUpon>ProviderAddingDialogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchWindow.xaml.cs">
-      <DependentUpon>SearchWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProductFilterDialogWindow.xaml.cs">
-      <DependentUpon>ProductFilterDialogWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ServiceSearchingDialogWindow.xaml.cs">
-      <DependentUpon>ServiceSearchingDialogWindow.xaml</DependentUpon>
+    <Compile Include="Views\ServiceAddingDialogWindow.xaml.cs">
+      <DependentUpon>ServiceAddingDialogWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Colors\Blue.xaml">
       <SubType>Designer</SubType>
@@ -306,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DanhSachDonHangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DanhSachPhieuDichVuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -393,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\CustomControlTemplates\EmptyCollectionDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\CustomControlTemplates\InvalidateDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -425,6 +427,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachPhieuDichVuTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\CustomDataTemplates\DiaChiTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -449,10 +455,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Test\TestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\AddressEditDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -474,6 +476,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditProductInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProviderInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -508,27 +514,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProviderFilterDialogWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ServiceFilterDialogWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ProviderAddingDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProductFilterDialogWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ServiceSearchingDialogWindow.xaml">
+    <Page Include="Views\ServiceAddingDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -609,14 +599,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\them_dichvu.png" />
-    <Resource Include="Images\them_hoadon.png" />
-    <Resource Include="Images\them_sanpham.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\banhang.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\customeravatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\them_nhacungcap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\them_sanpham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\them_donhang.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />

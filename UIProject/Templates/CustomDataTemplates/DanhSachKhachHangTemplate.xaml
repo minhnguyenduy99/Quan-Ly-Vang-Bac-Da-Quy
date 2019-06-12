@@ -2,13 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:services="clr-namespace:UIProject.ServiceProviders">
+                    xmlns:services="clr-namespace:UIProject.ServiceProviders"
+                    xmlns:attacher="clr-namespace:UIProject.Behaviors">
     <DataTemplate x:Key="DanhSachKhachHangTemplate">
         <DataGrid Grid.Row="0"
                   DataContext="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type materialDesign:Card}}}"
                   CanUserSortColumns="True"
                   ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  attacher:DataGridAttachProperties.AllowAppliedEmptyTemplate="True"
+                  attacher:DataGridAttachProperties.ImageSource="/Images/tongquan_khachhangmoi.png"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"

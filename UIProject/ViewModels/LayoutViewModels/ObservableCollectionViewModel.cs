@@ -62,9 +62,9 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// <summary>
         /// The filter to applied to the collection
         /// </summary>
-        public IEnumerable<Func<ItemViewModel<T>, bool>> Filters
+        public List<Func<ItemViewModel<T>, bool>> Filters
         {
-            get => GetPropertyValue<IEnumerable<Func<ItemViewModel<T>, bool>>>();
+            get => GetPropertyValue<List<Func<ItemViewModel<T>, bool>>>();
             private set
             {
                 SetProperty(value);
@@ -114,6 +114,15 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
 
         /// <summary>
+        /// Remove the currently selected item in the collection
+        /// </summary>
+        /// <returns></returns>
+        public bool RemoveCurrentItem()
+        {
+            return this.Remove(this.SelectedItem as ItemViewModel<T>);
+        }
+
+        /// <summary>
         /// Refresh the item source with new source
         /// </summary>
         /// <param name="itemsSource">The new source</param>
@@ -154,8 +163,6 @@ namespace UIProject.ViewModels.LayoutViewModels
             Filter();
             FiltersUpdated?.Invoke(this, EventArgs.Empty);
         }
-
-
         protected virtual void OnRemoveItemCommandExecute(object item)
         {
             ItemViewModel<T> castItem = item as ItemViewModel<T>;
@@ -165,11 +172,18 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
+        protected new void LoadComponentsInternal()
+        {
+            SelectedItem = null;           
+        }
 
-
+        protected new void ReloadComponentsInternal()
+        {
+            SelectedItem = null;
+        }
         private ObservableCollection<ItemViewModel<T>> GetUpdatedDisplayItems()
         {
-            return new ObservableCollection<ItemViewModel<T>>(this.Filter(Filters.ToArray()));
+            return new ObservableCollection<ItemViewModel<T>>(this.Filter(Filters));
         }
     }
 }

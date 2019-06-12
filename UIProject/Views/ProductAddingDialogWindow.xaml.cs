@@ -27,6 +27,7 @@ namespace UIProject.Views
         public ProductAddingDialogWindow()
         {
             InitializeComponent();
+
         }
 
         public FrameworkElement Activator { get; set; }
