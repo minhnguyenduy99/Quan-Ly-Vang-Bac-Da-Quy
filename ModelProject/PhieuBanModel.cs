@@ -117,7 +117,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SavePhieuBan(this);
+            maPhieu = DataAccess.SavePhieuBan(this);
         }
 
         protected override void Update()

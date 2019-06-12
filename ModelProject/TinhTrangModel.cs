@@ -37,7 +37,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SaveTinhTrang(this);
+            maTinhTrang = DataAccess.SaveTinhTrang(this);
         }
 
         protected override void Update()

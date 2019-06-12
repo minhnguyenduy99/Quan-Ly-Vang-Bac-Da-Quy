@@ -37,7 +37,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveKhuVuc(this);
+            maKhuVuc = DataAccess.SaveKhuVuc(this);
         }
 
         protected override void Update()

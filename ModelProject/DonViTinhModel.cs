@@ -33,7 +33,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveDonViTinh(this);
+            maDVT = DataAccess.SaveDonViTinh(this);
         }
 
         protected override void Update()

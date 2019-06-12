@@ -81,7 +81,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SavePhieuDichVu(this);
+            maPhieu = DataAccess.SavePhieuDichVu(this);
         }
 
         protected override void Update()

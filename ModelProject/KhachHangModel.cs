@@ -83,7 +83,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveKhachHang(this);
+            maKH = DataAccess.SaveKhachHang(this);
         }
 
         protected override void Update()

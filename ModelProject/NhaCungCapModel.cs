@@ -64,7 +64,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SaveNhaCungCap(this);
+            maNCC = DataAccess.SaveNhaCungCap(this);
         }
 
         protected override void Update()

@@ -12,7 +12,7 @@ namespace ModelProject
     public class ChiTietBanModel : BaseSubmitableModel
     {
         private long maPhieuMuaHang;
-        private string maSP;
+        private long maSP;
 
         private double chietKhau;
        
@@ -41,7 +41,7 @@ namespace ModelProject
                 return;
             }
             maPhieuMuaHang = (long)_hoaDon.MaPhieu;
-            maSP = _sanPham.MaSP.ToString();
+            maSP = (long)_sanPham.MaSP;
             soLuong = _soLuong;
             donGiaMuaVao = _sanPham.DonGiaMuaVao;
 
@@ -62,7 +62,7 @@ namespace ModelProject
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
         }
-        public string MaSP
+        public long MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);
@@ -73,7 +73,7 @@ namespace ModelProject
             {
                 if (phanTramLoiNhuan >= 0)
                     return phanTramLoiNhuan;
-                else if (maSP != null && maSP.Length > 0)
+                else if (maSP != null && maSP > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
@@ -93,7 +93,7 @@ namespace ModelProject
             {
                 if (tenSP != null && tenSP.Length > 0)
                     return tenSP;
-                else if (maSP != null && maSP.Length > 0)
+                else if (maSP != null && maSP > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     tenSP = product.TenSP;
@@ -112,7 +112,7 @@ namespace ModelProject
             {
                 if (loaiSP != null && loaiSP.Length > 0)
                     return loaiSP;
-                else if (maSP != null && maSP.Length > 0)
+                else if (maSP != null && maSP > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
@@ -132,7 +132,7 @@ namespace ModelProject
             {
                 if (donViTinh != null && donViTinh.Length > 0)
                     return donViTinh;
-                else if (maSP != null && maSP.Length > 0)
+                else if (maSP != null && maSP > 0)
                 {
                     SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
                     LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);

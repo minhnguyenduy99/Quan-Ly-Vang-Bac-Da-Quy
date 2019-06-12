@@ -54,7 +54,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveLoaiSanPham(this);
+            maLoaiSP = DataAccess.SaveLoaiSanPham(this);
         }
 
         protected override void Update()

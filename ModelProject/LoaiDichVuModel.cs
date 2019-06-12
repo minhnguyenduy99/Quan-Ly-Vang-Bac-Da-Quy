@@ -42,7 +42,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveLoaiDichVu(this);
+            maLoaiDV = DataAccess.SaveLoaiDichVu(this);
         }
 
         protected override void Update()
