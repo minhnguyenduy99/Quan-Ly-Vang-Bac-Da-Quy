@@ -13,7 +13,7 @@ namespace ModelProject
 
             SanPhamModel spModel = new SanPhamModel()
             {
-                MaSP = "MASP1",
+                MaSP = null,
                 MaLoaiSP = "MALOAISP1",
                 DonGiaMuaVao = 100000,
                 TenSP = "TENSP1"
@@ -117,7 +117,7 @@ namespace ModelProject
             //TestKH(khachHangModel);
 
             //Test sản phẩm.
-            //TestSP(spModel);
+            TestSP(spModel);
 
             //Test đơn vị tính.
             //TestDVT(donViTinhModel);
@@ -144,7 +144,7 @@ namespace ModelProject
             //TestLSP(loaiSanPhamModel);
 
             //Test phiếu mua.
-            TestPM(phieuMuaModel);
+            //TestPM(phieuMuaModel);
 
             Console.ReadKey();
         }
@@ -456,7 +456,7 @@ namespace ModelProject
             List<SanPhamModel> list = new List<SanPhamModel>();
 
             //Test thêm.
-            DataAccess.SaveSanPham(spModel);
+            spModel.MaSP = DataAccess.SaveSanPham(spModel);
             list = DataAccess.LoadSanPham();
             Console.WriteLine("Load : ");
             foreach(SanPhamModel sp in list)

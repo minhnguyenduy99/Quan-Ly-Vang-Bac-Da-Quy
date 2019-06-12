@@ -10,7 +10,7 @@ namespace ModelProject
     public class LoaiSanPhamModel : BaseSubmitableModel
     {
 
-        private string maLoaiSP;
+        private long ? maLoaiSP;
         private string tenLoaiSP;
         private string maDVT;
         private double phanTramLoiNhuan;
@@ -18,7 +18,7 @@ namespace ModelProject
         //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
         private bool isUpdated = false;
 
-        public string MaLoaiSP
+        public long ? MaLoaiSP
         {
             get => maLoaiSP;
             set => SetProperty(ref maLoaiSP, value);
@@ -54,7 +54,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveLoaiSanPham(this);
+            maLoaiSP = DataAccess.SaveLoaiSanPham(this);
         }
 
         protected override void Update()

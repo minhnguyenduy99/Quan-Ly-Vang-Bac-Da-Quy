@@ -67,11 +67,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveDonViTinh(DonViTinhModel dvt)
+        public static long SaveDonViTinh(DonViTinhModel dvt)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into DonViTinh(TENDVT) values (@TenDVT) ", dvt);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
         public static void UpdateDonViTinh(DonViTinhModel dvt)
@@ -104,12 +108,16 @@ namespace ModelProject
             }
         }
 
-        public static void SaveKhachHang(KhachHangModel khachHang)
+        public static long SaveKhachHang(KhachHangModel khachHang)
         {
             Console.WriteLine(khachHang.MaKH);
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into KhachHang(TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -142,11 +150,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveKhuVuc(KhuVucModel khuVuc)
+        public static long SaveKhuVuc(KhuVucModel khuVuc)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into KhuVuc(TENKHUVUC) values (@TenKhuVuc) ", khuVuc);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
         public static void UpdateKhuVuc(KhuVucModel khuVuc)
@@ -178,11 +190,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveTinhTrang(TinhTrangModel TinhTrang)
+        public static long SaveTinhTrang(TinhTrangModel TinhTrang)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into TinhTrang(TENTINHTRANG) values (@TenTinhTrang) ", TinhTrang);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -215,11 +231,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveLoaiDichVu(LoaiDichVuModel loaiDV)
+        public static long SaveLoaiDichVu(LoaiDichVuModel loaiDV)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into LoaiDichVu(TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV) ", loaiDV);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -252,11 +272,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveChiTietBan(ChiTietBanModel ctb)
+        public static long SaveChiTietBan(ChiTietBanModel ctb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue)", ctb);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -289,11 +313,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveChiTietMua(ChiTietMuaModel ctm)
+        public static long SaveChiTietMua(ChiTietMuaModel ctm)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia) ", ctm);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -326,11 +354,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveChiTietDichVu(ChiTietDichVuModel ctdv)
+        public static long SaveChiTietDichVu(ChiTietDichVuModel ctdv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang) ", ctdv);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -364,11 +396,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveLoaiSanPham(LoaiSanPhamModel loaiSP)
+        public static long SaveLoaiSanPham(LoaiSanPhamModel loaiSP)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into LoaiSanPham(MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP) ", loaiSP);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -401,11 +437,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SaveNhaCungCap(NhaCungCapModel nhaCC)
+        public static long SaveNhaCungCap(NhaCungCapModel nhaCC)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into NHACUNGCAP(TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email) ", nhaCC);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -440,11 +480,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SavePhieuBan(PhieuBanModel phieuBan)
+        public static long SavePhieuBan(PhieuBanModel phieuBan)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into PhieuBan(SOPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu) ", phieuBan);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -480,11 +524,15 @@ namespace ModelProject
             }
         }
 
-        public static void SavePhieuMua(PhieuMuaModel PhieuMua)
+        public static long SavePhieuMua(PhieuMuaModel PhieuMua)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC, GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu) ", PhieuMua);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
         public static void UpdatePhieuMua(PhieuMuaModel PhieuMua)
@@ -517,11 +565,15 @@ namespace ModelProject
                 return output.ToList();
             }
         }
-        public static void SavePhieuDichVu(PhieuDichVuModel PhieuDichVu)
+        public static long SavePhieuDichVu(PhieuDichVuModel PhieuDichVu)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into PhieuDichVu(SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu) ", PhieuDichVu);
+                //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
+                string queryLastRow = @"select last_insert_rowid()";
+                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
+                return lastRowID;
             }
         }
 
@@ -604,7 +656,7 @@ namespace ModelProject
         }
 
         //Đã test
-        public static SanPhamModel LoadSPByMaSP(string masp)
+        public static SanPhamModel LoadSPByMaSP(long masp)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -688,7 +740,7 @@ namespace ModelProject
             }
         }
 
-        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(string madv)
+        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(long madv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -699,8 +751,10 @@ namespace ModelProject
             }
         }
 
-        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(string malsp)
+        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(long malsp)
         {
+            if (malsp == null)
+                return null;
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<LoaiSanPhamModel>("select * " +

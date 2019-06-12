@@ -9,17 +9,17 @@ namespace ModelProject
 {
     public class PhieuDichVuModel : BaseSubmitableModel
     {
-        private string maPhieu;
+        private long ? maPhieu;
         private string soPhieu;
         private string ngayLap;
-        private string maKH;
+        private long maKH;
         private long tongTien;
         private long tongTienTraTruoc;
-        private string tinhTrang;
-        private string maNV;
+        private int tinhTrang;
+        private long maNV;
         private string ghiChu;
 
-        public string MaNV
+        public long MaNV
         {
             get => maNV;
             set => SetProperty(ref maNV, value);
@@ -31,7 +31,7 @@ namespace ModelProject
             set => SetProperty(ref ghiChu, value);
         }
 
-        public string MaPhieu
+        public long ? MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
@@ -46,7 +46,7 @@ namespace ModelProject
             get => ngayLap;
             set => SetProperty(ref ngayLap, value);
         }
-        public string MaKH
+        public long MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
@@ -61,7 +61,7 @@ namespace ModelProject
             get => tongTienTraTruoc;
             set => SetProperty(ref tongTienTraTruoc, value);
         }
-        public string TinhTrang
+        public int TinhTrang
         {
             get => tinhTrang;
             set => SetProperty(ref tinhTrang, value);
@@ -81,7 +81,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SavePhieuDichVu(this);
+            maPhieu = DataAccess.SavePhieuDichVu(this);
         }
 
         protected override void Update()

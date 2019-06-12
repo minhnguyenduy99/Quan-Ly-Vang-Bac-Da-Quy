@@ -8,11 +8,11 @@ namespace ModelProject
 {
     public class LoaiDichVuModel : BaseMVVM_Service.BaseMVVM.BaseSubmitableModel
     {
-        private string maLoaiDV;
+        private long ? maLoaiDV;
         private string tenLoaiDV;
         private long donGiaDV;
 
-        public string MaLoaiDV
+        public long ? MaLoaiDV
         {
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
@@ -42,7 +42,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveLoaiDichVu(this);
+            maLoaiDV = DataAccess.SaveLoaiDichVu(this);
         }
 
         protected override void Update()

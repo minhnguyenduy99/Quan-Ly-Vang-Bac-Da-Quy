@@ -7,10 +7,10 @@ namespace ModelProject
 {
     public class DonViTinhModel : BaseMVVM_Service.BaseMVVM.BaseSubmitableModel
     {
-        private string maDVT;
+        private long ? maDVT;
         private string tenDVT;
 
-        public string MaDVT
+        public long ? MaDVT
         {
             get => maDVT;
             set => SetProperty(ref maDVT, value);
@@ -33,7 +33,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveDonViTinh(this);
+            maDVT = DataAccess.SaveDonViTinh(this);
         }
 
         protected override void Update()

@@ -9,10 +9,10 @@ namespace ModelProject
 {
     public class KhuVucModel : BaseSubmitableModel
     {
-        private string maKhuVuc;
+        private long ? maKhuVuc;
         private string tenKhuVuc;
 
-        public string MaKhuVuc
+        public long ? MaKhuVuc
         {
             get => maKhuVuc;
             set => SetProperty(ref maKhuVuc, value);
@@ -37,7 +37,7 @@ namespace ModelProject
         #region ACCESS_DB_METHOD
         protected override void Add()
         {
-            DataAccess.SaveKhuVuc(this);
+            maKhuVuc = DataAccess.SaveKhuVuc(this);
         }
 
         protected override void Update()

@@ -9,10 +9,10 @@ namespace ModelProject
 {
     public class TinhTrangModel : BaseSubmitableModel
     {
-        private string maTinhTrang;
+        private long ? maTinhTrang;
         private string tenTinhTrang;
 
-        public string MaTinhTrang
+        public long ? MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);
@@ -37,7 +37,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SaveTinhTrang(this);
+            maTinhTrang = DataAccess.SaveTinhTrang(this);
         }
 
         protected override void Update()

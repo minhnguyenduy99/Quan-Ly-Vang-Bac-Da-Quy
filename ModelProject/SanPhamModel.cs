@@ -9,8 +9,8 @@ namespace ModelProject
 {
     public class SanPhamModel : BaseSubmitableModel
     {
-        private string maSP;
-        private string maLoaiSP;
+        private long? maSP;
+        private long maLoaiSP;
         private long donGiaMuaVao;
         private string tenSP;
         private string maNCC;
@@ -23,12 +23,12 @@ namespace ModelProject
         //    donGiaMuaVao = DONGIA;
         //    tenSP = TENSP;
         //}
-        public string MaSP
+        public long ? MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);
         }
-        public string MaLoaiSP
+        public long MaLoaiSP
         {
             get => maLoaiSP;
             set
@@ -94,7 +94,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            DataAccess.SaveSanPham(this);
+            maSP = DataAccess.SaveSanPham(this);
         }
 
         protected override void Update()
