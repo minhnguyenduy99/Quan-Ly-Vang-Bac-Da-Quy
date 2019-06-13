@@ -106,13 +106,7 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void SetUpHoaDonVM()
         {
-            PhieuBanModel phieuBan = new PhieuBanModel()
-            {
-                MaPhieu = "PH001",
-                MaNV = "NV001",
-            };
-
-            HoaDonVM = new HoaDonViewModel(phieuBan);
+            HoaDonVM = new HoaDonViewModel();
         }
 
         private void SetUpBolocTimKiemSanPham()
@@ -125,12 +119,11 @@ namespace UIProject.ViewModels.PageViewModels
                 LocLoaiSanPhamCallBack,
                 new ObservableCollection<LoaiSanPhamModel>(DataAccess.LoadLoaiSanPham()));
 
-            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = "LSP-1" };
+            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = null };
 
             TimKiemSanPhamVM.Filters.Add(LocTenSanPhamCallBack);
-            TimKiemSanPhamVM.Filters.Add(LocLoaiSanPhamCallBack);
+            TimKiemSanPhamVM.Filters.Add(LocSanPhamVM.FilterCallBack);
             
-
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
         }
 
@@ -138,7 +131,7 @@ namespace UIProject.ViewModels.PageViewModels
         {
             var khachHangSource = DataAccess.LoadKhachHang();
             TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(khachHangSource);
-            TimKiemKhachHangVM.Filters.ToList().Add(new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack));
+            TimKiemKhachHangVM.Filters.Add(new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack));
             TimKiemKhachHangVM.SelectedValuePath = "TenKH";
 
             TimKiemKhachHangVM.SelectedItemChanged += TimKiemKhachHangVM_SelectedItemChanged;
@@ -177,9 +170,8 @@ namespace UIProject.ViewModels.PageViewModels
                 return true;
             }
             var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
-            var chonTatCa = LocSanPhamVM.NonApplyFilterItem.Model as LoaiSanPhamModel;
 
-            if (chonTatCa != null && castLoaiSanPhamDaChon.MaLoaiSP == chonTatCa.MaLoaiSP)
+            if (castLoaiSanPhamDaChon.MaLoaiSP == null)
                 return true;
             return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
         }

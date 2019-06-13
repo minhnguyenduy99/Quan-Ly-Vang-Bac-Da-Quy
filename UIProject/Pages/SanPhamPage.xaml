@@ -7,10 +7,12 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:converters="clr-namespace:UIProject.Converters"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:attacher="clr-namespace:UIProject.Behaviors"
       mc:Ignorable="d" 
       Title="SanPhamPage">
     <Page.Resources>
         <converters:SelectedItemToEnabledConverter x:Key="functionEnabledConverter"/>
+        <converters:EmptyListDisplayConverter x:Key="emptyDataGridDisplayConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,9 +26,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Style="{StaticResource HeaderLabelStyle}"
-               Margin="10"
-               Content="Sản phẩm"
-               HorizontalAlignment="Left"/>
+                   Margin="10"
+                   Content="Sản phẩm"
+                   HorizontalAlignment="Left"/>
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
@@ -50,7 +52,7 @@
                                               Hint="Tìm kiếm sản phẩm"
                                               IconSource="/Images/search_icon.png"
                                               IconHeight="25"
-                                              Width="500"/>
+                                              Width="450"/>
                 <ComboBox VerticalAlignment="Stretch"
                         DataContext="{Binding LocLoaiSanPhamVM}"
                         Margin="20 5 10 5"
@@ -76,11 +78,20 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <materialDesign:Card Grid.Row="1" Grid.Column="0"
-                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                     x:Name="gridProductList"
-                                     ContentTemplate="{StaticResource DanhSachSanPhamTemplate}"
-                                     Content="{Binding DanhSachSanPhamVM}">
+                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}">
+                    <Grid>
+                        <ContentControl
+                                         x:Name="gridProductList"
+                                         ContentTemplate="{StaticResource DanhSachSanPhamTemplate}"
+                                         Content="{Binding DanhSachSanPhamVM}">
+                        </ContentControl>
+                        <ContentControl Style="{StaticResource UIProjectEmptyDisplayer}"
+                                        IsEnabled="{Binding DanhSachSanPhamVM.Items.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource emptyDataGridDisplayConverter}}"
+                                        attacher:ExtendContent.ImageSource="/Images/them_sanpham.png"
+                                        Content="Bạn chưa có sản phẩm nào"/>
+                    </Grid>
                 </materialDesign:Card>
+                
                 <materialDesign:Card Grid.Column="1"
                                      Margin="10 0 0 0"
                                      Padding="10 0 10 20"
@@ -120,9 +131,8 @@
                               Margin="10 20 10 10"
                               VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightIconButtonStyle}">
@@ -137,27 +147,33 @@
                                                          Height="auto"
                                                          Width="auto"/>
                             </Button>
-                            <Button Grid.Column="1"
-                                    x:Name="btnEditProductInfo"
-                                    ToolTip="Chỉnh sửa thông tin sản phẩm"
-                                    Command="{Binding ChinhSuaThongTinCommand}"
-                                    Click="BtnEditProductInfo_Click"
-                                    IsEnabled="{Binding Content.SelectedItem, ElementName=gridProductList, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource functionEnabledConverter}}">
-                                <materialDesign:PackIcon Kind="TableEdit"
+                            <Grid Grid.Column="1"
+                                  IsEnabled="{Binding DanhSachSanPhamVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource functionEnabledConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                        x:Name="btnEditProductInfo"
+                                        ToolTip="Chỉnh sửa thông tin sản phẩm"
+                                        Command="{Binding ChinhSuaThongTinCommand}"
+                                        Click="BtnEditProductInfo_Click">
+                                    <materialDesign:PackIcon Kind="TableEdit"
+                                                             Height="auto"
+                                                             Width="auto"/>
+                                </Button>
+                                <Button Grid.Column="1"
+                                        x:Name="btnDeleteProduct"
+                                        Background="{StaticResource DarkGrayBrush}"
+                                        ToolTip="Xóa sản phẩm khỏi cửa hàng"
+                                        Command="{Binding XoaSanPhamCommand}"
+                                        Click="BtnDeleteProduct_Click">
+                                    <materialDesign:PackIcon Kind="DeleteForever"
                                                          Height="auto"
                                                          Width="auto"/>
-                            </Button>
-                            <Button Grid.Column="2"
-                                    x:Name="btnDeleteProduct"
-                                    Background="{StaticResource DarkGrayBrush}"
-                                    ToolTip="Xóa sản phẩm khỏi cửa hàng"
-                                    Command="{Binding XoaSanPhamCommand}"
-                                    Click="BtnDeleteProduct_Click"
-                                    IsEnabled="{Binding Content.SelectedItem, ElementName=gridProductList, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource functionEnabledConverter}}">
-                                <materialDesign:PackIcon Kind="DeleteForever"
-                                                         Height="auto"
-                                                         Width="auto"/>
-                            </Button>
+                                </Button>
+                            </Grid>
+                            
 
                         </Grid>
                     </StackPanel>

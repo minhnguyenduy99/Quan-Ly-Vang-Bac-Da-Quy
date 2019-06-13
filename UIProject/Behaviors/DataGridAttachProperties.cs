@@ -15,24 +15,7 @@ namespace UIProject.Behaviors
 {
     public class DataGridAttachProperties
     {
-        #region ImageSource Property
-        // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.RegisterAttached(
-                "ImageSource",
-                typeof(ImageSource),
-                typeof(DataGridAttachProperties),
-                new PropertyMetadata(null));
-        public static ImageSource GetImageSource(DependencyObject obj)
-        {
-            return (ImageSource)obj.GetValue(ImageSourceProperty);
-        }
 
-        public static void SetImageSource(DependencyObject obj, ImageSource value)
-        {
-            obj.SetValue(ImageSourceProperty, value);
-        }
-        #endregion
 
         #region CustomSorter Property
         public static readonly DependencyProperty CustomSorterProperty =
@@ -71,77 +54,6 @@ namespace UIProject.Behaviors
             grid.SetValue(AllowCustomSortProperty, value);
         }
         #endregion
-
-
-
-        public static bool GetAllowAppliedEmptyTemplate (DependencyObject obj)
-        {
-            return (bool)obj.GetValue(AllowAppliedEmptyTemplateProperty);
-        }
-
-        public static void SetAllowAppliedEmptyTemplate(DependencyObject obj, bool value)
-        {
-            obj.SetValue(AllowAppliedEmptyTemplateProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AllowAppliedEmptyTemplateProperty =
-            DependencyProperty.RegisterAttached(
-                "AllowAppliedEmptyTemplate", 
-                typeof(bool), 
-                typeof(DataGridAttachProperties), 
-                new PropertyMetadata(false, OnSettingApplyEmptyTemplate));
-
-
-
-        private static void OnSettingApplyEmptyTemplate(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            DataGrid dataGrid = d as DataGrid;
-
-            if (dataGrid == null)
-                return;
-
-            bool newValue = (bool)e.NewValue;
-
-            if (newValue == true)
-            {
-                dataGrid.SourceUpdated += ApplyPropertyTemplate;
-            }
-            else
-            {
-                dataGrid.SourceUpdated -= ApplyPropertyTemplate;
-            }
-        }
-
-        private static void ApplyPropertyTemplate(object sender, DataTransferEventArgs e)
-        {
-            DataGrid grid = sender as DataGrid;
-
-            if (grid == null)
-                return;
-
-            int count = grid.Items.Count;
-            e.Handled = true;
-
-
-            // Empty Source
-            if (count == 0)
-            {
-                try
-                {
-                    grid.Template = (ControlTemplate)Application.Current.FindResource("EmptyCollectionTemplate");
-                    grid.ApplyTemplate();
-                }
-                catch { }
-            }
-            else
-            {
-
-            }
-        }
-
-
-
 
 
         /// <summary>

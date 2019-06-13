@@ -43,13 +43,7 @@ namespace UIProject.Pages
         }
         private void DeleteCustomerHandler(object sender, RoutedEventArgs e)
         {
-            DialogPopupWindow notifyWnd = new DialogPopupWindow(new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.YesNo,
-                NoText = "Không",
-                YesText = "Có",
-                MessageText = "Bạn muốn xóa người này khỏi danh sách ?"
-            });
+            DialogPopupWindow notifyWnd = new DialogPopupWindow();
             btnDelete.CommandParameter = notifyWnd;
         }
 

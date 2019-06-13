@@ -12,7 +12,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// Base view model for filter functionality 
     /// </summary>
-    public abstract class BaseFilterViewModel<T> : BaseViewModel
+    public abstract class BaseFilterViewModel<T> : BaseViewModelObject<T>
     {
         private Func<ItemViewModel<T>,bool> filterCallback;
 
@@ -26,17 +26,18 @@ namespace UIProject.ViewModels.LayoutViewModels
         }
 
 
-        public BaseFilterViewModel(Func<ItemViewModel<T>, bool> filterCallback) : base()
+        public BaseFilterViewModel(Func<ItemViewModel<T>, bool> filterCallback)
         {
             if (filterCallback == null)
                 this.FilterCallBack = new Func<ItemViewModel<T>, bool>((item) => true);
             else
                 this.FilterCallBack = filterCallback;
+
+            // Load the components after then
+            base.Load();
         }
 
         public BaseFilterViewModel() : this(null) { }
-
-
 
         public event EventHandler<object> FilterExecuted;
         protected virtual void OnFilterExecuted(FilterEventArgs<T> e)

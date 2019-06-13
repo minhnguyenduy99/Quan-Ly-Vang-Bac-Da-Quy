@@ -9,8 +9,8 @@ namespace ModelProject
 {
     public class ChiTietDichVuModel : BaseSubmitableModel
     {
-        private long maPhieu;
-        private long maLoaiDV;
+        private long? maPhieu;
+        private long? maLoaiDV;
 
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenDV;
@@ -24,17 +24,17 @@ namespace ModelProject
         private int soLuong;
         private long traTruoc;
         private string ngayGiao;
-        private string maTinhTrang;
+        private long? maTinhTrang;
 
         //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
         private bool isUpdated = false;
 
-        public long MaPhieu
+        public long? MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
         }
-        public long MaLoaiDV
+        public long? MaLoaiDV
         {
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
@@ -64,7 +64,7 @@ namespace ModelProject
             get => ngayGiao;
             set => SetProperty(ref ngayGiao, value);
         }
-        public string MaTinhTrang
+        public long? MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);
@@ -110,7 +110,7 @@ namespace ModelProject
         {
             get
             {
-                if (maTinhTrang != null && maTinhTrang.Length > 0)
+                if (maTinhTrang != null)
                 {
                     TinhTrangModel status = DataAccess.LoadTinhTrangByMaTT(maTinhTrang);
                     tinhTrangDV = status.TenTinhTrang;

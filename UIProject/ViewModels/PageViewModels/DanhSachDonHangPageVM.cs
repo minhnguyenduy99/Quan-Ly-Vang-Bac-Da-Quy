@@ -86,7 +86,8 @@ namespace UIProject.ViewModels.PageViewModels
             var castPhieuBan = TimKiemPhieuBanVM.SelectedItem as ItemViewModel<PhieuBanModel>;
             if (castPhieuBan == null)
                 return true;
-            return castPhieuBan.Model.MaPhieu.ToLower().StartsWith(phieuBan.Model.MaPhieu.ToLower());
+            return castPhieuBan.Model.MaPhieu.ToString().ToLower()
+                .StartsWith(phieuBan.Model.MaPhieu.ToString().ToLower());
         }
 
         private bool LocTheoThoiGianCallBack(ItemViewModel<PhieuBanModel> phieuBan)

@@ -18,8 +18,7 @@
     
     <DataTemplate x:Key="WaitingDialogTemplate">
         <Border Background="White"
-                CornerRadius="15"
-                BorderThickness="1"
+                BorderThickness="2"
                 BorderBrush="LightGray">
             <Grid 
                   VerticalAlignment="Center"
@@ -36,8 +35,7 @@
 
     <DataTemplate x:Key="WaitingMessageDialogTemplate">
         <Border Background="White"
-                CornerRadius="15"
-                BorderThickness="1"
+                BorderThickness="2"
                 BorderBrush="LightGray">
             <Grid>
                 <Grid.RowDefinitions>
@@ -62,10 +60,14 @@
     
     <DataTemplate x:Key="YesNoDialogTemplate">
         <Border Background="White"
-                CornerRadius="15"
                 Padding="20"
                 BorderThickness="1"
                 BorderBrush="LightGray">
+            <Border.Resources>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightButtonStyle}">
+                    <Setter Property="Margin" Value="20"/>
+                </Style>
+            </Border.Resources>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -76,10 +78,11 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.ColumnSpan="2"
-                       Height="100"
+                       Margin="20"
                        Style="{StaticResource MediumLabelStyle}"
                        Content="{Binding MessageText}"/>
                 <Button Grid.Row="1" Grid.Column="0"
+                        Background="{DynamicResource DarkGrayBrush}"
                         x:Name="Yes"
                         HorizontalAlignment="Center"
                         Content="{Binding YesText}"
@@ -97,8 +100,7 @@
 
     <DataTemplate x:Key="MessageDialogTemplate">
         <Border Background="White"
-                CornerRadius="15"
-                BorderThickness="1"
+                BorderThickness="2"
                 BorderBrush="LightGray">
             <Grid>
                 <Grid.RowDefinitions>

@@ -129,11 +129,11 @@ namespace UIProject.ViewModels.LayoutViewModels
         public void RefreshItemsSource(IEnumerable<T> itemsSource)
         {
             ObservableCollection<ItemViewModel<T>> newItems = new ObservableCollection<ItemViewModel<T>>();
-            foreach(var item in itemsSource)
+            Items.Clear();
+            foreach (var item in itemsSource)
             {
-                newItems.Add(new ItemViewModel<T>(item));
+                Items.Add(new ItemViewModel<T>(item));
             }
-            this.items = newItems;
             OnItemsSourceChanged();
         }
 
@@ -147,6 +147,23 @@ namespace UIProject.ViewModels.LayoutViewModels
             SelectedItem = null;
             DisplayItems = null;
         }
+
+        // Everytime an item is added to or remove from the collection, update the DisplayItems property
+        #region Override add and move internal handler
+        protected override void OnItemAdded(ItemAddedEventArgs<T> e)
+        {
+            base.OnItemAdded(e);
+            Filter();
+        }
+
+        protected override void OnItemRemoved(ItemRemovedEventArgs<T> e)
+        {
+            base.OnItemRemoved(e);
+            Filter();
+        }
+        #endregion
+
+
 
         protected virtual void OnSelectedItemChanged(SelectedItemChangedEventArgs e)
         {
@@ -172,6 +189,7 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
+
         protected new void LoadComponentsInternal()
         {
             SelectedItem = null;           
@@ -181,6 +199,8 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             SelectedItem = null;
         }
+
+
         private ObservableCollection<ItemViewModel<T>> GetUpdatedDisplayItems()
         {
             return new ObservableCollection<ItemViewModel<T>>(this.Filter(Filters));

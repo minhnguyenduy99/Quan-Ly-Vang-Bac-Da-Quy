@@ -50,12 +50,7 @@ namespace UIProject.Views
 
         private void PrintWndVM_PrintFinished(object sender, Events.PrintedEventArgs e)
         {
-            DialogPopupWindow notifyWnd = new DialogPopupWindow(new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.Info,
-                WindowState = WindowState.Normal,
-                MessageText = "Thanh toán thành công",
-            });
+            DialogPopupWindow notifyWnd = new DialogPopupWindow();
             notifyWnd.ShowDialog();
             this.DialogResult = e.PrintResult;
             this.Close();

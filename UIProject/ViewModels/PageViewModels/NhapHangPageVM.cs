@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UIProject.Events;
 using UIProject.UIConnector;
+using UIProject.ViewModels.DataViewModels;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -15,21 +17,28 @@ namespace UIProject.ViewModels.PageViewModels
 {
     public class NhapHangPageVM : BasePageViewModel 
     {
+        #region Resources
+        private IEnumerable<SanPhamModel> dsSanPham;
+        private IEnumerable<NhaCungCapModel> dsNhaCungCap;
+        #endregion
+
         private ICommand submitPhieuNhapHangCmd;
         private ICommand huyPhieuNhapHangCmd;
         private ICommand themSanPhamCmd;
 
         public ICommand SubmitPhieuNhapHangCommand
         {
-            get => submitPhieuNhapHangCmd ?? new BaseCommand<IWindowExtension>(OnSubmitPhieuNhapHangCommandExecute);
+            get => submitPhieuNhapHangCmd ?? new BaseCommand<IWindow>(OnSubmitPhieuNhapHangCommandExecute);
             private set => submitPhieuNhapHangCmd = value;
         }
 
         public ICommand HuyPhieuNhapHangCommand
         {
-            get => huyPhieuNhapHangCmd ?? new BaseCommand<IWindowExtension>(OnHuyPhieuNhapHangComamndExecute);
+            get => huyPhieuNhapHangCmd ?? new BaseCommand<IWindow>(OnHuyPhieuNhapHangComamndExecute);
             private set => huyPhieuNhapHangCmd = value;
         }
+
+
 
         public ICommand ThemSanPhamCommand
         {
@@ -40,13 +49,7 @@ namespace UIProject.ViewModels.PageViewModels
 
 
         public SearchTextBoxViewModel<SanPhamModel> TimKiemSanPhamVM { get; set; }
-        public ObservableCollectionViewModel<ChiTietMuaModel> DanhSachChiTietMuaVM { get; set; }
-        public PhieuMuaModel PhieuMua { get; set; }
-
-
-
-
-
+        public NhapHangViewModel NhapHangVM { get; set; }
 
 
         public NhapHangPageVM() : base() { }
@@ -56,44 +59,59 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void SetUpTimKiemSanPhamVM()
         {
-            var dsSanPham = DataAccess.LoadSanPham();
             TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(dsSanPham);
-        }
+            TimKiemSanPhamVM.Filters.Add(LocSanPhamTheoTen);
+            TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectedItemChanged;
 
-        private void OnSubmitPhieuNhapHangCommandExecute(IWindowExtension window)
-        {
-            if (window.ShowDialog() == true)
+            bool LocSanPhamTheoTen(ItemViewModel<SanPhamModel> sanPhamItem)
             {
-                bool submitSuccess = PhieuMua.Submit(SubmitType.Add);
-                if (submitSuccess)
-                {
-                    foreach(var chiTiet in DanhSachChiTietMuaVM.Models)
-                    {
-                        try
-                        {
-                            chiTiet.Submit(SubmitType.Add);
-                        }
-                        catch { }
-                    }
-                }
+                if (sanPhamItem == null)
+                    return true;
+
+                return sanPhamItem.Model.TenSP.ToLower().StartsWith(TimKiemSanPhamVM.Text.ToLower());
+            }
+
+            void TimKiemSanPhamVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
+                if (sanPhamDaChon == null)
+                    return;
+
+                NhapHangVM.Add(sanPhamDaChon);
             }
         }
 
-        private void OnHuyPhieuNhapHangComamndExecute(IWindowExtension window)
+
+
+        private void SetUpNhapHangVM()
         {
-            throw new NotImplementedException();
+            NhapHangVM = new NhapHangViewModel();
         }
+
+        private void OnSubmitPhieuNhapHangCommandExecute(IWindow window)
+        {
+            if (window.ShowDialog() == true)
+            {
+                bool submitSuccess = NhapHangVM.Submit();
+                if (submitSuccess)
+                    Reload();
+            }
+        }
+
 
         private void OnThemSanPhamCommandExecute(IWindowExtension window)
         {
             AddingWindowViewModel<SanPhamModel> themSanPhamVM = new AddingWindowViewModel<SanPhamModel>();
             SearchTextBoxViewModel<NhaCungCapModel> timKiemNCC
-                = new SearchTextBoxViewModel<NhaCungCapModel>(DataAccess.LoadNhaCungCap());
+                = new SearchTextBoxViewModel<NhaCungCapModel>(dsNhaCungCap);
 
             themSanPhamVM.AdditionData.Add(DataAccess.LoadLoaiSanPham());
             themSanPhamVM.Searchers.Add(timKiemNCC);
 
             window.DataContext = themSanPhamVM;
+
+            // trigger the closing handler to allow a manual one
+            window.Closing += (sender, e) => e.Cancel = true;
 
             // Thêm sản phẩm vào database thành công
             if (window.ShowDialog(-500, 0) == true)
@@ -103,15 +121,58 @@ namespace UIProject.ViewModels.PageViewModels
             }
             
         }
+        private void OnHuyPhieuNhapHangComamndExecute(IWindow window)
+        {
+            DialogWindowViewModel popUpWndVM = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.YesNo,
+                MessageText = "Bạn muốn hủy phiếu mua đang làm ?",
+                YesText = "Có",
+                NoText = "Không"
+            };
+
+            window.DataContext = popUpWndVM;
+            popUpWndVM.ButtonPressed += PopUpWndVM_ButtonPressed;
+
+            // Chấp nhận hủy phiếu ban đang làm hiện tại
+            if (window.ShowDialog() == true)
+            {
+                Reload();
+            }
+
+
+            // local function
+            void PopUpWndVM_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
+            {
+                if (e.DialogResult == DialogResult.Yes)
+                    window.DialogResult = true;
+                if (e.DialogResult == DialogResult.No)
+                    window.DialogResult = false;
+
+                window.Close();
+            }
+        }
+
+        private void RefreshResource()
+        {
+            dsSanPham = DataAccess.LoadSanPham();
+            dsNhaCungCap = DataAccess.LoadNhaCungCap();
+        }
 
         protected override void LoadComponentsInternal()
         {
+            RefreshResource();
+
             SetUpTimKiemSanPhamVM();
+            SetUpNhapHangVM();
         }
 
         protected override void ReloadComponentsInternal()
         {
+            RefreshResource();
+
             TimKiemSanPhamVM.Reload();
+            NhapHangVM.Reload();
         }
     }
 }

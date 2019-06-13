@@ -13,5 +13,14 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
         }
 
+        protected override void LoadComponentsInternal()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -36,9 +36,22 @@ namespace UIProject.Pages
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void BtnAddProvider_Click(object sender, RoutedEventArgs e)
         {
-            
+            ProviderAddingDialogWindow providerAddWnd = new ProviderAddingDialogWindow(btnAddProvider);
+            btnAddProvider.CommandParameter = providerAddWnd;
+        }
+
+        private void BtnEditProvider_Click(object sender, RoutedEventArgs e)
+        {
+            EditProviderInfoWindow providerEditWnd = new EditProviderInfoWindow(btnEditProvider);
+            btnEditProvider.CommandParameter = providerEditWnd;
+        }
+
+        private void BtnDeleteProvider_Click(object sender, RoutedEventArgs e)
+        {
+            DialogPopupWindow deleteNotifyWnd = new DialogPopupWindow();
+            btnDeleteProvider.CommandParameter = deleteNotifyWnd;
         }
     }
 }

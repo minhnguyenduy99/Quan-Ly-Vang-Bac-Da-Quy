@@ -656,7 +656,7 @@ namespace ModelProject
         }
 
         //Đã test
-        public static SanPhamModel LoadSPByMaSP(long masp)
+        public static SanPhamModel LoadSPByMaSP(long? masp)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -669,7 +669,7 @@ namespace ModelProject
         }
 
         //Đã test
-        public static KhachHangModel LoadKHByMaKH(string makh)
+        public static KhachHangModel LoadKHByMaKH(long? makh)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -682,7 +682,7 @@ namespace ModelProject
 
 
         //Đã test
-        public static NhaCungCapModel LoadNCCByMaNCC(string mancc)
+        public static NhaCungCapModel LoadNCCByMaNCC(long? mancc)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -694,7 +694,7 @@ namespace ModelProject
         }
 
 
-        public static KhuVucModel LoadKhuVucByMKV(string makv)
+        public static KhuVucModel LoadKhuVucByMKV(long? makv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -705,7 +705,7 @@ namespace ModelProject
             }
         }
 
-        public static PhieuBanModel LoadPhieuBanByMaPhieuBan(string mapb)
+        public static PhieuBanModel LoadPhieuBanByMaPhieuBan(long? mapb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -716,7 +716,7 @@ namespace ModelProject
             }
         }
 
-        public static PhieuMuaModel LoadPhieuBanByMaPhieuMua(string mapb)
+        public static PhieuMuaModel LoadPhieuBanByMaPhieuMua(long? mapb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -729,7 +729,7 @@ namespace ModelProject
 
         //Copy paste tu day 
 
-        public static DonViTinhModel LoadDonViTinhByMADVT(string madvt)
+        public static DonViTinhModel LoadDonViTinhByMADVT(long? madvt)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -740,7 +740,7 @@ namespace ModelProject
             }
         }
 
-        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(long madv)
+        public static LoaiDichVuModel LoadLoaiDichVuByMaLDV(long? madv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -751,7 +751,7 @@ namespace ModelProject
             }
         }
 
-        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(long malsp)
+        public static LoaiSanPhamModel LoadLoaiSanPhamByMaLSP(long? malsp)
         {
             if (malsp == null)
                 return null;
@@ -764,7 +764,7 @@ namespace ModelProject
             }
         }
 
-        public static PhieuDichVuModel LoadPhieuDichVuByMaPDV(string mapdv)
+        public static PhieuDichVuModel LoadPhieuDichVuByMaPDV(long? mapdv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -775,7 +775,7 @@ namespace ModelProject
             }
         }
 
-        public static TinhTrangModel LoadTinhTrangByMaTT(string matt)
+        public static TinhTrangModel LoadTinhTrangByMaTT(long? matt)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -789,7 +789,7 @@ namespace ModelProject
 
 
         //Các bản chi tiết 
-        public static ChiTietBanModel LoadChiTietBanByMaCTB(string mactb)
+        public static ChiTietBanModel LoadChiTietBanByMaCTB(long? mactb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -801,7 +801,7 @@ namespace ModelProject
         }
 
 
-        public static ChiTietMuaModel LoadChiTietMuaByMaCTM(string mactb)
+        public static ChiTietMuaModel LoadChiTietMuaByMaCTM(long? mactb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -812,7 +812,7 @@ namespace ModelProject
             }
         }
 
-        public static ChiTietDichVuModel LoadChiTietDichVuByMaCTDV(string macctdv)
+        public static ChiTietDichVuModel LoadChiTietDichVuByMaCTDV(long? macctdv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
@@ -825,8 +825,8 @@ namespace ModelProject
 
         
        private  static string LoadConnectionString(string id = "Default")
-        {
-            return "Data Source=.\\database.db;Version=3;";
-        }
+       {
+            return "Data Source=.\\..\\..\\..\\ModelProject\\database.db;Version=3;";
+       }
     }
 }

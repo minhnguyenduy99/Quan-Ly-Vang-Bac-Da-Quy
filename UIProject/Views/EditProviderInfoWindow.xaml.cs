@@ -23,19 +23,10 @@ namespace UIProject.Views
     {
         public FrameworkElement Activator { get; set; }
 
-        public EditProviderInfoWindow()
+        public EditProviderInfoWindow(FrameworkElement activator)
         {
             InitializeComponent();
-        }
-
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
+            Activator = activator;
         }
 
         public bool? ShowDialog(Point position)

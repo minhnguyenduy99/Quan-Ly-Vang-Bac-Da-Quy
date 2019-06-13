@@ -77,14 +77,14 @@ namespace UIProject
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogPopupWindow waitingDialog = new DialogPopupWindow(
-                new DialogWindowViewModel()
-                {
-                    CanMaximized = false,
-                    CanMinimized = false,
-                    MessageText = "Vui lòng đợi",
-                    DialogType = DialogWindowType.WaitingMessage,
-                });
+            DialogPopupWindow waitingDialog = new DialogPopupWindow();
+            waitingDialog.DataContext = new DialogWindowViewModel()
+            {
+                CanMaximized = false,
+                CanMinimized = false,
+                MessageText = "Vui lòng đợi",
+                DialogType = DialogWindowType.WaitingMessage,
+            };
 
             // For the weird behave of PasswordBox, its value cannot be used in binding with 
             // Text property of normal textbox. Therefore, this is a must-have function to update

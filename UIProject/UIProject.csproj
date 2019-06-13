@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\DataGridAttachProperties.cs" />
     <Compile Include="Behaviors\DataGridSetColumnStyle.cs" />
+    <Compile Include="Behaviors\ExtendContent.cs" />
     <Compile Include="Behaviors\MoneyRuleApplier.cs" />
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -391,7 +392,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Templates\CustomControlTemplates\EmptyCollectionDisplay.xaml">
+    <Page Include="Templates\CustomControlTemplates\ExtendContentTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

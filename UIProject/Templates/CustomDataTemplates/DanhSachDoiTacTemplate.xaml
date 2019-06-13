@@ -2,55 +2,68 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:attacher="clr-namespace:UIProject.Behaviors">
+                    xmlns:attacher="clr-namespace:UIProject.Behaviors"
+                    xmlns:converters="clr-namespace:UIProject.Converters">
+    <converters:KhuVucToTenKhuVucConverter x:Key="khuVucConverter"/>
     <DataTemplate x:Key="DanhSachDoiTacTemplate">
-        <DataGrid HorizontalAlignment="Left"
+        <DataGrid DataContext="{Binding Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                  HorizontalAlignment="Left"
                   CanUserSortColumns="True"
-                  ItemsSource="{Binding}"
+                  ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  SelectionUnit="FullRow"
-                  attacher:DataGridAttachProperties.AllowAppliedEmptyTemplate="False"
-                  attacher:DataGridAttachProperties.ImageSource="/Images/them_nhacungcap.png">
+                  SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridHyperlinkColumn Width="70"
-                                         Binding="{Binding CustomerID}"
-                                         CanUserSort="False"
-                                         IsReadOnly="True"
-                                         Header="Mã NCC"
-                                         HeaderStyle="{StaticResource RightDataGridHeader}"
-                                         CellStyle="{StaticResource RightDataGridCell}"/>
+                <DataGridTextColumn Width="100"
+                                    Binding="{Binding Model.MaNCC}"
+                                    Header="Mã NCC"
+                                    SortDirection="Ascending"
+                                    IsReadOnly="True"
+                                    CanUserSort="True"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridTextColumn Width="170"
-                                    Binding="{Binding Name}"
+                                    CanUserResize="True"
+                                    Binding="{Binding Model.TenNCC}"
                                     Header="Tên NCC"
                                     IsReadOnly="True"
                                     CanUserSort="True"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="120"
-                                    Binding="{Binding Gender}"
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Model.DiaChi}"
                                     Header="Địa chỉ"
-                                    IsReadOnly="True"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="120"
+                <DataGridTextColumn Width="220"
                                     IsReadOnly="True"
-                                    Binding="{Binding Area}"
-                                    Header="Số điện thoại"
-                                    CanUserSort="False"
+                                    CanUserResize="True"
+                                    Binding="{Binding Model.KhuVuc, Converter={StaticResource khuVucConverter}}"
+                                    Header="Khu vực"
+                                    CanUserSort="true"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="120"
+                <DataGridTextColumn Width="130"
                                     CanUserSort="False"
-                                    Binding="{Binding PhoneNumber}"
-                                    Header="Email"                                           
+                                    Binding="{Binding Model.DienThoai}"
+                                    Header="SĐT"                                           
                                     IsReadOnly="True"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
             </DataGrid.Columns>
         </DataGrid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchNhaCungCapTemplate">
+        <Label Padding="7"
+               FontSize="13"
+               Foreground="Black"
+               Width="150"
+               Content="{Binding Model.TenNCC}"/>
     </DataTemplate>
 </ResourceDictionary>

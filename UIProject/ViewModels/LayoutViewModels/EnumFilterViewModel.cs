@@ -70,8 +70,6 @@ namespace UIProject.ViewModels.LayoutViewModels
                 Collection = new ObservableCollectionViewModel<object>();
             else
                 Collection = new ObservableCollectionViewModel<object>(itemsSource);
-
-            this.Collection.Add(NonApplyFilterItem);
         }
 
         /// <summary>
@@ -80,12 +78,41 @@ namespace UIProject.ViewModels.LayoutViewModels
         public EnumFilterViewModel() : this(null, null) { }
 
         /// <summary>
+        /// Refresh the items source of the <see cref="EnumFilterViewModel{T}"/>
+        /// </summary>
+        /// <param name="newSource">The new source to applied</param>
+        public void RefreshItemsSource(IEnumerable<object> newSource)
+        {
+            Collection.Clear();
+            foreach(var newItem in newSource)
+            {
+                Collection.Add(newItem);
+            }
+            if (IsApplyNonFilterItem)
+            {
+                Collection.Add(NonApplyFilterItem);
+            }
+        }
+
+        /// <summary>
         /// Event occurs when the selected item of the collection changed
         /// </summary>
         public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged
         {
             add { Collection.SelectedItemChanged += value; }
             remove { Collection.SelectedItemChanged -= value; }
+        }
+
+        
+        protected override void LoadComponentsInternal()
+        {
+            if (collection != null)
+                Collection.Load();
+        }
+        protected override void ReloadComponentsInternal()
+        {
+            if (Collection != null)
+                Collection.Reload();
         }
     }
 }

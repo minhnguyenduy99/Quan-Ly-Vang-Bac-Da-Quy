@@ -13,8 +13,8 @@ namespace ModelProject
         private long ? maPhieu;
         private string soPhieu;
         private string ngayLap;
-        private string maNV;
-        private string maKH;
+        private long? maNV;
+        private long? maKH;
         private int thue;
         private int chietKhau;
         private string ghichu;
@@ -42,7 +42,7 @@ namespace ModelProject
             get => ngayLap;
             set => SetProperty(ref ngayLap, value);
         }
-        public string MaKH
+        public long? MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
@@ -73,7 +73,7 @@ namespace ModelProject
                 OnChietKhauThayDoi();
             }
         }
-        public string MaNV
+        public long? MaNV
         {
             get => maNV;
             set => SetProperty(ref maNV, value);

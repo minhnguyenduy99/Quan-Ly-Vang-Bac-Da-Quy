@@ -45,13 +45,7 @@ namespace UIProject.Pages
 
         private void BtnDeleteProduct_Click(object sender, RoutedEventArgs e)
         {
-            DialogPopupWindow notifyDeleteWnd = new DialogPopupWindow(new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.YesNo,
-                MessageText = "Bạn muốn xóa sản phẩm này ?",
-                YesText = "Có",
-                NoText = "Không"
-            });
+            DialogPopupWindow notifyDeleteWnd = new DialogPopupWindow();
 
             this.btnDeleteProduct.CommandParameter = notifyDeleteWnd;
         }

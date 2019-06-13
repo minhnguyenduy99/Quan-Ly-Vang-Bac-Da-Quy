@@ -13,7 +13,7 @@ namespace ModelProject
         private long maLoaiSP;
         private long donGiaMuaVao;
         private string tenSP;
-        private string maNCC;
+        private long? maNCC;
         private int soLuong;
 
         //public SanPhamModel(string MASP, string TENSP, string MALOAISP, long DONGIA)
@@ -38,7 +38,7 @@ namespace ModelProject
             }
         }
 
-        public string MaNCC
+        public long? MaNCC
         {
             get => maNCC;
             set

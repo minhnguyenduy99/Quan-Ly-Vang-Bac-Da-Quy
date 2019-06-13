@@ -43,7 +43,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" 
-                       Margin="0 50 0 0"
+                       Margin="0 30 0 0"
                        Style="{StaticResource LargeLabelStyle}"
                        HorizontalAlignment="Left"
                        Content="Thêm mới nhà cung cấp"/>
@@ -58,15 +58,12 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical"
                                 Margin="10">
-                        <Label Style="{StaticResource MediumLabelStyle}"
-                               Content="Thông tin chung"
-                               HorizontalAlignment="Left"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition Height="1*"/>
+                                <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -84,21 +81,28 @@
                                    Content="Khu vực"/>
                             <Label Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
+                                   Content="Địa chỉ"/>
+                            <Label Grid.Row="4" Grid.Column="0"
+                                   Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Email"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.TenNhaCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.DienThoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ComboBox x:Name="PART_Combobox"
                                       Grid.Row="2" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       Margin="10"                                    
                                       Height="30"
-                                      ItemsSource="{Binding LocalArea}"
+                                      ItemsSource="{Binding AdditionData[0]}"
+                                      DisplayMemberPath="TenKhuVuc"
                                       SelectedItem="{Binding Data.MaKhuVuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource khuVucConverter}}"/>
                             <TextBox Grid.Row="3" Grid.Column="1"
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding Data.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
                                      Text="{Binding Data.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>

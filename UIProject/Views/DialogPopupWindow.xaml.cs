@@ -28,34 +28,22 @@ namespace UIProject.Views
         public DialogPopupWindow()
         {
             InitializeComponent();
+
+            this.DataContextChanged += DialogPopupWindow_DataContextChanged;
         }
 
-        public DialogPopupWindow(DialogWindowViewModel dialogWindowVM) : this()
+        private void DialogPopupWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ViewModel = dialogWindowVM;
-            this.DataContext = this.Content = ViewModel;
-
-            ApplyTemplateForViewModel();
-
-            dialogWindowVM.ButtonPressed += DialogWindowVM_ButtonPressed;
-        }
-
-        private void DialogWindowVM_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
-        {
-            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.OK)
+            if (DataContext is DialogWindowViewModel)
             {
-                this.Close();
-                return;
+                this.Content = DataContext;
+                ApplyTemplateForViewModel();
             }
-            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.Yes)
-                DialogResult = true;
-            if (e.DialogResult == ViewModels.LayoutViewModels.DialogResult.No)
-                DialogResult = false;
         }
 
         private void ApplyTemplateForViewModel()
         {
-            switch((ViewModel as DialogWindowViewModel).DialogType)
+            switch((DataContext as DialogWindowViewModel).DialogType)
             {
                 case DialogWindowType.Waiting: this.ContentTemplate = GetDialogContentTemplate("WaitingDialogTemplate");break;
                 case DialogWindowType.YesNo: this.ContentTemplate = GetDialogContentTemplate("YesNoDialogTemplate");break;
@@ -63,12 +51,6 @@ namespace UIProject.Views
                 case DialogWindowType.WaitingMessageCancel: this.ContentTemplate = GetDialogContentTemplate("WaitingMessageCancelTemplate");break;
                 case DialogWindowType.Info: this.ContentTemplate = GetDialogContentTemplate("MessageDialogTemplate");break;
             }
-        }
-
-
-        public void ApplyCustomTemplateForViewModel(string resource)
-        {
-            this.ContentTemplate = GetDialogContentTemplate(resource);
         }
 
         private DataTemplate GetDialogContentTemplate(string resource)

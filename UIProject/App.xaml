@@ -75,7 +75,8 @@
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/PopupDialogTemplate.xaml"/>
-                        <ResourceDictionary Source="./Templates/CustomControlTemplates/EmptyCollectionDisplay.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomControlTemplates/ExtendContentTemplate.xaml"/>
+
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 

@@ -10,7 +10,7 @@ namespace ModelProject
     public class ChiTietMuaModel : BaseSubmitableModel
     {
         private long maPhieuMuaHang;
-        private long maSP;
+        private long? maSP;
 
         //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
         private string tenSP;
@@ -18,40 +18,65 @@ namespace ModelProject
         private int soLuong;
         private long donGia;
 
-        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
-        private bool isUpdated = false;
-
         public long MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
         }
-        public long MaSP
+        public long? MaSP
         {
             get => maSP;
-            set => SetProperty(ref maSP, value);
+            set
+            {
+                SetProperty(ref maSP, value);
+                if (maSP == null)
+                    return;
+                TenSP = DataAccess.LoadSanPham().Where(sp => sp.MaSP == maSP).ElementAt(0).TenSP;
+            }
         }
         public int SoLuong
         {
             get => soLuong;
-            set => SetProperty(ref soLuong, value);
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Số lượng phải lớn hơn 0");
+                SetProperty(ref soLuong, value);
+            }
         }
         public long DonGia
         {
             get => donGia;
             set => SetProperty(ref donGia, value);
         }
-
         public string TenSP
         {
             get
             {
-                SanPhamModel _sanPham = DataAccess.LoadSPByMaSP(maSP);
-                tenSP = _sanPham.TenSP;
-                return tenSP;
+                return GetPropertyValue<string>();
+            }
+            private set
+            {
+                SetProperty(value);
             }
         }
 
+        public ChiTietMuaModel(long? maSP)
+        {
+            SanPhamModel sanPham = null;
+            // mã sản phẩm có thể sai
+            try
+            {
+                sanPham = DataAccess.LoadSPByMaSP(maSP);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new Exception("Mã sản phẩm không chính xác");
+            }
+
+            this.MaSP = sanPham.MaSP;
+            this.SoLuong = 0;          
+        }
         public override bool Equals(object obj)
         {
             //Two buying details only match if and only if they both have the same maPhieuMuaHang and maSP.

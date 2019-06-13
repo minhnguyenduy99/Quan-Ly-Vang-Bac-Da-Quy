@@ -66,7 +66,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition Height="1*"/>
+                                <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -84,21 +84,28 @@
                                    Content="Khu vực"/>
                             <Label Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
+                                   Content="Địa chỉ"/>
+                            <Label Grid.Row="4" Grid.Column="0"
+                                   Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Email"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.TenNhaCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.DienThoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ComboBox x:Name="PART_Combobox"
                                       Grid.Row="2" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       Margin="10"                                    
                                       Height="30"
-                                      ItemsSource="{Binding LocalArea}"
+                                      ItemsSource="{Binding AdditionData[0]}"
+                                      DisplayMemberPath="TenKhuVuc"
                                       SelectedItem="{Binding Data.MaKhuVuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource khuVucConverter}}"/>
                             <TextBox Grid.Row="3" Grid.Column="1"
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding Data.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
                                      Text="{Binding Data.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
@@ -114,17 +121,15 @@
                             Margin="0 20"
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"
-                            Command="{Binding SubmitCommand}"
-                            CommandParameter="{Binding ElementName=editProviderWnd}"
-                            Click="BtnSubmit_Click"/>
+                            Command="{Binding UpdateCommand}"
+                            CommandParameter="{Binding ElementName=editProviderWnd}"/>
                     <Button Grid.Column="1"
                             x:Name="btnCancel"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=editProviderWnd}"
-                            Click="BtnCancel_Click"/>
+                            CommandParameter="{Binding ElementName=editProviderWnd}"/>
                 </Grid>
             </Grid>
         </Grid>

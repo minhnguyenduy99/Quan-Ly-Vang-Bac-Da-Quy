@@ -125,7 +125,7 @@ namespace UIProject.ViewModels.DataViewModels
             PhieuBan = phieuBan;
             KhachHang = new KhachHangModel()
             {
-                MaKH = string.Empty,
+                MaKH = null
             };
         }
 

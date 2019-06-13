@@ -16,8 +16,6 @@
                     DataContext="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentControl}}}"
                     ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   behavior:DataGridAttachProperties.AllowAppliedEmptyTemplate="True"
-                  behavior:DataGridAttachProperties.ImageSource="/Images/them_donhang.png"
                     CanUserSortColumns="True"
                     CanUserAddRows="False"
                     CanUserResizeColumns="False"

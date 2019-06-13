@@ -12,13 +12,13 @@ namespace ModelProject
 
         private long ? maLoaiSP;
         private string tenLoaiSP;
-        private string maDVT;
+        private long? maDVT;
         private double phanTramLoiNhuan;
 
         //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
         private bool isUpdated = false;
 
-        public long ? MaLoaiSP
+        public long? MaLoaiSP
         {
             get => maLoaiSP;
             set => SetProperty(ref maLoaiSP, value);
@@ -29,7 +29,7 @@ namespace ModelProject
             get => tenLoaiSP;
             set => SetProperty(ref tenLoaiSP, value);
         }
-        public string MaDVT
+        public long? MaDVT
         {
             get => maDVT;
             set => SetProperty(ref maDVT, value);

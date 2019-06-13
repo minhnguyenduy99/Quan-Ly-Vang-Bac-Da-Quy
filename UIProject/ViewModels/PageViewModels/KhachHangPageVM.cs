@@ -102,7 +102,7 @@ namespace UIProject.ViewModels.PageViewModels
                 DataAccess.LoadKhuVuc());
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
-            LocKhuVucVM.NonApplyFilterItem.Model = new KhuVucModel() { MaKhuVuc = "-1", TenKhuVuc = "Chọn tất cả" };
+            LocKhuVucVM.NonApplyFilterItem.Model = new KhuVucModel() { MaKhuVuc = null, TenKhuVuc = "Chọn tất cả" };
 
             (DanhSachKhachHangVM.Filters as List<Func<ItemViewModel<KhachHangModel>, bool>>)
                 .Add(LocKhuVucVM.FilterCallBack);

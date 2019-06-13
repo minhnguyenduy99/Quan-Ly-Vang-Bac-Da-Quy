@@ -137,6 +137,15 @@ namespace UIProject.ViewModels.LayoutViewModels
             return Remove(item);
         }
 
+        /// <summary>
+        /// Remove all the items in the collection
+        /// </summary>
+        public void Clear()
+        {
+            Items.Clear();
+            OnItemClear(EventArgs.Empty);
+        }
+
         public IEnumerable<ItemViewModel<Model>> Filter(Func<ItemViewModel<Model>, bool> filterFunction)
         {
             return FilterHelper.Filter(items, filterFunction);
@@ -170,6 +179,11 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public event EventHandler<ItemEventArgs<Model>> ContainsItemModel;
 
+        /// <summary>
+        /// Event occurs when all the items in collection are clear
+        /// </summary>
+        public event EventHandler ItemsClear;
+
         #endregion
 
 
@@ -185,6 +199,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected virtual void OnContainsItemModel(ItemEventArgs<Model> e)
         {
             ContainsItemModel?.Invoke(this, e);
+        }
+        protected virtual void OnItemClear(EventArgs e)
+        {
+            ItemsClear?.Invoke(this, e);
         }
 
         protected override void LoadComponentsInternal() { }

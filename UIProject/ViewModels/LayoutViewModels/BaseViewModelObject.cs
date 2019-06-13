@@ -45,7 +45,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// </summary>
     public abstract class BaseViewModelObject : BaseViewModelObject<object>
     {
-        public BaseViewModelObject()
+        public BaseViewModelObject() : base()
         {
             Model = null;
         }

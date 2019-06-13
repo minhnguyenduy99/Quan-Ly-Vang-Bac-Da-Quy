@@ -10,8 +10,6 @@
                   CanUserSortColumns="True"
                   ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  attacher:DataGridAttachProperties.AllowAppliedEmptyTemplate="True"
-                  attacher:DataGridAttachProperties.ImageSource="/Images/tongquan_khachhangmoi.png"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"

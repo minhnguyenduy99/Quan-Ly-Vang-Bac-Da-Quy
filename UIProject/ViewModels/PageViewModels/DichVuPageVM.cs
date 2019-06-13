@@ -74,7 +74,7 @@ namespace UIProject.ViewModels.PageViewModels
 
             // Lựa chọn "Chọn tất cả"
             LocTinhTrangPhieuDichVuVM.NonApplyFilterItem.Model
-                = new TinhTrangModel() { MaTinhTrang = "TT-1", TenTinhTrang = "Chọn tất cả" };
+                = new TinhTrangModel() { MaTinhTrang = null, TenTinhTrang = "Chọn tất cả" };
 
             LocTinhTrangPhieuDichVuVM.SelectedItemChanged += UpdateDanhSachPhieuBan;
         }

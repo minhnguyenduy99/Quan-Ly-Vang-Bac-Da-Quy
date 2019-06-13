@@ -18,6 +18,7 @@ namespace UIProject.ViewModels.PageViewModels
         #region Private Fields
         private bool takeFullScreen;
         private bool isNavigated;
+        private bool firstLoaded = true;
         #endregion
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace UIProject.ViewModels.PageViewModels
         } 
 
         /// <summary>
-        /// The navigator that holds this page 
+        /// The navigator that navigates this page 
         /// </summary>
         public INavigator Navigator { get; set; }
 
@@ -70,9 +71,15 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public event EventHandler Navigated;
 
+        /// <summary>
+        /// Internal handler when the page is navigated
+        /// </summary>
         protected virtual void OnNavigated()
         {
-            Reload();
+            if (!firstLoaded)
+                Reload();
+            else
+                firstLoaded = false;
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 

@@ -14,10 +14,12 @@ namespace UIProject.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string castMaKhuVuc = (string)value;
-            if (string.IsNullOrEmpty(castMaKhuVuc))
-                return Binding.DoNothing;
-            return DataAccess.LoadKhuVucByMKV(castMaKhuVuc);
+            try
+            {
+                long? castMaKhuVuc = (long?)value;
+                return DataAccess.LoadKhuVucByMKV(castMaKhuVuc);
+            }
+            catch { return Binding.DoNothing; }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,14 +31,32 @@ namespace UIProject.Converters
         }
     }
 
+    public class KhuVucToTenKhuVucConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            KhuVucModel khuVuc = value as KhuVucModel;
+            if (khuVuc == null)
+                return Binding.DoNothing;
+            return khuVuc.TenKhuVuc;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new Exception("Cannot convert back");
+        }
+    }
+
     public class MaLoaiSanPhamToLoaiSanPhamConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var castMaLoaiSP = (string)value;
-            if (string.IsNullOrEmpty(castMaLoaiSP))
-                return Binding.DoNothing;
-            return DataAccess.LoadLoaiSanPhamByMaLSP(castMaLoaiSP);
+            try
+            {
+                var castMaLoaiSP = (long)value;
+                return DataAccess.LoadLoaiSanPhamByMaLSP(castMaLoaiSP);
+            }
+            catch { return Binding.DoNothing; }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

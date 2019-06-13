@@ -23,9 +23,10 @@ namespace UIProject.Views
     public partial class ProviderAddingDialogWindow : Window, IWindowExtension
     {
         public FrameworkElement Activator { get; set; }
-        public ProviderAddingDialogWindow()
+        public ProviderAddingDialogWindow(FrameworkElement activator)
         {
             InitializeComponent();
+            Activator = activator;
         }
 
         public bool? ShowDialog(Point position)
