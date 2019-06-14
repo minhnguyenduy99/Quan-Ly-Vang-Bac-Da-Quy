@@ -10,6 +10,13 @@ using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.Converters
 {
+    public enum DataConvertType
+    {
+        CodeToName = 0,
+        CodeToObject = 1,
+        ObjectToCode = 2,
+        ObjectToName = 3,
+    };
     public class MaKhuVucToKhuVucConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -49,6 +56,7 @@ namespace UIProject.Converters
 
     public class MaLoaiSanPhamToLoaiSanPhamConverter : IValueConverter
     {
+        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -68,6 +76,61 @@ namespace UIProject.Converters
         }
     }
 
+    public class LoaiSanPhamToTenDonViTinhConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var castLoaiSP = value as LoaiSanPhamModel;
+            if (castLoaiSP == null)
+                return Binding.DoNothing;
+            return DataAccess.LoadDonViTinhByMADVT(castLoaiSP.MaDVT).TenDVT;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new Exception("Unable to convert back");
+        }
+    }
+
+    public class NhaCungCapConverter : IValueConverter
+    {
+        public DataConvertType ConvertType { get; set; }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch (ConvertType)
+            {
+                case DataConvertType.CodeToName: return CodeToNameConvert((long?)value);
+                case DataConvertType.CodeToObject: return CodeToObjectConvert((long?)value);
+                case DataConvertType.ObjectToCode: return ObjectToCodeConvert(value as NhaCungCapModel);
+                case DataConvertType.ObjectToName: return ObjectToNameConvert(value as NhaCungCapModel);
+                default:
+                    return Binding.DoNothing;
+            }
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        private object CodeToNameConvert(long? code)
+        {
+            try
+            {
+                return DataAccess.LoadNCCByMaNCC(code).TenNCC;
+            }
+            catch { return Binding.DoNothing; }
+        }
+        private object CodeToObjectConvert(long? code)
+        {
+            try
+            {
+                return DataAccess.LoadNCCByMaNCC(code);
+            }
+            catch { return Binding.DoNothing; }
+        }
+        private object ObjectToNameConvert(NhaCungCapModel nhaCC) => nhaCC?.TenNCC;
+        private object ObjectToCodeConvert(NhaCungCapModel nhaCC) => nhaCC?.MaNCC;
+    }
 
     /// <summary>
     /// A converter functions to indicate weither there is a currently selected item

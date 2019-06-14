@@ -23,7 +23,7 @@ namespace UIProject.Pages
 
         private void BtnAddProduct_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ProductAddingDialogWindow productAddingWnd = new ProductAddingDialogWindow();
+            ProductAddingDialogWindow productAddingWnd = new ProductAddingDialogWindow(btnAddProduct);
             btnAddProduct.CommandParameter = productAddingWnd;
         }
     }

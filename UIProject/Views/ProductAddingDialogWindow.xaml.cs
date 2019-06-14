@@ -24,9 +24,10 @@ namespace UIProject.Views
     /// </summary>
     public partial class ProductAddingDialogWindow : Window, IWindowExtension
     {
-        public ProductAddingDialogWindow()
+        public ProductAddingDialogWindow(FrameworkElement activator)
         {
             InitializeComponent();
+            Activator = activator;
 
         }
 
