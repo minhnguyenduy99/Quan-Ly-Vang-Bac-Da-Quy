@@ -7,7 +7,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using Dapper;
-
 namespace ModelProject
 {
     public class DataAccess
@@ -28,7 +27,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao)", sanPham);
+                cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO, MANCC) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao, @MaNCC)", sanPham);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 string queryLastRow = @"select last_insert_rowid()";
                 long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
