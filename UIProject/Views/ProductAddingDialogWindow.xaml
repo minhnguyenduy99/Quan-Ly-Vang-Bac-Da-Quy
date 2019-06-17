@@ -6,11 +6,15 @@
         xmlns:local="clr-namespace:UIProject.Views"
         xmlns:customControls="clr-namespace:UIProject.CustomControls"
         xmlns:viewModels="clr-namespace:UIProject.ViewModels.LayoutViewModels"
+        xmlns:converters="clr-namespace:UIProject.Converters"
         mc:Ignorable="d"
         WindowStyle="None"
+        x:Name="ProductAddingWnd"
         Style="{StaticResource CustomDialogWindowStyle}"       
         Title="ProductAddingDialogWindow">
     <Window.Resources>
+        <converters:MaLoaiSanPhamToLoaiSanPhamConverter x:Key="loaiSanPhamConverter"/>
+        <converters:LoaiSanPhamToTenDonViTinhConverter x:Key="donViTinhConverter"/>
         <Style x:Key="CustomDefinedLabelStyle" TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -58,7 +62,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical"
                                 Margin="10">
-                        <Grid>
+                        <Grid Panel.ZIndex="99">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -78,13 +82,13 @@
                                    Content="Loại sản phẩm"/>
                             <Label Grid.Row="2" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Nhà cung cấp"/>
+                                   Content="Đơn vị tính"/>
                             <Label Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Email"/>
+                                   Content="Nhà cung cấp"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.Model.TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ComboBox x:Name="CbbLoaiSanPham"
                                       Grid.Row="1" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
@@ -92,16 +96,21 @@
                                       Height="30"
                                       ItemsSource="{Binding AdditionData[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       DisplayMemberPath="TenLoaiSP"
-                                      SelectedItem="{Binding Data.MaLoaiSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <customControls:SearchTextBox Grid.Row="2" Grid.Column="1"
+                                      SelectedItem="{Binding Data.MaLoaiSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource loaiSanPhamConverter}}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"
+                                     Panel.ZIndex="1"
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     IsEnabled="False"
+                                     Text="{Binding SelectedItem, ElementName=CbbLoaiSanPham, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource donViTinhConverter}}"/>
+                            <customControls:SearchTextBox Grid.Row="3" Grid.Column="1"
                                                             DataContext="{Binding Searchers[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                             Style="{StaticResource NoFieldNoIconSearchTextBoxStyle}"
                                                             HorizontalAlignment="Stretch"
                                                             Panel.ZIndex="99"
                                                             ListBoxMaxHeight="150"
                                                             SearchBoxItemTemplate="{StaticResource SearchNhaCCTemplate}"
-                                                            SearchBoxItemSource="{Binding DisplayItems}"
-                                                            SelectedValue="{Binding TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            SearchBoxItemSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            SelectedValue="{Binding Model.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                             SearchListBoxBackground="WhiteSmoke"
                                                             Margin="10"
                                                             FontWeight="Normal"
@@ -109,12 +118,12 @@
                                                             IconHeight="17"
                                                             Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                             Hint="Tìm kiếm nhà cung cấp"/>
-                            <TextBox Grid.Row="3" Grid.Column="1"
-                                     Style="{StaticResource CustomTextBoxStyle}"/>
+                            
                         </Grid>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="3">
+                <Grid Grid.Row="3"
+                      Panel.ZIndex="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -124,13 +133,13 @@
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"
                             Command="{Binding SubmitCommand}"
-                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"/>
+                            CommandParameter="{Binding ElementName=ProductAddingWnd}"/>
                     <Button Grid.Column="1"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"/>
+                            CommandParameter="{Binding ElementName=ProductAddingWnd}"/>
                 </Grid>
             </Grid>
         </Grid>

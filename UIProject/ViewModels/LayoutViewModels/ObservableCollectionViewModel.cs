@@ -48,8 +48,6 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             get
             {
-                if (Filters == null)
-                    return items;
                 return GetPropertyValue<ObservableCollection<ItemViewModel<T>>>();
             }
             private set
@@ -82,7 +80,10 @@ namespace UIProject.ViewModels.LayoutViewModels
             set => removeItemCmd = value;
         }
 
-        public ObservableCollectionViewModel(): base() { }
+        public ObservableCollectionViewModel(): base()
+        {
+            Filters = new List<Func<ItemViewModel<T>, bool>>();
+        }
 
         public ObservableCollectionViewModel(IEnumerable<T> itemsSource) : base(itemsSource)
         {
@@ -110,7 +111,10 @@ namespace UIProject.ViewModels.LayoutViewModels
         /// </summary>
         public void Filter()
         {
-            DisplayItems = GetUpdatedDisplayItems();
+            if (Filters == null)
+                DisplayItems = Items;
+            else
+                DisplayItems = GetUpdatedDisplayItems();
         }
 
         /// <summary>
@@ -153,12 +157,16 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected override void OnItemAdded(ItemAddedEventArgs<T> e)
         {
             base.OnItemAdded(e);
+            if (Filters == null)
+                return;
             Filter();
         }
 
         protected override void OnItemRemoved(ItemRemovedEventArgs<T> e)
         {
             base.OnItemRemoved(e);
+            if (Filters == null)
+                return;
             Filter();
         }
         #endregion

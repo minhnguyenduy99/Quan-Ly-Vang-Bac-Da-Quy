@@ -40,7 +40,7 @@ namespace ModelProject
             set
             {
                 if (value <= 0)
-                    throw new Exception("Số lượng phải lớn hơn 0");
+                    throw new Exception("Số lượng nhập phải lớn hơn 0");
                 SetProperty(ref soLuong, value);
             }
         }
@@ -49,6 +49,8 @@ namespace ModelProject
             get => donGia;
             set => SetProperty(ref donGia, value);
         }
+
+        #region Additional Properties
         public string TenSP
         {
             get
@@ -60,22 +62,32 @@ namespace ModelProject
                 SetProperty(value);
             }
         }
-
+        public string TenLoaiSP
+        {
+            get => GetPropertyValue<string>();
+            private set
+            {
+                SetProperty(value);
+            }
+        }
+        #endregion
         public ChiTietMuaModel(long? maSP)
         {
             SanPhamModel sanPham = null;
+            LoaiSanPhamModel loaiSP = null;
             // mã sản phẩm có thể sai
             try
             {
                 sanPham = DataAccess.LoadSPByMaSP(maSP);
+                loaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(sanPham.MaLoaiSP);
             }
             catch (IndexOutOfRangeException)
             {
                 throw new Exception("Mã sản phẩm không chính xác");
             }
-
+            this.TenLoaiSP = loaiSP.TenLoaiSP;
             this.MaSP = sanPham.MaSP;
-            this.SoLuong = 0;          
+            this.SoLuong = 1;          
         }
         public override bool Equals(object obj)
         {

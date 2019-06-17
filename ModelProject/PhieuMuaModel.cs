@@ -9,10 +9,10 @@ namespace ModelProject
 {
     public class PhieuMuaModel : BaseSubmitableModel
     {
-        private long ? maPhieu;
+        private long? maPhieu;
         private string soPhieu;
         private string ngayLap;
-        private string maNCC;
+        private long? maNCC;
         private string ghiChu;
 
         public string GhiChu
@@ -36,7 +36,7 @@ namespace ModelProject
             get => ngayLap;
             set => SetProperty(ref ngayLap, value);
         }
-        public string MaNCC
+        public long? MaNCC
         {
             get => maNCC;
             set => SetProperty(ref maNCC, value);

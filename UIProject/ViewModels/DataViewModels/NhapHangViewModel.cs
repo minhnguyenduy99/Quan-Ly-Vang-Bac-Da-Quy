@@ -40,6 +40,7 @@ namespace UIProject.ViewModels.DataViewModels
         public NhapHangViewModel(): base()
         {
             DSChiTietMua = new ObservableCollectionViewModel<ChiTietMuaModel>();
+            PhieuMua = new PhieuMuaModel();
             DSChiTietMua.ItemAdded += DSChiTietMua_ItemAdded;
             DSChiTietMua.ItemRemoved += DSChiTietMua_ItemRemoved;
         }
@@ -49,6 +50,10 @@ namespace UIProject.ViewModels.DataViewModels
             DSChiTietMua.Add(new ChiTietMuaModel(sanPham.Model.MaSP));
         }
 
+        public void Clear()
+        {
+            DSChiTietMua.Clear();
+        }
         private void DSChiTietMua_ItemAdded(object sender, ItemAddedEventArgs<ChiTietMuaModel> e)
         {
             UpdatePhieuMua();

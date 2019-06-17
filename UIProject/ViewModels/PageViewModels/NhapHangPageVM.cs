@@ -38,8 +38,6 @@ namespace UIProject.ViewModels.PageViewModels
             private set => huyPhieuNhapHangCmd = value;
         }
 
-
-
         public ICommand ThemSanPhamCommand
         {
             get => themSanPhamCmd ?? new BaseCommand<IWindowExtension>(OnThemSanPhamCommandExecute);
@@ -48,7 +46,8 @@ namespace UIProject.ViewModels.PageViewModels
 
 
 
-        public SearchTextBoxViewModel<SanPhamModel> TimKiemSanPhamVM { get; set; }
+        public SearchTextBoxViewModel<SanPhamModel> TimKiemSanPhamVM { get; private set; }
+        public SearchTextBoxViewModel<NhaCungCapModel> TimKiemNhaCungCapVM { get; private set; }
         public NhapHangViewModel NhapHangVM { get; set; }
 
 
@@ -56,11 +55,36 @@ namespace UIProject.ViewModels.PageViewModels
         public NhapHangPageVM(INavigator navigator) : base(navigator) { }
 
      
+        private void SetUpTimKiemNhaCungCapVM()
+        {
+            TimKiemNhaCungCapVM = new SearchTextBoxViewModel<NhaCungCapModel>(dsNhaCungCap);
+            TimKiemNhaCungCapVM.Filters.Add(LocTheoTenNCCCallback);
+            TimKiemNhaCungCapVM.SelectedValuePath = "TenNCC";
+            TimKiemNhaCungCapVM.SelectedItemChanged += TimKiemNhaCungCapVM_SelectedItemChanged;
+
+            // local function
+            bool LocTheoTenNCCCallback(ItemViewModel<NhaCungCapModel> nhaCCItem)
+            {
+                if (nhaCCItem == null)
+                    return true;
+
+                return nhaCCItem.Model.TenNCC.ToLower().StartsWith(TimKiemNhaCungCapVM.Text.ToLower());
+            }
+            void TimKiemNhaCungCapVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                var nhaCCDaChon = e.SelectedItem as ItemViewModel<NhaCungCapModel>;
+                if (nhaCCDaChon == null)
+                    return;
+                NhapHangVM.Clear();
+                NhapHangVM.PhieuMua.MaNCC = nhaCCDaChon.Model.MaNCC;
+            }
+        }
 
         private void SetUpTimKiemSanPhamVM()
         {
             TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(dsSanPham);
             TimKiemSanPhamVM.Filters.Add(LocSanPhamTheoTen);
+            TimKiemSanPhamVM.Filters.Add(LocSanPhamTheoNhaCungCap);
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectedItemChanged;
 
             bool LocSanPhamTheoTen(ItemViewModel<SanPhamModel> sanPhamItem)
@@ -69,6 +93,16 @@ namespace UIProject.ViewModels.PageViewModels
                     return true;
 
                 return sanPhamItem.Model.TenSP.ToLower().StartsWith(TimKiemSanPhamVM.Text.ToLower());
+            }
+            bool LocSanPhamTheoNhaCungCap(ItemViewModel<SanPhamModel> sanPhamItem)
+            {
+                var nhaCungCap = TimKiemNhaCungCapVM.SelectedItem as ItemViewModel<NhaCungCapModel>;
+
+                //  không cho phép người dùng tìm sản phẩm nếu chưa chọn nhà cung câp
+                if (nhaCungCap == null)
+                    return false;
+
+                return sanPhamItem?.Model?.MaNCC == nhaCungCap?.Model?.MaNCC;
             }
 
             void TimKiemSanPhamVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
@@ -104,7 +138,7 @@ namespace UIProject.ViewModels.PageViewModels
             AddingWindowViewModel<SanPhamModel> themSanPhamVM = new AddingWindowViewModel<SanPhamModel>();
             SearchTextBoxViewModel<NhaCungCapModel> timKiemNCC
                 = new SearchTextBoxViewModel<NhaCungCapModel>(dsNhaCungCap);
-
+            timKiemNCC.SelectedValuePath = "TenNCC";
             themSanPhamVM.AdditionData.Add(DataAccess.LoadLoaiSanPham());
             themSanPhamVM.Searchers.Add(timKiemNCC);
 
@@ -117,7 +151,8 @@ namespace UIProject.ViewModels.PageViewModels
             if (window.ShowDialog(-500, 0) == true)
             {
                 // Cập nhật lại danh sách sản phẩm
-                TimKiemSanPhamVM.RefreshItemSource(DataAccess.LoadSanPham());
+                RefreshResource();
+                TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
             }
             
         }
@@ -163,8 +198,9 @@ namespace UIProject.ViewModels.PageViewModels
         {
             RefreshResource();
 
-            SetUpTimKiemSanPhamVM();
             SetUpNhapHangVM();
+            SetUpTimKiemSanPhamVM();
+            SetUpTimKiemNhaCungCapVM();
         }
 
         protected override void ReloadComponentsInternal()
@@ -172,6 +208,7 @@ namespace UIProject.ViewModels.PageViewModels
             RefreshResource();
 
             TimKiemSanPhamVM.Reload();
+            TimKiemNhaCungCapVM.Reload();
             NhapHangVM.Reload();
         }
     }

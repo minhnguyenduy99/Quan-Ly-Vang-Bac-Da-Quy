@@ -74,16 +74,16 @@
                 Width="auto"
                 Visibility="{Binding Text,ElementName=PART_TextBox, Converter={StaticResource ItemVisibilitySearchConverter}}">
                 <ListBox x:Name="PART_ListBox"
-                     SelectionMode="Single"
-                     Height="auto"
-                     MaxHeight="{Binding ListBoxMaxHeight, ElementName=uc}"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     Background="{Binding SearchListBoxBackground, ElementName=uc}"
-                     ItemsSource="{Binding DisplayItems,UpdateSourceTrigger=PropertyChanged}"
-                     SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     SelectedValue="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}"
-                     IsSynchronizedWithCurrentItem="False">
+                         SelectionMode="Single"
+                         Height="auto"
+                         MaxHeight="{Binding ListBoxMaxHeight, ElementName=uc}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Background="{Binding SearchListBoxBackground, ElementName=uc}"
+                         ItemsSource="{Binding DisplayItems,UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedValue="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         ItemTemplate="{Binding SearchBoxItemTemplate, ElementName=uc}"
+                         IsSynchronizedWithCurrentItem="False">
                 </ListBox>
             </Canvas>
         </Grid>
