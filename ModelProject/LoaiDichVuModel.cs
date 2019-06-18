@@ -11,7 +11,9 @@ namespace ModelProject
         private long ? maLoaiDV;
         private string tenLoaiDV;
         private long donGiaDV;
+        private long chiPhiRieng;
 
+        #region Main properties
         public long ? MaLoaiDV
         {
             get => maLoaiDV;
@@ -28,13 +30,21 @@ namespace ModelProject
             set => SetProperty(ref donGiaDV, value);
         }
 
+        public long ChiPhiRieng
+        {
+            get => chiPhiRieng;
+            set => SetProperty(ref chiPhiRieng, value);
+        }
+        #endregion
+
+
         public override bool Equals(object obj)
         {
             if (obj is LoaiDichVuModel)
             {
                 LoaiDichVuModel secondObj = (LoaiDichVuModel)obj;
                 //Two service type only match if and only if they both have the same maLoaiDV.
-                return (maLoaiDV.Equals(secondObj.maLoaiDV));
+                return MaLoaiDV == secondObj.MaLoaiDV;
             }
             return false;
         }

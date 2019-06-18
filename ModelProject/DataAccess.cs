@@ -527,7 +527,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC, GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu) ", PhieuMua);
+                cnn.Execute("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC,GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu) ", PhieuMua);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 string queryLastRow = @"select last_insert_rowid()";
                 long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);

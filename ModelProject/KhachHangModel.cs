@@ -17,12 +17,12 @@ namespace ModelProject
         private long? maKhuVuc;
         private string email;
 
+        #region Main properties
         public long ? MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
         }
-
         public string SDT
         {
             get => sdt;
@@ -52,7 +52,15 @@ namespace ModelProject
                 TenKhuVuc = DataAccess.LoadKhuVucByMKV(maKhuVuc).TenKhuVuc;   
             }
         }
+        public string Email
+        {
+            get => email;
+            set => SetProperty(ref email, value);
+        }
 
+        #endregion
+
+        #region Additional properties
         public string TenKhuVuc
         {
             get => GetPropertyValue<string>();
@@ -61,12 +69,7 @@ namespace ModelProject
                 SetProperty(value);
             }
         }
-
-        public string Email
-        {
-            get => email;
-            set => SetProperty(ref email, value);
-        }
+        #endregion
 
 
         public override bool Equals(object obj)
@@ -75,7 +78,7 @@ namespace ModelProject
             {
                 KhachHangModel secondObj = (KhachHangModel)obj;
                 //Two customers only match if and only if they both have the same maKH.
-                return (maKH.Equals(secondObj.maKH));
+                return MaKH == secondObj.MaKH;
             }
             return false;
         }

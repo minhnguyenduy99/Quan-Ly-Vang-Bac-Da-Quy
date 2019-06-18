@@ -9,14 +9,12 @@ namespace ModelProject
 {
     public class LoaiSanPhamModel : BaseSubmitableModel
     {
-
         private long ? maLoaiSP;
         private string tenLoaiSP;
         private long? maDVT;
         private double phanTramLoiNhuan;
 
-        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
-        private bool isUpdated = false;
+        #region Main properties
 
         public long? MaLoaiSP
         {
@@ -40,13 +38,16 @@ namespace ModelProject
             set => SetProperty(ref phanTramLoiNhuan, value);
         }
 
+        #endregion
+
+
         public override bool Equals(object obj)
         {
             if (obj is LoaiSanPhamModel)
             {
                 LoaiSanPhamModel secondObj = (LoaiSanPhamModel)obj;
                 //Two product type only match if and only if they both have the same maLoaiSP.
-                return (maLoaiSP.Equals(secondObj.maLoaiSP));
+                return MaLoaiSP == secondObj.MaLoaiSP;
             }
             return false;
         }

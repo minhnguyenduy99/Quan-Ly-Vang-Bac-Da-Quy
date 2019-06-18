@@ -10,25 +10,19 @@ namespace ModelProject
     public class SanPhamModel : BaseSubmitableModel
     {
         private long? maSP;
-        private long maLoaiSP;
+        private long? maLoaiSP;
         private long donGiaMuaVao;
         private string tenSP;
         private long? maNCC;
         private int soLuong;
 
-        //public SanPhamModel(string MASP, string TENSP, string MALOAISP, long DONGIA)
-        //{
-        //    maSP = MASP;
-        //    maLoaiSP = MALOAISP;
-        //    donGiaMuaVao = DONGIA;
-        //    tenSP = TENSP;
-        //}
+        #region Main properties
         public long ? MaSP
         {
             get => maSP;
             set => SetProperty(ref maSP, value);
         }
-        public long MaLoaiSP
+        public long? MaLoaiSP
         {
             get => maLoaiSP;
             set
@@ -37,7 +31,6 @@ namespace ModelProject
                 TenLoaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(maLoaiSP).TenLoaiSP;
             }
         }
-
         public long? MaNCC
         {
             get => maNCC;
@@ -50,20 +43,37 @@ namespace ModelProject
         public long DonGiaMuaVao
         {
             get => donGiaMuaVao;
-            set => SetProperty(ref donGiaMuaVao, value);
+            set
+            {
+                if (value <= 0)
+                    IsDataValid = false;
+                else
+                {
+                    IsDataValid = true;
+                }
+                SetProperty(ref donGiaMuaVao, value);
+            }
         }
         public string TenSP
         {
             get => tenSP;
             set => SetProperty(ref tenSP, value);
         }
-
         public int SoLuong
         {
             get => soLuong;
-            set => SetProperty(ref soLuong, value);
+            set
+            {
+                if (value < 0)
+                    IsDataValid = false;
+                else
+                {
+                    IsDataValid = true;
+                }
+                SetProperty(ref soLuong, value);
+            }
         }
-
+        #endregion
 
         #region Additional Properties
         public string TenLoaiSP
@@ -86,7 +96,7 @@ namespace ModelProject
             {
                 SanPhamModel secondObj = (SanPhamModel)obj;
                 //Two products only match if and only if they both have the same maSP.
-                return (maSP.Equals(secondObj.maSP));
+                return MaSP == secondObj.MaSP;
             }
             return false;
         }
@@ -94,7 +104,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            maSP = DataAccess.SaveSanPham(this);
+            MaSP = DataAccess.SaveSanPham(this);
         }
 
         protected override void Update()

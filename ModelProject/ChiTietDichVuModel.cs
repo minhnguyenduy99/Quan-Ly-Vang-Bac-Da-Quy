@@ -11,24 +11,15 @@ namespace ModelProject
     {
         private long? maPhieu;
         private long? maLoaiDV;
-
-        //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
-        private string tenDV;
-        private double donGiaDV;
-        private string tinhTrangDV;
-        private string ngayBatDauCungCapDV;
-
-        private long chiPhiRieng;
-        //Số lượng không được vượt quá số sản phẩm.
-        //Số lượng không được âm.
         private int soLuong;
         private long traTruoc;
+        private long thanhTien;
+        private long conLai;
         private string ngayGiao;
         private long? maTinhTrang;
 
-        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
-        private bool isUpdated = false;
 
+        #region Main properties
         public long? MaPhieu
         {
             get => maPhieu;
@@ -39,108 +30,106 @@ namespace ModelProject
             get => maLoaiDV;
             set => SetProperty(ref maLoaiDV, value);
         }
-
-        public long ChiPhiRieng
-        {
-            get => chiPhiRieng;
-            set => SetProperty(ref chiPhiRieng, value);
-        }
         public int SoLuong
         {
             get => soLuong;
-            set => SetProperty(ref soLuong, value);
+            set
+            {
+                SetProperty(ref soLuong, value);
+                UpdateTongTienChiTiet();
+            }
         }
-        public double ThanhTien
+        public long ThanhTien
         {
-            get => (soLuong * donGiaDV);
+            get => thanhTien;
+            private set => SetProperty(ref thanhTien, value);
         }
         public long TraTruoc
         {
             get => traTruoc;
-            set => SetProperty(ref traTruoc, value);
+            set
+            {
+                if (value > ThanhTien)
+                {
+                    throw new Exception("Gía trị trả phải nhỏ hơn hoặc bằng tổng tiền chi tiết");
+                }
+                SetProperty(ref traTruoc, value);
+                UpdateTongTienChiTiet();
+            }
+        }
+        public long ConLai
+        {
+            get => GetPropertyValue<long>();
+            private set => SetProperty(value);
         }
         public string NgayGiao
         {
             get => ngayGiao;
-            set => SetProperty(ref ngayGiao, value);
+            private set
+            {
+                SetProperty(ref ngayGiao, value);
+            }
         }
+
+        #endregion 
+
+        #region Additional properties
+        public DateTime NgayGiaoDateTime
+        {
+            get => GetPropertyValue<DateTime>();
+            set => SetProperty(value);
+        }
+
         public long? MaTinhTrang
         {
             get => maTinhTrang;
             set => SetProperty(ref maTinhTrang, value);
         }
 
-        public string TenDV
+        public string TenLoaiDV
         {
-            get
-            {
-                if (maLoaiDV != null && maLoaiDV > 0)
-                {
-                    LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
-                    tenDV = serviceType.TenLoaiDV;
-                    return tenDV;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maLoaiDV before get DonViTinh. Otherwise, will always return null");
-                    return "";
-                }
-            }
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
         }
 
-        public double DonGiaDV
+        public long DonGiaDV
         {
-            get
-            {
-                if (maLoaiDV != null && maLoaiDV > 0)
-                {
-                    LoaiDichVuModel serviceType = DataAccess.LoadLoaiDichVuByMaLDV(maLoaiDV);
-                    donGiaDV = serviceType.DonGiaDV;
-                    return donGiaDV;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maLoaiDV before get DonGiaDV. Otherwise, will always return null");
-                    return -1;
-                }
-            }
+            get => GetPropertyValue<long>();
+            private set => SetProperty(value);
+        }
+        public string TenTinhTrang
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
         }
 
-        public string TinhTrangDV
+        #endregion
+
+
+        public ChiTietDichVuModel(PhieuDichVuModel phieuDV, LoaiDichVuModel dichVu)
         {
-            get
-            {
-                if (maTinhTrang != null)
-                {
-                    TinhTrangModel status = DataAccess.LoadTinhTrangByMaTT(maTinhTrang);
-                    tinhTrangDV = status.TenTinhTrang;
-                    return tinhTrangDV;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maLoaiDV before get TinhTrangDV. Otherwise, will always return null");
-                    return "";
-                }
-            }
+            MaPhieu = phieuDV.MaPhieu;
+            SoLuong = 1;
+            MaLoaiDV = dichVu.MaLoaiDV;
+            TenLoaiDV = dichVu.TenLoaiDV;
         }
 
-        public string NgayBatDauCungCapDV
+        public void UpdateTongTienChiTiet()
         {
-            //Chưa implement. Hình như trong dataaccess chưa có get ngày bắt đầu cung cấp DV ?
-            get
-            {
-                return "";
-            }
+            LoaiDichVuModel dichVu = DataAccess.LoadLoaiDichVuByMaLDV(MaLoaiDV);
+            if (dichVu == null)
+                return;
+            ThanhTien = (DonGiaDV + dichVu.ChiPhiRieng) * SoLuong;
+            ConLai = ThanhTien - TraTruoc;
         }
-
-        
 
         public override bool Equals(object obj)
         {
             if (obj is ChiTietDichVuModel)
             {
+                var castObj = obj as ChiTietDichVuModel;
                 //Two service details only match if and only if they both have the same MaPhieu and MaLoaiDV.
-                return ((maPhieu.Equals(((ChiTietDichVuModel)obj).maPhieu)) && (maLoaiDV.Equals(((ChiTietDichVuModel)obj).maLoaiDV)));
+                return MaPhieu == castObj.MaPhieu && MaLoaiDV == castObj.MaLoaiDV;
             }
             return false;
         }

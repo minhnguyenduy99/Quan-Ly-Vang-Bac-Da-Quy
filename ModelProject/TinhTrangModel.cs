@@ -12,6 +12,7 @@ namespace ModelProject
         private long ? maTinhTrang;
         private string tenTinhTrang;
 
+        #region Main properties
         public long ? MaTinhTrang
         {
             get => maTinhTrang;
@@ -22,6 +23,7 @@ namespace ModelProject
             get => tenTinhTrang;
             set => SetProperty(ref tenTinhTrang, value);
         }
+        #endregion
 
         public override bool Equals(object obj)
         {
@@ -29,7 +31,7 @@ namespace ModelProject
             {
                 TinhTrangModel secondObj = (TinhTrangModel)obj;
                 //Two status only match if and only if they both have the same maTinhTrang.
-                return (maTinhTrang.Equals(secondObj.maTinhTrang));
+                return MaTinhTrang == secondObj.MaTinhTrang;
             }
             return false;
         }

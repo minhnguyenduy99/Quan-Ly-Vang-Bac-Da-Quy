@@ -10,36 +10,25 @@ namespace ModelProject
     public class PhieuDichVuModel : BaseSubmitableModel
     {
         private long ? maPhieu;
-        private string soPhieu;
         private string ngayLap;
         private long maKH;
-        private long tongTien;
-        private long tongTienTraTruoc;
-        private int tinhTrang;
-        private long maNV;
+        private long thanhTien;
+        private long traTruoc;
+        private long conLai;
+        private long? maTinhTrang;
         private string ghiChu;
 
-        public long MaNV
-        {
-            get => maNV;
-            set => SetProperty(ref maNV, value);
-        }
+        #region Main properties
 
         public string GhiChu
         {
             get => ghiChu;
             set => SetProperty(ref ghiChu, value);
         }
-
-        public long ? MaPhieu
+        public long? MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
-        }
-        public string SoPhieu
-        {
-            get => soPhieu;
-            set => SetProperty(ref soPhieu, value);
         }
         public string NgayLap
         {
@@ -51,21 +40,33 @@ namespace ModelProject
             get => maKH;
             set => SetProperty(ref maKH, value);
         }
-        public long TongTien
+        public long ThanhTien
         {
-            get => tongTien;
-            set => SetProperty(ref tongTien, value);
+            get => thanhTien;
+            set => SetProperty(ref thanhTien, value);
         }
-        public long TongTienTraTruoc
+        public long TraTruoc
         {
-            get => tongTienTraTruoc;
-            set => SetProperty(ref tongTienTraTruoc, value);
+            get => traTruoc;
+            set
+            {
+                if (value < 0 || value > ThanhTien)
+                    throw new Exception("Số tiền trả trước không hợp lệ");
+                SetProperty(ref traTruoc, value);
+                ConLai = ThanhTien - TraTruoc;
+            }
         }
-        public int TinhTrang
+        public long ConLai
         {
-            get => tinhTrang;
-            set => SetProperty(ref tinhTrang, value);
+            get => conLai;
+            private set => SetProperty(ref conLai, value);
         }
+        public long? MaTinhTrang
+        {
+            get => maTinhTrang;
+            private set => SetProperty(ref maTinhTrang, value);
+        }
+        #endregion
 
         public override bool Equals(object obj)
         {
@@ -73,7 +74,7 @@ namespace ModelProject
             {
                 PhieuDichVuModel secondObj = (PhieuDichVuModel)obj;
                 //Two service receipt only match if and only if they both have the same maPhieu.
-                return (maPhieu.Equals(secondObj.maPhieu));
+                return MaPhieu == secondObj.MaPhieu;
             }
             return false;
         }

@@ -16,10 +16,15 @@ namespace ModelProject
         private long? maKhuVuc;
         private string email;
 
+        #region Main properties
         public long? MaKhuVuc
         {
             get => maKhuVuc;
-            set => SetProperty(ref maKhuVuc, value);
+            set
+            {
+                SetProperty(ref maKhuVuc, value);
+                KhuVuc = DataAccess.LoadKhuVucByMKV(MaKhuVuc);
+            }
         }
 
         public string Email
@@ -49,16 +54,13 @@ namespace ModelProject
             get => dienThoai;
             set => SetProperty(ref dienThoai, value);
         }
+        #endregion
 
         #region Addition Properties
         public KhuVucModel KhuVuc
         {
-            get
-            {
-                if (MaKhuVuc == null)
-                    return null;
-                return DataAccess.LoadKhuVucByMKV(MaKhuVuc);
-            }
+            get => GetPropertyValue<KhuVucModel>();
+            private set => SetProperty(value);
         }
         #endregion
 
@@ -68,7 +70,7 @@ namespace ModelProject
             {
                 NhaCungCapModel secondObj = (NhaCungCapModel)obj;
                 //Two suppliers only match if and only if they both have the same maNCC.
-                return (maNCC.Equals(secondObj.maNCC));
+                return MaNCC == secondObj.MaNCC;
             }
             return false;
         }
@@ -76,7 +78,7 @@ namespace ModelProject
         #region ACCESS_DB_REGION
         protected override void Add()
         {
-            maNCC = DataAccess.SaveNhaCungCap(this);
+            MaNCC = DataAccess.SaveNhaCungCap(this);
         }
 
         protected override void Update()

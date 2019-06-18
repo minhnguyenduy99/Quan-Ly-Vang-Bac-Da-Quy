@@ -11,138 +11,24 @@ namespace ModelProject
 {
     public class ChiTietBanModel : BaseSubmitableModel
     {
-        private long maPhieuMuaHang;
-        private long maSP;
-
-        private double chietKhau;
-       
-        //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
-        private string tenSP;
-        private string loaiSP;
-        private string donViTinh;
-        private double donGiaBanRa;
-        private double phanTramLoiNhuan;
-
+        private long? maPhieu;
+        private long? maSP;    
         private int soLuong;
         private long thanhTien;
-        private long donGiaMuaVao;
         
-        private long thue;
 
-        //Biến dùng để xác định xem các dữ liệu ReadOnly đã được load từ CSDL chưa.
-        private bool isUpdated = false;
-
-        //Constructor tự động tạo 1 chi tiết bán từ object sản phẩm và object hoá đơn.
-        public ChiTietBanModel(PhieuBanModel _hoaDon, SanPhamModel _sanPham, int _soLuong)
+        #region Main properties
+        public long? MaPhieu
         {
-            if (_hoaDon.MaPhieu == null)
-            {
-                Console.WriteLine("MaPhieu hoa don null");
-                return;
-            }
-            maPhieuMuaHang = (long)_hoaDon.MaPhieu;
-            maSP = (long)_sanPham.MaSP;
-            soLuong = _soLuong;
-            donGiaMuaVao = _sanPham.DonGiaMuaVao;
-
-            LoaiSanPhamModel _loaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(_sanPham.MaLoaiSP);
-            tenSP = _sanPham.TenSP;
-            loaiSP = _loaiSP.TenLoaiSP;
-            phanTramLoiNhuan = _loaiSP.PhanTramLoiNhuan;
-
-            DonViTinhModel dvtModel = DataAccess.LoadDonViTinhByMADVT(_loaiSP.MaDVT);
-            donViTinh = dvtModel.TenDVT;
-
-            ThanhTien = _sanPham.DonGiaMuaVao * SoLuong;
+            get => maPhieu;
+            private set => SetProperty(ref maPhieu, value);
         }
-
-        public long MaPhieuMuaHang
-        {
-            get => maPhieuMuaHang;
-            set => SetProperty(ref maPhieuMuaHang, value);
-        }
-        public long MaSP
+        public long? MaSP
         {
             get => maSP;
-            set => SetProperty(ref maSP, value);
-        }
-        public double PhanTramLoiNhuan
-        {
-            get
+            private set
             {
-                if (phanTramLoiNhuan >= 0)
-                    return phanTramLoiNhuan;
-                else if (maSP != null && maSP > 0)
-                {
-                    SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
-                    LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
-                    phanTramLoiNhuan = productType.PhanTramLoiNhuan;
-                    return phanTramLoiNhuan;
-                }
-                else
-                {
-                    Console.WriteLine("Please set masp before retrieve the phanTramLoiNhuan value !");
-                    return -1;
-                }
-            }
-        }
-        public string TenSP
-        {
-            get
-            {
-                if (tenSP != null && tenSP.Length > 0)
-                    return tenSP;
-                else if (maSP != null && maSP > 0)
-                {
-                    SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
-                    tenSP = product.TenSP;
-                    return tenSP;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maSP before get name. Otherwise, will always return null");
-                    return "";
-                }
-            }
-        }
-        public string LoaiSP
-        {
-            get
-            {
-                if (loaiSP != null && loaiSP.Length > 0)
-                    return loaiSP;
-                else if (maSP != null && maSP > 0)
-                {
-                    SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
-                    LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
-                    loaiSP = productType.TenLoaiSP;
-                    return loaiSP;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maSP before get LoaiSanPham. Otherwise, will always return null");
-                    return "";
-                }
-            }
-        }
-        public string DonViTinh
-        {
-            get
-            {
-                if (donViTinh != null && donViTinh.Length > 0)
-                    return donViTinh;
-                else if (maSP != null && maSP > 0)
-                {
-                    SanPhamModel product = DataAccess.LoadSPByMaSP(maSP);
-                    LoaiSanPhamModel productType = DataAccess.LoadLoaiSanPhamByMaLSP(product.MaLoaiSP);
-                    donViTinh = productType.TenLoaiSP;
-                    return donViTinh;
-                }
-                else
-                {
-                    Console.WriteLine("Please set maSP before get DonViTinh. Otherwise, will always return null");
-                    return "";
-                }
+                SetProperty(ref maSP, value);
             }
         }
         public int SoLuong
@@ -154,19 +40,46 @@ namespace ModelProject
                 OnSoLuongThayDoi();
             }
         }
-
         public long ThanhTien
         {
             get => thanhTien;
-            private set => SetProperty(ref thanhTien, value);
+            set => SetProperty(ref thanhTien, value);
         }
+        #endregion
 
 
+        #region Additional properties
         public long DonGiaMuaVao
         {
-            get => donGiaMuaVao;
-            set => SetProperty(ref donGiaMuaVao, value);
+            get => GetPropertyValue<long>();
+            private set
+            {
+                SetProperty(value);
+            }
         }
+        public string TenSP
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+
+        public string TenLoaiSP
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+
+        public string TenDVT
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+        public double PhanTramLoiNhuan
+        {
+            get => GetPropertyValue<double>();
+            private set => SetProperty(value);
+        }
+        #endregion
 
 
         #region Converts from normal type to money format with comma separation
@@ -180,12 +93,31 @@ namespace ModelProject
         }
         #endregion
 
+        // Tạo 1 chi tiết hóa đơn mới
+        public ChiTietBanModel(PhieuBanModel hoaDon, SanPhamModel sanPham)
+        {
+            int soLuongSanPham = DataAccess.LoadSPByMaSP(sanPham.MaSP).SoLuong;
+
+            MaPhieu = hoaDon.MaPhieu;
+            MaSP = sanPham.MaSP;
+            SoLuong = 1;
+
+            // load additional data
+            var loaiSanPham = DataAccess.LoadLoaiSanPhamByMaLSP(sanPham.MaLoaiSP);
+            PhanTramLoiNhuan = loaiSanPham.PhanTramLoiNhuan;
+            TenSP = sanPham.TenSP;
+            TenLoaiSP = loaiSanPham.TenLoaiSP;
+            TenDVT = DataAccess.LoadDonViTinhByMADVT(loaiSanPham.MaDVT).TenDVT;
+            DonGiaMuaVao = sanPham.DonGiaMuaVao;
+        }
+
         public override bool Equals(object obj)
         {
-            if (obj is ChiTietBanModel)
+            if (obj != null && obj is ChiTietBanModel)
             {
+                var castChiTietBan = obj as ChiTietBanModel;
                 //Two recept details only match if and only if they both have the same MaPhieuMuaHang and MaSP.
-                return ((maPhieuMuaHang.Equals(((ChiTietBanModel)obj).maPhieuMuaHang)) && (maSP.Equals(((ChiTietBanModel)obj).maSP)));
+                return MaPhieu == castChiTietBan.MaPhieu && MaSP == castChiTietBan.MaSP;
             }
             return false;
         }
@@ -194,10 +126,30 @@ namespace ModelProject
         
         protected virtual void OnSoLuongThayDoi()
         {
-            ThanhTien = (long)DonGiaMuaVao * SoLuong;
+            int soLuongSanPham = DataAccess.LoadSPByMaSP(MaSP).SoLuong;
+
+            // số lượng sản phẩm đã chọn trong chi tiết lớn hơn số lượng sản phẩm hiện có
+            if (SoLuong > soLuongSanPham)
+            {
+                OnSoLuongSanPhamKhongDu();
+                return;
+            }
+
+            UpdateTongTienChiTiet();
+
             SoLuongThayDoi?.Invoke(this, EventArgs.Empty);
         }
 
+        protected virtual void UpdateTongTienChiTiet()
+        {
+            ThanhTien = (long)(100 + PhanTramLoiNhuan) / 100 * SoLuong * DonGiaMuaVao;
+        }
+
+        public event EventHandler SoLuongSanPhamKhongDu;
+        protected virtual void OnSoLuongSanPhamKhongDu()
+        {
+            SoLuongSanPhamKhongDu?.Invoke(this, EventArgs.Empty);
+        }
 
         #region Access Database methods
         protected override void Add()

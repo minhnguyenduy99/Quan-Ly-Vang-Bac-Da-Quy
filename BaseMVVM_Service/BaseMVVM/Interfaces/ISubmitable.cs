@@ -23,6 +23,7 @@ namespace BaseMVVM_Service.BaseMVVM.Interfaces
     /// <typeparam name="T">Data type</typeparam>
     public interface ISubmitable
     { 
+        bool IsDataValid { get; }
         /// <summary>
         /// Submit data to database
         /// </summary>

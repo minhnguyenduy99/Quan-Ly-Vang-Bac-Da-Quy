@@ -13,7 +13,7 @@ namespace BaseMVVM_Service.BaseMVVM
     /// </summary>
     public abstract class BaseSubmitableModel : BaseModel, ISubmitable
     {
-        public bool IsDataValid { get; private set; }
+        public bool IsDataValid { get; protected set; }
 
         public BaseSubmitableModel()
         {

@@ -12,6 +12,7 @@ namespace ModelProject
         private long ? maKhuVuc;
         private string tenKhuVuc;
 
+        #region Main properties
         public long ? MaKhuVuc
         {
             get => maKhuVuc;
@@ -23,13 +24,15 @@ namespace ModelProject
             set => SetProperty(ref tenKhuVuc, value);
         }
 
+        #endregion
+
         public override bool Equals(object obj)
         {
             if (obj is KhuVucModel)
             {
                 KhuVucModel secondObj = (KhuVucModel)obj;
                 //Two location only match if and only if they both have the same maKhuVuc.
-                return (maKhuVuc.Equals(secondObj.maKhuVuc));
+                return MaKhuVuc == secondObj.MaKhuVuc;
             }
             return false;
         }

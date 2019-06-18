@@ -9,16 +9,14 @@ namespace ModelProject
 {
     public class ChiTietMuaModel : BaseSubmitableModel
     {
-        private long maPhieuMuaHang;
+        private long? maPhieuMuaHang;
         private long? maSP;
-
-        //Đây là những thuộc tính ReadOnly. Sẽ tự load giá trị từ database với mã phiếu cho trước.
-        private string tenSP;
-
         private int soLuong;
         private long donGia;
+        private long thanhTien;
 
-        public long MaPhieuMuaHang
+        #region Main properties
+        public long? MaPhieuMuaHang
         {
             get => maPhieuMuaHang;
             set => SetProperty(ref maPhieuMuaHang, value);
@@ -47,8 +45,22 @@ namespace ModelProject
         public long DonGia
         {
             get => donGia;
-            set => SetProperty(ref donGia, value);
+            set
+            {
+                if (value < 0)
+                    IsDataValid = false;
+                else
+                    IsDataValid = true;
+                SetProperty(ref donGia, value);
+                
+            }
         }
+        public long ThanhTien
+        {
+            get => thanhTien;
+            private set => SetProperty(ref thanhTien, value);
+        }
+        #endregion
 
         #region Additional Properties
         public string TenSP
@@ -70,7 +82,13 @@ namespace ModelProject
                 SetProperty(value);
             }
         }
+        public double LoiNhuan
+        {
+            get => GetPropertyValue<double>();
+            private set => SetProperty(value);
+        }
         #endregion
+
         public ChiTietMuaModel(long? maSP)
         {
             SanPhamModel sanPham = null;
@@ -86,6 +104,7 @@ namespace ModelProject
                 throw new Exception("Mã sản phẩm không chính xác");
             }
             this.TenLoaiSP = loaiSP.TenLoaiSP;
+            this.LoiNhuan = loaiSP.PhanTramLoiNhuan;
             this.MaSP = sanPham.MaSP;
             this.SoLuong = 1;          
         }
@@ -95,7 +114,7 @@ namespace ModelProject
             if (obj is ChiTietMuaModel)
             {
                 ChiTietMuaModel secondObj = (ChiTietMuaModel)obj;
-                return (maPhieuMuaHang.Equals(secondObj.maPhieuMuaHang)) && (maSP.Equals(secondObj.maSP));
+                return MaPhieuMuaHang == secondObj.MaPhieuMuaHang && MaSP == secondObj.MaSP;
             }
             return false;
         }

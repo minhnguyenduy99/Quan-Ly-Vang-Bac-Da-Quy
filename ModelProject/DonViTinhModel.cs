@@ -10,6 +10,7 @@ namespace ModelProject
         private long ? maDVT;
         private string tenDVT;
 
+        #region Main properties
         public long ? MaDVT
         {
             get => maDVT;
@@ -20,12 +21,16 @@ namespace ModelProject
             get => tenDVT;
             set => SetProperty(ref tenDVT, value);
         }
+
+        #endregion
+
+
         public override bool Equals(object obj)
         {
             if (obj is DonViTinhModel)
             {
                 //Two counting meter only match if and only if they both have the same maDVT.
-                return (maDVT.Equals(((DonViTinhModel)obj).maDVT));
+                return MaDVT == (obj as DonViTinhModel)?.MaDVT;
             }
             return false;
         }
