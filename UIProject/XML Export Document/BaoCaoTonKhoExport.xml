@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/5/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <fileVersion lastEdited="4" lowestEdited="4" rupBuild="4017"/>
+  <workbookPr dateCompatibility="false" vbName="ThisWorkbook" defaultThemeVersion="123820"/>
+  <bookViews>
+    <workbookView xWindow="120" yWindow="45" windowWidth="15135" windowHeight="7650" activeTab="4"/>
+  </bookViews>
+  <sheets>
+    <sheet name="Sheet1" sheetId="1" r:id="rId1"/>
+  </sheets>
+  <definedNames>
+    <definedName name="MyDefinedName">Sheet3!$A$1:$C$12</definedName>
+  </definedNames>
+  <calcPr calcId="122211" calcMode="autoNoTable" refMode="R1C1" iterate="1"    fullPrecision="0"/>
+  <customWorkbookViews>
+    <customWorkbookView name="CustomView1"       guid="{CE6681F1-E999-414D-8446-68A031534B57}" maximized="1" xWindow="1"       yWindow="1" windowWidth="1024" windowHeight="547" activeSheetId="1"/>
+  </customWorkbookViews>
+  <pivotCaches>
+    <pivotCache cacheId="0" r:id="rId8"/>
+  </pivotCaches>
+  <smartTagPr embed="1" show="noIndicator"/>
+  <smartTagTypes>
+    <smartTagType namespaceUri="urn:schemas-openxmlformats-org:office:smarttags"       name="date"/>
+  </smartTagTypes>
+  <webPublishing codePage="1252"/>
+</workbook>

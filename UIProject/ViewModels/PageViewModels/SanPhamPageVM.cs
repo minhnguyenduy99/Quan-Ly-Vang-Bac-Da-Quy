@@ -32,6 +32,9 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public EnumFilterViewModel<SanPhamModel> LocLoaiSanPhamVM { get; set; }
 
+        /// <summary>
+        /// View model của bộ lọc nhà cung cấp
+        /// </summary>
         public EnumFilterViewModel<SanPhamModel> LocNhaCungCapVM { get; set; }
 
 
@@ -53,7 +56,9 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ChinhSuaThongTinCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnChinhSuaThongTinCommandExecute);
+            get => new BaseCommand<IWindowExtension>(
+                OnChinhSuaThongTinCommandExecute,
+                window => DanhSachSanPhamVM?.SelectedItem != null);
         }
 
         /// <summary>
@@ -61,13 +66,14 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand XoaSanPhamCommand
         {
-            get => new BaseCommand<IWindow>(OnXoaSanPhamCommandExecute);
+            get => new BaseCommand<IWindow>(
+                OnXoaSanPhamCommandExecute,
+                window => DanhSachSanPhamVM?.SelectedItem != null);
         }
 
 
         public SanPhamPageVM() : base() { }
         public SanPhamPageVM(INavigator navigator) : base(navigator) { }
-
 
         private void SetUpDanhSachSanPhamVM()
         {
@@ -83,6 +89,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(null);
             TimKiemSanPhamVM.TextChanged += TimKiemSanPhamVM_TextChanged;
 
+            // local function
             void TimKiemSanPhamVM_TextChanged(object sender, TextValueChangedEventArgs e)
             {
                 if (e.NewValue == null || e.NewValue.Equals(e.OldValue))
@@ -96,7 +103,7 @@ namespace UIProject.ViewModels.PageViewModels
         {
             LocLoaiSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
                 LocSanPhamTheoLoaiSanPham,
-                DataAccess.LoadLoaiSanPham());
+                dsLoaiSanPham);
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocLoaiSanPhamVM.IsApplyNonFilterItem = true;
@@ -112,8 +119,8 @@ namespace UIProject.ViewModels.PageViewModels
                     DanhSachSanPhamVM.Filter();
                 }
             }
-        }
 
+        }
 
         private void SetUpLocNhaCungCapVM()
         {
@@ -142,7 +149,6 @@ namespace UIProject.ViewModels.PageViewModels
 
             return sanPham.Model.TenSP.ToLower().StartsWith(TimKiemSanPhamVM.Text.ToLower());
         }
-
         private bool LocSanPhamTheoLoaiSanPham(ItemViewModel<SanPhamModel> sanPham)
         {
             var loaiSanPhamDaChon = LocLoaiSanPhamVM.Collection.SelectedItem as ItemViewModel<object>;
@@ -156,10 +162,9 @@ namespace UIProject.ViewModels.PageViewModels
                 return true;
             return sanPham.Model.MaLoaiSP == castLoaiSP.MaLoaiSP;
         }
-
         private bool LocSanPhamTheoNhaCungCap(ItemViewModel<SanPhamModel> sanPham)
         {
-            var nhaCCDaChon = LocLoaiSanPhamVM.Collection.SelectedItem as ItemViewModel<object>;
+            var nhaCCDaChon = LocNhaCungCapVM.Collection.SelectedItem as ItemViewModel<object>;
             if (nhaCCDaChon == null)
             {
                 return true;
@@ -169,7 +174,7 @@ namespace UIProject.ViewModels.PageViewModels
             // nhà cung cấp đã chọn là item "Chọn tất cả" vì mã null
             if (castNhaCC == null || castNhaCC.MaKhuVuc == null)
                 return true;
-            return sanPham.Model.MaLoaiSP == castNhaCC.MaKhuVuc;
+            return sanPham.Model?.MaNCC == castNhaCC?.MaNCC;
         }
 
         #endregion
@@ -178,6 +183,17 @@ namespace UIProject.ViewModels.PageViewModels
         #region Command execution
         private void OnXoaSanPhamCommandExecute(IWindow window)
         {
+            DialogWindowViewModel notifyDeleteWnd = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.YesNo,
+                YesText = "Có",
+                NoText = "Không",
+                MessageText = "Bạn muốn xóa sản phẩm này ?"
+            };
+
+            notifyDeleteWnd.ButtonPressed += NotifyDeleteWnd_ButtonPressed;
+            window.DataContext = notifyDeleteWnd;
+
             if (window.ShowDialog() == true)
             {
                 var deleteSanPhamItem = DanhSachSanPhamVM.SelectedItem as ItemViewModel<SanPhamModel>;
@@ -187,6 +203,17 @@ namespace UIProject.ViewModels.PageViewModels
 
                 // page reload
                 Reload();
+            }
+
+            // local functon
+            void NotifyDeleteWnd_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
+            {
+                if (e.DialogResult == DialogResult.Yes)
+                    window.DialogResult = true;
+                if (e.DialogResult == DialogResult.No)
+                    window.DialogResult = false;
+
+                window.Close();
             }
         }
 
@@ -202,19 +229,14 @@ namespace UIProject.ViewModels.PageViewModels
             EditWindowViewModel<SanPhamModel> chinhSuaThongTin
                 = new EditWindowViewModel<SanPhamModel>(sanPhamDaChon.Model);
 
-            // set up View model tìm kiếm nhà cung cấp
-            var timKiemNCCVM = new SearchTextBoxViewModel<NhaCungCapModel>(dsNhaCungCap);
-            timKiemNCCVM.SelectedValuePath = "Model.TenNCC";
-
             chinhSuaThongTin.AdditionData.Add(dsLoaiSanPham);
-            chinhSuaThongTin.Searchers.Add(timKiemNCCVM);
 
             window.DataContext = chinhSuaThongTin;
             window.Closing += (sender, e) => e.Cancel = true;
     
+            // Update thông tin sản phẩm thành công
             if (window.ShowDialog(-500, -200) == true)
             {
-                chinhSuaThongTin.Data.Submit(SubmitType.Update);
                 Reload();
             }
         }
@@ -241,8 +263,15 @@ namespace UIProject.ViewModels.PageViewModels
             RefreshResource();
 
             DanhSachSanPhamVM.Reload();
+            DanhSachSanPhamVM.RefreshItemsSource(dsSanPham);
+
             TimKiemSanPhamVM.Reload();
+
             LocLoaiSanPhamVM.Reload();
+            LocLoaiSanPhamVM.RefreshItemsSource(dsLoaiSanPham);
+
+            LocNhaCungCapVM.Reload();
+            LocNhaCungCapVM.RefreshItemsSource(dsNhaCungCap);
         }
 
 

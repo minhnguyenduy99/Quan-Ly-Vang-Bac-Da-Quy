@@ -10,6 +10,7 @@ using System.Windows.Input;
 using UIProject.Converters;
 using UIProject.Events;
 using UIProject.UIConnector;
+using UIProject.ViewModels.DataViewModels;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -23,6 +24,8 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ObservableCollectionViewModel<PhieuBanModel> DanhSachPhieuBanVM { get; set; }
 
+        public HoaDonViewModel HoaDonHienTai { get; private set; }
+
         public DateTime ThoiGianLapPhieu { get; set; }
 
         public ICommand BanHangCommand
@@ -33,12 +36,16 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ICommand ChinhSuaThongTinCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnChinhSuaThongTinCommandExecute);
+            get => new BaseCommand<IWindowExtension>(
+                OnChinhSuaThongTinCommandExecute,
+                window => DanhSachPhieuBanVM?.SelectedItem != null);
         }
 
         public ICommand XoaPhieuBanCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnXoaPhieuBanCommandExecute);
+            get => new BaseCommand<IWindowExtension>(
+                OnXoaPhieuBanCommandExecute,
+                window => DanhSachPhieuBanVM?.SelectedItem != null);
         }
 
 
@@ -47,22 +54,28 @@ namespace UIProject.ViewModels.PageViewModels
         {
         }
 
+        private void SetUpHoaDonVM()
+        {
+            HoaDonHienTai = new HoaDonViewModel();  
+        }
         private void SetUpDanhSachPhieuBanVM()
         {
             DanhSachPhieuBanVM = new ObservableCollectionViewModel<PhieuBanModel>(phieuBanSource);
+            DanhSachPhieuBanVM.Filters.Add(LocTheoMaDonHangCallBack);
+            DanhSachPhieuBanVM.Filters.Add(LocTheoThoiGianCallBack);
             DanhSachPhieuBanVM.SelectedItemChanged += DanhSachPhieuBanVM_SelectedItemChanged;
 
-            var tempFilters = DanhSachPhieuBanVM.Filters as List<Func<ItemViewModel<PhieuBanModel>, bool>>;
-            tempFilters.Add(LocTheoMaDonHangCallBack);
-            tempFilters.Add(LocTheoThoiGianCallBack);
-
-
-            // Local handler
             void DanhSachPhieuBanVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
-                
+                var phieuBanDaChonItem = e.SelectedItem as ItemViewModel<PhieuBanModel>;
+                if (phieuBanDaChonItem == null)
+                    return;
+
+                HoaDonHienTai.PhieuBan = phieuBanDaChonItem.Model;
+
             }
         }
+
 
 
         private void SetUpTimKiemPhieuBanVM()
@@ -70,6 +83,8 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemPhieuBanVM = new SearchTextBoxViewModel<PhieuBanModel>(phieuBanSource);
             TimKiemPhieuBanVM.TextChanged += TimKiemPhieuBanVM_TextChanged;
 
+
+            // local function
             void TimKiemPhieuBanVM_TextChanged(object sender, TextValueChangedEventArgs e)
             {
                 if (e.NewValue != e.OldValue)
@@ -128,7 +143,10 @@ namespace UIProject.ViewModels.PageViewModels
 
         protected override void ReloadComponentsInternal()
         {
+            phieuBanSource = DataAccess.LoadPhieuBan();
+
             TimKiemPhieuBanVM.Reload();
+            TimKiemPhieuBanVM.RefreshItemSource(phieuBanSource);
             DanhSachPhieuBanVM.Reload();
         }
         #endregion

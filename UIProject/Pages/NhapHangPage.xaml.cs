@@ -26,5 +26,17 @@ namespace UIProject.Pages
             ProductAddingDialogWindow productAddingWnd = new ProductAddingDialogWindow(btnAddProduct);
             btnAddProduct.CommandParameter = productAddingWnd;
         }
+
+        private void BtnThemPhieuMua_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DialogPopupWindow notifyWnd = new DialogPopupWindow();
+            btnThemPhieuMua.CommandParameter = notifyWnd;
+        }
+
+        private void BtnHuyPhieu_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DialogPopupWindow notifyWnd = new DialogPopupWindow();
+            btnHuyPhieu.CommandParameter = notifyWnd;
+        }
     }
 }

@@ -56,6 +56,8 @@
                         <customControls:SearchTextBox Margin="0"
                                                       DockPanel.Dock="Left"
                                                       Style="{StaticResource FieldSearchTextBoxStyle}"
+                                                      DataContext="{Binding TImKiemDonHangVM}"
+                                                      Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       Hint="Tìm kiếm đơn hàng"
                                                       HorizontalAlignment="Left"
                                                       IconSource="/Images/search_icon.png"
@@ -126,7 +128,7 @@
                                        Content="Ngày lập"/>
                                 <Label Grid.Row="0" Grid.Column="1"
                                        Style="{StaticResource ValueLabelStyle}"
-                                       Content="{Binding Model.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                       Content="{Binding Model.NgayLap, Mode=OneWay}"/>
                             </Grid>
                             <Grid Grid.Row="0" Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -141,12 +143,12 @@
                                            Content="Khách hàng"/>
                                 <Label Grid.Row="0" Grid.Column="1"
                                            Style="{StaticResource ValueLabelStyle}"
-                                           Content="{Binding Model.TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                           Content="{Binding Model.TenKH, Mode=OneWay}"/>
                                 <Label Grid.Row="1" Grid.Column="0"
                                            Content="Nhân viên"/>
                                 <Label Grid.Row="1" Grid.Column="1"
                                            Style="{StaticResource ValueLabelStyle}"
-                                           Content="{Binding Model.MaNV, UpdateSourceTrigger=PropertyChanged}"/>
+                                           Content="{Binding Model.MaNV, Mode=OneWay}"/>
                             </Grid>
                         </Grid>
                         <Separator Margin="0 10"

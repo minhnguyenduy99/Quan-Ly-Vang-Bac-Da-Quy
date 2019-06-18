@@ -55,14 +55,16 @@
                            Margin="10 30 10 10"
                            BorderThickness="3"
                            BorderBrush="Gray"/>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Panel.ZIndex="99">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical"
-                                Margin="10">
-                        <Grid Panel.ZIndex="99">
+                                Margin="10"
+                                Panel.ZIndex="99">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -103,21 +105,22 @@
                                      IsEnabled="False"
                                      Text="{Binding SelectedItem, ElementName=CbbLoaiSanPham, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource donViTinhConverter}}"/>
                             <customControls:SearchTextBox Grid.Row="3" Grid.Column="1"
-                                                            DataContext="{Binding Searchers[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            Style="{StaticResource NoFieldNoIconSearchTextBoxStyle}"
-                                                            HorizontalAlignment="Stretch"
-                                                            Panel.ZIndex="99"
-                                                            ListBoxMaxHeight="150"
-                                                            SearchBoxItemTemplate="{StaticResource SearchNhaCCTemplate}"
-                                                            SearchBoxItemSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            SelectedValue="{Binding Model.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            SearchListBoxBackground="WhiteSmoke"
-                                                            Margin="10"
-                                                            FontWeight="Normal"
-                                                            FontSize="13"
-                                                            IconHeight="17"
-                                                            Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            Hint="Tìm kiếm nhà cung cấp"/>
+                                                        DataContext="{Binding Searchers[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Style="{StaticResource NoFieldNoIconSearchTextBoxStyle}"
+                                                        HorizontalAlignment="Stretch"
+                                                        Panel.ZIndex="99"
+                                                        ListBoxMaxHeight="150"
+                                                        SearchBoxItemTemplate="{StaticResource SearchNhaCCTemplate}"
+                                                        SearchBoxItemSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        SelectedValue="{Binding Model.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        SearchListBoxBackground="WhiteSmoke"                                           
+                                                        Margin="10"
+                                                        FontWeight="Normal"
+                                                        FontSize="13"
+                                                        IconHeight="17"
+                                                        Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Hint="Tìm kiếm nhà cung cấp">
+                            </customControls:SearchTextBox>
                             
                         </Grid>
                     </StackPanel>
@@ -129,12 +132,15 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
+                            Panel.ZIndex="1"
                             Margin="0 20"
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"
+                            IsEnabled="{Binding IsDataValid, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             Command="{Binding SubmitCommand}"
                             CommandParameter="{Binding ElementName=ProductAddingWnd}"/>
                     <Button Grid.Column="1"
+                            Panel.ZIndex="1"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"

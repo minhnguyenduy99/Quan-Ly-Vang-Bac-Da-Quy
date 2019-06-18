@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -32,9 +33,32 @@ namespace UIProject.Pages
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnChinhSuaThongTinLienHe_Click(object sender, RoutedEventArgs e)
+        {
+            AddressEditDialogWindow addressEditWnd = new AddressEditDialogWindow(this.btnChinhSuaThongTinLienHe);
+            btnChinhSuaThongTinLienHe.CommandParameter = addressEditWnd;
+        }
+
+        private void BtnXemDanhSachDV_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnThemDichVu_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceAddingDialogWindow serviceAddWnd = new ServiceAddingDialogWindow(btnThemDichVu);
+            btnThemDichVu.CommandParameter = serviceAddWnd;
+        }
+
+        private void BtnSubmitPhieuDichVu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnThemKhachHang_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerAddingDialogWindow customerAddWnd = new CustomerAddingDialogWindow(btnThemKhachHang);
+            btnThemKhachHang.CommandParameter = customerAddWnd;
         }
     }
 }

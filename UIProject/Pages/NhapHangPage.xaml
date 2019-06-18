@@ -30,16 +30,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="124*"/>
+            <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="566"/>
-            <ColumnDefinition Width="269"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.ColumnSpan="3"
+        <Grid Grid.Row="0" Grid.ColumnSpan="2"
               Panel.ZIndex="99">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -82,14 +80,14 @@
             </StackPanel>
 
         </Grid>
-        <Separator Grid.Row="1" Grid.ColumnSpan="3"
+        <Separator Grid.Row="1" Grid.ColumnSpan="2"
                    Panel.ZIndex="1"
                    Margin="10"/>
         <materialDesign:Card Grid.Row="2" Grid.Column="0"
                              Panel.ZIndex="1"
                              Margin="10 10 5 10"
-                             Style="{StaticResource UIProjectMaterialDesignCardStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <DataGrid Grid.Row="2" Grid.Column="0"                     
+                             Style="{StaticResource UIProjectMaterialDesignCardStyle}">
+            <DataGrid                    
                       DataContext="{Binding NhapHangVM.DSChiTietMua}"
                       x:Name="ProductView"
                       ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}"  
@@ -115,7 +113,7 @@
                                         Binding="{Binding Model.TenSP}"
                                         Header="Tên sản phẩm"
                                         TextBlock.TextAlignment="Right"
-                                        IsReadOnly="False"
+                                        IsReadOnly="true"
                                         CanUserSort="False"
                                         HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                         CellStyle="{StaticResource CenteredDataGridCell}"/>
@@ -130,24 +128,24 @@
                     <DataGridTextColumn Width="80"
                                         TextBlock.TextAlignment="Center"
                                         IsReadOnly="False"
-                                        Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                         Header="Số lượng"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"
                                         EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                     <DataGridTextColumn Width="150"
                                         CanUserSort="False"
-                                        Binding="{Binding Model.LoiNhuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
+                                        Binding="{Binding Model.LoiNhuan}"
                                         Header="Lợi nhuận (%)"                                           
-                                        IsReadOnly="False"
+                                        IsReadOnly="true"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"/>
                     <DataGridTextColumn Width="150"
-                                        Binding="{Binding Model.DonGia}"
+                                        Binding="{Binding Model.DonGia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
                                         CanUserSort="False"
                                         Header="Đơn giá mua vào"
                                         TextBlock.TextAlignment="Center"
-                                        IsReadOnly="true"
+                                        IsReadOnly="false"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"
                                         EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
@@ -179,11 +177,11 @@
             </DataGrid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="2" Grid.Column="2"
+        <materialDesign:Card Grid.Row="2" Grid.Column="1"
                              Panel.ZIndex="1"
                              Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                              Margin="5 10 10 10"
-                             Padding="7" Grid.RowSpan="2">
+                             Padding="7">
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -204,6 +202,9 @@
                             Panel.ZIndex="99">
                     <Label Style="{StaticResource CustomOrderInfoLabelStyle}"
                             Content="Nhà cung cấp"/>
+                    <Label Style="{StaticResource SmallDefinedLabelStyle}"
+                           Foreground="Red"
+                           Content="Vui lòng chọn nhà cung cấp"/>
                     <customControls:SearchTextBox Margin="5 0 0 0"
                                                   Style="{StaticResource NoFieldNoIconSearchTextBoxStyle}"
                                                   Width="auto"
@@ -226,19 +227,19 @@
                                 Name="LocaleDatePicker"
                                 materialDesign:HintAssist.Hint="Locale Date"
                                 Style="{StaticResource UIProjectDatePickerStyle}"
-                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource dateConverter}}">
+                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLapDateTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                     </DatePicker>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Grid.Row="4" Grid.ColumnSpan="2"
+        <materialDesign:Card Grid.Row="3"
                              Margin="10 5 5 10"
                              Style="{StaticResource UIProjectMaterialDesignCardStyle}">
-            <Grid Grid.Row="3"
+            <Grid 
                   Margin="10 5 5 10" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0"
                        VerticalAlignment="Stretch">
@@ -260,50 +261,47 @@
                              Height="auto"
                              VerticalAlignment="Stretch"
                              Style="{StaticResource CustomTextBoxStyle}"
-                             Text="{Binding NhapHangVM.GhiChu, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding NhapHangVM.PhieuMua.GhiChu, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
-                <Grid Grid.Column="1">
-                    <Grid HorizontalAlignment="Right"
-                          VerticalAlignment="Top"
-                          Margin="10">
-                        <Grid.Resources>
-                            <Style x:Key="CustomDefinedLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
-                                <Setter Property="HorizontalAlignment" Value="Right"/>
-                                <Setter Property="Margin" Value="0 0 20 10"/>
-                            </Style>
-                            <Style x:Key="ValueLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
-                                <Setter Property="HorizontalAlignment" Value="Left"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                                <Setter Property="Foreground" Value="{StaticResource AirForceBlue}"/>
-                                <Setter Property="Margin" Value="0 0 20 10"/>
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0"
-                               Style="{StaticResource CustomDefinedLabelStyle}"
-                               Content="Số lượng"/>
-                        <Label Grid.Row="1" Grid.Column="0"
+                <Grid Grid.Column="1"
+                      Margin="10">
+                    <Grid.Resources>
+                        <Style x:Key="CustomDefinedLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="0 0 20 10"/>
+                        </Style>
+                        <Style x:Key="ValueLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="{StaticResource AirForceBlue}"/>
+                            <Setter Property="Margin" Value="0 0 20 10"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                            Style="{StaticResource CustomDefinedLabelStyle}"
+                            Content="Số lượng"/>
+                    <Label Grid.Row="1" Grid.Column="0"
                                Style="{StaticResource CustomDefinedLabelStyle}"
                                Content="Tiền hàng"/>
-                        <Label Grid.Row="0" Grid.Column="1"
-                               Style="{StaticResource ValueLabelStyle}"
-                               Content="{Binding NhapHangVM.TongSoLuong, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Grid.Row="1" Grid.Column="1"
-                               Style="{StaticResource ValueLabelStyle}"
-                               Content="{Binding NhapHangVM.TongTien, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"/>
-                    </Grid>
+                    <Label Grid.Row="0" Grid.Column="1"
+                            Style="{StaticResource ValueLabelStyle}"
+                            Content="{Binding NhapHangVM.TongSoLuong, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="1" Grid.Column="1"
+                            Style="{StaticResource ValueLabelStyle}"
+                            Content="{Binding NhapHangVM.TongTien, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"/>
                 </Grid>
             </Grid>
         </materialDesign:Card>
 
-        <Grid Grid.Row="4" Grid.Column="2">
+        <Grid Grid.Row="3" Grid.Column="1">
             <materialDesign:Card VerticalContentAlignment="Center"
                                  Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                  Margin="5 5 10 10">
@@ -311,9 +309,13 @@
                             Orientation="Vertical"
                             VerticalAlignment="Stretch"
                             Background="White">
-                    <Button 
+                    <Button x:Name="btnThemPhieuMua"
+                            Command="{Binding SubmitPhieuNhapHangCommand}"
+                            Click="BtnThemPhieuMua_Click"
                             Content="Lưu"/>
-                    <Button 
+                    <Button x:Name="btnHuyPhieu"
+                            Command="{Binding HuyPhieuNhapHangCommand}"
+                            Click="BtnHuyPhieu_Click"
                             Content="Hủy"/>
                 </StackPanel>
             </materialDesign:Card>

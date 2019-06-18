@@ -20,8 +20,14 @@ namespace UIProject.ViewModels.PageViewModels
 {
     public class BanHangPageVM : BasePageViewModel
     {
-        private ICommand thanhToanCommand;
-        private List<ChiTietBanModel> dsChiTietBan;
+        #region Private fields and resources
+        private ICommand thanhToanCmd;
+        private ICommand themKhachHangCmd;
+
+        private IEnumerable<SanPhamModel> dsSanPham;
+        private IEnumerable<KhachHangModel> dsKhachHang;
+        private IEnumerable<LoaiSanPhamModel> dsLoaiSanPham;
+        #endregion
 
         /// <summary>
         /// Thông tin khách hàng 
@@ -63,8 +69,8 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThanhToanCommand
         {
-            get => thanhToanCommand ?? new BaseCommand<IWindow>(OnThanhToanCommandExecute);
-            set => thanhToanCommand = value;
+            get => thanhToanCmd ?? new BaseCommand<IWindow>(OnThanhToanCommandExecute);
+            set => thanhToanCmd = value;
         }
 
         /// <summary>
@@ -72,7 +78,8 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ThemKhachHangCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnThemKhachHangCommandExecute);
+            get => themKhachHangCmd ??  new BaseCommand<IWindowExtension>(OnThemKhachHangCommandExecute);
+            set => themKhachHangCmd = value;
         }
 
         public BanHangPageVM() : base() { }
@@ -85,25 +92,6 @@ namespace UIProject.ViewModels.PageViewModels
             remove { HoaDonVM.SanPhamDaTonTai -= value; }
         }
 
-        #region Setup components
-        protected override void LoadComponentsInternal()
-        {
-            SetUpBolocTimKiemSanPham();
-            SetUpBoLocTimKiemKhachHang();
-            SetUpHoaDonVM();
-        }
-
-        protected override void ReloadComponentsInternal()
-        {
-            TimKiemKhachHangVM.Reload();
-            TimKiemSanPhamVM.Reload();
-            HoaDonVM.DanhSachChiTietBan.Reload();        
-        }
-        #endregion
-
-
-
-
         private void SetUpHoaDonVM()
         {
             HoaDonVM = new HoaDonViewModel();
@@ -111,82 +99,73 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void SetUpBolocTimKiemSanPham()
         {
-            var sanPhamSource = DataAccess.LoadSanPham();
-
-            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(sanPhamSource);
-
-            LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
-                LocLoaiSanPhamCallBack,
-                new ObservableCollection<LoaiSanPhamModel>(DataAccess.LoadLoaiSanPham()));
-
-            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = null };
-
+            TimKiemSanPhamVM = new SearchTextBoxViewModel<SanPhamModel>(dsSanPham);
+            
             TimKiemSanPhamVM.Filters.Add(LocTenSanPhamCallBack);
             TimKiemSanPhamVM.Filters.Add(LocSanPhamVM.FilterCallBack);
             
             TimKiemSanPhamVM.SelectedItemChanged += TimKiemSanPhamVM_SelectionChanged;
-        }
 
+            // local function
+            void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
+                if (sanPhamDaChon != null)
+                {
+                    var chiTietBan = new ChiTietBanModel(HoaDonVM.PhieuBan, sanPhamDaChon.Model);
+                    HoaDonVM.ThemChiTietBan(chiTietBan);
+                }
+            }
+            bool LocTenSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
+            {
+                return sanPham.Model.TenSP.ToLower().Contains(TimKiemSanPhamVM.Text.ToLower());
+            }
+        }
+        private void SetUpBoLocLoaiSanPham()
+        {
+            LocSanPhamVM = new EnumFilterViewModel<SanPhamModel>(
+                LocLoaiSanPhamCallBack,
+                dsLoaiSanPham);
+
+            LocSanPhamVM.NonApplyFilterItem.Model = new LoaiSanPhamModel() { TenLoaiSP = "Lọc tất cả", MaLoaiSP = null };
+
+            // local function
+            bool LocLoaiSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
+            {
+                var loaiSanPhamDaChon = LocSanPhamVM.Collection.SelectedItem as ItemViewModel<object>;
+                if (loaiSanPhamDaChon == null)
+                {
+                    return true;
+                }
+                var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
+
+                if (castLoaiSanPhamDaChon.MaLoaiSP == null)
+                    return true;
+                return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
+            }
+        }
         private void SetUpBoLocTimKiemKhachHang()
         {
-            var khachHangSource = DataAccess.LoadKhachHang();
-            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(khachHangSource);
-            TimKiemKhachHangVM.Filters.Add(new Func<ItemViewModel<KhachHangModel>, bool>(LocTenKhachHangCallBack));
+            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(dsKhachHang);
+            TimKiemKhachHangVM.Filters.Add(LocTenKhachHangCallBack);
             TimKiemKhachHangVM.SelectedValuePath = "TenKH";
 
             TimKiemKhachHangVM.SelectedItemChanged += TimKiemKhachHangVM_SelectedItemChanged;
-        }
 
-
-
-        #region Event Handler
-        private void TimKiemSanPhamVM_SelectionChanged(object sender, SelectedItemChangedEventArgs e)
-        {
-            var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
-            if (sanPhamDaChon != null)
+            // local function
+            void TimKiemKhachHangVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
-                var chiTietBan = new ChiTietBanModel(HoaDonVM.PhieuBan, sanPhamDaChon.Model, 1);
-                HoaDonVM.ThemChiTietBan(chiTietBan);
+                var khachHangDaChon = e.SelectedItem as ItemViewModel<KhachHangModel>;
+                if (khachHangDaChon != null)
+                {
+                    HoaDonVM.KhachHang = khachHangDaChon.Model;
+                }
+            }
+            bool LocTenKhachHangCallBack(ItemViewModel<KhachHangModel> khachHang)
+            {
+                return khachHang.Model.TenKH.ToLower().Contains(TimKiemKhachHangVM.Text.ToLower());
             }
         }
-
-        private void TimKiemKhachHangVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
-        {
-            var khachHangDaChon = e.SelectedItem as ItemViewModel<KhachHangModel>;
-            if (khachHangDaChon != null)
-            {
-                HoaDonVM.KhachHang = khachHangDaChon.Model;
-            }
-        }
-        #endregion
-
-
-        #region Callback cho bộ lọc tìm kiếm 
-        private bool LocLoaiSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
-        {
-            var loaiSanPhamDaChon = LocSanPhamVM.Collection.SelectedItem as ItemViewModel<object>;
-            if (loaiSanPhamDaChon == null)
-            {
-                return true;
-            }
-            var castLoaiSanPhamDaChon = loaiSanPhamDaChon.Model as LoaiSanPhamModel;
-
-            if (castLoaiSanPhamDaChon.MaLoaiSP == null)
-                return true;
-            return sanPham.Model.MaLoaiSP.Equals(castLoaiSanPhamDaChon.MaLoaiSP);
-        }
-
-        private bool LocTenSanPhamCallBack(ItemViewModel<SanPhamModel> sanPham)
-        {
-            return sanPham.Model.TenSP.ToLower().Contains(TimKiemSanPhamVM.Text.ToLower());
-        }
-        private bool LocTenKhachHangCallBack(ItemViewModel<KhachHangModel> khachHang)
-        {
-            return khachHang.Model.TenKH.ToLower().Contains(TimKiemKhachHangVM.Text.ToLower());
-        }
-        #endregion
-
-
 
         #region Command Execution 
         protected virtual void OnThemKhachHangCommandExecute(IWindowExtension window)
@@ -197,9 +176,10 @@ namespace UIProject.ViewModels.PageViewModels
             window.DataContext = addingCustomerVM;
             window.Closing += (sender, e) => e.Cancel = true;
 
-            if (window.ShowDialog(-400, 0) == true)
+            // thêm khách hàng thành công
+            if (window.ShowDialog(-500, 0) == true)
             {
-                TimKiemKhachHangVM.RefreshItemSource(DataAccess.LoadKhachHang());
+                Reload();
             }
         }
 
@@ -208,7 +188,41 @@ namespace UIProject.ViewModels.PageViewModels
             if (window.ShowDialog() == true)
             {
                 bool submitSuccess = HoaDonVM.Submit();
+                Reload();
             }
+        }
+        #endregion
+
+        #region Setup components
+
+        private void RefreshSource()
+        {
+            dsKhachHang = DataAccess.LoadKhachHang();
+            dsSanPham = DataAccess.LoadSanPham();
+            dsLoaiSanPham = DataAccess.LoadLoaiSanPham();
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            RefreshSource();
+
+            // Thứ tự hàm quan trọng
+            SetUpBoLocLoaiSanPham();
+            SetUpBolocTimKiemSanPham();
+            SetUpBoLocTimKiemKhachHang();
+            SetUpHoaDonVM();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            RefreshSource();
+
+            TimKiemKhachHangVM.Reload();
+            TimKiemKhachHangVM.RefreshItemSource(dsKhachHang);
+            TimKiemSanPhamVM.Reload();
+            TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
+
+            HoaDonVM.DanhSachChiTietBan.Reload();
         }
         #endregion
     }

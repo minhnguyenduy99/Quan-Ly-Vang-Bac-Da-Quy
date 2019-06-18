@@ -34,7 +34,7 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ICommand HuyPhieuNhapHangCommand
         {
-            get => huyPhieuNhapHangCmd ?? new BaseCommand<IWindow>(OnHuyPhieuNhapHangComamndExecute);
+            get => huyPhieuNhapHangCmd ?? new BaseCommand<IWindow>(OnHuyPhieuNhapHangCommandExecute);
             private set => huyPhieuNhapHangCmd = value;
         }
 
@@ -70,6 +70,7 @@ namespace UIProject.ViewModels.PageViewModels
 
                 return nhaCCItem.Model.TenNCC.ToLower().StartsWith(TimKiemNhaCungCapVM.Text.ToLower());
             }
+
             void TimKiemNhaCungCapVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
                 var nhaCCDaChon = e.SelectedItem as ItemViewModel<NhaCungCapModel>;
@@ -124,11 +125,32 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void OnSubmitPhieuNhapHangCommandExecute(IWindow window)
         {
+            DialogWindowViewModel dialogVM = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.YesNo,
+                YesText = "Có",
+                NoText = "Không",
+                MessageText = "Bạn muốn lưu phiếu mua hàng?",
+            };
+
+            dialogVM.ButtonPressed += NotifySubmitWnd_ButtonPressed;
+            window.DataContext = dialogVM;
             if (window.ShowDialog() == true)
             {
                 bool submitSuccess = NhapHangVM.Submit();
                 if (submitSuccess)
                     Reload();
+            }
+
+            // local functon
+            void NotifySubmitWnd_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
+            {
+                if (e.DialogResult == DialogResult.Yes)
+                    window.DialogResult = true;
+                if (e.DialogResult == DialogResult.No)
+                    window.DialogResult = false;
+
+                window.Close();
             }
         }
 
@@ -139,6 +161,7 @@ namespace UIProject.ViewModels.PageViewModels
             SearchTextBoxViewModel<NhaCungCapModel> timKiemNCC
                 = new SearchTextBoxViewModel<NhaCungCapModel>(dsNhaCungCap);
             timKiemNCC.SelectedValuePath = "TenNCC";
+            timKiemNCC.SelectedItemChanged += TimKiemNCC_SelectedItemChanged;
             themSanPhamVM.AdditionData.Add(DataAccess.LoadLoaiSanPham());
             themSanPhamVM.Searchers.Add(timKiemNCC);
 
@@ -154,9 +177,21 @@ namespace UIProject.ViewModels.PageViewModels
                 RefreshResource();
                 TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
             }
-            
+
+            // local function
+            void TimKiemNCC_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                var nhaCungCapDaChon = e.SelectedItem as ItemViewModel<NhaCungCapModel>;
+                if (nhaCungCapDaChon == null)
+                    return;
+
+                (themSanPhamVM.Data as SanPhamModel).MaNCC = nhaCungCapDaChon.Model?.MaNCC;
+            }
         }
-        private void OnHuyPhieuNhapHangComamndExecute(IWindow window)
+
+
+
+        private void OnHuyPhieuNhapHangCommandExecute(IWindow window)
         {
             DialogWindowViewModel popUpWndVM = new DialogWindowViewModel()
             {
@@ -208,7 +243,10 @@ namespace UIProject.ViewModels.PageViewModels
             RefreshResource();
 
             TimKiemSanPhamVM.Reload();
+            TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
             TimKiemNhaCungCapVM.Reload();
+            TimKiemNhaCungCapVM.RefreshItemSource(dsNhaCungCap);
+
             NhapHangVM.Reload();
         }
     }

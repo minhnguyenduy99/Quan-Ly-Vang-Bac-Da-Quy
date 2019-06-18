@@ -11,17 +11,34 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UIProject.UIConnector;
+using UIProject.ServiceProviders;
 
 namespace UIProject.Views
 {
     /// <summary>
     /// Interaction logic for AddressEditDialogWindow.xaml
     /// </summary>
-    public partial class AddressEditDialogWindow : Window
+    public partial class AddressEditDialogWindow : Window, IWindowExtension
     {
-        public AddressEditDialogWindow()
+        public AddressEditDialogWindow(FrameworkElement activator)
         {
             InitializeComponent();
+            Activator = activator;
+        }
+
+        public FrameworkElement Activator { get; set; }
+
+        public bool? ShowDialog(Point position)
+        {
+            return this.ShowDialog(position);
+        }
+
+        public bool? ShowDialog(double dentaX, double dentaY)
+        {
+            if (Activator == null)
+                throw new Exception("Activator cannot be null");
+            return this.ShowDialog(this.Activator, dentaX, dentaY);
         }
     }
 }

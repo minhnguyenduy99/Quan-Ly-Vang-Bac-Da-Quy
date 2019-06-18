@@ -30,7 +30,7 @@
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="70"
                                     IsReadOnly="True"
-                                    Binding="{Binding Model.DonGia}"
+                                    Binding="{Binding Model.DonGia, Mode=OneWay, Converter={StaticResource moneyConverter}}"
                                     Header="Đơn giá"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
@@ -44,7 +44,7 @@
                                     CellStyle="{StaticResource RightDataGridCell}"/>
                 <DataGridTextColumn Width="100"
                                     IsReadOnly="True"
-                                    Binding="{Binding Model.ThanhTien}"
+                                    Binding="{Binding Model.ThanhTien, Mode=OneWay, Converter={StaticResource moneyConverter}}"
                                     Header="Thành tiền"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"

@@ -37,12 +37,21 @@ namespace UIProject.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime castShortDate;
-            string castDateStr = (string)value;
-            bool parseSuccess = DateTime.TryParseExact(castDateStr, DateTimeFormats, null, DateTimeStyles.None, out castShortDate);
-            if (parseSuccess)
-                return castShortDate;
-            return Binding.DoNothing;
+            if (value == null)
+                return Binding.DoNothing;
+            var castValue = (DateTime)value;
+            var day = castValue.Day;
+            var month = castValue.Month;
+            var year = castValue.Year;
+            string dayStr = day.ToString();
+            string monthStr = month.ToString();
+            string yearStr = year.ToString();
+            if (day < 10)
+                dayStr = $"0{day}";
+            if (month < 10)
+                monthStr = $"0{month}";
+
+            return $"{dayStr}/{monthStr}/{yearStr}";    
         }
     }
 }

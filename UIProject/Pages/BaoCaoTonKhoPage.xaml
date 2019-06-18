@@ -61,18 +61,22 @@
                             <StackPanel Grid.Row="1" Grid.Column="0">
                                 <Label Content="Loại sản phẩm"/>
                                 <ComboBox Height="35"
-                                      FontSize="15">
-                                    <ComboBoxItem Content="Vàng bạc"/>
-                                    <ComboBoxItem Content="Đá quý"/>
-                                    <ComboBoxItem Content="Vòng tay"/>
-                                </ComboBox>
+                                          FontSize="15"
+                                          DataContext="{Binding LocLoaiSanPhamVM}"
+                                          ItemsSource="{Binding Collection.Items}"
+                                          SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="Model.TenLoaiSP"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="0">
                                 <Label Content="Nhà cung cấp"/>
                                 <customControls:SearchTextBox Style="{StaticResource UIProjectSearchTextBoxStyle}"
-                                                          Height="40"
-                                                          Background="WhiteSmoke"
-                                                          FontSize="15"/>
+                                                              DataContext="{Binding TImKiemNhaCungCapVM}"
+                                                              Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              SearchBoxItemSource="{Binding DisplayItems}"
+                                                              SelectedValue="{Binding Model.TenNCC, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              Height="40"
+                                                              Background="WhiteSmoke"
+                                                              FontSize="15"/>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Column="1">
