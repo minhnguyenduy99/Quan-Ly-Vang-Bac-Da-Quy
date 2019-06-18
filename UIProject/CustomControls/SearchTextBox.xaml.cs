@@ -64,6 +64,18 @@ namespace UIProject.CustomControls
         }
 
         /// <summary>
+        /// The selected item in the <see cref="SearchTextBox"/>
+        /// </summary>
+        public object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set
+            {
+                SetValue(SelectedItemProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Event occurs when the text property changed
         /// </summary>
         [Browsable(true)]
@@ -87,13 +99,6 @@ namespace UIProject.CustomControls
             add { PART_ListBox.SelectionChanged += value; }
             remove { PART_ListBox.SelectionChanged -= value; }
         }
-
-        /// <summary>
-        /// Event occurs when an item is selected
-        /// </summary>
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        public event EventHandler<SelectedEventArgs> Selected;
 
         /// <summary>
         /// The hint text in the <see cref="SearchTextBox"/>
@@ -280,6 +285,11 @@ namespace UIProject.CustomControls
 
         public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
             "SelectedValue",
+            typeof(object),
+            typeof(SearchTextBox));
+
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
+            "SelectedItem",
             typeof(object),
             typeof(SearchTextBox));
 

@@ -47,8 +47,18 @@ namespace UIProject.ViewModels.DataViewModels
 
         public void Add(ItemViewModel<SanPhamModel> sanPham)
         {
-            DSChiTietMua.Add(new ChiTietMuaModel(sanPham.Model.MaSP));
+            var chiTietMua = new ChiTietMuaModel(sanPham.Model.MaSP);
+            chiTietMua.PropertyChanged += ChiTietMua_DonGiaThayDoi;
+            DSChiTietMua.Add(chiTietMua);
+
+            // local function
+            void ChiTietMua_DonGiaThayDoi(object sender, EventArgs e)
+            {
+                UpdatePhieuMua();
+            }
         }
+
+
 
         public void Clear()
         {
@@ -79,13 +89,17 @@ namespace UIProject.ViewModels.DataViewModels
         public bool Submit()
         {
             var dsChiTiet = DSChiTietMua.Models;
+            var dsSanPham = DataAccess.LoadSanPham().Select(sanpham => sanpham.MaSP);
             try
             {
+                long maPhieuMua = DataAccess.SavePhieuMua(PhieuMua);
                 foreach (var chiTiet in dsChiTiet)
                 {
+                    // Gán mã phiếu mua cho chi tiết và lưu xuống database
+                    chiTiet.MaPhieuMuaHang = maPhieuMua;
                     chiTiet.Submit(SubmitType.Add);
                 }
-                PhieuMua.Submit(SubmitType.Add);
+
                 return true;
             }
             catch { return false; }

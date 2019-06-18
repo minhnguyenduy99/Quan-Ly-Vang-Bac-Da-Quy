@@ -101,11 +101,11 @@ namespace UIProject.ViewModels.PageViewModels
             var nonApplyItem = LocTinhTrangPhieuDichVuVM.NonApplyFilterItem?.Model as TinhTrangModel;
 
             // trong trường hợp người dùng lựa chọn "Chọn tất cả"
-            if (nonApplyItem != null && nonApplyItem.MaTinhTrang.Equals(phieuDV.TinhTrang)){
+            if (nonApplyItem != null && nonApplyItem.MaTinhTrang.Equals(phieuDV.MaTinhTrang)){
                 return true;
             }
 
-            return phieuDV.TinhTrang.Equals(tinhTrangDaChon?.Model?.MaTinhTrang);
+            return phieuDV.MaTinhTrang.Equals(tinhTrangDaChon?.Model?.MaTinhTrang);
         }
 
         private void OnNavigateTaoPhieuDichVuCommand()

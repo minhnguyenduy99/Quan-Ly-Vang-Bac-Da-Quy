@@ -25,7 +25,19 @@ namespace UIProject.ViewModels.DataViewModels
         }
         public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBan { get; set; }
 
-        public PhieuBanModel PhieuBan { get; set; }
+        public PhieuBanModel PhieuBan
+        {
+            get => GetPropertyValue<PhieuBanModel>();
+            set
+            {
+                SetProperty(value);
+                DanhSachChiTietBan?.Clear();
+                if (value == null)
+                    return;
+
+                // var dsChiTietBan = DataAccess.LoadChiTietBanByMaCTB(value.MaPhieu);
+            }
+        }
 
         public KhachHangModel KhachHang
         {

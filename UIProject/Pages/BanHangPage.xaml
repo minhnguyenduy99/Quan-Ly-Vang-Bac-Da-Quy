@@ -99,7 +99,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"
                                                 Binding="{Binding Model.MaSP}"
-                                                Header="Mã hàng"
+                                                Header="Mã SP"
                                                 TextBlock.TextAlignment="Right"
                                                 IsReadOnly="True"
                                                 CanUserSort="False"
@@ -113,7 +113,7 @@
                                                 CellStyle="{StaticResource LeftDataGridCell}"/>
                             <DataGridTextColumn Width="130"
                                                 CanUserSort="False"
-                                                Binding="{Binding Model.LoaiSP}"
+                                                Binding="{Binding Model.TenLoaiSP}"
                                                 Header="Loại sản phẩm"                                           
                                                 IsReadOnly="True"
                                                 HeaderStyle="{StaticResource CenteredDataGridHeader}"

@@ -55,7 +55,9 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand ChinhSuaThongTinCommand
         {
-            get => new BaseCommand<IWindowExtension>(OnChinhSuaThongTinCommandExecute);
+            get => new BaseCommand<IWindowExtension>
+                (OnChinhSuaThongTinCommandExecute,
+                window => DanhSachKhachHangVM?.SelectedItem != null);
         }
 
         /// <summary>
@@ -63,7 +65,9 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public ICommand XoaKhachHangCommand
         {
-            get => new BaseCommand<IWindow>(OnXoaKhachHangCommandExecute);
+            get => new BaseCommand<IWindow>(
+                OnXoaKhachHangCommandExecute,
+                window => DanhSachKhachHangVM?.SelectedItem != null);
         }
 
 
@@ -163,13 +167,36 @@ namespace UIProject.ViewModels.PageViewModels
         #region Command execution
         private void OnXoaKhachHangCommandExecute(IWindow window)
         {
+            DialogWindowViewModel notifyDeleteWnd = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.YesNo,
+                YesText = "Có",
+                NoText = "Không",
+                MessageText = "Bạn muốn xóa khách hàng này?"
+            };
+
+            notifyDeleteWnd.ButtonPressed += NotifyDeleteWnd_ButtonPressed;
+            window.DataContext = notifyDeleteWnd;
+
+
             if (window.ShowDialog() == true)
             {
                 var deleteKhachHangItem = DanhSachKhachHangVM.SelectedItem as ItemViewModel<KhachHangModel>;
                 if (deleteKhachHangItem == null)
                     return;
                 DataAccess.RemoveKhachHang(deleteKhachHangItem.Model);
-                DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
+                Reload();
+            }
+
+            // local function for event handler
+            void NotifyDeleteWnd_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
+            {
+                if (e.DialogResult == DialogResult.Yes)
+                    window.DialogResult = true;
+                if (e.DialogResult == DialogResult.No)
+                    window.DialogResult = false;
+
+                window.Close();
             }
         }
 
@@ -202,6 +229,7 @@ namespace UIProject.ViewModels.PageViewModels
             if (window.ShowDialog(-400, -600) == true)
             {
                 DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
+                DanhSachKhachHangVM.Reload();
             }
         }
 
@@ -219,6 +247,7 @@ namespace UIProject.ViewModels.PageViewModels
 
             DanhSachKhachHangVM.Reload();
             DanhSachKhachHangVM.RefreshItemsSource(dsKhachHang);
+            LocKhuVucVM.Reload();
             TimKiemKhachHangVM.Reload();
         }
 

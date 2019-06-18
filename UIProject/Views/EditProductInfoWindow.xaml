@@ -63,9 +63,6 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -77,9 +74,6 @@
                             <Label Grid.Row="1" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Loại sản phẩm"/>
-                            <Label Grid.Row="2" Grid.Column="0"
-                                   Style="{StaticResource CustomDefinedLabelStyle}"
-                                   Content="Nhà cung cấp"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
                                      Text="{Binding Data.TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -91,27 +85,6 @@
                                       ItemsSource="{Binding AdditionData[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       DisplayMemberPath="TenLoaiSP"
                                       SelectedItem="{Binding Data.MaLoaiSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource loaiSanPhamConverter}}"/>
-                            <Label Grid.Row="2" Grid.Column="1" 
-                                   x:Name="lblNhaCC"
-                                   Style="{StaticResource MediumLabelStyle}"
-                                   Content="{Binding Data.TenNhaCC, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <customControls:SearchTextBox Grid.Row="3" Grid.Column="1"
-                                                          x:Name="searchNCC"
-                                                            DataContext="{Binding Searchers[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            Style="{StaticResource FieldSearchTextBoxStyle}"
-                                                            HorizontalAlignment="Stretch"
-                                                            Panel.ZIndex="99"
-                                                            ListBoxMaxHeight="150"
-                                                            SearchBoxItemTemplate="{StaticResource SearchNhaCCTemplate}"
-                                                            SearchBoxItemSource="{Binding DisplayItems}"
-                                                            SelectedValue="{Binding TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            SearchListBoxBackground="WhiteSmoke"
-                                                            Margin="10"
-                                                            FontWeight="Normal"
-                                                            FontSize="13"
-                                                            IconHeight="17"
-                                                            Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            Hint="Tìm kiếm nhà cung cấp"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

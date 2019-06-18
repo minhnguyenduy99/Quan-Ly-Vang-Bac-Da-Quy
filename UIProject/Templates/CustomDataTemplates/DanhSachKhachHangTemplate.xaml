@@ -16,16 +16,13 @@
                   AutoGenerateColumns="False"
                   SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="50"
-                                        HeaderStyle="{StaticResource CenteredDataGridHeader}"
-                                        CellStyle="{StaticResource CenteredDataGridCell}"/>
-                <DataGridTextColumn Width="70"
+                <DataGridTextColumn Width="90"
                                     Binding="{Binding Model.MaKH}"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     IsReadOnly="True"
                                     Header="Mã KH"
-                                    HeaderStyle="{StaticResource RightDataGridHeader}"
-                                    CellStyle="{StaticResource RightDataGridCell}"/>
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridTextColumn Width="170"
                                     Binding="{Binding Model.TenKH}"
                                     Header="Tên khách hàng"
@@ -33,14 +30,14 @@
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="170"
+                <DataGridTextColumn Width="220"
                                     IsReadOnly="True"
                                     Binding="{Binding Model.TenKhuVuc}"
                                     Header="Khu vực"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="130"
+                <DataGridTextColumn Width="150"
                                     CanUserSort="False"
                                     Binding="{Binding Model.SDT}"
                                     Header="Số điện thoại"                                           

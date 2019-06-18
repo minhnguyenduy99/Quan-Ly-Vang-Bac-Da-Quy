@@ -31,12 +31,16 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ICommand ChinhSuaNhaCungCapCommand
         {
-            get => GetPropertyValue<ICommand>() ?? new BaseCommand<IWindowExtension>(OnChinhSuaNhaCungCapCommandExecute);
+            get => GetPropertyValue<ICommand>() ?? new BaseCommand<IWindowExtension>(
+                OnChinhSuaNhaCungCapCommandExecute,
+                window => DanhSachNhaCungCapVM?.SelectedItem != null);
             set => SetProperty(value);
         }
         public ICommand XoaNhaCungCapCommand
         {
-            get => GetPropertyValue<ICommand>() ?? new BaseCommand<IWindow>(OnXoaNhaCungCapCommandExecute);
+            get => GetPropertyValue<ICommand>() ?? new BaseCommand<IWindow>(
+                OnXoaNhaCungCapCommandExecute,
+                window => DanhSachNhaCungCapVM?.SelectedItem != null);
             set => SetProperty(value);
         }
 
@@ -104,12 +108,6 @@ namespace UIProject.ViewModels.PageViewModels
                 DanhSachNhaCungCapVM.Filter();
             }
         }
-
-
-
-
-
-
 
         #region Command execution
         private void OnXoaNhaCungCapCommandExecute(IWindow window)

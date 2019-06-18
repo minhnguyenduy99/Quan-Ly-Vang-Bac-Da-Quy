@@ -23,19 +23,10 @@ namespace UIProject.Views
     {
         public FrameworkElement Activator { get; set; }
 
-        public ServiceAddingDialogWindow()
+        public ServiceAddingDialogWindow(FrameworkElement activator)
         {
             InitializeComponent();
-        }
-
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
+            this.Activator = activator;
         }
 
         public bool? ShowDialog(Point position)
@@ -50,6 +41,16 @@ namespace UIProject.Views
                 throw new Exception("Activator cannot be null");
             }
             return this.ShowDialog(Activator, dentaX, dentaY);
+        }
+
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

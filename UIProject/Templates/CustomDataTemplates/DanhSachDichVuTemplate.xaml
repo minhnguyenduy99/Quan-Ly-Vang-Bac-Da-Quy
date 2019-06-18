@@ -2,25 +2,50 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates">
     <DataTemplate x:Key="DanhSachDichVuTemplate">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Image Width="50"
-                       Height="50"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Stretch="UniformToFill"/>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </Grid>
+        <DataGrid DataContext="{Binding Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                  HorizontalAlignment="Left"
+                  CanUserSortColumns="True"
+                  ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  AutoGenerateColumns="False"
+                  SelectionUnit="FullRow"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="100"
+                                    Binding="{Binding Model.MaLoaiDV}"
+                                    Header="Mã loại DV"
+                                    SortDirection="Ascending"
+                                    IsReadOnly="True"
+                                    CanUserSort="True"
+                                    HeaderStyle="{StaticResource CenteredDataGridHeader}"
+                                    CellStyle="{StaticResource CenteredDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    CanUserResize="True"
+                                    Binding="{Binding Model.TenLoaiDV}"
+                                    Header="Tên loại DV"
+                                    IsReadOnly="True"
+                                    CanUserSort="True"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="170"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Model.DonGiaDV, Converter={StaticResource moneyConverter}}"
+                                    Header="Đơn gía"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                <DataGridTextColumn Width="220"
+                                    IsReadOnly="True"
+                                    CanUserResize="True"
+                                    Binding="{Binding Model.ChiPhiRieng, Converter={StaticResource moneyConverter}}"
+                                    Header="Chi phí riêng"
+                                    CanUserSort="true"
+                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </DataTemplate>
 </ResourceDictionary>
