@@ -13,6 +13,7 @@ namespace ModelProject
     {
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix return last row.
         #region SANPHAM_DataAcess
         public static List<SanPhamModel> LoadSanPham()
         {
@@ -54,6 +55,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix return last row.
         #region DONVITINH_DataAcess
 
         public static List<DonViTinhModel> LoadDonViTinh()
@@ -68,10 +70,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into DonViTinh(TENDVT) values (@TenDVT) ", dvt);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into DonViTinh(TENDVT) values (@TenDVT); SELECT last_insert_rowid() ", dvt);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -94,6 +94,7 @@ namespace ModelProject
         #endregion DONVITINH_DataAcess
 
         //Đã duyệt và fix bởi N.
+        //Đã fix return last row.
         #region KHACHHANG_DataAcess
 
         public static List<KhachHangModel> LoadKhachHang()
@@ -110,10 +111,8 @@ namespace ModelProject
             Console.WriteLine(khachHang.MaKH);
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into KhachHang(TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email) ", khachHang);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into KhachHang(TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email); SELECT last_insert_rowid()", khachHang);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -138,6 +137,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region KHUVUC_DataAcess
         public static List<KhuVucModel> LoadKhuVuc()
         {
@@ -151,10 +151,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into KhuVuc(TENKHUVUC) values (@TenKhuVuc) ", khuVuc);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into KhuVuc(TENKHUVUC) values (@TenKhuVuc); SELECT last_insert_rowid()", khuVuc);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -178,6 +176,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region TINHTRANG_DataAcess
         public static List<TinhTrangModel> LoadTinhTrang()
         {
@@ -191,10 +190,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into TinhTrang(TENTINHTRANG) values (@TenTinhTrang) ", TinhTrang);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into TinhTrang(TENTINHTRANG) values (@TenTinhTrang); SELECT last_insert_rowid()", TinhTrang);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -219,6 +216,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region LOAIDICHVU_DataAcess
         public static List<LoaiDichVuModel> LoadLoaiDichVu()
         {
@@ -232,10 +230,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiDichVu(TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV) ", loaiDV);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into LoaiDichVu(TENLOAIDV,DONGIADV) values (@TenLoaiDV,@DonGiaDV); SELECT last_insert_rowid()", loaiDV);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -260,6 +256,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region CHITIETBAN_DataAcess
         public static List<ChiTietBanModel> LoadChiTietBan()
         {
@@ -273,10 +270,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue)", ctb);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue); SELECT last_insert_rowid()", ctb);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -301,6 +296,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region CHITIETMUA_DataAcess
         public static List<ChiTietMuaModel> LoadChiTietMua()
         {
@@ -314,10 +310,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia) ", ctm);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia); SELECT last_insert_rowid()", ctm);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -342,6 +336,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region CHITIETDICHVU_DataAcess
         public static List<ChiTietDichVuModel> LoadChiTietDichVu()
         {
@@ -355,10 +350,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang) ", ctdv);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang); SELECT last_insert_rowid()", ctdv);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -383,6 +376,7 @@ namespace ModelProject
 
         //Đã test
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region LOAISANPHAM_DataAcess
 
         public static List<LoaiSanPhamModel> LoadLoaiSanPham()
@@ -397,10 +391,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into LoaiSanPham(MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP) ", loaiSP);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into LoaiSanPham(MADVT,PHANTRAMLOINHUAN, TENLOAISP) values (@MaDVT,@PhanTramLoiNhuan,@TenLoaiSP); SELECT last_insert_rowid()", loaiSP);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -424,6 +416,7 @@ namespace ModelProject
         #endregion LOAISANPHAM_DataAcess
 
         //Viết bởi N.
+        //Đã fix last row id.
         #region NHACC_DataAcess
 
         public static List<NhaCungCapModel> LoadNhaCungCap()
@@ -438,10 +431,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into NHACUNGCAP(TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email) ", nhaCC);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into NHACUNGCAP(TENNCC,DIACHI,DIENTHOAI, MAKHUVUC, EMAIL) values (@tenNCC,@diaChi,@dienThoai, @maKhuVuc, @email); SELECT last_insert_rowid()", nhaCC);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -467,6 +458,7 @@ namespace ModelProject
         //Đã test
         //Cần check lại số lượng thuộc tính. //Đã check.
         //Cần check lại thuộc tính maPhieu. //Done.
+        //Đã fix last row id.
         #region PHIEUBAN_DataAcess
 
         public static List<PhieuBanModel> LoadPhieuBan()
@@ -481,10 +473,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuBan(SOPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu) ", phieuBan);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuBan(SOPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu); SELECT last_insert_rowid()", phieuBan);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -511,6 +501,7 @@ namespace ModelProject
         //Cần check lại số lượng thuộc tính. //Done.
         //Cần check lại thuộc tính maPhieu. //Done.
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region PHIEUMUA_DataAcess
         public static List<PhieuMuaModel> LoadPhieuMua()
         {
@@ -525,10 +516,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC,GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu) ", PhieuMua);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC,GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu); SELECT last_insert_rowid()", PhieuMua);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
@@ -553,6 +542,7 @@ namespace ModelProject
         //Đã test
         //Cần check lại số lượng thuộc tính. //Done.
         //Đã duyệt và fix bởi N.
+        //Đã fix last row id.
         #region PHIEUDICHVU_DataAcess
         public static List<PhieuDichVuModel> LoadPhieuDichVu()
         {
@@ -566,10 +556,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into PhieuDichVu(SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu) ", PhieuDichVu);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuDichVu(SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu); SELECT last_insert_rowid()", PhieuDichVu);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
