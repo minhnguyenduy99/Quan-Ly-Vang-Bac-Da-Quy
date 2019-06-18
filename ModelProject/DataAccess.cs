@@ -27,10 +27,8 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO, MANCC) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao, @MaNCC)", sanPham);
+                long lastRowID = (long)cnn.Execute("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO, MANCC) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao, @MaNCC); SELECT last_insert_rowid()", sanPham);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
-                string queryLastRow = @"select last_insert_rowid()";
-                long lastRowID = (long)cnn.ExecuteScalar(queryLastRow);
                 return lastRowID;
             }
         }
