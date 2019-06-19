@@ -212,6 +212,7 @@
     <Compile Include="ViewModels\LayoutViewModels\PaymentTabItemVM.cs" />
     <Compile Include="ViewModels\LayoutViewModels\PrintViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\SearchTextBoxViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModels\TextBasedSearchViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\ValueFilterViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModels\DialogWindowViewModel.cs" />

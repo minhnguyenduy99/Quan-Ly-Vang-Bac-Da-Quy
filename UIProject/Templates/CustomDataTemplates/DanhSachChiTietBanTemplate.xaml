@@ -12,7 +12,8 @@
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  SelectionUnit="FullRow">
+                  SelectionUnit="FullRow"
+                  VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridHyperlinkColumn Width="70"
                                          Binding="{Binding Model.MaSP}"

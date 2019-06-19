@@ -114,7 +114,7 @@ namespace UIProject.ViewModels
         /// <returns></returns>
         public bool Login()
         {
-            IsAccountValid = true;
+            IsAccountValid = LoginService.Login(TypingUsername, TypingPassword);
             Thread.Sleep(3000);
             OnPropertyChanged("IsAccountValid");
             return IsAccountValid;
@@ -126,10 +126,10 @@ namespace UIProject.ViewModels
                 this.TypingPassword = password;
         }
 
-        protected virtual void OnLoginCommandExecute(IWindow waitingDialogWindow)
+        protected virtual async void OnLoginCommandExecute(IWindow waitingDialogWindow)
         {
             // No return-result required
-            LoginAsync(waitingDialogWindow);
+            await LoginAsync(waitingDialogWindow);
         }
 
         /// <summary>
@@ -145,7 +145,6 @@ namespace UIProject.ViewModels
                 IsAccountValid = result.Value;
             }
             return result;
-
         }
 
         protected override void LoadComponentsInternal()

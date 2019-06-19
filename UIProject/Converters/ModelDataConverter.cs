@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using UIProject.ViewModels.FunctionInterfaces;
 
@@ -17,6 +18,19 @@ namespace UIProject.Converters
         ObjectToCode = 2,
         ObjectToName = 3,
     };
+    
+    /// <summary>
+    /// The state mode of the an control element
+    /// </summary>
+    public enum StateMode
+    {
+        Visible = 0,
+        Hidden = 1,
+        Collapsed = 2,
+        Enabled = 3,
+        Disabled = 4,
+    }
+
     public class MaKhuVucToKhuVucConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -137,17 +151,43 @@ namespace UIProject.Converters
     /// </summary>
     public class SelectedItemToEnabledConverter : IValueConverter
     {
+        /// <summary>
+        /// The state of control element when the object value is null
+        /// </summary>
+        public StateMode NullState { get; set; }
+
+        /// <summary>
+        /// The state of control element when the object value is not null
+        /// </summary>
+        public StateMode NotNullState { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var castSelectedItem = value as ISelectable;
-            if (castSelectedItem == null)
-                return false;
-            return true;          
+            if (value == null)
+                return ConvertFromStateToVisibility(NullState);
+            return ConvertFromStateToVisibility(NotNullState);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
+
+        private object ConvertFromStateToVisibility(StateMode state)
+        {
+            switch (state)
+            {
+                case StateMode.Collapsed: return Visibility.Collapsed;
+                case StateMode.Hidden: return Visibility.Hidden;
+                case StateMode.Visible: return Visibility.Visible;
+            }
+            switch (state)
+            {
+                case StateMode.Enabled: return true;
+                case StateMode.Disabled: return false;
+            }
+            return Binding.DoNothing;
+        }
     }
+
+
 }

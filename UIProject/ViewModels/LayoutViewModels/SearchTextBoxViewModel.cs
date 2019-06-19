@@ -28,6 +28,11 @@ namespace UIProject.ViewModels.LayoutViewModels
         #endregion
 
         /// <summary>
+        /// Represents the search mode of <see cref="SearchTextBoxViewModel{T}"/>
+        /// </summary>
+        public SearchMode SearchMode { get; set; }
+
+        /// <summary>
         /// The items satisfied the Filter
         /// </summary>
         public ObservableCollection<ItemViewModel<T>> DisplayItems
@@ -106,14 +111,16 @@ namespace UIProject.ViewModels.LayoutViewModels
             }
         }
 
+        /// <summary>
+        /// Get the value path for searching
+        /// </summary>
         public string SelectedValuePath
         {
             get => GetPropertyValue<string>();
             set => SetProperty(value);
         }
 
-        
-
+       
         /// <summary>
         /// The text notified the state of empty displayed items
         /// </summary>
@@ -160,6 +167,9 @@ namespace UIProject.ViewModels.LayoutViewModels
         #region Method executes the Event
         protected virtual void OnTextPropertyChanged(string oldValue, string newValue)
         {
+            // Avoid the case that the changed text does not match any item
+            SelectedItem = null;
+
             if (!string.IsNullOrEmpty(newValue))
             {
                 this.DisplayItems = new ObservableCollection<ItemViewModel<T>>(itemsSource.Filter(Filters));                 
@@ -226,9 +236,5 @@ namespace UIProject.ViewModels.LayoutViewModels
 
 
     }
-
-
-
-
 }
 

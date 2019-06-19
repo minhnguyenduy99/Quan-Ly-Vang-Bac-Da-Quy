@@ -40,7 +40,7 @@ namespace UIProject.ViewModels.PageViewModels
         /// <summary>
         /// View model của việc tìm kiếm khách hàng
         /// </summary>
-        public SearchTextBoxViewModel<KhachHangModel> TimKiemKhachHangVM { get; set; }
+        public TextBasedSearchViewModel<KhachHangModel> TimKiemKhachHangVM { get; set; }
 
         /// <summary>
         /// Command cho việc thêm khách hàng
@@ -81,8 +81,7 @@ namespace UIProject.ViewModels.PageViewModels
             DanhSachKhachHangVM = new ObservableCollectionViewModel<KhachHangModel>(khachHangSource);
             DanhSachKhachHangVM.SelectedItemChanged += DanhSachKhachHangVM_SelectedItemChanged;
 
-            var temp = DanhSachKhachHangVM.Filters as List<Func<ItemViewModel<KhachHangModel>, bool>>;
-            temp.Add(LocKhachHangTheoTen);
+            DanhSachKhachHangVM.Filters.Add(LocKhachHangTheoTen);
         }
 
         private void DanhSachKhachHangVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
@@ -96,9 +95,10 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void SetUpTimKiemKhachHangVM()
         {
-            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(null);
+            TimKiemKhachHangVM = new TextBasedSearchViewModel<KhachHangModel>(SearchMode.LikelyIgnoreCase);
             TimKiemKhachHangVM.TextChanged += TimKiemKhachHangVM_TextChanged;
         }
+
         private void SetUpLocKhuVucVM()
         {
             LocKhuVucVM = new EnumFilterViewModel<KhachHangModel>(
@@ -108,8 +108,7 @@ namespace UIProject.ViewModels.PageViewModels
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocKhuVucVM.NonApplyFilterItem.Model = new KhuVucModel() { MaKhuVuc = null, TenKhuVuc = "Chọn tất cả" };
 
-            (DanhSachKhachHangVM.Filters as List<Func<ItemViewModel<KhachHangModel>, bool>>)
-                .Add(LocKhuVucVM.FilterCallBack);
+            DanhSachKhachHangVM.Filters.Add(LocKhuVucVM.FilterCallBack);
 
             LocKhuVucVM.SelectedItemChanged += LocKhuVucVM_SelectedItemChanged;
         }
@@ -150,7 +149,7 @@ namespace UIProject.ViewModels.PageViewModels
         {
             if (e.NewValue == null || e.NewValue.Equals(e.OldValue))
                 return;
-            
+
             DanhSachKhachHangVM.Filter();
         }
 

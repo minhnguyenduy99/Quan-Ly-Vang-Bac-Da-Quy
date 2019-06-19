@@ -12,6 +12,7 @@
     <Page.Resources>
         <converters:ToShortDateConverter x:Key="dateConverter"/>
         <converters:MoneyRuleConverter x:Key="moneyRuleConverter"/>
+        <converters:SelectedItemToEnabledConverter x:Key="nhaCungCapDaChonConverter" NullState="Visible" NotNullState="Collapsed"/>
         <Style x:Key="CustomTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="MinWidth" Value="200"/>
@@ -133,14 +134,14 @@
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"
                                         EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
-                    <DataGridTextColumn Width="150"
+                    <DataGridTextColumn Width="100"
                                         CanUserSort="False"
                                         Binding="{Binding Model.LoiNhuan}"
                                         Header="Lợi nhuận (%)"                                           
                                         IsReadOnly="true"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"/>
-                    <DataGridTextColumn Width="150"
+                    <DataGridTextColumn Width="130"
                                         Binding="{Binding Model.DonGia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
                                         CanUserSort="False"
                                         Header="Đơn giá mua vào"
@@ -149,6 +150,14 @@
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"
                                         EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                    <DataGridTextColumn Width="130"
+                                        Binding="{Binding Model.ThanhTien, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
+                                        CanUserSort="False"
+                                        Header="Thành tiền"
+                                        TextBlock.TextAlignment="Center"
+                                        IsReadOnly="true"
+                                        HeaderStyle="{StaticResource RightDataGridHeader}"
+                                        CellStyle="{StaticResource RightDataGridCell}"/>
                     <DataGridTemplateColumn Width="30"
                                             HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                             CellStyle="{StaticResource ButtonDataGridCellStyle}">
@@ -204,7 +213,8 @@
                             Content="Nhà cung cấp"/>
                     <Label Style="{StaticResource SmallDefinedLabelStyle}"
                            Foreground="Red"
-                           Content="Vui lòng chọn nhà cung cấp"/>
+                           Content="Vui lòng chọn nhà cung cấp"
+                           Visibility="{Binding TimKiemNhaCungCapVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nhaCungCapDaChonConverter}}"/>
                     <customControls:SearchTextBox Margin="5 0 0 0"
                                                   Style="{StaticResource NoFieldNoIconSearchTextBoxStyle}"
                                                   Width="auto"
@@ -227,7 +237,7 @@
                                 Name="LocaleDatePicker"
                                 materialDesign:HintAssist.Hint="Locale Date"
                                 Style="{StaticResource UIProjectDatePickerStyle}"
-                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLapDateTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLapDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     </DatePicker>
                 </StackPanel>
             </Grid>

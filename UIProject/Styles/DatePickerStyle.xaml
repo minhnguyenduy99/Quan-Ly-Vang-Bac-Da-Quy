@@ -34,6 +34,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="PART_TextBox"
+                                     IsEnabled="False"
                                      Style="{StaticResource UIProjectTextBoxStyle}"
                                      Height="{TemplateBinding Height}"
                                      Background="{TemplateBinding Background}"

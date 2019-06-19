@@ -28,7 +28,9 @@ namespace UIProject.ViewModels.PageViewModels
 
         public ICommand SubmitPhieuNhapHangCommand
         {
-            get => submitPhieuNhapHangCmd ?? new BaseCommand<IWindow>(OnSubmitPhieuNhapHangCommandExecute);
+            get => submitPhieuNhapHangCmd ?? new BaseCommand<IWindow>(
+                OnSubmitPhieuNhapHangCommandExecute,
+                window => NhapHangVM.IsDataValid);
             private set => submitPhieuNhapHangCmd = value;
         }
 
@@ -49,7 +51,6 @@ namespace UIProject.ViewModels.PageViewModels
         public SearchTextBoxViewModel<SanPhamModel> TimKiemSanPhamVM { get; private set; }
         public SearchTextBoxViewModel<NhaCungCapModel> TimKiemNhaCungCapVM { get; private set; }
         public NhapHangViewModel NhapHangVM { get; set; }
-
 
         public NhapHangPageVM() : base() { }
         public NhapHangPageVM(INavigator navigator) : base(navigator) { }
@@ -115,9 +116,6 @@ namespace UIProject.ViewModels.PageViewModels
                 NhapHangVM.Add(sanPhamDaChon);
             }
         }
-
-
-
         private void SetUpNhapHangVM()
         {
             NhapHangVM = new NhapHangViewModel();

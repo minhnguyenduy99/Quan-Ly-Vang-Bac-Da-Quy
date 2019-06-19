@@ -10,7 +10,8 @@
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  SelectionUnit="FullRow">
+                  SelectionUnit="FullRow"
+                  VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="100"
                                     Binding="{Binding Model.TenSP}"

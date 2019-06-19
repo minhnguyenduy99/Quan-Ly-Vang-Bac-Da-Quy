@@ -14,6 +14,7 @@ namespace UIProject.Converters
     [ValueConversion(typeof(string),typeof(DateTime))]
     public class ToShortDateConverter : IValueConverter
     {
+        public const string DATE_ERROR_STATEMENT = "Ngày không hợp lệ";
         public readonly string[] DateTimeFormats =
         {
             "dd/MM/yyyy",
@@ -39,19 +40,23 @@ namespace UIProject.Converters
         {
             if (value == null)
                 return Binding.DoNothing;
-            var castValue = (DateTime)value;
-            var day = castValue.Day;
-            var month = castValue.Month;
-            var year = castValue.Year;
-            string dayStr = day.ToString();
-            string monthStr = month.ToString();
-            string yearStr = year.ToString();
-            if (day < 10)
-                dayStr = $"0{day}";
-            if (month < 10)
-                monthStr = $"0{month}";
+            try
+            {
+                var castValue = (DateTime)value;
+                var day = castValue.Day;
+                var month = castValue.Month;
+                var year = castValue.Year;
+                string dayStr = day.ToString();
+                string monthStr = month.ToString();
+                string yearStr = year.ToString();
+                if (day < 10)
+                    dayStr = $"0{day}";
+                if (month < 10)
+                    monthStr = $"0{month}";
 
-            return $"{dayStr}/{monthStr}/{yearStr}";    
+                return $"{dayStr}/{monthStr}/{yearStr}";
+            }
+            catch { return DATE_ERROR_STATEMENT; }
         }
     }
 }

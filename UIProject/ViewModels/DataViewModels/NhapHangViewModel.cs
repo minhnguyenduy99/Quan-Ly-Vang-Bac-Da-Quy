@@ -20,7 +20,14 @@ namespace UIProject.ViewModels.DataViewModels
         /// </summary>
         public ISubmitable Data { get; set; } = null;
 
-        public bool IsDataValid { get; private set; }
+        public bool IsDataValid
+        {
+            get => GetPropertyValue<bool>();
+            private set
+            {
+                SetProperty(value);
+            }
+        }
 
         public PhieuMuaModel PhieuMua { get; private set; }
         public ObservableCollectionViewModel<ChiTietMuaModel> DSChiTietMua { get; private set; }
@@ -41,8 +48,11 @@ namespace UIProject.ViewModels.DataViewModels
         {
             DSChiTietMua = new ObservableCollectionViewModel<ChiTietMuaModel>();
             PhieuMua = new PhieuMuaModel();
+            PhieuMua.DataValidChanged += DataValidChangedHandler;
+            PhieuMua.NgayLapDateTime = DateTime.Now;
             DSChiTietMua.ItemAdded += DSChiTietMua_ItemAdded;
             DSChiTietMua.ItemRemoved += DSChiTietMua_ItemRemoved;
+            
         }
 
         public void Add(ItemViewModel<SanPhamModel> sanPham)
@@ -58,7 +68,10 @@ namespace UIProject.ViewModels.DataViewModels
             }
         }
 
-
+        private void DataValidChangedHandler(object sender, BaseSubmitableModel.DataValidChangedEventArgs e)
+        {
+            IsDataValid = e.DataValid;
+        }
 
         public void Clear()
         {
@@ -67,10 +80,16 @@ namespace UIProject.ViewModels.DataViewModels
         private void DSChiTietMua_ItemAdded(object sender, ItemAddedEventArgs<ChiTietMuaModel> e)
         {
             UpdatePhieuMua();
+
+            // Subcribe the DataValidChanged event
+            e.AddedItem.Model.DataValidChanged += DataValidChangedHandler;
         }
         private void DSChiTietMua_ItemRemoved(object sender, ItemRemovedEventArgs<ChiTietMuaModel> e)
         {
             UpdatePhieuMua();
+
+            // Unsubcribe the DataValidChanged event
+            e.RemovedItem.Model.DataValidChanged -= DataValidChangedHandler;
         }
 
         public void UpdatePhieuMua()
