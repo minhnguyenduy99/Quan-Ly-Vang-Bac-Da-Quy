@@ -40,6 +40,7 @@ namespace ModelProject
                 if (value <= 0)
                     throw new Exception("Số lượng nhập phải lớn hơn 0");
                 SetProperty(ref soLuong, value);
+                UpdateThanhTien();
             }
         }
         public long DonGia
@@ -52,7 +53,7 @@ namespace ModelProject
                 else
                     IsDataValid = true;
                 SetProperty(ref donGia, value);
-                
+                UpdateThanhTien();
             }
         }
         public long ThanhTien
@@ -89,6 +90,10 @@ namespace ModelProject
         }
         #endregion
 
+        public void UpdateThanhTien()
+        {
+            ThanhTien = SoLuong * DonGia;
+        }
         public ChiTietMuaModel(long? maSP)
         {
             SanPhamModel sanPham = null;

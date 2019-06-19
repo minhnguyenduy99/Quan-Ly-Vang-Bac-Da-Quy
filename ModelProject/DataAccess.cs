@@ -7,6 +7,12 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using Dapper;
+
+/// <summary>
+/// Tất cả hàm Load đều phải đăt try - catch vì trong trường hợp 1 table rỗng thì sẽ gây ra <see cref="DataException"/>
+/// </summary>
+
+
 namespace ModelProject
 {
     public class DataAccess
@@ -19,8 +25,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<SanPhamModel>("select * from SANPHAM", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<SanPhamModel>("select * from SANPHAM", new DynamicParameters());
+                    return output?.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<SanPhamModel>();
+                }
             }
         }
 
@@ -62,8 +75,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<DonViTinhModel>("select * from DONVITINH", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<DonViTinhModel>("select * from DONVITINH", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch(DataException)
+                {
+                    return new List<DonViTinhModel>();
+                }
             }
         }
         public static long SaveDonViTinh(DonViTinhModel dvt)
@@ -101,8 +121,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<KhachHangModel>("select * from KhachHang", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<KhachHangModel>("select * from KhachHang", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<KhachHangModel>();
+                }
             }
         }
 
@@ -143,8 +170,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<KhuVucModel>("select * from KhuVuc", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<KhuVucModel>("select * from KhuVuc", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<KhuVucModel>();
+                }
             }
         }
         public static long SaveKhuVuc(KhuVucModel khuVuc)
@@ -182,8 +216,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TinhTrangModel>("select * from TinhTrang", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<TinhTrangModel>("select * from TinhTrang", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<TinhTrangModel>();
+                }
             }
         }
         public static long SaveTinhTrang(TinhTrangModel TinhTrang)
@@ -222,8 +263,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<LoaiDichVuModel>("select * from LoaiDichVu", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<LoaiDichVuModel>("select * from LoaiDichVu", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<LoaiDichVuModel>();
+                }
             }
         }
         public static long SaveLoaiDichVu(LoaiDichVuModel loaiDV)
@@ -262,8 +310,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ChiTietBanModel>("select * from chitietban", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<ChiTietBanModel>("select * from chitietban", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<ChiTietBanModel>();
+                }
             }
         }
         public static long SaveChiTietBan(ChiTietBanModel ctb)
@@ -302,8 +357,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ChiTietMuaModel>("select * from ChiTietMua", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<ChiTietMuaModel>("select * from ChiTietMua", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<ChiTietMuaModel>();
+                }
             }
         }
         public static long SaveChiTietMua(ChiTietMuaModel ctm)
@@ -342,8 +404,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ChiTietDichVuModel>("select * from ChiTietDichVu", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<ChiTietDichVuModel>("select * from ChiTietDichVu", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<ChiTietDichVuModel>();
+                }
             }
         }
         public static long SaveChiTietDichVu(ChiTietDichVuModel ctdv)
@@ -383,8 +452,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<LoaiSanPhamModel>("select * from LoaiSanPham", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<LoaiSanPhamModel>("select * from LoaiSanPham", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<LoaiSanPhamModel>();
+                }
             }
         }
         public static long SaveLoaiSanPham(LoaiSanPhamModel loaiSP)
@@ -423,8 +499,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<NhaCungCapModel>("select * from NHACUNGCAP", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<NhaCungCapModel>("select * from NHACUNGCAP", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<NhaCungCapModel>();
+                }
             }
         }
         public static long SaveNhaCungCap(NhaCungCapModel nhaCC)
@@ -465,15 +548,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<PhieuBanModel>("select * from PhieuBan", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<PhieuBanModel>("select * from PhieuBan", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<PhieuBanModel>();
+                }
             }
         }
         public static long SavePhieuBan(PhieuBanModel phieuBan)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuBan(SOPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu); SELECT last_insert_rowid()", phieuBan);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuBan(MAPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu); SELECT last_insert_rowid()", phieuBan);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -483,7 +573,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuBan set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH, MANV = @MaNV, CHIETKHAU = @ChietKhau, THUE = @Thue, THANHTIEN = @ThanhTien, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", phieuBan);
+                cnn.Execute("update PhieuBan set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH, MANV = @MaNV, CHIETKHAU = @ChietKhau, THUE = @Thue, THANHTIEN = @ThanhTien, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", phieuBan);
             }
         }
 
@@ -507,8 +597,15 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<PhieuMuaModel>("select * from PhieuMua", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<PhieuMuaModel>("select * from PhieuMua", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<PhieuMuaModel>();
+                }
             }
         }
 
@@ -516,7 +613,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuMua(SOPHIEU,NGAYLAP,MANCC,GHICHU) values (@SoPhieu,@NgayLap,@MaNCC, @GhiChu); SELECT last_insert_rowid()", PhieuMua);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuMua(MAPHIEU,NGAYLAP,MANCC,GHICHU) values (@MaPhieu,@NgayLap,@MaNCC, @GhiChu); SELECT last_insert_rowid()", PhieuMua);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -525,7 +622,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuMua set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuMua);
+                cnn.Execute("update PhieuMua set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuMua);
             }
         }
 
@@ -548,15 +645,22 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<PhieuDichVuModel>("select * from PhieuDichVu", new DynamicParameters());
-                return output.ToList();
+                try
+                {
+                    var output = cnn.Query<PhieuDichVuModel>("select * from PhieuDichVu", new DynamicParameters());
+                    return output.ToList();
+                }
+                catch (DataException)
+                {
+                    return new List<PhieuDichVuModel>();
+                }
             }
         }
         public static long SavePhieuDichVu(PhieuDichVuModel PhieuDichVu)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuDichVu(SOPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@SoPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu); SELECT last_insert_rowid()", PhieuDichVu);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuDichVu(MAPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu); SELECT last_insert_rowid()", PhieuDichVu);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -566,7 +670,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuDichVu set SOPHIEU=@SoPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc, TINHTRANG = @TinhTrang, MANV = @MaNV, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
+                cnn.Execute("update PhieuDichVu set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc, TINHTRANG = @TinhTrang, MANV = @MaNV, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
             }
         }
 
