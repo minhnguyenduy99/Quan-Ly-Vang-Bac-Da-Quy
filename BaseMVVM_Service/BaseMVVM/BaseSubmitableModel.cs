@@ -13,7 +13,22 @@ namespace BaseMVVM_Service.BaseMVVM
     /// </summary>
     public abstract class BaseSubmitableModel : BaseModel, ISubmitable
     {
-        public bool IsDataValid { get; protected set; }
+        protected bool isDataValid;
+
+        /// <summary>
+        /// Indicating weither the current data value is valid
+        /// </summary>
+        public bool IsDataValid
+        {
+            get => isDataValid;
+            set
+            {
+                bool temp = isDataValid;
+                SetProperty(ref isDataValid, value);
+                if (temp != value)
+                    OnDataValidChanged(new DataValidChangedEventArgs(value));          
+            }
+        }
 
         public BaseSubmitableModel()
         {
@@ -52,10 +67,31 @@ namespace BaseMVVM_Service.BaseMVVM
             return base.GetHashCode();
         }
 
-        public abstract override bool Equals(object obj);
+        /// <summary>
+        /// Occurs when the value of <see cref="IsDataValid"/> changed
+        /// </summary>
+        public event EventHandler<DataValidChangedEventArgs> DataValidChanged;
 
+        protected virtual void OnDataValidChanged(DataValidChangedEventArgs e)
+        {
+            DataValidChanged?.Invoke(this, e);
+        }
+
+        public abstract override bool Equals(object obj);
         protected internal abstract void Add();
         protected internal abstract void Update();
         protected internal abstract void Delete();
+
+        /// <summary>
+        /// Provides information about <see cref="DataValidChanged"/> event
+        /// </summary>
+        public class DataValidChangedEventArgs
+        {
+            public bool DataValid { get; private set; }
+            public DataValidChangedEventArgs(bool dataValid)
+            {
+                DataValid = dataValid;
+            }
+        }
     }
 }
