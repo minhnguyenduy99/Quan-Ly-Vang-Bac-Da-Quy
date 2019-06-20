@@ -36,8 +36,8 @@ namespace UIProject.ViewModels.LayoutViewModels
                 if (value != null)
                 {
                     selectedItem.IsSelected = true;
-                    OnSelectedItemChanged(new SelectedItemChangedEventArgs(selectedItem));
                 }
+                OnSelectedItemChanged(new SelectedItemChangedEventArgs(selectedItem));
             }
         }      
 
@@ -138,18 +138,13 @@ namespace UIProject.ViewModels.LayoutViewModels
             {
                 Items.Add(new ItemViewModel<T>(item));
             }
-            OnItemsSourceChanged();
-        }
-
-        protected virtual void OnItemsSourceChanged()
-        {
-            Filter();
+            OnItemsSourceRefresh();
         }
 
         protected virtual void OnItemsSourceRefresh()
         {
-            SelectedItem = null;
-            DisplayItems = null;
+            Filter();
+            Reload();
         }
 
         // Everytime an item is added to or remove from the collection, update the DisplayItems property

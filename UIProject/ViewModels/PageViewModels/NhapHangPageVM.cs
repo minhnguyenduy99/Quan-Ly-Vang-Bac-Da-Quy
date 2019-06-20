@@ -29,8 +29,7 @@ namespace UIProject.ViewModels.PageViewModels
         public ICommand SubmitPhieuNhapHangCommand
         {
             get => submitPhieuNhapHangCmd ?? new BaseCommand<IWindow>(
-                OnSubmitPhieuNhapHangCommandExecute,
-                window => NhapHangVM.IsDataValid);
+                OnSubmitPhieuNhapHangCommandExecute);
             private set => submitPhieuNhapHangCmd = value;
         }
 
@@ -45,8 +44,6 @@ namespace UIProject.ViewModels.PageViewModels
             get => themSanPhamCmd ?? new BaseCommand<IWindowExtension>(OnThemSanPhamCommandExecute);
             set => themSanPhamCmd = value;
         }
-
-
 
         public SearchTextBoxViewModel<SanPhamModel> TimKiemSanPhamVM { get; private set; }
         public SearchTextBoxViewModel<NhaCungCapModel> TimKiemNhaCungCapVM { get; private set; }
@@ -71,7 +68,6 @@ namespace UIProject.ViewModels.PageViewModels
 
                 return nhaCCItem.Model.TenNCC.ToLower().StartsWith(TimKiemNhaCungCapVM.Text.ToLower());
             }
-
             void TimKiemNhaCungCapVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
                 var nhaCCDaChon = e.SelectedItem as ItemViewModel<NhaCungCapModel>;

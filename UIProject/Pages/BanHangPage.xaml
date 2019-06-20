@@ -19,6 +19,7 @@
       Title="BanHangPage">
     <Page.Resources>
         <converters:MoneyRuleConverter x:Key="moneyConverter"/>
+        <converters:NumberValidateConverter x:Key="numberValidateConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -119,7 +120,7 @@
                                                 HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                                 CellStyle="{StaticResource CenteredDataGridCell}"/>
                             <DataGridTextColumn Width="90"
-                                                Binding="{Binding Model.DonViTinh}"
+                                                Binding="{Binding Model.TenDVT}"
                                                 CanUserSort="False"
                                                 Header="Đơn vị tính"
                                                 TextBlock.TextAlignment="Center"
@@ -134,7 +135,7 @@
                                                 EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"
                                                 IsReadOnly="False"/>
                             <DataGridTextColumn Width="150"
-                                                Binding="{Binding Model.DonGiaMuaVao, Converter={StaticResource moneyConverter}}"
+                                                Binding="{Binding Model.DonGiaBanRa, Converter={StaticResource moneyConverter}}"
                                                 Header="Đơn giá"
                                                 TextBlock.TextAlignment="Right"
                                                 IsReadOnly="True"
@@ -323,7 +324,7 @@
                                      Margin="7"
                                      Height="auto"
                                      VerticalAlignment="Stretch"
-                                     Text="{Binding HoaDon.PhieuBan.GhiChu, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                                     Text="{Binding HoaDonVM.PhieuBan.GhiChu, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
@@ -369,7 +370,7 @@
                                            HorizontalContentAlignment="Right"
                                            Style="{StaticResource MediumLabelStyle}"
                                            FontWeight="Normal"
-                                           Content="{Binding HoaDonVM.TongTienHoaDon, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource moneyConverter}}"/>
+                                           Content="{Binding HoaDonVM.PhieuBan.ThanhTien, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource moneyConverter}}"/>
                                 </DockPanel>
 
                                 <TextBox Grid.Row="0" Grid.Column="1"
@@ -379,7 +380,7 @@
                                          Style="{StaticResource UIProjectNoFieldTextBoxStyle}"
                                          materialDesign:HintAssist.Hint="Thuế"
                                          Margin="5"
-                                         Text="{Binding HoaDonVM.Thue, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                                         Text="{Binding HoaDonVM.PhieuBan.Thue, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource numberValidateConverter}}"/>
                                 <Grid Grid.Row="1" Grid.Column="1"
                                       VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
@@ -393,7 +394,7 @@
                                              TextAlignment="Right"
                                              Margin="5"
                                              materialDesign:HintAssist.Hint="Chiết khấu"
-                                             Text="{Binding HoaDonVM.ChietKhau, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource moneyConverter}}"/>
+                                             Text="{Binding HoaDonVM.PhieuBan.ChietKhau, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource numberValidateConverter}}"/>
                                 </Grid>
                             </Grid>
                             <Grid Grid.Row="2">

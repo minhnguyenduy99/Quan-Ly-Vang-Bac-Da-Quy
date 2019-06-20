@@ -24,8 +24,8 @@ namespace UIProject.ServiceProviders
             {
                 try
                 {
-                    var dateX = (DateTime)new ToShortDateConverter().ConvertBack(castX.NgayLap, typeof(DateTime), null, null);
-                    var dateY = (DateTime)new ToShortDateConverter().ConvertBack(castY.NgayLap, typeof(DateTime), null, null);
+                    var dateX = DateTime.ParseExact(castX.NgayLapDate, "dd/MM/yyyy", null);
+                    var dateY = DateTime.ParseExact(castY.NgayLapDate, "dd/MM/yyyy", null);
                     if (SortDirection == ListSortDirection.Ascending)
                         return dateX.CompareTo(dateY);
                     else

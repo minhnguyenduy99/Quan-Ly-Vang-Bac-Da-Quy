@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using UIProject.Events;
 using UIProject.ServiceProviders;
@@ -95,7 +96,15 @@ namespace UIProject.ViewModels.PageViewModels
         private void SetUpHoaDonVM()
         {
             HoaDonVM = new HoaDonViewModel();
+            HoaDonVM.SanPhamKhongDu += HoaDonVM_SanPhamKhongDuHandler ;
+
+            // local function
+            void HoaDonVM_SanPhamKhongDuHandler(object sender, EventArgs e)
+            {
+                MessageBox.Show("Không đủ số lượng cho sản phẩm này");
+            }
         }
+
 
         private void SetUpBolocTimKiemSanPham()
         {
@@ -191,6 +200,8 @@ namespace UIProject.ViewModels.PageViewModels
                 Reload();
             }
         }
+
+
         #endregion
 
         #region Setup components
@@ -222,7 +233,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemSanPhamVM.Reload();
             TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
 
-            HoaDonVM.DanhSachChiTietBan.Reload();
+            HoaDonVM.Reload();
         }
         #endregion
     }

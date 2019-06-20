@@ -19,14 +19,33 @@ namespace UIProject.ViewModels.PageViewModels
     public class DanhSachDonHangPageVM : BasePageViewModel
     {
         private IEnumerable<PhieuBanModel> phieuBanSource;
+        private DateTime? thoiGianLapPhieu;
 
         public SearchTextBoxViewModel<PhieuBanModel> TimKiemPhieuBanVM { get; set; }
 
         public ObservableCollectionViewModel<PhieuBanModel> DanhSachPhieuBanVM { get; set; }
 
-        public HoaDonViewModel HoaDonHienTai { get; private set; }
+        public ObservableCollectionViewModel<ChiTietBanModel> DanhSachChiTietBanVM { get; private set; }
 
-        public DateTime ThoiGianLapPhieu { get; set; }
+        public DateTime? ThoiGianLapPhieu
+        {
+            get => thoiGianLapPhieu;
+            set
+            {
+                SetProperty(ref thoiGianLapPhieu, value);
+                OnThoiGianLapPhieuThayDoi();
+
+                // local function
+                void OnThoiGianLapPhieuThayDoi()
+                {
+                    if (DanhSachPhieuBanVM != null)
+                        DanhSachPhieuBanVM.Filter();
+                }
+            }
+
+        }
+
+
 
         public ICommand BanHangCommand
         {
@@ -54,9 +73,9 @@ namespace UIProject.ViewModels.PageViewModels
         {
         }
 
-        private void SetUpHoaDonVM()
+        private void SetUpDanhSachChiTietBanVM()
         {
-            HoaDonHienTai = new HoaDonViewModel();  
+            DanhSachChiTietBanVM = new ObservableCollectionViewModel<ChiTietBanModel>();
         }
         private void SetUpDanhSachPhieuBanVM()
         {
@@ -65,14 +84,19 @@ namespace UIProject.ViewModels.PageViewModels
             DanhSachPhieuBanVM.Filters.Add(LocTheoThoiGianCallBack);
             DanhSachPhieuBanVM.SelectedItemChanged += DanhSachPhieuBanVM_SelectedItemChanged;
 
+
+            // local function
             void DanhSachPhieuBanVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
                 var phieuBanDaChonItem = e.SelectedItem as ItemViewModel<PhieuBanModel>;
                 if (phieuBanDaChonItem == null)
+                {
+                    DanhSachChiTietBanVM.Clear();
                     return;
+                }
 
-                HoaDonHienTai.PhieuBan = phieuBanDaChonItem.Model;
-
+                var danhSachChiTietBan = DataAccess.LoadChiTietBan().Where(chiTiet => chiTiet.MaPhieuBan == phieuBanDaChonItem.Model.MaPhieu);
+                DanhSachChiTietBanVM.RefreshItemsSource(danhSachChiTietBan);
             }
         }
 
@@ -98,11 +122,10 @@ namespace UIProject.ViewModels.PageViewModels
 
         private bool LocTheoMaDonHangCallBack(ItemViewModel<PhieuBanModel> phieuBan)
         {
-            var castPhieuBan = TimKiemPhieuBanVM.SelectedItem as ItemViewModel<PhieuBanModel>;
-            if (castPhieuBan == null)
+            if (phieuBan == null || phieuBan.Model == null)
                 return true;
-            return castPhieuBan.Model.MaPhieu.ToString().ToLower()
-                .StartsWith(phieuBan.Model.MaPhieu.ToString().ToLower());
+            return phieuBan.Model.MaPhieu.ToString().ToLower()
+                .StartsWith(TimKiemPhieuBanVM.Text.ToLower());
         }
 
         private bool LocTheoThoiGianCallBack(ItemViewModel<PhieuBanModel> phieuBan)
@@ -111,9 +134,11 @@ namespace UIProject.ViewModels.PageViewModels
                 return true;
             if (phieuBan.Model == null)
                 return true;
+            if (ThoiGianLapPhieu == null)
+                return true;
 
-            DateTime ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuBan.Model.NgayLap, null, null, null);
-            return ngayLap.Date == ThoiGianLapPhieu.Date;
+            DateTime ngayLap = DateTime.Parse(phieuBan.Model.NgayLap);
+            return ngayLap.Date == ThoiGianLapPhieu?.Date;
         }
         #endregion
 
@@ -137,8 +162,10 @@ namespace UIProject.ViewModels.PageViewModels
         {
             phieuBanSource = DataAccess.LoadPhieuBan();
 
+            SetUpDanhSachChiTietBanVM();
             SetUpDanhSachPhieuBanVM();
             SetUpTimKiemPhieuBanVM();
+            ThoiGianLapPhieu = null;
         }
 
         protected override void ReloadComponentsInternal()
@@ -148,6 +175,9 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemPhieuBanVM.Reload();
             TimKiemPhieuBanVM.RefreshItemSource(phieuBanSource);
             DanhSachPhieuBanVM.Reload();
+            DanhSachPhieuBanVM.RefreshItemsSource(phieuBanSource);
+            ThoiGianLapPhieu = null;
+            DanhSachChiTietBanVM.Clear();
         }
         #endregion
 

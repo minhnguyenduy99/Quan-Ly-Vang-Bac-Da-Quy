@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using BaseMVVM_Service.BaseMVVM.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,61 @@ namespace ModelProject
             }
             return false;
         }
+
+
+        /// <summary>
+        /// Sau khi chi tiết mua được submit thành công, sẽ update lại sản phẩm và phiếu mua tương ứng
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnSubmited(SubmitEventArgs e)
+        {
+            if (e.SubmitResult == true)
+            {
+                switch (e.SubmitType)
+                {
+                    case SubmitType.Add:
+                        UpdatePhieuMua_SubmitType_Add();
+                        UpdateSanPham_SubmitType_Add();
+                        break;
+                    case SubmitType.Delete:
+                        UpdatePhieuMua_SubmitType_Delete();
+                        UpdateSanPham_SubmitType_Delete();
+                        break;
+                }
+
+            }
+            base.OnSubmited(e);
+
+            // local function
+            void UpdatePhieuMua_SubmitType_Add()
+            {
+                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMuaHang);
+                phieuMua.ThanhTien += this.ThanhTien;
+                phieuMua.Submit(SubmitType.Update);
+            }
+            void UpdateSanPham_SubmitType_Add()
+            {
+                var sanPham = DataAccess.LoadSPByMaSP(this.MaSP);
+                sanPham.DonGiaMuaVao = this.DonGia;
+                sanPham.SoLuong += this.SoLuong;
+                sanPham.Submit(SubmitType.Update);
+            }
+
+            void UpdatePhieuMua_SubmitType_Delete()
+            {
+                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMuaHang);
+                phieuMua.ThanhTien -= this.ThanhTien;
+                phieuMua.Submit(SubmitType.Update);
+            }
+            void UpdateSanPham_SubmitType_Delete()
+            {
+                var sanPham = DataAccess.LoadSPByMaSP(this.MaSP);
+                sanPham.SoLuong -= this.SoLuong;
+                sanPham.Submit(SubmitType.Update);
+            }
+        }
+
+
 
         #region ACCESS_DB_METHOD
         protected override void Add()

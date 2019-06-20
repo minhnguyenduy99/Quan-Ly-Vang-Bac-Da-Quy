@@ -16,7 +16,6 @@ namespace BaseMVVM_Service.BaseMVVM.Interfaces
         Delete = 2
     }
 
-
     /// <summary>
     /// Data is provided with submit ability to be saved in Database
     /// </summary>
@@ -30,5 +29,24 @@ namespace BaseMVVM_Service.BaseMVVM.Interfaces
         /// <param name="submitType">The type of submition</param>
         /// <returns></returns>
         bool Submit(SubmitType submitType);
+
+        /// <summary>
+        /// Event occurs when the data is submited
+        /// </summary>
+        event EventHandler<SubmitEventArgs> Submited;
+    }
+
+    /// <summary>
+    /// Provides information about events related to data submition
+    /// </summary>
+    public class SubmitEventArgs: EventArgs
+    {
+        public bool SubmitResult { get; private set; }
+        public SubmitType SubmitType { get; private set; }
+        public SubmitEventArgs(bool submitResult, SubmitType submitType)
+        {
+            SubmitResult = submitResult;
+            SubmitType = submitType;
+        }
     }
 }

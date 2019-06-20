@@ -16,32 +16,46 @@ namespace ModelProject
         private double thue;
         private double chietKhau;
         private string ghichu;
-        private double thanhTien;
+        private long thanhTien;
+
+        private bool isUpdateFromDatabase = true;
 
         #region Main properties
-        public double ThanhTien
+        public long ThanhTien
         {
             get => thanhTien;
-            set => SetProperty(ref thanhTien, value);
+            set
+            {
+                if (thanhTien == value)
+                    return;
+                SetProperty(ref thanhTien, value);         
+                GiaTriThanhTienThayDoi?.Invoke(this, EventArgs.Empty);
+            }
         }
-
         public long? MaPhieu
         {
             get => maPhieu;
             set => SetProperty(ref maPhieu, value);
         }
-
         public string NgayLap
         {
             get => ngayLap;
-            set => SetProperty(ref ngayLap, value);
+            set
+            {
+                SetProperty(ref ngayLap, value);
+                bool parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
+                if (parseSuccess)
+                {
+                    NgayLapDateTime = ngayLapDateTime;
+                }
+
+            }
         }
         public long? MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
         }
-
         public double Thue
         {
             get => thue;
@@ -49,29 +63,75 @@ namespace ModelProject
             {
                 if (value < 0 || value > 100)
                 {
-                    throw new Exception("Thuế (đơn vị %) có giá trị từ 0 đến 100");
+                    IsDataValid = false;
+                    return;
                 }
+                IsDataValid = true;
+                ThanhTien = GetGiaTriThanhTienTieuChuan();
                 SetProperty(ref thue, value);
+                UpdateGiaTriThanhTienMoi();
             }
         }
-
         public double ChietKhau
         {
             get => chietKhau;
             set
             {
                 if (value < 0 || value > 100)
-                    throw new Exception("Chiết khấu (đơn vị %) có giá trị từ 0 đến 100");
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                IsDataValid = true;
+                ThanhTien = GetGiaTriThanhTienTieuChuan();
                 SetProperty(ref chietKhau, value);
+                UpdateGiaTriThanhTienMoi();
             }
         }
-
         public string GhiChu
         {
             get => ghichu;
             set => SetProperty(ref ghichu, value);
         }
         #endregion
+
+        #region Additional properties
+       
+        private DateTime NgayLapDateTime
+        {
+            get => GetPropertyValue<DateTime>();
+            set => SetProperty(value);
+        }
+        public string NgayLapDate
+        {
+            get => NgayLapDateTime.ToString("dd/MM/yyyy");
+            private set
+            {
+                SetProperty(value);
+            }
+        }
+        public string NgayLapTime
+        {
+            get => NgayLapDateTime.ToShortTimeString();
+            private set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public string TenKH
+        {
+            get => DataAccess.LoadKHByMaKH(MaKH)?.TenKH;
+        }
+        #endregion
+
+        public PhieuBanModel()
+        {
+            NgayLap = DateTime.Now.ToString();
+        }
+
+
+        public event EventHandler GiaTriThanhTienThayDoi;
 
         public override bool Equals(object obj)
         {
@@ -83,7 +143,25 @@ namespace ModelProject
             }
             return false;
         }
-       
+        
+
+        /// <summary>
+        /// Gía trị thành tiền được tính dựa trên giá trị thuế và chiết khấu cũ
+        /// </summary>
+        /// <returns></returns>
+        private long GetGiaTriThanhTienTieuChuan()
+        {
+            return (long)(ThanhTien * 100 / (100 + Thue - ChietKhau));
+        }
+
+        /// <summary>
+        /// Đây là giá trị của thành tiền được tính dựa trên giá trị thuế và chiết khấu mới
+        /// </summary>
+        private void UpdateGiaTriThanhTienMoi()
+        {
+            ThanhTien = (long)(ThanhTien * (100 + Thue - ChietKhau) / 100);
+        }
+
 
         #region ACCESS_DB_REGION
         protected override void Add()

@@ -5,23 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseMVVM_Service;
 using BaseMVVM_Service.BaseMVVM;
+using BaseMVVM_Service.BaseMVVM.Interfaces;
 using ModelProject.ExtensionFunctions;
 
 namespace ModelProject
 {
     public class ChiTietBanModel : BaseSubmitableModel
     {
-        private long? maPhieu;
+        private long? maPhieuBan;
         private long? maSP;    
         private int soLuong;
         private long thanhTien;
-        
+
+        public static bool IsUpdateFromDatabase { get; set; }
 
         #region Main properties
-        public long? MaPhieu
+        public long? MaPhieuBan
         {
-            get => maPhieu;
-            private set => SetProperty(ref maPhieu, value);
+            get => maPhieuBan;
+            set => SetProperty(ref maPhieuBan, value);
         }
         public long? MaSP
         {
@@ -29,6 +31,11 @@ namespace ModelProject
             private set
             {
                 SetProperty(ref maSP, value);
+                var sanPham = DataAccess.LoadSPByMaSP(value);
+                if (sanPham == null)
+                    return;
+                TenSP = sanPham.TenSP;
+                DonGiaBanRa = sanPham.DonGiaBanRa;
             }
         }
         public int SoLuong
@@ -36,6 +43,17 @@ namespace ModelProject
             get => soLuong;
             set
             {
+                if (IsUpdateFromDatabase)
+                {
+                    SetProperty(ref soLuong, value);
+                    return;
+                }
+                var soLuongSanPham = DataAccess.LoadSPByMaSP(MaSP).SoLuong;
+                if (value > soLuongSanPham)
+                {
+                    OnSoLuongSanPhamKhongDu();
+                    return;
+                }
                 SetProperty(ref soLuong, value);
                 OnSoLuongThayDoi();
             }
@@ -43,13 +61,13 @@ namespace ModelProject
         public long ThanhTien
         {
             get => thanhTien;
-            set => SetProperty(ref thanhTien, value);
+            private set => SetProperty(ref thanhTien, value);
         }
         #endregion
 
 
         #region Additional properties
-        public long DonGiaMuaVao
+        public long DonGiaBanRa
         {
             get => GetPropertyValue<long>();
             private set
@@ -87,9 +105,9 @@ namespace ModelProject
         {
             get => MoneyConverter.ConvertToMoneyFormat(ThanhTien);
         }
-        public string DonGiaMuaVaoMoneyFormat
+        public string DonGiaBanRaMoneyFormat
         {
-            get => MoneyConverter.ConvertToMoneyFormat(DonGiaMuaVao);
+            get => MoneyConverter.ConvertToMoneyFormat(DonGiaBanRa);
         }
         #endregion
 
@@ -98,9 +116,10 @@ namespace ModelProject
         {
             int soLuongSanPham = DataAccess.LoadSPByMaSP(sanPham.MaSP).SoLuong;
 
-            MaPhieu = hoaDon.MaPhieu;
+            MaPhieuBan = hoaDon.MaPhieu;
             MaSP = sanPham.MaSP;
             SoLuong = 1;
+
 
             // load additional data
             var loaiSanPham = DataAccess.LoadLoaiSanPhamByMaLSP(sanPham.MaLoaiSP);
@@ -108,8 +127,15 @@ namespace ModelProject
             TenSP = sanPham.TenSP;
             TenLoaiSP = loaiSanPham.TenLoaiSP;
             TenDVT = DataAccess.LoadDonViTinhByMADVT(loaiSanPham.MaDVT).TenDVT;
-            DonGiaMuaVao = sanPham.DonGiaMuaVao;
+            DonGiaBanRa = sanPham.DonGiaBanRa;
+
+            ThanhTien = DonGiaBanRa;
         }
+
+        /// <summary>
+        /// This constructor is only used for data access from database
+        /// </summary>
+        public ChiTietBanModel() : base() { }
 
         public override bool Equals(object obj)
         {
@@ -117,7 +143,7 @@ namespace ModelProject
             {
                 var castChiTietBan = obj as ChiTietBanModel;
                 //Two recept details only match if and only if they both have the same MaPhieuMuaHang and MaSP.
-                return MaPhieu == castChiTietBan.MaPhieu && MaSP == castChiTietBan.MaSP;
+                return MaPhieuBan == castChiTietBan.MaPhieuBan && MaSP == castChiTietBan.MaSP;
             }
             return false;
         }
@@ -126,23 +152,12 @@ namespace ModelProject
         
         protected virtual void OnSoLuongThayDoi()
         {
-            int soLuongSanPham = DataAccess.LoadSPByMaSP(MaSP).SoLuong;
-
-            // số lượng sản phẩm đã chọn trong chi tiết lớn hơn số lượng sản phẩm hiện có
-            if (SoLuong > soLuongSanPham)
-            {
-                OnSoLuongSanPhamKhongDu();
-                return;
-            }
-
             UpdateTongTienChiTiet();
-
             SoLuongThayDoi?.Invoke(this, EventArgs.Empty);
         }
-
         protected virtual void UpdateTongTienChiTiet()
         {
-            ThanhTien = (long)(100 + PhanTramLoiNhuan) / 100 * SoLuong * DonGiaMuaVao;
+            ThanhTien = DonGiaBanRa * SoLuong;
         }
 
         public event EventHandler SoLuongSanPhamKhongDu;
@@ -150,6 +165,52 @@ namespace ModelProject
         {
             SoLuongSanPhamKhongDu?.Invoke(this, EventArgs.Empty);
         }
+        protected override void OnSubmited(SubmitEventArgs e)
+        {
+            if (e.SubmitResult == true)
+            {
+                switch (e.SubmitType)
+                {
+                    case SubmitType.Add:
+                        UpdateSanPham_SubmitType_Add();
+                        break;
+                    case SubmitType.Delete:
+                        UpdatePhieuBan_SubmitType_Delete();
+                        UpdateSanPham_SubmitType_Delete();
+                        break;
+                }
+            }
+            base.OnSubmited(e);
+
+            // local function
+            void UpdatePhieuBan_SubmitType_Add()
+            {
+                var phieuBan = DataAccess.LoadPhieuBanByMaPhieuBan(this.MaPhieuBan);
+                phieuBan.ThanhTien += this.ThanhTien;
+                phieuBan.Submit(SubmitType.Update);
+            }
+            void UpdateSanPham_SubmitType_Add()
+            {
+                var sanPham = DataAccess.LoadSPByMaSP(this.MaSP);
+                sanPham.SoLuong -= this.SoLuong;
+                sanPham.Submit(SubmitType.Update);
+            }
+
+            void UpdateSanPham_SubmitType_Delete()
+            {
+                var phieuBan = DataAccess.LoadPhieuBanByMaPhieuBan(this.MaPhieuBan);
+                phieuBan.ThanhTien -= this.ThanhTien;
+                phieuBan.Submit(SubmitType.Update);
+            }
+            void UpdatePhieuBan_SubmitType_Delete()
+            {
+                var sanPham = DataAccess.LoadSPByMaSP(this.MaSP);
+                sanPham.SoLuong += this.SoLuong;
+                sanPham.Submit(SubmitType.Update); 
+            }
+        }
+
+
 
         #region Access Database methods
         protected override void Add()

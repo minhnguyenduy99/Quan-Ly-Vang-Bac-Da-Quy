@@ -86,9 +86,8 @@ namespace UIProject.Behaviors
             var dataGrid = sender as DataGrid;
             if (dataGrid == null || !GetAllowCustomSort(dataGrid)) return;
 
-            var listColView = dataGrid.ItemsSource as ListCollectionView;
-            if (listColView == null)
-                throw new Exception("The DataGrid's ItemsSource property must be of type, ListCollectionView");
+
+            ListCollectionView listColView = new ListCollectionView(dataGrid.ItemsSource as IList);
 
             // Sanity check
             var sorter = GetCustomSorter(e.Column);
@@ -97,8 +96,6 @@ namespace UIProject.Behaviors
 
             // The guts.
             e.Handled = true;
-
-
 
             var direction = (e.Column.SortDirection != ListSortDirection.Ascending)
                                 ? ListSortDirection.Ascending

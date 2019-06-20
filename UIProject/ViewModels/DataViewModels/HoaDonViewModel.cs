@@ -14,7 +14,7 @@ using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.DataViewModels
 {
-    public class HoaDonViewModel : BaseViewModel, ISubmitViewModel
+    public class HoaDonViewModel : BaseViewModelObject, ISubmitViewModel
     {
         public ISubmitable Data { get; set; } = null;
 
@@ -34,8 +34,11 @@ namespace UIProject.ViewModels.DataViewModels
                 DanhSachChiTietBan?.Clear();
                 if (value == null)
                     return;
-
-                // var dsChiTietBan = DataAccess.LoadChiTietBanByMaCTB(value.MaPhieu);
+                else
+                {
+                    var dsChiTietBan = DataAccess.LoadChiTietBanByMaCTB(PhieuBan.MaPhieu);
+                    dsChiTietBan.ForEach(chiTiet => DanhSachChiTietBan.Add(chiTiet));
+                }
             }
         }
 
@@ -45,24 +48,6 @@ namespace UIProject.ViewModels.DataViewModels
             set => SetProperty(value);
         }
 
-        public int Thue
-        {
-            get => GetPropertyValue<int>();
-            set
-            {
-                SetProperty(value);
-                UpdateHoaDon();
-            }
-        }
-        public int ChietKhau
-        {
-            get => GetPropertyValue<int>();
-            set
-            {
-                SetProperty(value);
-                UpdateHoaDon();
-            }
-        }
         public long SoTienKhachTra
         {
             get => GetPropertyValue<long>();
@@ -89,11 +74,6 @@ namespace UIProject.ViewModels.DataViewModels
             get => GetPropertyValue<long>();
             private set => SetProperty(value);
         }
-        public long TongTienHoaDon
-        {
-            get => GetPropertyValue<long>();
-            private set => SetProperty(value);
-        }
 
         #region Converts from long type to money type with comma separation
         public string SoTienKhachTraConverter
@@ -113,7 +93,7 @@ namespace UIProject.ViewModels.DataViewModels
 
         public string TongTienHoaDonConverter
         {
-            get => (string)new MoneyRuleConverter().Convert(TongTienHoaDon, null, null, null);
+            get => (string)new MoneyRuleConverter().Convert(PhieuBan.ThanhTien, null, null, null);
         }
         #endregion
 
@@ -129,21 +109,18 @@ namespace UIProject.ViewModels.DataViewModels
             remove { DanhSachChiTietBan.ContainsItemModel -= value; }
         }
 
-        public HoaDonViewModel(PhieuBanModel phieuBan)
+        public HoaDonViewModel() : this(new PhieuBanModel()) { }
+        public HoaDonViewModel(PhieuBanModel phieuBan) : base()
         {
-            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>();
-            DanhSachChiTietBan.ItemAdded += ThemSanPhamHandler;
-            DanhSachChiTietBan.ItemRemoved += XoaSanPhamHandler;
             PhieuBan = phieuBan;
-            KhachHang = new KhachHangModel()
-            {
-                MaKH = null
-            };
+            PhieuBan.GiaTriThanhTienThayDoi += PhieuBan_GiaTriThanhTienThayDoi;
         }
 
-        public HoaDonViewModel() : this(new PhieuBanModel()) { }
-
-
+        // Trong trường hợp tổng tiền hóa đơn thay đổi do chiết khấu và thuế
+        private void PhieuBan_GiaTriThanhTienThayDoi(object sender, EventArgs e)
+        {    
+            SoTienThoiLai = SoTienKhachTra - PhieuBan.ThanhTien;
+        }
 
         public void ThemChiTietBan(ChiTietBanModel chiTiet)
         {
@@ -153,38 +130,50 @@ namespace UIProject.ViewModels.DataViewModels
         private void ThemSanPhamHandler(object sender, ItemAddedEventArgs<ChiTietBanModel> e)
         {
             e.AddedItem.Model.SoLuongThayDoi += (s, ev) => UpdateHoaDon();
+            e.AddedItem.Model.SoLuongSanPhamKhongDu += SoLuongSanPhamKhongDuHandler;
             UpdateHoaDon();
         }
 
+        private void SoLuongSanPhamKhongDuHandler(object sender, EventArgs e)
+        {
+            SanPhamKhongDu?.Invoke(this, EventArgs.Empty);
+        }
         private void XoaSanPhamHandler(object sender, ItemRemovedEventArgs<ChiTietBanModel> e)
         {
             e.RemovedItem.Model.SoLuongThayDoi -= (s, ev) => UpdateHoaDon();
+            e.RemovedItem.Model.SoLuongSanPhamKhongDu -= SoLuongSanPhamKhongDuHandler;
             UpdateHoaDon();
         }
 
+        public event EventHandler SanPhamKhongDu;
+
         private void UpdateHoaDon()
         {
-            TongTienChiTietBan = DanhSachChiTietBan.Items.ToList().Sum(item => item.Model.ThanhTien);
-            TongTienHoaDon = TongTienChiTietBan * (100 + Thue - ChietKhau) / 100;
-            SoTienThoiLai = SoTienKhachTra - TongTienHoaDon;
+            TongTienChiTietBan = DanhSachChiTietBan.Models.Sum(chiTiet => chiTiet.ThanhTien);
+            PhieuBan.ThanhTien = (long)(TongTienChiTietBan * (100 - PhieuBan.ChietKhau + PhieuBan.Thue) / 100);
+            SoTienThoiLai = SoTienKhachTra - PhieuBan.ThanhTien;
         }
 
         public bool Submit()
         {
             try
             {
-                bool ketQuaSubmit = true;
-                if (KhachHang == null)
+                PhieuBan.MaKH = KhachHang?.MaKH;
+                var submitPhieuBanSuccess = PhieuBan.Submit(SubmitType.Add);
+                if (!submitPhieuBanSuccess)
                 {
-                    KhachHang = new KhachHangModel();
+                    OnDataSubmited(new SubmitedDataEventArgs(null, false));
+                    return false;
                 }
-                PhieuBan.MaKH = KhachHang.MaKH;
 
-                PhieuBan.Submit(SubmitType.Add);
-                DanhSachChiTietBan.Models.ForEach(model => model.Submit(SubmitType.Add));
+                foreach(var chiTiet in DanhSachChiTietBan.Models)
+                {
+                    chiTiet.MaPhieuBan = PhieuBan.MaPhieu;
+                    chiTiet.Submit(SubmitType.Add);
+                }
 
                 OnDataSubmited(new SubmitedDataEventArgs(null, true));
-                return ketQuaSubmit;
+                return true;
             }
             catch
             {
@@ -196,6 +185,23 @@ namespace UIProject.ViewModels.DataViewModels
         protected virtual void OnDataSubmited(SubmitedDataEventArgs e)
         {
             SubmitedData?.Invoke(this, e);
+        }
+
+        protected override void LoadComponentsInternal()
+        {
+            DanhSachChiTietBan = new ObservableCollectionViewModel<ChiTietBanModel>();
+            DanhSachChiTietBan.ItemAdded += ThemSanPhamHandler;
+            DanhSachChiTietBan.ItemRemoved += XoaSanPhamHandler;
+            PhieuBan = new PhieuBanModel();
+            KhachHang = new KhachHangModel();
+        }
+
+        protected override void ReloadComponentsInternal()
+        {
+            DanhSachChiTietBan.Reload();
+            SoTienKhachTra = SoTienThoiLai = 0;
+            PhieuBan = new PhieuBanModel();
+            KhachHang = new KhachHangModel();
         }
     }
 }

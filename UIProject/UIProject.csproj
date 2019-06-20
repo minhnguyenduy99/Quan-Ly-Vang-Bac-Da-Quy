@@ -110,6 +110,7 @@
     <Compile Include="Converters\LongStringToThreeDotConverter.cs" />
     <Compile Include="Converters\ModelDataConverter.cs" />
     <Compile Include="Converters\MoneyRuleConverter.cs" />
+    <Compile Include="Converters\NumberValidateConverter.cs" />
     <Compile Include="Converters\PageViewModelToPageControlConverter.cs" />
     <Compile Include="Converters\TabCheckedToVisibilityConverter.cs" />
     <Compile Include="Converters\TabNameToTabViewModelConverter.cs" />

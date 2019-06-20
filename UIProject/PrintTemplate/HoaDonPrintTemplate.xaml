@@ -86,7 +86,7 @@
                                Content="Khách hàng : "/>
                         <Label Grid.Row="1" Grid.Column="0"
                                HorizontalContentAlignment="Right"
-                               Content="Nhân viên : "/>
+                               Content="Mã KH : "/>
                         <Label Grid.Row="0" Grid.Column="1"
                                x:Name="khachhang"
                                DataContext="{Binding KhachHang}"
@@ -183,9 +183,9 @@
                                     </Style>
                                 </StackPanel.Resources>
                                 <Label Content="{Binding TongTienChiTietBan, Converter={StaticResource moneyConverter}}"/>
-                                <Label Content="{Binding Thue}"/>
-                                <Label Content="{Binding ChietKhau}"/>
-                                <Label Content="{Binding TongTienHoaDon, Converter={StaticResource moneyConverter}}"/> 
+                                <Label Content="{Binding PhieuBan.Thue}"/>
+                                <Label Content="{Binding PhieuBan.ChietKhau}"/>
+                                <Label Content="{Binding PhieuBan.ThanhTien, Converter={StaticResource moneyConverter}}"/> 
                             </StackPanel>
                         </Grid>
                     </Border>

@@ -8,7 +8,8 @@
         Title="DocumentPrintViewerWindow"
         WindowStyle="None"
         Style="{StaticResource CustomWindowStyle}"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Border BorderBrush="Black"
             BorderThickness="1">
         <Grid Background="{StaticResource MaterialDesignPaper}">
@@ -23,10 +24,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <Button Content="In"
+                <Button x:Name="btnPrint"
+                        Content="In"
                         Command="{Binding PrintCommand}"
-                        CommandParameter="{Binding Document, ElementName=documentViewer}"
-                        Click="Button_Click"/>
+                        CommandParameter="{Binding Document, ElementName=documentViewer}"/>
             </StackPanel>
             <FlowDocumentPageViewer Grid.Column="1"
                                     x:Name="documentViewer"           

@@ -41,7 +41,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO, MANCC) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao, @MaNCC); SELECT last_insert_rowid()", sanPham);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into SANPHAM (TENSP,MALOAISP,DONGIAMUAVAO, MANCC, SOLUONG, DONGIABANRA) values (@TenSP,@MaLoaiSP,@DonGiaMuaVao, @MaNCC, @SoLuong, @DonGiaBanRa); SELECT last_insert_rowid()", sanPham);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -51,7 +51,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update SANPHAM set TENSP = @tenSP, MALOAISP = @MaLoaiSP, DONGIAMUAVAO = @DonGiaMuaVao WHERE MASP = @MaSP", sanPham);
+                cnn.Execute("update SANPHAM set TENSP = @tenSP, MALOAISP = @MaLoaiSP, DONGIAMUAVAO = @DonGiaMuaVao, SOLUONG = @SoLuong, DONGIABANRA = @DonGiaBanRa WHERE MASP = @MaSP", sanPham);
             }
         }
 
@@ -312,7 +312,9 @@ namespace ModelProject
             {
                 try
                 {
+                    ChiTietBanModel.IsUpdateFromDatabase = true;
                     var output = cnn.Query<ChiTietBanModel>("select * from chitietban", new DynamicParameters());
+                    ChiTietBanModel.IsUpdateFromDatabase = false;
                     return output.ToList();
                 }
                 catch (DataException)
@@ -325,7 +327,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into chitietban(MAPHIEUMUAHANG,MASP,SOLUONG,THANHTIEN,DONGIAMUAVAO,CHIETKHAU,THUE) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@ThanhTien,@DonGiaMuaVao,@ChietKhau,@Thue); SELECT last_insert_rowid()", ctb);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into chitietban(MAPHIEUBAN,MASP,SOLUONG,THANHTIEN) values (@MaPhieuBan,@MaSP,@SoLuong,@ThanhTien); SELECT last_insert_rowid()", ctb);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -335,7 +337,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update chitietban set SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,DONGIAMUAVAO=@DonGiaMuaVao,CHIETKHAU=@ChietKhau,THUE=@Thue WHERE MAPHIEUMUAHANG = @maPhieuMuaHang and MASP = @maSP", ctb);
+                cnn.Execute("update chitietban set SOLUONG=@SoLuong,THANHTIEN=@ThanhTien WHERE MAPHIEUMUAHANG = @maPhieuMuaHang and MASP = @maSP", ctb);
             }
         }
 
@@ -372,7 +374,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietMua(MAPHIEUMUAHANG,MASP,SOLUONG,DONGIA) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia); SELECT last_insert_rowid()", ctm);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietMua(MAPHIEUMUA,MASP,SOLUONG,DONGIA,THANHTIEN) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia,@ThanhTien); SELECT last_insert_rowid()", ctm);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -563,7 +565,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuBan(MAPHIEU,NGAYLAP,MAKH, MANV, CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@MaNV,@ChietKhau, @Thue, @ThanhTien, @GhiChu); SELECT last_insert_rowid()", phieuBan);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuBan(MAPHIEU,NGAYLAP,MAKH,CHIETKHAU, THUE, THANHTIEN, GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@ChietKhau, @Thue, @ThanhTien, @GhiChu); SELECT last_insert_rowid()", phieuBan);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -573,7 +575,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuBan set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH, MANV = @MaNV, CHIETKHAU = @ChietKhau, THUE = @Thue, THANHTIEN = @ThanhTien, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", phieuBan);
+                cnn.Execute("update PhieuBan set NGAYLAP=@NgayLap,MAKH=@MaKH,CHIETKHAU = @ChietKhau, THUE = @Thue, THANHTIEN = @ThanhTien, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", phieuBan);
             }
         }
 
@@ -622,7 +624,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuMua set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MANCC=@MaNCC, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuMua);
+                cnn.Execute("update PhieuMua set NGAYLAP=@NgayLap,MANCC=@MaNCC, GHICHU = @GhiChu, THANHTIEN = @ThanhTien WHERE MAPHIEU = @maPhieu", PhieuMua);
             }
         }
 
@@ -878,14 +880,18 @@ namespace ModelProject
 
 
         //Các bản chi tiết 
-        public static ChiTietBanModel LoadChiTietBanByMaCTB(long? mactb)
+        public static List<ChiTietBanModel> LoadChiTietBanByMaCTB(long? mactb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ChiTietBanModel>("select * " +
-                    "from ChiTietBan " +
-                    "where MAPHIEUMUAHANG=@m ", new { m = mactb });
-                return output.ElementAt<ChiTietBanModel>(0);
+                try
+                {
+                    var output = cnn.Query<ChiTietBanModel>("select * " +
+                        "from ChiTietBan " +
+                        "where MAPHIEUBAN=@m ", new { m = mactb });
+                    return output.ToList();
+                }
+                catch { return new List<ChiTietBanModel>(); }
             }
         }
 

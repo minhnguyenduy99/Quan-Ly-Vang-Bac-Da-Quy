@@ -15,6 +15,7 @@ namespace ModelProject
         private string tenSP;
         private long? maNCC;
         private int soLuong;
+        private long donGiaBanRa;
 
         #region Main properties
         public long ? MaSP
@@ -45,13 +46,14 @@ namespace ModelProject
             get => donGiaMuaVao;
             set
             {
-                if (value <= 0)
+                if (value < 0)
                     IsDataValid = false;
                 else
                 {
                     IsDataValid = true;
                 }
                 SetProperty(ref donGiaMuaVao, value);
+                UpdateDonGiaBanRa();
             }
         }
         public string TenSP
@@ -73,6 +75,11 @@ namespace ModelProject
                 SetProperty(ref soLuong, value);
             }
         }
+        public long DonGiaBanRa
+        {
+            get => donGiaBanRa;
+            private set => SetProperty(ref donGiaBanRa, value);
+        }
         #endregion
 
         #region Additional Properties
@@ -89,6 +96,11 @@ namespace ModelProject
         }
         #endregion
 
+        private void UpdateDonGiaBanRa()
+        {
+            var phamTramLoiNhuan = DataAccess.LoadLoaiSanPhamByMaLSP(MaLoaiSP).PhanTramLoiNhuan;
+            DonGiaBanRa = (long)(DonGiaMuaVao * (100 + phamTramLoiNhuan) / 100);
+        }
 
         public override bool Equals(object obj)
         {

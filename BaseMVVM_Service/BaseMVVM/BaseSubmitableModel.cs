@@ -35,6 +35,8 @@ namespace BaseMVVM_Service.BaseMVVM
             IsDataValid = true;
         }
 
+        public event EventHandler<SubmitEventArgs> Submited;
+
         public virtual bool Submit(SubmitType submitType)
         {
             if (!IsDataValid)
@@ -42,11 +44,13 @@ namespace BaseMVVM_Service.BaseMVVM
             try
             {
                 InternalSubmit(submitType);
+                OnSubmited(new SubmitEventArgs(true, submitType));
                 return true;
             }
             catch
             {
                 //throw new Exception("Submit into database failed");
+                OnSubmited(new SubmitEventArgs(false, submitType));
                 return false;
             }
         }
@@ -61,6 +65,10 @@ namespace BaseMVVM_Service.BaseMVVM
             }
         }
 
+        protected virtual void OnSubmited(SubmitEventArgs e)
+        {
+            Submited?.Invoke(this, e);
+        }
 
         public override int GetHashCode()
         {

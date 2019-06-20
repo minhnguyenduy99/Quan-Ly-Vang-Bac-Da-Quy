@@ -108,15 +108,15 @@ namespace UIProject.ViewModels.DataViewModels
         public bool Submit()
         {
             var dsChiTiet = DSChiTietMua.Models;
-            var dsSanPham = DataAccess.LoadSanPham().Select(sanpham => sanpham.MaSP);
+            var dsSanPham = DataAccess.LoadSanPham();
             try
             {
-                long maPhieuMua = DataAccess.SavePhieuMua(PhieuMua);
+                PhieuMua.MaPhieu = DataAccess.SavePhieuMua(PhieuMua);
                 foreach (var chiTiet in dsChiTiet)
                 {
                     // Gán mã phiếu mua cho chi tiết và lưu xuống database
-                    chiTiet.MaPhieuMuaHang = maPhieuMua;
-                    chiTiet.Submit(SubmitType.Add);
+                    chiTiet.MaPhieuMuaHang = PhieuMua.MaPhieu;
+                    chiTiet.Submit(SubmitType.Add);                  
                 }
 
                 return true;

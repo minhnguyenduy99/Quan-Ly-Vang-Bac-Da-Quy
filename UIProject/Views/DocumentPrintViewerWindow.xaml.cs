@@ -51,10 +51,26 @@ namespace UIProject.Views
         private void PrintWndVM_PrintFinished(object sender, Events.PrintedEventArgs e)
         {
             DialogPopupWindow notifyWnd = new DialogPopupWindow();
+            DialogWindowViewModel notifyWndVM = new DialogWindowViewModel()
+            {
+                DialogType = DialogWindowType.Info,
+                MessageText = "Tạo phiếu bán thành công",
+                OKText = "OK"
+            };
+            notifyWnd.DataContext = notifyWndVM;
+            notifyWndVM.ButtonPressed += ButtonPressedHandler;
+
             notifyWnd.ShowDialog();
             this.DialogResult = e.PrintResult;
             this.Close();
+
+            void ButtonPressedHandler(object s, DialogButtonPressedEventArgs ev)
+            {
+                notifyWnd.DialogResult = true;
+                notifyWnd.Close();
+            }
         }
+
 
 
         private void UpdateBindingToLabel()
@@ -66,7 +82,6 @@ namespace UIProject.Views
             var tenKHlabel = LogicalTreeHelper.FindLogicalNode(document, "khachhang") as Label;
             tenKHlabel.Content = (document.DataContext as HoaDonViewModel).KhachHang.TenKH;
         }
-
 
         private void ConvertDataGridToTable()
         {
@@ -91,15 +106,10 @@ namespace UIProject.Views
                     "MaSP",
                     "TenSP",
                     "SoLuong",
-                    "DonGiaMuaVaoMoneyFormat",
+                    "DonGiaBanRaMoneyFormat",
                     "ThanhTienMoneyFormat"
-                }, table);
-           
+                }, table);          
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using BaseMVVM_Service.BaseMVVM.Interfaces;
 using ModelProject;
 using System;
 using System.Collections.Generic;
@@ -183,7 +184,8 @@ namespace UIProject.ViewModels.PageViewModels
                 var deleteKhachHangItem = DanhSachKhachHangVM.SelectedItem as ItemViewModel<KhachHangModel>;
                 if (deleteKhachHangItem == null)
                     return;
-                DataAccess.RemoveKhachHang(deleteKhachHangItem.Model);
+                //DataAccess.RemoveKhachHang(deleteKhachHangItem.Model);
+                deleteKhachHangItem.Model.Submit(SubmitType.Delete);
                 Reload();
             }
 
@@ -232,6 +234,12 @@ namespace UIProject.ViewModels.PageViewModels
             }
         }
 
+        private void RefreshSource()
+        {
+            dsKhachHang = DataAccess.LoadKhachHang();
+            dsSanPham = DataAccess.LoadSanPham();
+        }
+
         protected override void LoadComponentsInternal()
         {
             SetUpDanhSachKhachHangVM();
@@ -241,8 +249,7 @@ namespace UIProject.ViewModels.PageViewModels
 
         protected override void ReloadComponentsInternal()
         {
-            dsKhachHang = DataAccess.LoadKhachHang();
-            dsSanPham = DataAccess.LoadSanPham();
+            RefreshSource();
 
             DanhSachKhachHangVM.Reload();
             DanhSachKhachHangVM.RefreshItemsSource(dsKhachHang);
