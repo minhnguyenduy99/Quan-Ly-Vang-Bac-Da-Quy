@@ -18,7 +18,7 @@ namespace UIProject.ViewModels.PageViewModels
     {
         #region Resources from database
         IEnumerable<KhachHangModel> dsKhachHang;
-        IEnumerable<SanPhamModel> dsSanPham;
+        IEnumerable<KhuVucModel> dsKhuVuc;
         #endregion
 
         /// <summary>
@@ -31,13 +31,6 @@ namespace UIProject.ViewModels.PageViewModels
         /// </summary>
         public EnumFilterViewModel<KhachHangModel> LocKhuVucVM { get; set; }
         
-
-        /// <summary>
-        /// Khách hàng đang được chọn
-        /// </summary>
-        public ItemViewModel<KhachHangModel> KhachHangDuocChon { get; private set; }
-
-
         /// <summary>
         /// View model của việc tìm kiếm khách hàng
         /// </summary>
@@ -78,20 +71,9 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void SetUpDanhSachKhachHangVM()
         {
-            var khachHangSource = DataAccess.LoadKhachHang();
-            DanhSachKhachHangVM = new ObservableCollectionViewModel<KhachHangModel>(khachHangSource);
-            DanhSachKhachHangVM.SelectedItemChanged += DanhSachKhachHangVM_SelectedItemChanged;
+            DanhSachKhachHangVM = new ObservableCollectionViewModel<KhachHangModel>(dsKhachHang);
 
             DanhSachKhachHangVM.Filters.Add(LocKhachHangTheoTen);
-        }
-
-        private void DanhSachKhachHangVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
-        {
-            var khachHangDuocChon = e.SelectedItem as ItemViewModel<KhachHangModel>;
-            if (khachHangDuocChon != null)
-            {
-                KhachHangDuocChon = khachHangDuocChon;
-            }
         }
 
         private void SetUpTimKiemKhachHangVM()
@@ -104,7 +86,7 @@ namespace UIProject.ViewModels.PageViewModels
         {
             LocKhuVucVM = new EnumFilterViewModel<KhachHangModel>(
                 LocKhachHangTheoKhuVuc,
-                DataAccess.LoadKhuVuc());
+                dsKhuVuc);
 
             // Thêm 1 lựa chọn tất cả vào bộ lọc
             LocKhuVucVM.NonApplyFilterItem.Model = new KhuVucModel() { MaKhuVuc = null, TenKhuVuc = "Chọn tất cả" };
@@ -218,10 +200,11 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void OnChinhSuaThongTinCommandExecute(IWindowExtension window)
         {
+            var khachHangDuocChon = DanhSachKhachHangVM.SelectedItem as ItemViewModel<KhachHangModel>;
             EditWindowViewModel<KhachHangModel> chinhSuaThongTin
-                = new EditWindowViewModel<KhachHangModel>(KhachHangDuocChon.Model);
+                = new EditWindowViewModel<KhachHangModel>(khachHangDuocChon?.Model);
 
-            chinhSuaThongTin.AdditionData.Add(DataAccess.LoadKhuVuc());
+            chinhSuaThongTin.AdditionData.Add(dsKhuVuc);
 
             window.DataContext = chinhSuaThongTin;
 
@@ -229,19 +212,20 @@ namespace UIProject.ViewModels.PageViewModels
 
             if (window.ShowDialog(-400, -600) == true)
             {
-                DanhSachKhachHangVM.RefreshItemsSource(DataAccess.LoadKhachHang());
-                DanhSachKhachHangVM.Reload();
+                Reload();
             }
         }
 
         private void RefreshSource()
         {
             dsKhachHang = DataAccess.LoadKhachHang();
-            dsSanPham = DataAccess.LoadSanPham();
+            dsKhuVuc = DataAccess.LoadKhuVuc();
         }
 
         protected override void LoadComponentsInternal()
         {
+            RefreshSource();
+
             SetUpDanhSachKhachHangVM();
             SetUpTimKiemKhachHangVM();
             SetUpLocKhuVucVM();
@@ -251,8 +235,8 @@ namespace UIProject.ViewModels.PageViewModels
         {
             RefreshSource();
 
-            DanhSachKhachHangVM.Reload();
             DanhSachKhachHangVM.RefreshItemsSource(dsKhachHang);
+            DanhSachKhachHangVM.Reload();
             LocKhuVucVM.Reload();
             TimKiemKhachHangVM.Reload();
         }

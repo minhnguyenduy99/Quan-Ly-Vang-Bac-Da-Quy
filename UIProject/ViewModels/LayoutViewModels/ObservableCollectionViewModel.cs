@@ -144,7 +144,6 @@ namespace UIProject.ViewModels.LayoutViewModels
         protected virtual void OnItemsSourceRefresh()
         {
             Filter();
-            Reload();
         }
 
         // Everytime an item is added to or remove from the collection, update the DisplayItems property

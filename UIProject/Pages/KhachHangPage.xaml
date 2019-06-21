@@ -111,7 +111,7 @@
                                    Margin="0"
                                    FontWeight="Bold"/>
                             <Grid x:Name="gridCustomerInfo"
-                                  DataContext="{Binding Content.SelectedItem, ElementName=PART_CustomerList, UpdateSourceTrigger=PropertyChanged}">
+                                  DataContext="{Binding Content.SelectedItem, ElementName=PART_CustomerList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
