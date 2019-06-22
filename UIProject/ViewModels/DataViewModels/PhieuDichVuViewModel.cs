@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UIProject.Events;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
+using static BaseMVVM_Service.BaseMVVM.BaseSubmitableModel;
 
 namespace UIProject.ViewModels.DataViewModels
 {
@@ -22,61 +23,114 @@ namespace UIProject.ViewModels.DataViewModels
 
         public bool IsDataValid { get; private set; }
 
-        public PhieuDichVuModel PhieuBan { get; set; }
-        public ObservableCollectionViewModel<ChiTietDichVuModel> DSChiTietDichVuVM { get ; private set; }
+        public PhieuDichVuModel PhieuDichVu { get; set; }
+
+        #region Thông tin liên hệ
+        public string DiaChi
+        {
+            get => GetPropertyValue<string>();
+            set => SetProperty(value);
+        }
+
+        public string SoDienThoai
+        {
+            get => GetPropertyValue<string>();
+            set => SetProperty(value);
+        }
+        #endregion
+
+
+        public ObservableCollectionViewModel<ChiTietDichVuModel> DSChiTietDichVu { get ; private set; }
 
         public PhieuDichVuViewModel()
         {
-            PhieuBan = new PhieuDichVuModel();
+            PhieuDichVu = new PhieuDichVuModel();
 
-            DSChiTietDichVuVM.ItemAdded += DSChiTietDichVuVM_ItemAdded;
-            DSChiTietDichVuVM.ItemRemoved += DSChiTietDichVuVM_ItemRemoved;
+            DSChiTietDichVu = new ObservableCollectionViewModel<ChiTietDichVuModel>();
+            DSChiTietDichVu.ItemAdded += DSChiTietDichVuVM_ItemAdded;
+            DSChiTietDichVu.ItemRemoved += DSChiTietDichVuVM_ItemRemoved;
+        }
+
+        private void DSChiTietDichVuVM_ItemAdded(object sender, ItemAddedEventArgs<ChiTietDichVuModel> e)
+        {
+            if (e.AddedItem == null || e.AddedItem.Model == null)
+                return;
+
+            var chiTietThem = e.AddedItem.Model;
+            chiTietThem.ThongTinChiTietThayDoi += ChiTietDichVu_ThongTinThayDoiHandler;
+            chiTietThem.DataValidChanged += DuLieuHopLeHandler;
+
+            UpdatePhieuDichVu();
         }
 
         private void DSChiTietDichVuVM_ItemRemoved(object sender, ItemRemovedEventArgs<ChiTietDichVuModel> e)
         {
+            if (e.RemovedItem == null || e.RemovedItem.Model == null)
+                return;
+
+            var chiTietXoa = e.RemovedItem.Model;
+            chiTietXoa.ThongTinChiTietThayDoi -= ChiTietDichVu_ThongTinThayDoiHandler;
+            chiTietXoa.DataValidChanged -= DuLieuHopLeHandler;
+
             UpdatePhieuDichVu();
         }
 
-        private void DSChiTietDichVuVM_ItemAdded(object sender, ItemAddedEventArgs<ChiTietDichVuModel> e)
+
+        private void DuLieuHopLeHandler(object sender, DataValidChangedEventArgs e)
+        { 
+            this.IsDataValid = e.DataValid;
+        }
+
+
+        /// <summary>
+        /// Mỗi khi có một chi tiết dịch vụ thay đổi thì cập nhật lại thông tin phiếu dịch vụ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChiTietDichVu_ThongTinThayDoiHandler(object sender, EventArgs e)
         {
             UpdatePhieuDichVu();
         }
 
         public event EventHandler<SubmitedDataEventArgs> SubmitedData;
 
+        /// <summary>
+        /// Tính lại các khoản tiền của phiếu dịch vụ
+        /// </summary>
         public void UpdatePhieuDichVu()
         {
-            PhieuBan.ThanhTien = 0;
-            foreach(var chiTiet in DSChiTietDichVuVM.Items)
+            PhieuDichVu.TongTien = 0;
+            PhieuDichVu.TongTienTraTruoc = 0;
+            foreach(var chiTiet in DSChiTietDichVu.Items)
             {
-                PhieuBan.ThanhTien += chiTiet.Model.ThanhTien;
-                PhieuBan.TraTruoc += chiTiet.Model.TraTruoc;
+                PhieuDichVu.TongTien += chiTiet.Model.ThanhTien;
+                PhieuDichVu.TongTienTraTruoc += chiTiet.Model.TraTruoc;
             }
         }
         public void AddChiTietDichVu(ChiTietDichVuModel chiTietDV)
         {
-            DSChiTietDichVuVM.Add(chiTietDV);
+            DSChiTietDichVu.Add(chiTietDV);
         }
 
         public void Remove(ItemViewModel<ChiTietDichVuModel> chiTietDV)
         {
-            DSChiTietDichVuVM.Remove(chiTietDV);
+            DSChiTietDichVu.Remove(chiTietDV);
         }
         public void Clear()
         {
-            DSChiTietDichVuVM.Clear();
+            DSChiTietDichVu.Clear();
         }
         public bool Submit()
         {
-            bool submitPhieuBanSuccess = PhieuBan.Submit(SubmitType.Add);
-            if (submitPhieuBanSuccess)
+            bool submitPhieuDichVuSuccess = PhieuDichVu.Submit(SubmitType.Add);
+            if (submitPhieuDichVuSuccess)
             {
                 try
                 {
-                    long? maPhieuBan = PhieuBan.MaPhieu;
-                    foreach(var chiTiet in DSChiTietDichVuVM.Models)
+                    long? maPhieuDichVu = PhieuDichVu.MaPhieu;
+                    foreach(var chiTiet in DSChiTietDichVu.Models)
                     {
+                        chiTiet.MaPhieu = maPhieuDichVu;
                         chiTiet.Submit(SubmitType.Add);
                     }
                     return true;

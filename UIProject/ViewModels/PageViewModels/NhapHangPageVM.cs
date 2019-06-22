@@ -71,9 +71,9 @@ namespace UIProject.ViewModels.PageViewModels
             void TimKiemNhaCungCapVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
             {
                 var nhaCCDaChon = e.SelectedItem as ItemViewModel<NhaCungCapModel>;
+                NhapHangVM.Clear();
                 if (nhaCCDaChon == null)
                     return;
-                NhapHangVM.Clear();
                 NhapHangVM.PhieuMua.MaNCC = nhaCCDaChon.Model.MaNCC;
             }
         }
@@ -240,6 +240,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemSanPhamVM.RefreshItemSource(dsSanPham);
             TimKiemNhaCungCapVM.Reload();
             TimKiemNhaCungCapVM.RefreshItemSource(dsNhaCungCap);
+
 
             NhapHangVM.Reload();
         }

@@ -7,7 +7,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ServiceListDialogWindow"
-        Style="{StaticResource CustomDialogWindowStyle}">
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Border BorderBrush="Gray"
             BorderThickness="1">
         <Grid>
@@ -39,8 +42,7 @@
                                 Click="BtnExit_Click">
                             <materialDesign:PackIcon Kind="ExitToApp"
                                                      Height="auto"
-                                                     Width="auto"
-                                                     />
+                                                     Width="auto"/>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -52,8 +54,9 @@
                 <materialDesign:Card Grid.Row="2"
                                      Margin="10 20 10 30"
                                      Padding="10"
+                                     Background="{StaticResource MaterialDesignPaper}"
                                      Style="{StaticResource UIProjectMaterialDesignCardStyle}">
-                    <ContentControl 
+                    <ContentControl x:Name="grServiceDisplayer"
                                     ContentTemplate="{StaticResource DanhSachDichVuTemplate}">
 
                     </ContentControl>

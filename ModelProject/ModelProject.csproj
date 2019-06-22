@@ -70,7 +70,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregationalModel\BaoCaoTonKhoModel.cs" />
     <Compile Include="ChiTietBanModel.cs" />
     <Compile Include="ChiTietDichVuModel.cs" />
     <Compile Include="ChiTietMuaModel.cs" />
@@ -81,6 +80,8 @@
     <Compile Include="KhuVucModel.cs" />
     <Compile Include="LoaiDichVuModel.cs" />
     <Compile Include="LoaiSanPhamModel.cs" />
+    <Compile Include="Model rules\RuleLoader.cs" />
+    <Compile Include="Model rules\ValueRangeRule.cs" />
     <Compile Include="NhaCungCapModel.cs" />
     <Compile Include="PhieuBanModel.cs" />
     <Compile Include="PhieuDichVuModel.cs" />

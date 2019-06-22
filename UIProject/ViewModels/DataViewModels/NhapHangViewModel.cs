@@ -49,10 +49,9 @@ namespace UIProject.ViewModels.DataViewModels
             DSChiTietMua = new ObservableCollectionViewModel<ChiTietMuaModel>();
             PhieuMua = new PhieuMuaModel();
             PhieuMua.DataValidChanged += DataValidChangedHandler;
-            PhieuMua.NgayLapDateTime = DateTime.Now;
+            PhieuMua.NgayLap = DateTime.Now.ToString();
             DSChiTietMua.ItemAdded += DSChiTietMua_ItemAdded;
-            DSChiTietMua.ItemRemoved += DSChiTietMua_ItemRemoved;
-            
+            DSChiTietMua.ItemRemoved += DSChiTietMua_ItemRemoved;        
         }
 
         public void Add(ItemViewModel<SanPhamModel> sanPham)
@@ -115,7 +114,7 @@ namespace UIProject.ViewModels.DataViewModels
                 foreach (var chiTiet in dsChiTiet)
                 {
                     // Gán mã phiếu mua cho chi tiết và lưu xuống database
-                    chiTiet.MaPhieuMuaHang = PhieuMua.MaPhieu;
+                    chiTiet.MaPhieuMua = PhieuMua.MaPhieu;
                     chiTiet.Submit(SubmitType.Add);                  
                 }
 
@@ -126,6 +125,7 @@ namespace UIProject.ViewModels.DataViewModels
 
         protected override void LoadComponentsInternal()
         {
+            PhieuMua = new PhieuMuaModel();
             DSChiTietMua?.Load();
         }
 

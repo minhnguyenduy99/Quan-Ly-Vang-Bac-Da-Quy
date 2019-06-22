@@ -138,7 +138,7 @@ namespace ModelProject
             Console.WriteLine(khachHang.MaKH);
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into KhachHang(TENKH,DIACHI,SDT,CONGNO,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@CongNo,@MaKhuVuc,@Email); SELECT last_insert_rowid()", khachHang);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into KhachHang(TENKH,DIACHI,SDT,MAKHUVUC,EMAIL) values (@TenKH,@DiaChi,@SDT,@MaKhuVuc,@Email); SELECT last_insert_rowid()", khachHang);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -361,7 +361,9 @@ namespace ModelProject
             {
                 try
                 {
+                    ChiTietMuaModel.IsUpdateFromDatabase = true;
                     var output = cnn.Query<ChiTietMuaModel>("select * from ChiTietMua", new DynamicParameters());
+                    ChiTietMuaModel.IsUpdateFromDatabase = false;
                     return output.ToList();
                 }
                 catch (DataException)
@@ -374,7 +376,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietMua(MAPHIEUMUA,MASP,SOLUONG,DONGIA,THANHTIEN) values (@MaPhieuMuaHang,@MaSP,@SoLuong,@DonGia,@ThanhTien); SELECT last_insert_rowid()", ctm);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietMua(MAPHIEUMUA,MASP,SOLUONG,DONGIA,THANHTIEN) values (@MaPhieuMua,@MaSP,@SoLuong,@DonGia,@ThanhTien); SELECT last_insert_rowid()", ctm);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -421,7 +423,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@NgayGiao,@MaTinhTrang); SELECT last_insert_rowid()", ctdv);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into ChiTietDichVu(MAPHIEU,MALOAIDV,CHIPHIRIENG,SOLUONG,THANHTIEN,TRATRUOC,CONLAI,NGAYGIAO,MATINHTRANG) values (@MaPhieu,@MaLoaiDV,@ChiPhiRieng,@SoLuong,@ThanhTien,@TraTruoc,@ConLai, @NgayGiao,@MaTinhTrang); SELECT last_insert_rowid()", ctdv);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -601,6 +603,7 @@ namespace ModelProject
             {
                 try
                 {
+                    
                     var output = cnn.Query<PhieuMuaModel>("select * from PhieuMua", new DynamicParameters());
                     return output.ToList();
                 }
@@ -662,7 +665,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuDichVu(MAPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TINHTRANG, MANV , GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TinhTrang, @MaNV, @GhiChu); SELECT last_insert_rowid()", PhieuDichVu);
+                long lastRowID = (long)cnn.ExecuteScalar("insert into PhieuDichVu(MAPHIEU,NGAYLAP,MAKH,TONGTIEN,TONGTIENTRATRUOC, TONGTIENCONLAI, TINHTRANG, GHICHU) values (@MaPhieu,@NgayLap,@MaKH,@TongTien,@TongTienTraTruoc,@TongTienConLai, @TinhTrang, @GhiChu); SELECT last_insert_rowid()", PhieuDichVu);
                 //lastRowID dùng để xác định ID của một hàng vừa được thêm vào.
                 return lastRowID;
             }
@@ -835,10 +838,14 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<LoaiDichVuModel>("select * " +
-                    "from LoaiDichVu " +
-                    "where MALOAIDICHVU=@m ",new { m = madv });
-                return output.ElementAt<LoaiDichVuModel>(0);
+                try
+                {
+                    var output = cnn.Query<LoaiDichVuModel>("select * " +
+                        "from LoaiDichVu " +
+                        "where MALOAIDV=@m ", new { m = madv });
+                    return output.ElementAt<LoaiDichVuModel>(0);
+                }
+                catch { return null; }
             }
         }
 

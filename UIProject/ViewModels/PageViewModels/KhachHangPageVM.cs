@@ -237,6 +237,7 @@ namespace UIProject.ViewModels.PageViewModels
 
             DanhSachKhachHangVM.RefreshItemsSource(dsKhachHang);
             DanhSachKhachHangVM.Reload();
+            LocKhuVucVM.RefreshItemsSource(dsKhuVuc);
             LocKhuVucVM.Reload();
             TimKiemKhachHangVM.Reload();
         }

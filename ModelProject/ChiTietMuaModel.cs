@@ -10,17 +10,19 @@ namespace ModelProject
 {
     public class ChiTietMuaModel : BaseSubmitableModel
     {
-        private long? maPhieuMuaHang;
+        private long? maPhieuMua;
         private long? maSP;
         private int soLuong;
         private long donGia;
         private long thanhTien;
 
+        public static bool IsUpdateFromDatabase { get; set; } = false;
+
         #region Main properties
-        public long? MaPhieuMuaHang
+        public long? MaPhieuMua
         {
-            get => maPhieuMuaHang;
-            set => SetProperty(ref maPhieuMuaHang, value);
+            get => maPhieuMua;
+            set => SetProperty(ref maPhieuMua, value);
         }
         public long? MaSP
         {
@@ -39,23 +41,21 @@ namespace ModelProject
             set
             {
                 if (value <= 0)
-                    throw new Exception("Số lượng nhập phải lớn hơn 0");
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                IsDataValid = true;
                 SetProperty(ref soLuong, value);
+                if (IsUpdateFromDatabase)
+                    return;
                 UpdateThanhTien();
             }
         }
         public long DonGia
         {
             get => donGia;
-            set
-            {
-                if (value < 0)
-                    IsDataValid = false;
-                else
-                    IsDataValid = true;
-                SetProperty(ref donGia, value);
-                UpdateThanhTien();
-            }
+            private set => SetProperty(ref donGia, value);
         }
         public long ThanhTien
         {
@@ -111,8 +111,14 @@ namespace ModelProject
             }
             this.TenLoaiSP = loaiSP.TenLoaiSP;
             this.LoiNhuan = loaiSP.PhanTramLoiNhuan;
+            this.DonGia = sanPham.DonGiaMuaVao;
             this.MaSP = sanPham.MaSP;
             this.SoLuong = 1;          
+        }
+
+        public ChiTietMuaModel() : base()
+        {
+
         }
         public override bool Equals(object obj)
         {
@@ -120,7 +126,7 @@ namespace ModelProject
             if (obj is ChiTietMuaModel)
             {
                 ChiTietMuaModel secondObj = (ChiTietMuaModel)obj;
-                return MaPhieuMuaHang == secondObj.MaPhieuMuaHang && MaSP == secondObj.MaSP;
+                return MaPhieuMua == secondObj.MaPhieuMua && MaSP == secondObj.MaSP;
             }
             return false;
         }
@@ -152,7 +158,7 @@ namespace ModelProject
             // local function
             void UpdatePhieuMua_SubmitType_Add()
             {
-                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMuaHang);
+                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMua);
                 phieuMua.ThanhTien += this.ThanhTien;
                 phieuMua.Submit(SubmitType.Update);
             }
@@ -166,7 +172,7 @@ namespace ModelProject
 
             void UpdatePhieuMua_SubmitType_Delete()
             {
-                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMuaHang);
+                var phieuMua = DataAccess.LoadPhieuBanByMaPhieuMua(MaPhieuMua);
                 phieuMua.ThanhTien -= this.ThanhTien;
                 phieuMua.Submit(SubmitType.Update);
             }

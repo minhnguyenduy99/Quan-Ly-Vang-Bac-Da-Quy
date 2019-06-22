@@ -11,7 +11,6 @@ namespace ModelProject
         private long ? maLoaiDV;
         private string tenLoaiDV;
         private long donGiaDV;
-        private long chiPhiRieng;
 
         #region Main properties
         public long ? MaLoaiDV
@@ -28,12 +27,6 @@ namespace ModelProject
         {
             get => donGiaDV;
             set => SetProperty(ref donGiaDV, value);
-        }
-
-        public long ChiPhiRieng
-        {
-            get => chiPhiRieng;
-            set => SetProperty(ref chiPhiRieng, value);
         }
         #endregion
 

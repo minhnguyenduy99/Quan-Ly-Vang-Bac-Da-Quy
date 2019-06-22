@@ -45,7 +45,7 @@
     <DataTemplate x:Key="ProductItemSearchTemplate">
         <Border BorderBrush="Black"
                 BorderThickness="1"
-                ToolTip="{Binding Model.DonGiaMuaVao, Converter={StaticResource moneyConverter}}">
+                ToolTip="{Binding Model.DonGiaBanRa, Converter={StaticResource moneyConverter},StringFormat=Don gia ban ra: {0}}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -64,7 +64,7 @@
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="70"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -208,7 +208,7 @@
     <DataTemplate x:Key="DanhSachSanPhamBaoCaoTonKhoTemplate">
         <DataGrid DataContext="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                   CanUserSortColumns="True"
-                  ItemsSource="{Binding Items}"
+                  ItemsSource="{Binding DisplayItems}"
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
@@ -230,7 +230,7 @@
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="120"
-                                    Binding="{Binding Model.SLMuaVao}"
+                                    Binding="{Binding Model.SoLuongMuaVao}"
                                     Header="SL mua vào"
                                     ToolTipService.ToolTip="Số lượng mua vào"
                                     IsReadOnly="True"
@@ -238,7 +238,7 @@
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
                 <DataGridTextColumn Width="120"
-                                    Binding="{Binding Model.SLBanRa}"
+                                    Binding="{Binding Model.SoLuongBanRa}"
                                     Header="SL bán ra"
                                     ToolTipService.ToolTip="Số lượng bán ra"
                                     IsReadOnly="True"
@@ -254,7 +254,7 @@
                                     CellStyle="{StaticResource RightDataGridCell}"/>
                 <DataGridTextColumn Width="170"
                                     IsReadOnly="True"
-                                    Binding="{Binding Model.TenNCC}"
+                                    Binding="{Binding Model.TenNhaCC}"
                                     Header="Nhà cung cấp"
                                     CanUserSort="False"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"

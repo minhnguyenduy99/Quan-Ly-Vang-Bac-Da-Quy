@@ -11,17 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UIProject.UIConnector;
 
 namespace UIProject.Views
 {
     /// <summary>
     /// Interaction logic for ServiceListDialogWindow.xaml
     /// </summary>
-    public partial class ServiceListDialogWindow : Window
+    public partial class ServiceListDialogWindow : Window, IWindow
     {
         public ServiceListDialogWindow()
         {
             InitializeComponent();
+            this.DataContextChanged += ServiceListDialogWindow_DataContextChanged;
+        }
+
+        private void ServiceListDialogWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            grServiceDisplayer.Content = e.NewValue;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

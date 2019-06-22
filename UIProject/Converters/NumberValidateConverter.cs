@@ -13,6 +13,7 @@ namespace UIProject.Converters
     /// </summary>
     public class NumberValidateConverter : IValueConverter
     {
+        public bool AllowNonNegative { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value;
@@ -23,6 +24,8 @@ namespace UIProject.Converters
             try
             {
                 double numberCast = double.Parse(value.ToString());
+                if (numberCast <= 0 && !AllowNonNegative)
+                    return -1;
                 return numberCast;
             }
             catch { return -1; }

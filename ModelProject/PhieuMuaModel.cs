@@ -29,9 +29,18 @@ namespace ModelProject
         public string NgayLap
         {
             get => ngayLap;
-            private set
+            set
             {
+                bool parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
+                if (!parseSuccess)
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                IsDataValid = true;
+
                 SetProperty(ref ngayLap, value);
+                NgayLapDateTime = ngayLapDateTime;
             }
         }
         public long? MaNCC
@@ -52,14 +61,23 @@ namespace ModelProject
         public DateTime NgayLapDateTime
         {
             get => GetPropertyValue<DateTime>();
-            set
+            private set
             {
                 SetProperty(value);
-                NgayLap = value.ToShortDateString();
             }
+        }
+
+        public string NgayLapDate
+        {
+            get => NgayLapDateTime.ToString("dd/MM/yyyy");
+            private set => SetProperty(value);
         }
         #endregion
 
+        public PhieuMuaModel() : base()
+        {
+            IsDataValid = true;
+        }
 
         public override bool Equals(object obj)
         {

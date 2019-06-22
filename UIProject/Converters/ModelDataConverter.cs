@@ -173,7 +173,7 @@ namespace UIProject.Converters
         }
 
         private object ConvertFromStateToVisibility(StateMode state)
-        {
+       {
             switch (state)
             {
                 case StateMode.Collapsed: return Visibility.Collapsed;

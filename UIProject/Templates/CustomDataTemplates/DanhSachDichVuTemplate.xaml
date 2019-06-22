@@ -5,8 +5,7 @@
         <DataGrid DataContext="{Binding Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                   HorizontalAlignment="Left"
                   CanUserSortColumns="True"
-                  ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Items, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"                
                   CanUserAddRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
@@ -33,19 +32,22 @@
                 <DataGridTextColumn Width="170"
                                     IsReadOnly="True"
                                     Binding="{Binding Model.DonGiaDV, Converter={StaticResource moneyConverter}}"
-                                    Header="Đơn gía"
-                                    CanUserSort="False"
-                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                    CellStyle="{StaticResource LeftDataGridCell}"/>
-                <DataGridTextColumn Width="220"
-                                    IsReadOnly="True"
-                                    CanUserResize="True"
-                                    Binding="{Binding Model.ChiPhiRieng, Converter={StaticResource moneyConverter}}"
-                                    Header="Chi phí riêng"
-                                    CanUserSort="true"
-                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                    CellStyle="{StaticResource LeftDataGridCell}"/>
+                                    Header="Đơn giá"
+                                    CanUserSort="True"
+                                    HeaderStyle="{StaticResource RightDataGridHeader}"
+                                    CellStyle="{StaticResource RightDataGridCell}"/>
             </DataGrid.Columns>
         </DataGrid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchDichVuTemplate">
+        <Border BorderBrush="Gray"
+                BorderThickness="1"
+                Padding="5"
+                Width="200">
+            <Label Style="{StaticResource BelowMediumLabelStyle}"
+                   Padding="7"
+                   Content="{Binding Model.TenLoaiDV}"/>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>

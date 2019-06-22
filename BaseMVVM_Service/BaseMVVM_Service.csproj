@@ -65,6 +65,7 @@
     <Compile Include="BaseMVVM\Interfaces\IAsynchronousable.cs" />
     <Compile Include="BaseMVVM\Interfaces\ICloneable.cs" />
     <Compile Include="BaseMVVM\Interfaces\IDataLoader.cs" />
+    <Compile Include="BaseMVVM\Interfaces\IRule.cs" />
     <Compile Include="BaseMVVM\Interfaces\ISubmitable.cs" />
     <Compile Include="BaseMVVM\ObservableObject.cs" />
     <Compile Include="Program.cs" />

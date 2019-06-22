@@ -1,4 +1,6 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using BaseMVVM_Service.BaseMVVM.Interfaces;
+using ModelProject.Model_rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,11 @@ namespace ModelProject
         private long conLai;
         private string ngayGiao;
         private long? maTinhTrang;
+        private long chiPhiRieng;
 
+        private IEnumerable<TinhTrangModel> dsTinhTrang;
+
+        private bool requiredInnerUpdate = false;
 
         #region Main properties
         public long? MaPhieu
@@ -35,8 +41,14 @@ namespace ModelProject
             get => soLuong;
             set
             {
+                if (value <= 0)
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                IsDataValid = true;
                 SetProperty(ref soLuong, value);
-                UpdateTongTienChiTiet();
+                OnThongTinChiTietThayDoi();
             }
         }
         public long ThanhTien
@@ -49,12 +61,22 @@ namespace ModelProject
             get => traTruoc;
             set
             {
-                if (value > ThanhTien)
+                if (requiredInnerUpdate)
                 {
-                    throw new Exception("Gía trị trả phải nhỏ hơn hoặc bằng tổng tiền chi tiết");
+                    SetProperty(ref traTruoc, value);
+                    requiredInnerUpdate = false;
+                    return;
                 }
-                SetProperty(ref traTruoc, value);
-                UpdateTongTienChiTiet();
+                SoTienTraTruocRule = new ValueRangeRule<long>(ThanhTien / 2, ThanhTien, Comparer<long>.Default);
+                SoTienTraTruocRule.DefaultValue = ThanhTien / 2;
+                var valueTemp = value;
+                if (!SoTienTraTruocRule.ApplyRuleValid(value))
+                {
+                    valueTemp = (long)SoTienTraTruocRule.DefaultValue;
+                }
+                IsDataValid = true;
+                SetProperty(ref traTruoc, valueTemp);
+                OnThongTinChiTietThayDoi();
             }
         }
         public long ConLai
@@ -70,6 +92,26 @@ namespace ModelProject
                 SetProperty(ref ngayGiao, value);
             }
         }
+        public long? MaTinhTrang
+        {
+            get => maTinhTrang;
+            set => SetProperty(ref maTinhTrang, value);
+        }
+        public long ChiPhiRieng
+        {
+            get => chiPhiRieng;
+            set
+            {
+                if (value < 0)
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                IsDataValid = true;
+                SetProperty(ref chiPhiRieng, value);
+                OnThongTinChiTietThayDoi();
+            }
+        }
 
         #endregion 
 
@@ -77,13 +119,11 @@ namespace ModelProject
         public DateTime NgayGiaoDateTime
         {
             get => GetPropertyValue<DateTime>();
-            set => SetProperty(value);
-        }
-
-        public long? MaTinhTrang
-        {
-            get => maTinhTrang;
-            set => SetProperty(ref maTinhTrang, value);
+            set
+            {
+                SetProperty(value);
+                NgayGiao = value.ToString("dd/MM/yyyy");
+            }
         }
 
         public string TenLoaiDV
@@ -92,6 +132,11 @@ namespace ModelProject
             private set => SetProperty(value);
         }
 
+        public long DonGiaDuocTinh
+        {
+            get => GetPropertyValue<long>();
+            private set => SetProperty(value);
+        }
         public long DonGiaDV
         {
             get => GetPropertyValue<long>();
@@ -103,25 +148,71 @@ namespace ModelProject
             private set => SetProperty(value);
         }
 
+        public IRule SoTienTraTruocRule
+        {
+            get => GetPropertyValue<IRule>();
+            set => SetProperty(value);
+        }
         #endregion
 
 
-        public ChiTietDichVuModel(PhieuDichVuModel phieuDV, LoaiDichVuModel dichVu)
+        public ChiTietDichVuModel(PhieuDichVuModel phieuDV, LoaiDichVuModel dichVu) : base()
         {
+            // load danh sách tình trạng
+            dsTinhTrang = DataAccess.LoadTinhTrang();
+            ChiPhiRieng = 0;
+
+            DonGiaDV = dichVu.DonGiaDV;
+            DonGiaDuocTinh = DonGiaDV + ChiPhiRieng;
+
+            // Main properties
             MaPhieu = phieuDV.MaPhieu;
-            SoLuong = 1;
             MaLoaiDV = dichVu.MaLoaiDV;
+            SoLuong = 1;
+            TraTruoc = ThanhTien / 2;
+         
+            // additional properties
+            TenTinhTrang = dsTinhTrang.ElementAt(1).TenTinhTrang;
             TenLoaiDV = dichVu.TenLoaiDV;
+            NgayGiaoDateTime = DateTime.Now;         
         }
 
-        public void UpdateTongTienChiTiet()
+        public event EventHandler ThongTinChiTietThayDoi;
+
+        protected virtual void OnThongTinChiTietThayDoi()
         {
-            LoaiDichVuModel dichVu = DataAccess.LoadLoaiDichVuByMaLDV(MaLoaiDV);
-            if (dichVu == null)
-                return;
-            ThanhTien = (DonGiaDV + dichVu.ChiPhiRieng) * SoLuong;
-            ConLai = ThanhTien - TraTruoc;
+            // cập nhật lại các thông tin của chi tiết dịch vụ khi số lượng thay đổi
+            UpdateChiTietDichVu();
+            ThongTinChiTietThayDoi?.Invoke(this, EventArgs.Empty);
         }
+        private void UpdateChiTietDichVu()
+        {
+            DonGiaDuocTinh = DonGiaDV + ChiPhiRieng;
+            ThanhTien = DonGiaDuocTinh * SoLuong;
+            UpdateTinhTrangTraTien();
+        }
+        private void UpdateTinhTrangTraTien()
+        {
+            if (TraTruoc < ThanhTien / 2)
+            {
+                requiredInnerUpdate = true;
+                TraTruoc = ThanhTien / 2;
+            }
+            ConLai = ThanhTien - TraTruoc;
+            if (ConLai == 0)
+            {
+                MaTinhTrang = dsTinhTrang.ElementAt(0).MaTinhTrang;
+                TenTinhTrang = dsTinhTrang.ElementAt(0).TenTinhTrang;
+            }
+            else
+            {
+                MaTinhTrang = dsTinhTrang.ElementAt(1).MaTinhTrang;
+                TenTinhTrang = dsTinhTrang.ElementAt(1).TenTinhTrang;
+            }
+        }
+
+
+
 
         public override bool Equals(object obj)
         {

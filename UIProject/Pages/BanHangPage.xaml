@@ -129,7 +129,7 @@
                                                 CellStyle="{StaticResource CenteredDataGridCell}"/>
                             <DataGridTextColumn Width="80"
                                                 Header="Số lượng"
-                                                Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                Binding="{Binding Model.SoLuong, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource numberValidateConverter}}"
                                                 HeaderStyle="{StaticResource RightDataGridHeader}"
                                                 CellStyle="{StaticResource RightDataGridCell}"
                                                 EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"

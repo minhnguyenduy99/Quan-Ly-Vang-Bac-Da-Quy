@@ -71,6 +71,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -88,6 +89,9 @@
                             <Label Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource CustomDefinedLabelStyle}"
                                    Content="Nhà cung cấp"/>
+                            <Label Grid.Row="4" Grid.Column="0"
+                                   Style="{StaticResource CustomDefinedLabelStyle}"
+                                   Content="Đơn giá"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
                                      Text="{Binding Data.TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -121,7 +125,11 @@
                                                         Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Hint="Tìm kiếm nhà cung cấp">
                             </customControls:SearchTextBox>
-                            
+                            <TextBox Grid.Row="4" Grid.Column="1"
+                                     Panel.ZIndex="1"
+                                     Style="{StaticResource CustomTextBoxStyle}"
+                                     Text="{Binding Data.DonGiaMuaVao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
+
                         </Grid>
                     </StackPanel>
                 </Grid>

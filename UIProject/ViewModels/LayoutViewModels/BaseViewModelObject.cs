@@ -43,11 +43,31 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// <summary>
     /// Non-generic version of <see cref="BaseViewModelObject"/>
     /// </summary>
-    public abstract class BaseViewModelObject : BaseViewModelObject<object>
+    public abstract class BaseViewModelObject : BaseViewModel, IViewModelObject
     {
-        public BaseViewModelObject() : base()
+        public BaseViewModelObject()
         {
-            Model = null;
+            Load();
         }
+
+        public void Load()
+        {
+            LoadComponentsInternal();
+
+            Loaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Reload()
+        {
+            ReloadComponentsInternal();
+            Reloaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Loaded;
+        public event EventHandler Reloaded;
+
+
+        protected abstract void LoadComponentsInternal();
+        protected abstract void ReloadComponentsInternal();
     }
 }

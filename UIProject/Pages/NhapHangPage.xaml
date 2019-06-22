@@ -13,6 +13,7 @@
         <converters:ToShortDateConverter x:Key="dateConverter"/>
         <converters:MoneyRuleConverter x:Key="moneyRuleConverter"/>
         <converters:SelectedItemToEnabledConverter x:Key="nhaCungCapDaChonConverter" NullState="Visible" NotNullState="Collapsed"/>
+        <converters:SelectedItemToEnabledConverter x:Key="nhaCungCapDaChonConverter2" NullState="Disabled" NotNullState="Enabled"/>
         <Style x:Key="CustomTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="MinWidth" Value="200"/>
@@ -67,7 +68,8 @@
                                               Width="300"                                              
                                               HorizontalAlignment="Right"
                                               Hint="Nhập tên sản phẩm"
-                                              Margin="10"/>
+                                              Margin="10"
+                                              IsEnabled="{Binding TimKiemNhaCungCapVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nhaCungCapDaChonConverter2}}"/>
                 <Button x:Name="btnAddProduct"
                         Style="{StaticResource UIProjectLightIconButtonStyle}"
                         Margin="20 0 10 0"
@@ -142,14 +144,13 @@
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
                                         CellStyle="{StaticResource RightDataGridCell}"/>
                     <DataGridTextColumn Width="130"
-                                        Binding="{Binding Model.DonGia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
+                                        Binding="{Binding Model.DonGia, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
                                         CanUserSort="False"
                                         Header="Đơn giá mua vào"
                                         TextBlock.TextAlignment="Center"
-                                        IsReadOnly="false"
+                                        IsReadOnly="true"
                                         HeaderStyle="{StaticResource RightDataGridHeader}"
-                                        CellStyle="{StaticResource RightDataGridCell}"
-                                        EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                        CellStyle="{StaticResource RightDataGridCell}"/>
                     <DataGridTextColumn Width="130"
                                         Binding="{Binding Model.ThanhTien, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyRuleConverter}}"
                                         CanUserSort="False"
@@ -237,7 +238,7 @@
                                 Name="LocaleDatePicker"
                                 materialDesign:HintAssist.Hint="Locale Date"
                                 Style="{StaticResource UIProjectDatePickerStyle}"
-                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLapDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource dateConverter}}">
                     </DatePicker>
                 </StackPanel>
             </Grid>
@@ -321,6 +322,7 @@
                             Background="White">
                     <Button x:Name="btnThemPhieuMua"
                             Command="{Binding SubmitPhieuNhapHangCommand}"
+                            IsEnabled="{Binding TimKiemNhaCungCapVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nhaCungCapDaChonConverter2}}"
                             Click="BtnThemPhieuMua_Click"
                             Content="Lưu"/>
                     <Button x:Name="btnHuyPhieu"

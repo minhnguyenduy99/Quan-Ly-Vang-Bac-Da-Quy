@@ -48,6 +48,10 @@ namespace ModelProject
                     SetProperty(ref soLuong, value);
                     return;
                 }
+                // số lượng sản phẩm bán ra phải luôn dương
+                if (value <= 0)
+                    return;
+
                 var soLuongSanPham = DataAccess.LoadSPByMaSP(MaSP).SoLuong;
                 if (value > soLuongSanPham)
                 {

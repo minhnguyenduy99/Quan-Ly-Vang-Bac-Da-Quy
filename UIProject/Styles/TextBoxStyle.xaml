@@ -123,7 +123,7 @@
 
     <Style x:Key="UIProjectMultipleLineTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource UIProjectTextBoxStyle}">
         <Setter Property="AcceptsReturn" Value="True"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="true">
                 <Setter Property="BorderBrush" Value="{DynamicResource AirForceBlue}"/>

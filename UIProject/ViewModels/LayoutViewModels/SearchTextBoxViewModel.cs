@@ -78,8 +78,8 @@ namespace UIProject.ViewModels.LayoutViewModels
                 if (value != null)
                 {
                     selectedItem.IsSelected = true;
-                    OnSelectedItem(new SelectedItemChangedEventArgs((ItemViewModel<T>)value));
                 }
+                OnSelectedItem(new SelectedItemChangedEventArgs((ItemViewModel<T>)value));
             }
         }
 

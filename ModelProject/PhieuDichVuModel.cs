@@ -11,12 +11,14 @@ namespace ModelProject
     {
         private long ? maPhieu;
         private string ngayLap;
-        private long maKH;
-        private long thanhTien;
-        private long traTruoc;
-        private long conLai;
-        private long? maTinhTrang;
+        private long? maKH;
+        private long tongTien;
+        private long tongTienTraTruoc;
+        private long tongTienConLai;
+        private long? tinhTrang;
         private string ghiChu;
+
+        private IEnumerable<TinhTrangModel> dsTinhTrang;
 
         #region Main properties
 
@@ -35,39 +37,67 @@ namespace ModelProject
             get => ngayLap;
             set => SetProperty(ref ngayLap, value);
         }
-        public long MaKH
+        public long? MaKH
         {
             get => maKH;
             set => SetProperty(ref maKH, value);
         }
-        public long ThanhTien
+        public long TongTien
         {
-            get => thanhTien;
-            set => SetProperty(ref thanhTien, value);
+            get => tongTien;
+            set => SetProperty(ref tongTien, value);
         }
-        public long TraTruoc
+        public long TongTienTraTruoc
         {
-            get => traTruoc;
+            get => tongTienTraTruoc;
             set
             {
-                if (value < 0 || value > ThanhTien)
+                if (value < 0 || value > TongTien)
                     throw new Exception("Số tiền trả trước không hợp lệ");
-                SetProperty(ref traTruoc, value);
-                ConLai = ThanhTien - TraTruoc;
+                SetProperty(ref tongTienTraTruoc, value);
+                UpdatePhieuDichVu();
             }
         }
-        public long ConLai
+        public long TongTienConLai
         {
-            get => conLai;
-            private set => SetProperty(ref conLai, value);
+            get => tongTienConLai;
+            private set => SetProperty(ref tongTienConLai, value);
         }
-        public long? MaTinhTrang
+        public long? TinhTrang
         {
-            get => maTinhTrang;
-            private set => SetProperty(ref maTinhTrang, value);
+            get => tinhTrang;
+            private set
+            {
+                SetProperty(ref tinhTrang, value);
+                TenTinhTrang = dsTinhTrang.Where(tt => tt.MaTinhTrang == value).ElementAt(0).TenTinhTrang;
+            }
         }
         #endregion
 
+        #region Additional Properties
+        public string TenTinhTrang
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+        #endregion
+        public PhieuDichVuModel() : base()
+        {
+            dsTinhTrang = DataAccess.LoadTinhTrang();
+            NgayLap = DateTime.Now.ToString("dd/MM/yyyy");
+        }
+        private void UpdatePhieuDichVu()
+        {
+            TongTienConLai = TongTien - TongTienTraTruoc;
+            if (TongTienConLai == 0)
+            {
+                TinhTrang = dsTinhTrang.ElementAt(0).MaTinhTrang;
+            }
+            else
+            {
+                TinhTrang = dsTinhTrang.ElementAt(1).MaTinhTrang;
+            }
+        }
         public override bool Equals(object obj)
         {
             if (obj is PhieuDichVuModel)

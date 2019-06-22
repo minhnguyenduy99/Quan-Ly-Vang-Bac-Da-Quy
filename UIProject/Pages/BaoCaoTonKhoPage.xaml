@@ -6,8 +6,12 @@
       xmlns:local="clr-namespace:UIProject.Pages"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:UIProject.Converters"
       mc:Ignorable="d" 
       Title="BaoCaoTonKhoPage">
+    <Page.Resources>
+        <converters:NumberValidateConverter x:Key="numberValidateConverter"/>
+    </Page.Resources>
     <Border Padding="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -57,12 +61,12 @@
                             <Label Grid.Row="0" Grid.Column="0"
                                    Style="{StaticResource MediumLabelStyle}"
                                    FontWeight="Bold"
-                                   Content="Sản phẩm"/>
+                                   Content="Lọc sản phẩm"/>
                             <StackPanel Grid.Row="1" Grid.Column="0">
                                 <Label Content="Loại sản phẩm"/>
                                 <ComboBox Height="35"
                                           FontSize="15"
-                                          DataContext="{Binding LocLoaiSanPhamVM}"
+                                          DataContext="{Binding DanhSachLoaiSanPhamVM}"
                                           ItemsSource="{Binding Collection.Items}"
                                           SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           DisplayMemberPath="Model.TenLoaiSP"/>
@@ -91,12 +95,14 @@
                                 Content="Thời gian"/>
 
                             <StackPanel Grid.Row="1" Grid.Column="1">
-                                <Label Content="Từ"/>
-                                <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"/>
+                                <Label Content="Tháng"/>
+                                <TextBox Style="{StaticResource UIProjectTextBoxStyle}"
+                                         Text="{Binding BaoCaoTonKhoVM.Thang, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource numberValidateConverter}}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="1">
-                                <Label Content="Đến"/>
-                                <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"/>
+                                <Label Content="Năm"/>
+                                <TextBox Style="{StaticResource UIProjectTextBoxStyle}"
+                                         Text="{Binding BaoCaoTonKhoVM.Nam, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource numberValidateConverter}}"/>
                             </StackPanel>
                         </Grid>
                         <StackPanel Grid.Column="2"
@@ -108,9 +114,11 @@
                                     <Setter Property="Width" Value="150"/>
                                 </Style>
                             </StackPanel.Resources>
-                            <Button Content="Thêm"/>
-                            <Button Content="Xóa"/>
-                            <Button Content="In" Click="Button_Click"/>
+                            <Button x:Name="btnLoadBaoCao"
+                                    Content="Tải báo cáo"
+                                    Command="{Binding LoadBaoCaoCommand}"
+                                    Click="BtnLoadBaoCao_Click"/>
+                            <Button Content="In" />
                             <Button Content="Xuất file"/>
                         </StackPanel>
                     </Grid>
@@ -144,10 +152,10 @@
                                Content="Gía trị tồn kho"/>
                         <Label Grid.Row="0" Grid.Column="1"
                                Style="{StaticResource ValueLabelStyle}"
-                               Content="10"/>
+                               Content="{Binding BaoCaoTonKhoVM.TongSoLuongTonKho, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Grid.Row="1" Grid.Column="1"
                                Style="{StaticResource ValueLabelStyle}"
-                               Content="12,250,000"/>
+                               Content="{Binding BaoCaoTonKhoVM.TongGiaTriTonKho, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
                     </Grid>
                 </materialDesign:Card>
             </Grid>
@@ -155,7 +163,8 @@
             <materialDesign:Card Grid.Row="3"
                                  Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                  Margin="0 10 0 10"
-                                 ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}">
+                                 ContentTemplate="{StaticResource DanhSachSanPhamBaoCaoTonKhoTemplate}"
+                                 Content="{Binding BaoCaoTonKhoVM.DanhSachSanPhamBaoCao}">
             </materialDesign:Card>
         </Grid>
     </Border>

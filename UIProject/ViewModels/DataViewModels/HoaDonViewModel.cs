@@ -1,7 +1,6 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using BaseMVVM_Service.BaseMVVM.Interfaces;
 using ModelProject;
-using ModelProject.AggregationalModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

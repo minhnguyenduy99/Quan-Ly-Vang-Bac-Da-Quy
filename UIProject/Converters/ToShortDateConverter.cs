@@ -42,19 +42,11 @@ namespace UIProject.Converters
                 return Binding.DoNothing;
             try
             {
-                var castValue = (DateTime)value;
-                var day = castValue.Day;
-                var month = castValue.Month;
-                var year = castValue.Year;
-                string dayStr = day.ToString();
-                string monthStr = month.ToString();
-                string yearStr = year.ToString();
-                if (day < 10)
-                    dayStr = $"0{day}";
-                if (month < 10)
-                    monthStr = $"0{month}";
-
-                return $"{dayStr}/{monthStr}/{yearStr}";
+                string[] dateSplit = value.ToString().Split('/');
+                int day = int.Parse(dateSplit[0]);
+                int month = int.Parse(dateSplit[1]);
+                int year = int.Parse(dateSplit[2]);
+                return new DateTime(year, month, day);
             }
             catch { return DATE_ERROR_STATEMENT; }
         }

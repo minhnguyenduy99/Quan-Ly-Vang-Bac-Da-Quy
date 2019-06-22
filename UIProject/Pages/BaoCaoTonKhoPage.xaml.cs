@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
-
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -39,6 +39,12 @@ namespace UIProject.Pages
             PrintDialog dlg = new PrintDialog();
             dlg.PageRangeSelection = PageRangeSelection.AllPages;
             dlg.ShowDialog();
+        }
+
+        private void BtnLoadBaoCao_Click(object sender, RoutedEventArgs e)
+        {
+            DialogPopupWindow loadingWindow = new DialogPopupWindow();
+            btnLoadBaoCao.CommandParameter = loadingWindow;
         }
     }
 }

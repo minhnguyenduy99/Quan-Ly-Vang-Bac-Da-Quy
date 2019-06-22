@@ -33,26 +33,16 @@ namespace UIProject.Pages
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
-        private void BtnChinhSuaThongTinLienHe_Click(object sender, RoutedEventArgs e)
-        {
-            AddressEditDialogWindow addressEditWnd = new AddressEditDialogWindow(this.btnChinhSuaThongTinLienHe);
-            btnChinhSuaThongTinLienHe.CommandParameter = addressEditWnd;
-        }
-
         private void BtnXemDanhSachDV_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void BtnThemDichVu_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceAddingDialogWindow serviceAddWnd = new ServiceAddingDialogWindow(btnThemDichVu);
-            btnThemDichVu.CommandParameter = serviceAddWnd;
+            ServiceListDialogWindow dsDichVuWnd = new ServiceListDialogWindow();
+            btnXemDanhSachDV.CommandParameter = dsDichVuWnd;
         }
 
         private void BtnSubmitPhieuDichVu_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogPopupWindow notifyWnd = new DialogPopupWindow();
+            btnSubmitPhieuDichVu.CommandParameter = notifyWnd;
         }
 
         private void BtnThemKhachHang_Click(object sender, RoutedEventArgs e)
