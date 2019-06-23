@@ -7,7 +7,9 @@
         xmlns:converters="clr-namespace:UIProject.Converters"
         mc:Ignorable="d"
         Title="ServiceAddingDialogWindow"
-        Style="{StaticResource CustomDialogWindowStyle}">
+        x:Name="serviceAddingWnd"
+        Style="{StaticResource CustomDialogWindowStyle}"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:MaKhuVucToKhuVucConverter x:Key="khuVucConverter"/>
         <Style x:Key="CustomDefinedLabelStyle" TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}">
@@ -74,10 +76,10 @@
                                    Content="Đơn giá"/>
                             <TextBox Grid.Row="0" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.TenNhaCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.TenLoaiDV, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                             <TextBox Grid.Row="1" Grid.Column="1"
                                      Style="{StaticResource CustomTextBoxStyle}"
-                                     Text="{Binding Data.SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding Data.DonGiaDV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -92,16 +94,14 @@
                             Style="{StaticResource UIProjectAcceptButtonStyle}"
                             Content="Lưu"
                             Command="{Binding SubmitCommand}"
-                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"
-                            Click="BtnSubmit_Click"/>
+                            CommandParameter="{Binding ElementName=serviceAddingWnd}"/>
                     <Button Grid.Column="1"
                             x:Name="btnCancel"
                             Margin="0 20"
                             Style="{StaticResource UIProjectCancelButtonStyle}"
                             Content="Hủy"
                             Command="{Binding CancelCommand}"
-                            CommandParameter="{Binding ElementName=ProviderAddingWnd}"
-                            Click="BtnCancel_Click"/>
+                            CommandParameter="{Binding ElementName=serviceAddingWnd}"/>
                 </Grid>
             </Grid>
         </Grid>

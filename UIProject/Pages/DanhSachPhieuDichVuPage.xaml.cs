@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
-
+using UIProject.Views;
 
 namespace UIProject.Pages
 {
@@ -39,5 +39,6 @@ namespace UIProject.Pages
         {
             await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
+
     }
 }

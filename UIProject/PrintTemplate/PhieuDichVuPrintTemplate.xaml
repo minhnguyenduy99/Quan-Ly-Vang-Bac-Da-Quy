@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:UIProject.PrintTemplate">
     <FlowDocument Background="White" 
                   x:Key="PhieuDichVuPrintTemplate"
-                  PageHeight="auto"
-                  PageWidth="1000">
+                  PageHeight="850"
+                  PageWidth="auto">
         <FlowDocument.Resources>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}" x:Key="ValueLabelStyle">
                 <Setter Property="FontWeight" Value="Normal"/>

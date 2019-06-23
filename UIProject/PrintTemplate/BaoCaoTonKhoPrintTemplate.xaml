@@ -1,0 +1,147 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UIProject.PrintTemplate">
+    <FlowDocument Background="White" 
+                  x:Key="BaoCaoTonKhoPrintTemplate"
+                  PageHeight="850"
+                  PageWidth="auto">
+        <FlowDocument.Resources>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}" x:Key="ValueLabelStyle">
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Width" Value="auto"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource UIProjectPrintTextBoxStyle}"></Style>
+        </FlowDocument.Resources>
+        <Section Name="GeneralInfo">
+            <BlockUIContainer>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Công ty TNHH MTV TeamWorkFirst"/>
+                    <TextBlock Text="Địa chỉ: Khu phố 6 - Linh Trung - Thủ Đức - TP Hồ Chí Minh"/>
+                </StackPanel>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph Margin="0"
+                   TextAlignment="Center">=================================================</Paragraph>
+        <Paragraph TextAlignment="Center"
+                   FontWeight="Bold">Bảng báo cáo tồn kho</Paragraph>
+        <Section Name="OrderInfo">
+            <BlockUIContainer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Style="{StaticResource MediumLabelStyle}"
+                           HorizontalAlignment="Right"
+                           Content="Ngày lập  : "/>
+                    <Label Grid.Column="1"
+                           Style="{StaticResource MediumLabelStyle}"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Left"
+                           Content="{Binding ThoiGianBaoCao}"/>
+                </Grid>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph TextAlignment="Center">==========================================</Paragraph>
+        <Table x:Name="dataTable">
+            <Table.Resources>
+                <Style TargetType="{x:Type Table}">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="FontFamily" Value="Arial"/>
+                    <Setter Property="CellSpacing" Value="0"/>
+                </Style>
+                <Style TargetType="{x:Type TableCell}">
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="Padding" Value="7"/>
+                    <Setter Property="TextAlignment" Value="{Binding}"/>
+                </Style>
+            </Table.Resources>
+            <Table.Columns>
+                <TableColumn/>
+                <TableColumn Width="120"/>
+                <TableColumn/>
+                <TableColumn/>
+                <TableColumn/>
+            </Table.Columns>
+            <TableRowGroup>
+                <TableRow>
+                    <TableRow.Resources>
+                        <Style TargetType="TableCell">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Padding" Value="7"/>
+                            <Setter Property="TextAlignment" Value="{Binding}"/>
+                        </Style>
+                    </TableRow.Resources>
+                    <TableCell TextAlignment="Center">
+                        <Paragraph>Mã SP</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Left">
+                        <Paragraph>Loại SP</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Left">
+                        <Paragraph>NCC</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>Tồn đầu</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>SL mua vào</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>SL bán ra</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>Tồn cuối</Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right">
+                        <Paragraph>Giá trị</Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        <Paragraph TextAlignment="Center">===============================================</Paragraph>
+        <Section Name="Summary">
+            <BlockUIContainer>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}">
+                        </Style>
+                    </StackPanel.Resources>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Số lượng tồn kho"/>
+                                <Label Content="Giá trị tồn kho"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ValueLabelStyle}">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="{Binding TongSoLuongTonKho}"/>
+                                <Label Content="{Binding TongGiaTriTonKho, Converter={StaticResource moneyConverter}}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </BlockUIContainer>
+        </Section>
+        <Paragraph TextAlignment="Center">======================== Hết =========================</Paragraph>
+    </FlowDocument>
+</ResourceDictionary>

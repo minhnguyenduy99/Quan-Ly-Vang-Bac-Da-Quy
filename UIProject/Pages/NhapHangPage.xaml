@@ -33,7 +33,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -238,7 +238,7 @@
                                 Name="LocaleDatePicker"
                                 materialDesign:HintAssist.Hint="Locale Date"
                                 Style="{StaticResource UIProjectDatePickerStyle}"
-                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource dateConverter}}">
+                                SelectedDate="{Binding NhapHangVM.PhieuMua.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     </DatePicker>
                 </StackPanel>
             </Grid>
@@ -313,23 +313,15 @@
         </materialDesign:Card>
 
         <Grid Grid.Row="3" Grid.Column="1">
-            <materialDesign:Card VerticalContentAlignment="Center"
+            <materialDesign:Card 
                                  Style="{StaticResource UIProjectMaterialDesignCardStyle}"
                                  Margin="5 5 10 10">
-                <StackPanel Margin="5 5 10 10"
-                            Orientation="Vertical"
-                            VerticalAlignment="Stretch"
-                            Background="White">
-                    <Button x:Name="btnThemPhieuMua"
-                            Command="{Binding SubmitPhieuNhapHangCommand}"
-                            IsEnabled="{Binding TimKiemNhaCungCapVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nhaCungCapDaChonConverter2}}"
-                            Click="BtnThemPhieuMua_Click"
-                            Content="Lưu"/>
-                    <Button x:Name="btnHuyPhieu"
-                            Command="{Binding HuyPhieuNhapHangCommand}"
-                            Click="BtnHuyPhieu_Click"
-                            Content="Hủy"/>
-                </StackPanel>
+                <Button x:Name="btnThemPhieuMua"
+                        Height="auto"
+                        Command="{Binding SubmitPhieuNhapHangCommand}"
+                        IsEnabled="{Binding TimKiemNhaCungCapVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nhaCungCapDaChonConverter2}}"
+                        Click="BtnThemPhieuMua_Click"
+                        Content="Lưu"/>
             </materialDesign:Card>
         </Grid>
     </Grid>

@@ -21,6 +21,7 @@ namespace UIProject.ViewModels.PageViewModels
         private IEnumerable<LoaiSanPhamModel> dsLoaiSanPham;
 
         private ICommand loadBaoCaoCmd;
+        private ICommand inBaoCaoTonKhoCmd;
 
         public BaoCaoTonKhoViewModel BaoCaoTonKhoVM { get; private set; }
         public ObservableCollectionViewModel<LoaiSanPhamModel> DanhSachLoaiSanPhamVM { get; private set; }
@@ -31,7 +32,11 @@ namespace UIProject.ViewModels.PageViewModels
             get => loadBaoCaoCmd ?? new BaseCommand<IWindow>(OnLoadBaoCaoCommandExcute);
             set => loadBaoCaoCmd = value;
         }
-
+        public ICommand InBaoCaoTonKhoCommand
+        {
+            get => inBaoCaoTonKhoCmd ?? new BaseCommand<IWindow>(OnInBaoCaoTonKhoCommandExecute);
+            set => inBaoCaoTonKhoCmd = value;
+        }
 
         public BaoCaoTonKhoPageVM(): base() { }
         public BaoCaoTonKhoPageVM(INavigator navigator) : base(navigator) { }
@@ -119,6 +124,11 @@ namespace UIProject.ViewModels.PageViewModels
                 MessageBox.Show("Có lỗi xảy ra trong quá trình tạo báo cáo");   
             }
 
+        }
+
+        private void OnInBaoCaoTonKhoCommandExecute(IWindow window)
+        {
+            window.ShowDialog();
         }
 
         private void RefreshResource()

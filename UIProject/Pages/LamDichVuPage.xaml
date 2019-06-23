@@ -61,6 +61,18 @@
                             VerticalAlignment="Center"
                             Command="{Binding XemDanhSachDichVuCommand}"
                             Click="BtnXemDanhSachDV_Click"/>
+                    <Button x:Name="btnThemDichVu"
+                            Margin="10"
+                            Style="{StaticResource UIProjectLightIconButtonStyle}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            ToolTip="Thêm dịch vụ mới"
+                            Command="{Binding ThemDichVuCommand}"
+                            Click="BtnThemDichVu_Click">
+                        <materialDesign:PackIcon Kind="Add"
+                                                 Width="auto"
+                                                 Height="auto"/>
+                    </Button>
                     <Button 
                             Grid.Column="1"
                             Margin="10"

@@ -50,7 +50,7 @@ namespace UIProject.Pages
         private async void BanHangPage_Loaded(object sender, RoutedEventArgs e)
         {
             (this.DataContext as BanHangPageVM).SanPhamDaTonTai += ViewModel_SanPhamDaCo;
-            await this.FadeIn(0.5f, 0.5f);
+            await this.SlideFromRightToLeftAndFadeIn(0.7f);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

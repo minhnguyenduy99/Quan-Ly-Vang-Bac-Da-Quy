@@ -26,6 +26,7 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand xoaPhieuDichVuCmd;
         private ICommand chinhSuaPhieuDichVuCmd;
         private ICommand navigateTaoPhieuDichVuPageCmd;
+        private ICommand themDichVuCmd;
 
         public ICommand XoaPhieuDichVuCommand
         {
@@ -42,8 +43,6 @@ namespace UIProject.ViewModels.PageViewModels
             get => navigateTaoPhieuDichVuPageCmd ?? new BaseCommand(OnNavigateTaoPhieuDichVuPageCommandExecute);
             set => navigateTaoPhieuDichVuPageCmd = value;
         }
-
-
 
         public SearchTextBoxViewModel<PhieuDichVuModel> TimKiemPhieuDichVuVM { get; set; }
         public EnumFilterViewModel<PhieuDichVuModel> LocTinhTrangPhieuDichVuVM { get; set; }

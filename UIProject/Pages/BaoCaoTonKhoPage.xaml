@@ -58,7 +58,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0"
+                            <!--<Label Grid.Row="0" Grid.Column="0"
                                    Style="{StaticResource MediumLabelStyle}"
                                    FontWeight="Bold"
                                    Content="Lọc sản phẩm"/>
@@ -81,7 +81,7 @@
                                                               Height="40"
                                                               Background="WhiteSmoke"
                                                               FontSize="15"/>
-                            </StackPanel>
+                            </StackPanel>-->
                         </Grid>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -118,8 +118,10 @@
                                     Content="Tải báo cáo"
                                     Command="{Binding LoadBaoCaoCommand}"
                                     Click="BtnLoadBaoCao_Click"/>
-                            <Button Content="In" />
-                            <Button Content="Xuất file"/>
+                            <Button x:Name="btnIn"
+                                    Content="In"
+                                    Command="{Binding InBaoCaoTonKhoCommand}"
+                                    Click="BtnIn_Click"/>
                         </StackPanel>
                     </Grid>
                 </materialDesign:Card>

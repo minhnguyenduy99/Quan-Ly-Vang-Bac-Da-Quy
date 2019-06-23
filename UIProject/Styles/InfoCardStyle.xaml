@@ -12,6 +12,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Padding" Value="0 10 0 10"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="ContentInfoForeground" Value="{DynamicResource AirForceBlue}"/>
         <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3"/>
         <Setter Property="materialDesign:ShadowAssist.ShadowEdges" Value="All"/>

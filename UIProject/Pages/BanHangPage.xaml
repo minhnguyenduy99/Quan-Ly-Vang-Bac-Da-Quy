@@ -281,8 +281,6 @@
                                        Content="Điện thoại"/>
                                 <Label Grid.Row="2" Grid.Column="0"
                                        Content="Địa chỉ"/>
-                                <Label Grid.Row="3" Grid.Column="0"
-                                       Content="Công nợ"/>
                                 <Label Grid.Row="0" Grid.Column="1"
                                        x:Name="Ten"
                                        Content="{Binding TenKH}"/>
@@ -290,8 +288,6 @@
                                    Content="{Binding SDT}"/>
                                 <Label Grid.Row="2" Grid.Column="1"
                                    Content="{Binding DiaChi}"/>
-                                <Label Grid.Row="3" Grid.Column="1"
-                                   Content="{Binding CongNo}"/>
                             </Grid>
                         </Grid>
                     </TabItem>
@@ -307,11 +303,8 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0"
-                                   Content="Nhân viên"/>
                             <Label Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Top"
                                    Margin="5 10 5 5"

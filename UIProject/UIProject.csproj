@@ -182,6 +182,7 @@
     <Compile Include="ViewModels\DataViewModels\HoaDonViewModel.cs" />
     <Compile Include="ViewModels\DataViewModels\NhapHangViewModel.cs" />
     <Compile Include="ViewModels\DataViewModels\PhieuDichVuViewModel.cs" />
+    <Compile Include="ViewModels\DataViewModels\ThongTinTongQuanViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ICollectionViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IConditionalDisplayCollection.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\INavigatable.cs" />
@@ -341,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TongQuanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintTemplate\BaoCaoTonKhoPrintTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

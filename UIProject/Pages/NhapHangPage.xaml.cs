@@ -46,11 +46,5 @@ namespace UIProject.Pages
         {
             return (IDocumentPaginatorSource)FindResource("PhieuMuaHangPrintTemplate");
         }
-
-        private void BtnHuyPhieu_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            DialogPopupWindow notifyWnd = new DialogPopupWindow();
-            btnHuyPhieu.CommandParameter = notifyWnd;
-        }
     }
 }

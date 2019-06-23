@@ -34,28 +34,22 @@ namespace UIProject.ViewModels.PageViewModels
         {
             get => themKhachHangCmd ?? new BaseCommand<IWindowExtension>(OnThemKhachHangCommandExecute);
             set => themKhachHangCmd = value;
-        }
-       
-
+        }     
         public ICommand XemDanhSachDichVuCommand
         {
             get => xemDSDichVuCmd ?? new BaseCommand<IWindow>(OnXemDanhSachDichVuCommandExecute);
             set => xemDSDichVuCmd = value;
         }
-
-
         public ICommand ThemDichVuCommand
         {
             get => themDichVuCmd ?? new BaseCommand<IWindowExtension>(OnThemDichVuCommandExecute);
             set => themDichVuCmd = value;
         }
-
         public ICommand SubmitPhieuDichVuCommand
         {
             get => submitPhieuDichVuCmd ?? new BaseCommand<IWindow>(OnSubmitPhieuDichVuCommandExecute);
             set => submitPhieuDichVuCmd = value;
         }
-
         public ICommand QuayLaiTrangTongQuanCommand
         {
             get => quayLaiTrangTongQuanCmd ?? new BaseCommand(OnQuayLaiTrangTongQuanCommandExecute);
@@ -170,14 +164,27 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void OnThemDichVuCommandExecute(IWindowExtension window)
         {
-            throw new NotImplementedException();
+            AddingWindowViewModel<LoaiDichVuModel> themDichVuVM = new AddingWindowViewModel<LoaiDichVuModel>();
+
+            // Trigger event for manual handler
+            window.Closing += (sender, e) => e.Cancel = true;
+            window.DataContext = themDichVuVM;
+
+            // thêm dịch vụ thành công
+            if (window.ShowDialog() == true)
+            {
+                // update lại danh sách dịch vụ
+                RefreshResource();
+
+                TimKiemDichVuVM.RefreshItemSource(dsDichVu);
+                TimKiemDichVuVM.Reload();
+            }
         }
         private void OnXemDanhSachDichVuCommandExecute(IWindow window)
         {
             ItemCollectionViewModel<LoaiDichVuModel> DanhSachDichVuVM = new ItemCollectionViewModel<LoaiDichVuModel>(dsDichVu);
             window.DataContext = DanhSachDichVuVM;
             window.ShowDialog();
-
         }
 
         private void OnThemKhachHangCommandExecute(IWindowExtension window)

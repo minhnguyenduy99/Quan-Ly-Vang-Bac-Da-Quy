@@ -55,7 +55,7 @@ namespace UIProject.Views
             DialogWindowViewModel notifyWndVM = new DialogWindowViewModel()
             {
                 DialogType = DialogWindowType.Info,
-                MessageText = "Lưu thành công",
+                MessageText = "In thành công",
                 OKText = "OK"
             };
             notifyWnd.DataContext = notifyWndVM;

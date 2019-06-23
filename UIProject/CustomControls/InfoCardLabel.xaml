@@ -16,6 +16,7 @@
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{Binding Background}"/>
+            <Setter Property="FontSize" Value="{Binding}"/>
         </Style>
     </UserControl.Style>
     <Grid x:Name="PART_Grid">
@@ -25,11 +26,11 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Image Margin="13 7 13 7"
-                       VerticalAlignment="Stretch"
-                       HorizontalAlignment="Center"
-                       Stretch="UniformToFill"
-                       Height="50"
-                       Source="{Binding IconInfoSource, ElementName=uc}">
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Center"
+                    Stretch="UniformToFill"
+                    Height="50"
+                    Source="{Binding IconInfoSource, ElementName=uc}">
             </Image>
         </Grid>
         <Grid Grid.Column="1">
@@ -39,21 +40,21 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"
                            Margin="7 0 0 0"
-                           FontSize="15"
+                           FontSize="{Binding FontSize, ElementName=uc}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Center"
                            TextAlignment="Left"
                            Foreground="{Binding TitleForeground, ElementName=uc}"
                            Text="{Binding Title, ElementName=uc}"/>
             <TextBlock Grid.Row="1"
-                           Margin="7 0 0 0"
-                           FontSize="25"
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Center"
-                           TextAlignment="Left"
-                           Foreground="{Binding ContentInfoForeground, ElementName=uc}"
-                           FontWeight="Bold"
-                           Text="{Binding ContentInfo, ElementName=uc}"/>
+                        Margin="7 0 0 0"
+                        FontSize="{Binding FontSize, ElementName=uc}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        TextAlignment="Left"
+                        Foreground="{Binding ContentInfoForeground, ElementName=uc}"
+                        FontWeight="Bold"
+                        Text="{Binding ContentInfo, ElementName=uc}"/>
         </Grid>
     </Grid>
 </UserControl>

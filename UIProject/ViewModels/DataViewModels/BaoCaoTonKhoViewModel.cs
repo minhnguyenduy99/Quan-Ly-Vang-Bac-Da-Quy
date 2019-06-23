@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using UIProject.Converters;
+using UIProject.ServiceProviders;
+using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.DataViewModels
@@ -13,10 +16,20 @@ namespace UIProject.ViewModels.DataViewModels
     /// <summary>
     /// View model của báo cáo tồn kho
     /// </summary>
-    public class BaoCaoTonKhoViewModel : BaseViewModelObject
+    public class BaoCaoTonKhoViewModel : BaseViewModelObject, ITableConvertable
     {
         public class ChiTietTonKho : BaseModel
         {
+            #region Resources
+            private static IEnumerable<PhieuMuaModel> dsPhieuMua;
+            private static IEnumerable<ChiTietMuaModel> dsChiTietMua;
+            private static IEnumerable<PhieuBanModel> dsPhieuBan;
+            private static IEnumerable<ChiTietBanModel> dsChiTietBan;
+            private static IEnumerable<SanPhamModel> dsSanPham;
+            #endregion
+            public static bool ResourceLoaded = false;
+
+
             public SanPhamModel SanPham
             {
                 get => GetPropertyValue<SanPhamModel>();
@@ -54,7 +67,6 @@ namespace UIProject.ViewModels.DataViewModels
             {
                 get => SanPham.TenNhaCC;
             }
-
             public long GiaTriTonKho
             {
                 get => SanPham.DonGiaMuaVao * TonCuoi;
@@ -63,17 +75,29 @@ namespace UIProject.ViewModels.DataViewModels
             public ChiTietTonKho(SanPhamModel sanPham, int thang, int nam)
             {
                 SanPham = sanPham;
-
+                if (!ResourceLoaded)
+                {
+                    LoadResource();
+                    ResourceLoaded = true;
+                }
                 TonDau = QuerySoLuongTonDau(SanPham.MaSP, thang, nam);
                 SoLuongMuaVao = QuerySoLuongMua(SanPham.MaSP, thang, nam);
                 SoLuongBanRa = QuerySoLuongBan(SanPham.MaSP, thang, nam);
                 TonCuoi = QuerySoLuongTonCuoi(SanPham.MaSP, thang, nam);
             }
+
+            private void LoadResource()
+            {
+                dsPhieuMua = DataAccess.LoadPhieuMua();
+                dsPhieuBan = DataAccess.LoadPhieuBan();
+                dsChiTietMua = DataAccess.LoadChiTietMua();
+                dsChiTietBan = DataAccess.LoadChiTietBan();
+                dsSanPham = DataAccess.LoadSanPham();
+            }
             private List<PhieuBanModel> QueryPhieuBan(int thang, int nam)
             {
-                var danhSachPhieuBan = DataAccess.LoadPhieuBan();
                 List<PhieuBanModel> queryPhieuBan = new List<PhieuBanModel>();
-                foreach (var phieuBan in danhSachPhieuBan)
+                foreach (var phieuBan in dsPhieuBan)
                 {
                     var ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuBan.NgayLapDate, null, null, null);
                     if (ngayLap.Month == thang && ngayLap.Year == nam)
@@ -85,9 +109,8 @@ namespace UIProject.ViewModels.DataViewModels
             }
             private List<PhieuMuaModel> QueryPhieuMua(int thang, int nam)
             {
-                var danhSachPhieuMua = DataAccess.LoadPhieuMua();
                 List<PhieuMuaModel> queryPhieuMua = new List<PhieuMuaModel>();
-                foreach (var phieuMua in danhSachPhieuMua)
+                foreach (var phieuMua in dsPhieuMua)
                 {
                     bool parseSuccess = DateTime.TryParse(phieuMua.NgayLap, out DateTime ngayLap);
                     if (parseSuccess)
@@ -107,9 +130,9 @@ namespace UIProject.ViewModels.DataViewModels
                 var dsPhieuBan = QueryPhieuBan(thang, nam);
                 foreach (var phieuban in dsPhieuBan)
                 {
-                    var dsChiTietBan = DataAccess.LoadChiTietBan().Where(chiTiet => chiTiet.MaSP == maSP && chiTiet.MaPhieuBan == phieuban.MaPhieu);
-                    if (dsChiTietBan.Count() != 0)
-                        soLuongSanPham += dsChiTietBan.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
+                    var dsChiTietBanTrongThang = dsChiTietBan.Where(chiTiet => chiTiet.MaSP == maSP && chiTiet.MaPhieuBan == phieuban.MaPhieu);
+                    if (dsChiTietBanTrongThang.Count() != 0)
+                        soLuongSanPham += dsChiTietBanTrongThang.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
                 }
                 return soLuongSanPham;
             }
@@ -119,39 +142,61 @@ namespace UIProject.ViewModels.DataViewModels
                 var dsPhieuMua = QueryPhieuMua(thang, nam);
                 foreach (var phieuMua in dsPhieuMua)
                 {
-                    var dsChiTietMua = DataAccess.LoadChiTietMua().Where(chiTiet => chiTiet.MaSP == maSP && chiTiet.MaPhieuMua == phieuMua.MaPhieu);
-                    if (dsChiTietMua.Count() != 0)
-                        soLuongSanPham += dsChiTietMua.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
+                    var dsChiTietMuaTrongThang = dsChiTietMua.Where(chiTiet => chiTiet.MaSP == maSP && chiTiet.MaPhieuMua == phieuMua.MaPhieu);
+                    if (dsChiTietMuaTrongThang.Count() != 0)
+                        soLuongSanPham += dsChiTietMuaTrongThang.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
                 }
                 return soLuongSanPham;
             }
             private int QuerySoLuongTonDau(long? maSP, int thang, int nam)
             {
-                int soLuongHienTai = DataAccess.LoadSPByMaSP(maSP).SoLuong;
+                var dsSanPhamTuongUng = dsSanPham.Where(sanPham => sanPham.MaSP == maSP);
+                int soLuongHienTai = 0;
+                if (dsSanPhamTuongUng.Count() != 0)
+                    soLuongHienTai = dsSanPhamTuongUng.Select(sanPham => sanPham.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
+                int soLuongBan = QuerySoLuongSanPhamBan();
+                int soLuongMua = QuerySoLuongSanPhamMua();
 
-                IEnumerable<ChiTietBanModel> dsChiTietBan =
-                    from chiTiet in DataAccess.LoadChiTietBan()
-                    join phieuBan in DataAccess.LoadPhieuBan()
-                    on chiTiet.MaPhieuBan equals phieuBan.MaPhieu
-                    where chiTiet.MaSP == maSP &&
-                    GetDateTime(phieuBan.NgayLapDate) > new DateTime(nam, thang, 1)
-                    select chiTiet;
-
-                IEnumerable<ChiTietMuaModel> dsChiTietMua =
-                    from chiTiet in DataAccess.LoadChiTietMua()
-                    join phieuMua in DataAccess.LoadPhieuMua()
-                    on chiTiet.MaPhieuMua equals phieuMua.MaPhieu
-                    where chiTiet.MaSP == maSP &&
-                    phieuMua.NgayLapDateTime > new DateTime(nam, thang, 1)
-                    select chiTiet;
-
-                int soLuongBan = dsChiTietBan.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
-                int soLuongMua = dsChiTietMua.Select(chiTiet => chiTiet.SoLuong).Aggregate((sl1, sl2) => sl1 + sl2);
                 return soLuongHienTai + soLuongBan - soLuongMua;
 
-                DateTime GetDateTime(string date)
+                // local function
+                int QuerySoLuongSanPhamBan()
                 {
-                    return (DateTime)new ToShortDateConverter().ConvertBack(date, null, null, null);
+                    int soLuong = 0;
+                    foreach(var chiTiet in dsChiTietBan)
+                    {
+                        foreach(var phieuBan in dsPhieuBan)
+                        {
+                            int ngayBanTreHon = DateTime.Compare(
+                                DateTime.Parse(phieuBan.NgayLap), 
+                                new DateTime(nam, thang, 1));
+                            if (chiTiet.MaPhieuBan == phieuBan.MaPhieu && chiTiet.MaSP == maSP &&
+                                ngayBanTreHon >=0)
+                            {
+                                soLuong += chiTiet.SoLuong;
+                            }
+                        }
+                    }
+                    return soLuong;
+                }
+                int QuerySoLuongSanPhamMua()
+                {
+                    int soLuong = 0;
+                    foreach (var chiTiet in dsChiTietMua)
+                    {
+                        foreach (var phieuMua in dsPhieuMua)
+                        {
+                            int ngayMuaTreHon = DateTime.Compare(
+                                                    DateTime.Parse(phieuMua.NgayLap),
+                                                    new DateTime(nam, thang, 1));
+                            if (chiTiet.MaPhieuMua == phieuMua.MaPhieu && chiTiet.MaSP == maSP &&
+                                ngayMuaTreHon >= 0)
+                            {
+                                soLuong += chiTiet.SoLuong;
+                            }
+                        }
+                    }
+                    return soLuong;
                 }
             }
             private int QuerySoLuongTonCuoi(long? maSP, int thang, int nam)
@@ -169,13 +214,27 @@ namespace UIProject.ViewModels.DataViewModels
         public int Thang
         {
             get => GetPropertyValue<int>();
-            set => SetProperty(value);
+            set
+            {
+                SetProperty(value);
+                ThoiGianBaoCao = $"{Thang} / {Nam}";
+            }
         }
 
         public int Nam
         {
             get => GetPropertyValue<int>();
-            set => SetProperty(value);
+            set
+            {
+                SetProperty(value);
+                ThoiGianBaoCao = $"{Thang} / {Nam}";
+            }
+        }
+
+        public string ThoiGianBaoCao
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
         }
 
         public int TongSoLuongTonKho
@@ -195,6 +254,8 @@ namespace UIProject.ViewModels.DataViewModels
         /// </summary>
         public bool LoadBaoCaoTonKho()
         {
+            DanhSachSanPhamBaoCao.Clear();
+            ChiTietTonKho.ResourceLoaded = false;
             try
             {
                 foreach (var sanPham in danhSachSanPham)
@@ -205,7 +266,7 @@ namespace UIProject.ViewModels.DataViewModels
                 TongGiaTriTonKho = GetTongGiaTriTonKho();
                 return true;
             }
-            catch { return false; }
+            catch (Exception e) { return false; }
         }
 
 
@@ -238,6 +299,23 @@ namespace UIProject.ViewModels.DataViewModels
         protected override void ReloadComponentsInternal()
         {
             
+        }
+
+        public bool ConvertDataToTable(Table table)
+        {
+            return CollectionToTableConverter.ConvertToTable(
+                DanhSachSanPhamBaoCao.Models,
+                new string[]
+                {
+                    "MaSP",
+                    "TenLoaiSP",
+                    "TenNhaCC",
+                    "TonDau",
+                    "SoLuongMuaVao",
+                    "SoLuongBanRa",
+                    "TonCuoi",
+                    "GiaTriTonKho"
+                }, new TryMoneyConverter(), table);
         }
     }
 }

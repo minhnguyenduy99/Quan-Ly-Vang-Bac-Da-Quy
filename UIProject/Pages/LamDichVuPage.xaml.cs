@@ -63,5 +63,11 @@ namespace UIProject.Pages
         {
             return (IDocumentPaginatorSource)FindResource("PhieuDichVuPrintTemplate");
         }
+
+        private void BtnThemDichVu_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceAddingDialogWindow themDichVuWnd = new ServiceAddingDialogWindow(btnThemDichVu);
+            btnThemDichVu.CommandParameter = themDichVuWnd;
+        }
     }
 }

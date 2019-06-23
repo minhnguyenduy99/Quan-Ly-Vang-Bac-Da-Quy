@@ -8,6 +8,8 @@ using System.Windows.Input;
 using BaseMVVM_Service.BaseMVVM;
 using ModelProject;
 using UIProject.ViewModels.FunctionInterfaces;
+using UIProject.ViewModels.DataViewModels;
+using System.Diagnostics;
 
 namespace UIProject.ViewModels.PageViewModels
 {
@@ -18,46 +20,16 @@ namespace UIProject.ViewModels.PageViewModels
     {
 
         #region Private Fields
-        private List<PhieuBanModel> dsPhieuBan;
-        private List<KhachHangModel> dsKhachHang;
-        private long doanhThu;
-        private ICommand getMoreInfoCommand;
-        private ICommand logoutCommand;
+        private const string TimHieuThemURL = "https://github.com/minhnguyenduy99/Quan-Ly-Vang-Bac-Da-Quy";
+        private IEnumerable<PhieuBanModel> dsPhieuBan;
+        private IEnumerable<KhachHangModel> dsKhachHang;
 
         private ICommand navigateNhapHangPageCmd;
         private ICommand navigateNhaCungCapPageCmd;
         private ICommand navigateDichVuPageCmd;
         private ICommand navigateBanHangPageCmd;
+        private ICommand navigateTimHieuThemCmd;
         #endregion
-
-        public int SoLuongHoaDon
-        {
-            get => this.dsPhieuBan.Count;
-        }
-
-        public int SoLuongKhachHangMoi
-        {
-            get => this.dsKhachHang.Count;
-        }
-
-        public long DoanhThu
-        {
-            get => this.doanhThu;
-        }
-
-
-        /// <summary>
-        /// Command hiển thị thông tin nhân viên
-        /// </summary>
-        public ICommand GetMoreInfoCommand
-        {
-            get => getMoreInfoCommand ?? (getMoreInfoCommand = new BaseCommand(OpenInfoDialog));
-        }
-
-        public ICommand LogOutCommand
-        {
-            get => logoutCommand ?? (logoutCommand = new BaseCommand(OnLogOutCommandExecute));
-        }
 
         public ICommand NavigateNhapHangPageCommand
         {
@@ -70,37 +42,26 @@ namespace UIProject.ViewModels.PageViewModels
             get => navigateNhaCungCapPageCmd ?? new BaseCommand(OnNavigateNhaCungCapPageCommandExecute);
             set => navigateNhaCungCapPageCmd = value;
         }
-
-
-
         public ICommand NavigateDichVuPageCommand
         {
             get => navigateDichVuPageCmd ?? new BaseCommand(OnNavigateDichVuPageCommandExecute);
             set => navigateDichVuPageCmd = value;
         }
-
-
         public ICommand NavigateBanHangPageCommand
         {
             get => navigateBanHangPageCmd ?? new BaseCommand(OnNavigateBanPageCommandExecute);
             set => navigateBanHangPageCmd = value;
         }
 
+        public ICommand NavigateTimHieuThemCommand
+        {
+            get => navigateTimHieuThemCmd ?? new BaseCommand(OnNavigateTimHieuThemCommandExecute);
+            set => navigateTimHieuThemCmd = value;
+        }
 
+        public ThongTinTongQuanViewModel TongQuanVM { get; private set; }
         public TongQuanPageVM() : base() { }
         public TongQuanPageVM(INavigator navigator) : base(navigator) { }
-
-
-
-        private void OpenInfoDialog()
-        {
-
-        }
-
-        protected void OnLogOutCommandExecute()
-        {
-
-        }
 
 
         protected virtual void OnNavigateNhapHangPageCommandExecute()
@@ -108,6 +69,10 @@ namespace UIProject.ViewModels.PageViewModels
             this.Navigator.Navigate("Nhập hàng");
         }
 
+        protected virtual void OnNavigateTimHieuThemCommandExecute()
+        {
+            Process.Start("chrome.exe", TimHieuThemURL);
+        }
 
         protected virtual void OnNavigateBanPageCommandExecute()
         {
@@ -126,14 +91,12 @@ namespace UIProject.ViewModels.PageViewModels
 
         protected override void LoadComponentsInternal()
         {
-            // Load all models needed for page
-            dsPhieuBan = DataAccess.LoadPhieuBan();
-            dsKhachHang = DataAccess.LoadKhachHang();
+            TongQuanVM = new ThongTinTongQuanViewModel();
         }
 
         protected override void ReloadComponentsInternal()
         {
-            
+            TongQuanVM.Load();
         }
     }
 }

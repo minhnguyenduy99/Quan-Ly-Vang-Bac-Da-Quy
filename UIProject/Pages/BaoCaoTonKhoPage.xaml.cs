@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels.PageViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -45,6 +46,23 @@ namespace UIProject.Pages
         {
             DialogPopupWindow loadingWindow = new DialogPopupWindow();
             btnLoadBaoCao.CommandParameter = loadingWindow;
+        }
+
+        private void BtnIn_Click(object sender, RoutedEventArgs e)
+        {
+            InitializePrintViewWindow();
+        }
+        private void InitializePrintViewWindow()
+        {
+            var baoCaoTonKhoPrintDoc = (FlowDocument)GetDocumentPage();
+            baoCaoTonKhoPrintDoc.DataContext = (DataContext as BaoCaoTonKhoPageVM).BaoCaoTonKhoVM;
+            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(baoCaoTonKhoPrintDoc);
+            btnIn.CommandParameter = printWnd;
+        }
+
+        private IDocumentPaginatorSource GetDocumentPage()
+        {
+            return (IDocumentPaginatorSource)FindResource("BaoCaoTonKhoPrintTemplate");
         }
     }
 }

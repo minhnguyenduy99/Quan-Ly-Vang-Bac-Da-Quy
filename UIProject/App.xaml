@@ -98,6 +98,7 @@
                         <ResourceDictionary Source="./PrintTemplate/HoaDonPrintTemplate.xaml"/>
                         <ResourceDictionary Source="./PrintTemplate/PhieuDichVuPrintTemplate.xaml"/>
                         <ResourceDictionary Source="./PrintTemplate/PhieuMuaHangPrintTemplate.xaml"/>
+                        <ResourceDictionary Source="./PrintTemplate/BaoCaoTonKhoPrintTemplate.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 
