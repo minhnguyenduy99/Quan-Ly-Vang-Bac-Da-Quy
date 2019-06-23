@@ -108,7 +108,7 @@
                         <Label Content="THÔNG TIN HÓA ĐƠN"
                                 Margin="0"
                                 FontWeight="Bold"/>
-                        <Grid DataContext="{Binding DanhSachPhieuBanVM.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid DataContext="{Binding DanhSachPhieuBanVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

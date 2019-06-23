@@ -7,14 +7,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using UIProject.Converters;
 using UIProject.Events;
+using UIProject.ServiceProviders;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 using static BaseMVVM_Service.BaseMVVM.BaseSubmitableModel;
 
 namespace UIProject.ViewModels.DataViewModels
 {
-    public class PhieuDichVuViewModel : BaseViewModel, ISubmitViewModel
+    public class PhieuDichVuViewModel : BaseViewModel, ISubmitViewModel, ITableConvertable
     {
         /// <summary>
         /// This property is not implemented to use in this class
@@ -23,7 +26,14 @@ namespace UIProject.ViewModels.DataViewModels
 
         public bool IsDataValid { get; private set; }
 
-        public PhieuDichVuModel PhieuDichVu { get; set; }
+        public PhieuDichVuModel PhieuDichVu
+        {
+            get => GetPropertyValue<PhieuDichVuModel>();
+            set
+            {
+                SetProperty(value);
+            }
+        }
 
         #region Thông tin liên hệ
         public string DiaChi
@@ -141,6 +151,30 @@ namespace UIProject.ViewModels.DataViewModels
                 }
             }
             return false;
+        }
+        public void UpdateToDatabase()
+        {
+            PhieuDichVu.Submit(SubmitType.Update);
+            foreach(var chiTiet in DSChiTietDichVu.Models)
+            {
+                chiTiet.Submit(SubmitType.Update);
+            }         
+        }
+        public bool ConvertDataToTable(Table table)
+        {
+            bool convertSuccess = CollectionToTableConverter.ConvertToTable(
+                DSChiTietDichVu.Models,
+                new string[]
+                {
+                    "TenLoaiDV",
+                    "DonGiaDuocTinh",
+                    "SoLuong",
+                    "ThanhTien",
+                    "TraTruoc",
+                    "ConLai",
+                    "NgayGiao"
+                }, new TryMoneyConverter(), table);
+            return convertSuccess;
         }
     }
 }

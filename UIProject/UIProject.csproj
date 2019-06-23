@@ -191,6 +191,7 @@
     <Compile Include="ViewModels\FunctionInterfaces\ISearcher.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISubmitViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IViewModelObject.cs" />
+    <Compile Include="ViewModels\FunctionInterfaces\ITableConvertable.cs" />
     <Compile Include="ViewModels\LayoutViewModels\AddingWindowViewModel.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\IAsyncCurrentSelectedItem.cs" />
     <Compile Include="ViewModels\FunctionInterfaces\ISelectable.cs" />
@@ -347,6 +348,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PrintTemplate\PhieuDichVuPrintTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintTemplate\PhieuMuaHangPrintTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\BorderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -420,6 +429,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\CustomDataTemplates\DanhSachChiTietBanTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachChiTietDichVuTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -410,7 +410,9 @@ namespace ModelProject
             {
                 try
                 {
+                    ChiTietDichVuModel.IsUpdatedFromDatabase = true;
                     var output = cnn.Query<ChiTietDichVuModel>("select * from ChiTietDichVu", new DynamicParameters());
+                    ChiTietDichVuModel.IsUpdatedFromDatabase = false;
                     return output.ToList();
                 }
                 catch (DataException)
@@ -433,7 +435,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update ChiTietDichVu set CHIPHIRIENG=@ChiPhiRieng,SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,TRATRUOC=@TraTruoc,NGAYGIAO=@NgayGiao,MATINHTRANG=@MaTinhTrang" , ctdv);
+                cnn.Execute("update ChiTietDichVu set CHIPHIRIENG=@ChiPhiRieng,SOLUONG=@SoLuong,THANHTIEN=@ThanhTien,TRATRUOC=@TraTruoc, CONLAI=@ConLai, NGAYGIAO=@NgayGiao,MATINHTRANG=@MaTinhTrang" , ctdv);
             }
         }
 
@@ -675,7 +677,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update PhieuDichVu set MAPHIEU=@MaPhieu,NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc, TINHTRANG = @TinhTrang, MANV = @MaNV, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
+                cnn.Execute("update PhieuDichVu set NGAYLAP=@NgayLap,MAKH=@MaKH,TONGTIEN=@TongTien,TONGTIENTRATRUOC=@TongTienTraTruoc, TONGTIENCONLAI=@TongTienConLai, TINHTRANG = @TinhTrang, GHICHU = @GhiChu WHERE MAPHIEU = @maPhieu", PhieuDichVu);
             }
         }
 
@@ -914,14 +916,18 @@ namespace ModelProject
             }
         }
 
-        public static ChiTietDichVuModel LoadChiTietDichVuByMaCTDV(long? macctdv)
+        public static List<ChiTietDichVuModel> LoadChiTietDichVuByMaCTDV(long? macctdv)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ChiTietDichVuModel>("select * " +
-                    "from ChiTietBan " +
-                    "where MAPHIEU=@m ",  new { m = macctdv });
-                return output.ElementAt<ChiTietDichVuModel>(0);
+                try
+                {
+                    var output = cnn.Query<ChiTietDichVuModel>("select * " +
+                        "from ChiTietDichVu " +
+                        "where MAPHIEU=@m ", new { m = macctdv });
+                    return output.ToList();
+                }
+                catch (DataException) { return new List<ChiTietDichVuModel>(); }
             }
         }
 

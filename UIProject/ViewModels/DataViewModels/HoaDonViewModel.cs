@@ -6,14 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using UIProject.Converters;
 using UIProject.Events;
+using UIProject.ServiceProviders;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.DataViewModels
 {
-    public class HoaDonViewModel : BaseViewModelObject, ISubmitViewModel
+    public class HoaDonViewModel : BaseViewModelObject, ISubmitViewModel, ITableConvertable
     {
         public ISubmitable Data { get; set; } = null;
 
@@ -179,6 +181,30 @@ namespace UIProject.ViewModels.DataViewModels
                 OnDataSubmited(new SubmitedDataEventArgs(null, false));
                 return false;
             }
+        }
+
+        public bool ConvertDataToTable(Table table)
+        {
+            //table = new Table();
+            //CollectionToTableConverter.AddRowHeaders(new string[]
+            //{
+            //        "Mã SP",
+            //        "Tên SP",
+            //        "Số lượng",
+            //        "Đơn giá bán ra",
+            //        "Thành tiền"
+            //},table);
+            bool convertSuccess = CollectionToTableConverter.ConvertToTable(
+                DanhSachChiTietBan.Models,
+                new string[]
+                {
+                    "MaSP",
+                    "TenSP",
+                    "SoLuong",
+                    "DonGiaBanRa",
+                    "ThanhTien"
+                }, new TryMoneyConverter(), table);
+            return convertSuccess;
         }
 
         protected virtual void OnDataSubmited(SubmitedDataEventArgs e)

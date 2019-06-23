@@ -16,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="200"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -27,235 +28,208 @@
                    Margin="10"
                    Content="Danh sách phiếu dịch vụ"
                    HorizontalAlignment="Left"/>
-            <Button Grid.Column="1"
-                    Style="{StaticResource UIProjectLightButtonStyle}"
-                    Content="Tạo phiếu dịch vụ"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Margin="0 0 13 0"
-                    Padding="10 15"/>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button 
+                        Margin="10"
+                        Padding="10 15"
+                        Style="{StaticResource UIProjectLightButtonStyle}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Content="Tạo phiếu dịch vụ"
+                        Command="{Binding NavigateTaoPhieuDichVuPageCommand}"/>
+            </StackPanel>
+           
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
         <Grid Grid.Row="2"
-              Margin="10">
+              Margin="10" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="41*"/>
-                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0"
-                            Margin="0 20 10 20" Grid.ColumnSpan="2"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                <customControls:SearchTextBox DataContext="{Binding TimKiemSanPhamVM}"
-                                              Text="{Binding Text,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                              Style="{StaticResource CustomSearchTextBoxStyle}"
-                                              Hint="Tìm kiếm khách hàng"
-                                              IconSource="/Images/search_icon.png"
-                                              IconHeight="25"
-                                              Width="350"/>
-                <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"
-                            Background="White"
-                            Margin="20 0 10 0"
-                            Width="209"/>
-                <ComboBox VerticalAlignment="Stretch"
-                              DataContext="{Binding LocNhaCungCapVM}"
-                              Margin="20 5 10 5"
-                              Width="130"
-                              FontSize="15"
-                              materialDesign:HintAssist.Hint="Tình trạng"
-                              ItemsSource="{Binding Collection.Items, UpdateSourceTrigger=PropertyChanged}"
-                              DisplayMemberPath="Model.TenNCC"
-                              SelectedItem="{Binding Collection.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <materialDesign:Card Grid.Row="1" Grid.Column="0"
-                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                     x:Name="gridProductList"
-                                     ContentTemplate="{StaticResource DanhSachPhieuDichVuTemplate}"
-                                     Content="{Binding DanhSachSanPhamVM}">
-                </materialDesign:Card>
-                <materialDesign:Card Grid.Column="1"
-                                     Margin="10 0 0 0"
-                                     Padding="10 0 10 20"
-                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                     VerticalAlignment="Top">
-                    <StackPanel Orientation="Vertical">
-                        <Grid>
-                            <Grid.Resources>
-                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
-                                    <Setter Property="Margin" Value="10"/>
-
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0"
-                                   Content="Kết quả tìm thấy"/>
-                            <Label Grid.Row="1" Grid.Column="0"                                   
-                                   Content="Số lượng"/>
-                            <Label Grid.Row="0" Grid.Column="1"                                  
-                                   Content="Số lượng"/>
-                            <Label Grid.Row="1" Grid.Column="1"
-                                   Content="Số lượng"/>
-                        </Grid>
-                        <Separator Margin="0 20 0 20"/>
-                        <Label Style="{StaticResource LargeLabelStyle}"
-                               Margin="10"
-                               Content="Hộp chức năng"/>
-                        <Grid Grid.Column="1"
-                              Margin="10 20 10 10"
-                              VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.Resources>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource UIProjectLightIconButtonStyle}">
-                                    <Setter Property="Margin" Value="5"/>
-                                </Style>
-                            </Grid.Resources>
-                            <Button Grid.Column="0"
-                                    x:Name="btnEditProductInfo"
-                                    ToolTip="Chỉnh sửa thông tin sản phẩm"
-                                    Command="{Binding ChinhSuaThongTinCommand}"
-                                    IsEnabled="{Binding Content.SelectedItem, ElementName=gridProductList, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource functionEnabledConverter}}">
-                                <materialDesign:PackIcon Kind="TableEdit"
-                                                         Height="auto"
-                                                         Width="auto"/>
-                            </Button>
-                            <Button Grid.Column="1"
-                                    x:Name="btnDeleteProduct"
-                                    Background="{StaticResource DarkGrayBrush}"
-                                    ToolTip="Xóa sản phẩm khỏi cửa hàng"
-                                    Command="{Binding XoaSanPhamCommand}"
-                                    IsEnabled="{Binding Content.SelectedItem, ElementName=gridProductList, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource functionEnabledConverter}}">
-                                <materialDesign:PackIcon Kind="DeleteForever"
-                                                         Height="auto"
-                                                         Width="auto"/>
-                            </Button>
-
-                        </Grid>
+            <materialDesign:Card Grid.Column="0"
+                                 Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                 Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="5 5 5 20"
+                                Orientation="Horizontal"
+                               Grid.Row="0"
+                               ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <customControls:SearchTextBox Margin="0"
+                                                      DockPanel.Dock="Left"
+                                                      Style="{StaticResource FieldSearchTextBoxStyle}"
+                                                      DataContext="{Binding TimKiemPhieuDichVuVM}"
+                                                      Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                                    
+                                                      Hint="Tìm kiếm phiếu dịch vụ"
+                                                      HorizontalAlignment="Left"
+                                                      IconSource="/Images/search_icon.png"
+                                                      IconHeight="25"
+                                                      Width="250"/>
+                        <DatePicker DockPanel.Dock="Right"
+                                    Width="200"
+                                    Style="{StaticResource UIProjectDatePickerStyle}"
+                                    Margin="20 0 0 0"
+                                    SelectedDate="{Binding LocNgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Margin="20 10"
+                                  DataContext="{Binding LocTinhTrangPhieuDichVuVM}"
+                                  ItemsSource="{Binding Collection.Items}"
+                                  SelectedItem="{Binding Collection.SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Model.TenTinhTrang"
+                                  materialDesign:HintAssist.Hint="Tình trạng"
+                                  Width="200"
+                                  FontSize="15"/>
                     </StackPanel>
-                </materialDesign:Card>
-                <!--<materialDesign:Card Grid.Column="1"
-                                     Style="{StaticResource UIProjectMaterialDesignCardStyle}"
-                                     Margin="10 0 0 0"
-                                     Padding="10">
-                    <DockPanel VerticalAlignment="Top">
-                        <DockPanel.Resources>
-                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}" x:Key="ValueLabelStyle">
-                                <Setter Property="HorizontalAlignment" Value="Right"/>
-                                <Setter Property="Margin" Value="10"/>
-                            </Style>
-                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MediumLabelStyle}">
-                                <Setter Property="HorizontalAlignment" Value="Left"/>
-                                <Setter Property="Margin" Value="15 10 10 10"/>
-                                <Setter Property="Foreground" Value="Gray"/>
-                            </Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource UIProjectMediumTextBlockStyle}">
-                                <Setter Property="HorizontalAlignment" Value="Right"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="Margin" Value="0 10 10 10"/>
-                            </Style>
-                        </DockPanel.Resources>
-                        <Grid DockPanel.Dock="Bottom"
-                              Margin="0 20 0 0">
+                    <Grid Grid.Row="1">
+                        <ContentControl x:Name="PART_CustomerList"
+                                        Grid.Row="1"
+                                        Background="WhiteSmoke"
+                                        DockPanel.Dock="Bottom"
+                                        Padding="5"
+                                        Width="auto"
+                                        ContentTemplate="{StaticResource DanhSachPhieuDichVuTemplate}"
+                                        Content="{Binding DanhSachPhieuDichVuVM}">
+                        </ContentControl>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Column="1"
+                                 Style="{StaticResource UIProjectMaterialDesignCardStyle}"
+                                 Margin="10 0 0 0"
+                                 Padding="10">
+                <DockPanel VerticalAlignment="Top">
+                    <DockPanel.Resources>
+                        <Style TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}" x:Key="ValueLabelStyle">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BelowMediumLabelStyle}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+                    </DockPanel.Resources>
+
+                    <StackPanel DockPanel.Dock="Bottom">
+                        <Label Content="THÔNG TIN PHIẾU DỊCH VỤ"
+                                Margin="0"
+                                FontWeight="Bold"/>
+                        <Grid DataContext="{Binding DanhSachPhieuDichVuVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0"
-                                    x:Name="btnEditInfo"
-                                    Style="{StaticResource UIProjectLightIconButtonStyle}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    ToolTip="Chỉnh sửa thông tin"
-                                    Command="{Binding ChinhSuaThongTinCommand}">
-                                <materialDesign:PackIcon Kind="Edit"
-                                                             Foreground="White"
-                                                             Height="auto"
-                                                             Width="auto"/>
-                            </Button>
-                            <Button Grid.Column="1"
-                                    x:Name="btnDelete"
-                                    Background="{StaticResource DarkGrayBrush}"
-                                    Style="{StaticResource UIProjectLightIconButtonStyle}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    ToolTip="Xóa sản phẩm"
-                                    Command="{Binding XoaKhachHangCommand}">
-                                <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="White"
-                                                             Height="auto"
-                                                             Width="auto"/>
-                            </Button>
+                            <Grid Grid.Row="0" Grid.Column="0"
+                                  Margin="0 0 10 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Content="Ngày lập       :"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="{Binding Model.NgayLapDate}"/>
+                                <Label Grid.Row="1" Grid.Column="0"
+                                       Content="Thời gian      :"/>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="{Binding Model.NgayLapTime}"/>
+                                <Label Grid.Row="2" Grid.Column="0"
+                                        Content="Khách hàng  :"/>
+                                <Label Grid.Row="2" Grid.Column="1"
+                                        Style="{StaticResource ValueLabelStyle}"
+                                        Content="{Binding Model.TenKH}"/>
+                            </Grid>
+                            <Grid Grid.Row="0" Grid.Column="1"
+                                  Margin="10 0 0 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0"
+                                        Content="Tổng tiền    :"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ValueLabelStyle}"
+                                       Content="{Binding Model.TongTien, Converter={StaticResource moneyConverter}}"/>
+                                <Label Grid.Row="1" Grid.Column="0"
+                                        Content="Trả trước     :"/>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                        Style="{StaticResource ValueLabelStyle}"
+                                        Content="{Binding Model.TongTienTraTruoc, Converter={StaticResource moneyConverter}}"/>
+                                <Label Grid.Row="2" Grid.Column="0"
+                                        Content="Còn lại        :"/>
+                                <Label Grid.Row="2" Grid.Column="1"
+                                        Style="{StaticResource ValueLabelStyle}"
+                                        Content="{Binding Model.TongTienConLai, Converter={StaticResource moneyConverter}}"/>
+                            </Grid>
                         </Grid>
-                        <Grid DockPanel.Dock="Bottom"
-                              Margin="0 20 0 0"
-                              DataContext="{Binding Content.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0"
-                                   Content="Loại SP"/>
-                            <Label Grid.Row="1" Grid.Column="0"
-                                   Content="Số lượng"/>
-                            <Label Grid.Row="2" Grid.Column="0"
-                                   Content="Nhà cung cấp"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1"
-                                       Text="{Binding Model.TenLoaiSP}"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1"
-                                       Text="{Binding Model.SoLuong}"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1"
-                                       Text="{Binding Model.TenNhaCC}"/>
-                        </Grid>
-                        <Image DockPanel.Dock="Left"
-                                Grid.ColumnSpan="2"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Source="/Images/software_icon.png"
-                                Margin="10 0 20 10"
-                                Width="70"
-                                Height="70"/>
-                        <StackPanel DockPanel.Dock="Right">
-                            <TextBlock
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Stretch"
-                                       FontSize="20"
-                                       TextWrapping="Wrap"
-                                       Text="{Binding Content.SelectedItem.Model.TenSP, ElementName=gridProductList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock DockPanel.Dock="Bottom"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Stretch"
-                                       FontSize="17"
-                                       TextWrapping="Wrap"
-                                       Foreground="Gray"
-                                       Text="{Binding Content.SelectedItem.Model.MaSP, ElementName=gridProductList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                    </DockPanel>
-                </materialDesign:Card>-->
-            </Grid>
+                        <Separator Margin="0 10"
+                                   Background="LightGray"/>
+                        <Label Content="Chi tiết phiếu dịch vụ"
+                                   FontWeight="Bold"
+                                   Margin="0"/>
+                        <ContentControl Margin="0 10"
+                                        ContentTemplate="{StaticResource DanhSachChiTietDichVuTemplate}"
+                                        Content="{Binding DanhSachChiTietDichVuVM, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        HorizontalContentAlignment="Center">
+                        </ContentControl>
+                    </StackPanel>
+                    <Separator DockPanel.Dock="Bottom"
+                                Margin="5 10 10 15"
+                                Background="LightGray"/>
+                    <Image DockPanel.Dock="Left"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Source="/Images/them_dichvu.png"
+                            Margin="10 0 20 10"
+                            Width="70"
+                            Height="70"/>
+                    <Grid DataContext="{Binding DanhSachPhieuDichVuVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Content="Mã phiếu dịch vụ"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Content="Tình trạng"/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Style="{StaticResource LargeLabelStyle}"
+                               Content="{Binding Model.MaPhieu}"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Style="{StaticResource LargeLabelStyle}"
+                               Content="{Binding Model.TenTinhTrang}">
+                        </Label>
+                    </Grid>
+                </DockPanel>
+            </materialDesign:Card>
         </Grid>
     </Grid>
 </Page>

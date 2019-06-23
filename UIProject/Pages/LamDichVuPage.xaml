@@ -9,6 +9,7 @@
       xmlns:dataValidation="clr-namespace:UIProject.DataValidation"
       xmlns:services="clr-namespace:UIProject.ServiceProviders"
       xmlns:converters="clr-namespace:UIProject.Converters"
+      xmlns:dataGridAttach="clr-namespace:UIProject.Behaviors"
       mc:Ignorable="d" 
       Title="LamDichVuPage">
     <Page.Resources>
@@ -261,6 +262,7 @@
                                       Height="auto"
                                       DataContext="{Binding PhieuDichVuVM.DSChiTietDichVu, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}"
+                                      dataGridAttach:DataGridSetColumnStyle.Elementstyle="{StaticResource UIProjectDataGridElementStyle}"
                                       CanUserSortColumns="True"
                                       CanUserAddRows="False"
                                       CanUserResizeColumns="False"

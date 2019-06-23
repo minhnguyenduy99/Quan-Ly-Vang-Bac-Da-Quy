@@ -7,13 +7,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using UIProject.Converters;
 using UIProject.Events;
+using UIProject.ServiceProviders;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.ViewModels.DataViewModels
 {
-    public class NhapHangViewModel : BaseViewModelObject, ISubmitViewModel
+    public class NhapHangViewModel : BaseViewModelObject, ISubmitViewModel, ITableConvertable
     {
         /// <summary>
         /// This property is not implemented in this class
@@ -132,6 +135,21 @@ namespace UIProject.ViewModels.DataViewModels
         protected override void ReloadComponentsInternal()
         {
             DSChiTietMua?.Reload();
+        }
+
+        public bool ConvertDataToTable(Table table)
+        {
+            return CollectionToTableConverter.ConvertToTable(
+                DSChiTietMua.Models,
+                new string[]
+                {
+                    "MaSP",
+                    "TenSP",
+                    "TenLoaiSP",
+                    "SoLuong",
+                    "DonGia",
+                    "ThanhTien"
+                }, new TryMoneyConverter(), table);
         }
     }
 }

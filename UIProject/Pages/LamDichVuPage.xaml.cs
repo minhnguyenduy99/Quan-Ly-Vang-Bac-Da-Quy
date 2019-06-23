@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels.PageViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -41,14 +42,26 @@ namespace UIProject.Pages
 
         private void BtnSubmitPhieuDichVu_Click(object sender, RoutedEventArgs e)
         {
-            DialogPopupWindow notifyWnd = new DialogPopupWindow();
-            btnSubmitPhieuDichVu.CommandParameter = notifyWnd;
+            InitializePrintViewWindow();
         }
 
         private void BtnThemKhachHang_Click(object sender, RoutedEventArgs e)
         {
-            CustomerAddingDialogWindow customerAddWnd = new CustomerAddingDialogWindow(btnThemKhachHang);
-            btnThemKhachHang.CommandParameter = customerAddWnd;
+            CustomerAddingDialogWindow themKhachHangWnd = new CustomerAddingDialogWindow(btnThemKhachHang);
+            btnThemKhachHang.CommandParameter = themKhachHangWnd;
+        }
+
+        private void InitializePrintViewWindow()
+        {
+            var phieuDichVuPrintDoc = (FlowDocument)GetDocumentPage();
+            phieuDichVuPrintDoc.DataContext = (DataContext as LamDichVuPageVM).PhieuDichVuVM;
+            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(phieuDichVuPrintDoc);
+            btnSubmitPhieuDichVu.CommandParameter = printWnd;
+        }
+
+        private IDocumentPaginatorSource GetDocumentPage()
+        {
+            return (IDocumentPaginatorSource)FindResource("PhieuDichVuPrintTemplate");
         }
     }
 }

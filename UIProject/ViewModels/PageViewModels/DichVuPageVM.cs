@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using UIProject.Events;
 using UIProject.UIConnector;
+using UIProject.ViewModels.DataViewModels;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -16,16 +18,15 @@ namespace UIProject.ViewModels.PageViewModels
 {
     public class DichVuPageVM : BasePageViewModel
     {
-        private ICommand navigatePhieuDichVuCmd;
+        private IEnumerable<PhieuDichVuModel> dsPhieuDichVu;
+        private IEnumerable<TinhTrangModel> dsTinhTrang;
+        private IEnumerable<ChiTietDichVuModel> dsChiTietDichVu;
+        private DateTime? locNgayLap;
+
         private ICommand xoaPhieuDichVuCmd;
         private ICommand chinhSuaPhieuDichVuCmd;
+        private ICommand navigateTaoPhieuDichVuPageCmd;
 
-
-        public ICommand NavigateTaoPhieuDichVuCommand
-        {
-            get => navigatePhieuDichVuCmd ?? new BaseCommand(OnNavigateTaoPhieuDichVuCommand);
-            set => navigatePhieuDichVuCmd = value;
-        }
         public ICommand XoaPhieuDichVuCommand
         {
             get => xoaPhieuDichVuCmd ?? new BaseCommand<IWindow>(OnXoaPhieuDichVuCommand);
@@ -36,81 +37,144 @@ namespace UIProject.ViewModels.PageViewModels
             get => chinhSuaPhieuDichVuCmd ?? new BaseCommand<IWindowExtension>(OnChinhSuaPhieuDichVuCommand);
             set => chinhSuaPhieuDichVuCmd = value;
         }
+        public ICommand NavigateTaoPhieuDichVuPageCommand
+        {
+            get => navigateTaoPhieuDichVuPageCmd ?? new BaseCommand(OnNavigateTaoPhieuDichVuPageCommandExecute);
+            set => navigateTaoPhieuDichVuPageCmd = value;
+        }
 
 
-        public SearchTextBoxViewModel<KhachHangModel> TimKiemKhachHangVM { get; set; }
+
+        public SearchTextBoxViewModel<PhieuDichVuModel> TimKiemPhieuDichVuVM { get; set; }
         public EnumFilterViewModel<PhieuDichVuModel> LocTinhTrangPhieuDichVuVM { get; set; }
         public ObservableCollectionViewModel<PhieuDichVuModel> DanhSachPhieuDichVuVM { get; set; }
-        public ObservableCollectionViewModel<ChiTietDichVuModel> DSChiTietDichVuVM { get; set; }
+        public ObservableCollectionViewModel<ChiTietDichVuModel> DanhSachChiTietDichVuVM { get; set; }
+        public DateTime? LocNgayLap
+        {
+            get => locNgayLap;
+            set
+            {
+                SetProperty(ref locNgayLap, value);
+                if (DanhSachPhieuDichVuVM != null)
+                {
+                    DanhSachPhieuDichVuVM.Filter();
+                }
+            }
+        }
 
 
-        public DichVuPageVM() : base() { }
-        public DichVuPageVM(INavigator navigator) : base(navigator) { }
+
+        public DichVuPageVM() : base()
+        {
+            TakeFullScreen = true;
+        }
+        public DichVuPageVM(INavigator navigator) : base(navigator)
+        {
+            TakeFullScreen = true;
+        }
+
 
         private void SetUpDanhSachPhieuDichVuVM()
         {
-            var dsPhieuDichVu = DataAccess.LoadPhieuDichVu();
-            DanhSachPhieuDichVuVM = new ObservableCollectionViewModel<PhieuDichVuModel>(dsPhieuDichVu);      
-        }
-        private void SetUpTimKiemKhachHangVM()
-        {
-            var dsKhachHang = DataAccess.LoadKhachHang();
-            TimKiemKhachHangVM = new SearchTextBoxViewModel<KhachHangModel>(dsKhachHang);
-            TimKiemKhachHangVM.SelectedValuePath = "Model.TenKH";
-            TimKiemKhachHangVM.Filters.ToList().Add(TimKiemTheoTenCallBack);
+            DanhSachPhieuDichVuVM = new ObservableCollectionViewModel<PhieuDichVuModel>(dsPhieuDichVu);
+            DanhSachPhieuDichVuVM.Filters.Add(LocTinhTrangPhieuDichVuVM.FilterCallBack);
+            DanhSachPhieuDichVuVM.Filters.Add(TimKiemTheoMaDichVu);
+            DanhSachPhieuDichVuVM.Filters.Add(LocTheoThoiGianLapPhieu);
+            DanhSachPhieuDichVuVM.SelectedItemChanged += DanhSachPhieuDichVuVM_SelectedItemChanged;
+
 
             // local function
-            bool TimKiemTheoTenCallBack(ItemViewModel<KhachHangModel> khachHangItem)
+            bool TimKiemTheoMaDichVu(ItemViewModel<PhieuDichVuModel> phieuDVItem)
             {
-                return (bool)khachHangItem?.Model.TenKH.ToLower().StartsWith(TimKiemKhachHangVM.Text.ToLower());
+                if (phieuDVItem == null || phieuDVItem.Model == null)
+                    return true;
+                return phieuDVItem.Model.MaPhieu.ToString().Contains(TimKiemPhieuDichVuVM.Text);
+            }
+            bool LocTheoThoiGianLapPhieu(ItemViewModel<PhieuDichVuModel> phieuDVItem)
+            {
+                if (phieuDVItem == null || phieuDVItem.Model == null)
+                    return true;
+                if (LocNgayLap == null)
+                    return true;
+                var ngayLapPhieuDV = phieuDVItem.Model.NgayLapDateTime;
+                return ngayLapPhieuDV.Date == LocNgayLap?.Date;
+            }
+            void DanhSachPhieuDichVuVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                var phieuDVDaChon = e.SelectedItem as ItemViewModel<PhieuDichVuModel>;
+                DanhSachChiTietDichVuVM.Clear();
+
+                if (phieuDVDaChon == null || phieuDVDaChon.Model == null)
+                    return;
+
+                var dsChiTiet = dsChiTietDichVu.Where(chiTiet => chiTiet.MaPhieu == phieuDVDaChon.Model.MaPhieu);
+                DanhSachChiTietDichVuVM.RefreshItemsSource(dsChiTiet);
             }
         }
+        private void SetUpDanhSachChiTietDichVuVM()
+        {
+            DanhSachChiTietDichVuVM = new ObservableCollectionViewModel<ChiTietDichVuModel>();
+        }
+        private void SetUpTimKiemPhieuDichVuVM()
+        {
+            TimKiemPhieuDichVuVM = new SearchTextBoxViewModel<PhieuDichVuModel>(dsPhieuDichVu);
+            TimKiemPhieuDichVuVM.TextChanged += TimKiemPhieuDichVuVM_TextChanged;
+
+            // local function
+            void TimKiemPhieuDichVuVM_TextChanged(object sender, TextValueChangedEventArgs e)
+            {
+                DanhSachPhieuDichVuVM?.Filter();
+            }
+        }
+
+
 
         private void SetUpLocTinhTrangPhieuDichVuVM()
         {
             LocTinhTrangPhieuDichVuVM = new EnumFilterViewModel<PhieuDichVuModel>(
                 LocTinhTrangPhieuDichVu,
-                DataAccess.LoadTinhTrang());
+                dsTinhTrang);
 
             // Lựa chọn "Chọn tất cả"
             LocTinhTrangPhieuDichVuVM.NonApplyFilterItem.Model
                 = new TinhTrangModel() { MaTinhTrang = null, TenTinhTrang = "Chọn tất cả" };
 
-            LocTinhTrangPhieuDichVuVM.SelectedItemChanged += UpdateDanhSachPhieuBan;
-        }
+            LocTinhTrangPhieuDichVuVM.SelectedItemChanged += LocTinhTrangPhieuDichVuVM_SelectedItemChanged;
 
-        private void UpdateDanhSachPhieuBan(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem == null)
-                return;
+            // local function
+            void LocTinhTrangPhieuDichVuVM_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
+            {
+                if (e.SelectedItem == null)
+                    return;
 
-            // Gọi tới hàm filter mặc định để lọc lại
-            this.DanhSachPhieuDichVuVM.Filter();
-        }
 
-        private bool LocTinhTrangPhieuDichVu(ItemViewModel<PhieuDichVuModel> phieuDichVuItem)
-        {
-            var phieuDV = phieuDichVuItem.Model as PhieuDichVuModel;
-            var tinhTrangDaChon = LocTinhTrangPhieuDichVuVM.Collection.SelectedItem as ItemViewModel<TinhTrangModel>;
 
-            if (phieuDV == null)
-                return true;
-            if (tinhTrangDaChon == null)
-                return true;
-
-            var nonApplyItem = LocTinhTrangPhieuDichVuVM.NonApplyFilterItem?.Model as TinhTrangModel;
-
-            // trong trường hợp người dùng lựa chọn "Chọn tất cả"
-            if (nonApplyItem != null && nonApplyItem.MaTinhTrang.Equals(phieuDV.TinhTrang)){
-                return true;
+                // Gọi tới hàm filter mặc định để lọc lại
+                this.DanhSachPhieuDichVuVM.Filter();
             }
+            bool LocTinhTrangPhieuDichVu(ItemViewModel<PhieuDichVuModel> phieuDichVuItem)
+            {
+                var phieuDV = phieuDichVuItem.Model as PhieuDichVuModel;
+                var tinhTrangDaChonItem = LocTinhTrangPhieuDichVuVM.Collection.SelectedItem as ItemViewModel<object>;
 
-            return phieuDV.TinhTrang.Equals(tinhTrangDaChon?.Model?.MaTinhTrang);
-        }
+                if (phieuDV == null)
+                    return true;
+                if (tinhTrangDaChonItem == null)
+                    return true;
 
-        private void OnNavigateTaoPhieuDichVuCommand()
-        {
-            this.Navigator.Navigate("Tạo phiếu dịch vụ");
+                var tinhTrangDaChon = tinhTrangDaChonItem.Model as TinhTrangModel;
+                var nonApplyItem = LocTinhTrangPhieuDichVuVM.NonApplyFilterItem?.Model as TinhTrangModel;
+
+                // trong trường hợp người dùng lựa chọn "Chọn tất cả"
+                if (nonApplyItem != null && nonApplyItem.MaTinhTrang == tinhTrangDaChon.MaTinhTrang)
+                {
+                    return true;
+                }
+
+
+
+                return phieuDV.TinhTrang.Equals(tinhTrangDaChon?.MaTinhTrang);
+            }
         }
 
         private void OnXoaPhieuDichVuCommand(IWindow dialogWindow)
@@ -128,7 +192,10 @@ namespace UIProject.ViewModels.PageViewModels
             }
         }
 
-
+        private void OnNavigateTaoPhieuDichVuPageCommandExecute()
+        {
+            this.Navigator.Navigate("Tạo phiếu dịch vụ");
+        }
         private void OnChinhSuaPhieuDichVuCommand(IWindowExtension window)
         {
             var phieuDichVuDaChon = (DanhSachPhieuDichVuVM.SelectedItem as ItemViewModel<PhieuDichVuModel>)?.Model;
@@ -147,18 +214,36 @@ namespace UIProject.ViewModels.PageViewModels
             }
         }
 
+        private void RefreshResource()
+        {
+            dsPhieuDichVu = DataAccess.LoadPhieuDichVu();
+            dsTinhTrang = DataAccess.LoadTinhTrang();
+            dsChiTietDichVu = DataAccess.LoadChiTietDichVu();
+        }
+
+
+
         protected override void LoadComponentsInternal()
         {
-            SetUpDanhSachPhieuDichVuVM();
-            SetUpTimKiemKhachHangVM();
+            RefreshResource();
+
+            SetUpTimKiemPhieuDichVuVM();
             SetUpLocTinhTrangPhieuDichVuVM();
+            SetUpDanhSachPhieuDichVuVM();
+            SetUpDanhSachChiTietDichVuVM();
+            LocNgayLap = null;
         }
 
         protected override void ReloadComponentsInternal()
         {
-            TimKiemKhachHangVM.Reload();
+            RefreshResource();
+
+            TimKiemPhieuDichVuVM.Reload();
+
+            DanhSachPhieuDichVuVM.RefreshItemsSource(dsPhieuDichVu);
             DanhSachPhieuDichVuVM.Reload();
-            DSChiTietDichVuVM.Reload();
+
+            DanhSachChiTietDichVuVM.Reload();
         }
     }
 }

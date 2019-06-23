@@ -19,6 +19,7 @@ using UIProject.ServiceProviders;
 using UIProject.UIConnector;
 using UIProject.ViewModels;
 using UIProject.ViewModels.DataViewModels;
+using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
 namespace UIProject.Views
@@ -44,7 +45,7 @@ namespace UIProject.Views
 
         private void DocumentPrintViewerWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateBindingToLabel();
+            //UpdateBindingToLabel();
             ConvertDataGridToTable();
         }
 
@@ -54,7 +55,7 @@ namespace UIProject.Views
             DialogWindowViewModel notifyWndVM = new DialogWindowViewModel()
             {
                 DialogType = DialogWindowType.Info,
-                MessageText = "Tạo phiếu bán thành công",
+                MessageText = "Lưu thành công",
                 OKText = "OK"
             };
             notifyWnd.DataContext = notifyWndVM;
@@ -71,44 +72,21 @@ namespace UIProject.Views
             }
         }
 
-
-
-        private void UpdateBindingToLabel()
-        {
-            var document = documentViewer.Document as FlowDocument;
-            if (document == null)
-                return;
-            
-            var tenKHlabel = LogicalTreeHelper.FindLogicalNode(document, "khachhang") as Label;
-            tenKHlabel.Content = (document.DataContext as HoaDonViewModel).KhachHang.TenKH;
-        }
-
         private void ConvertDataGridToTable()
         {
             var document = documentViewer.Document as FlowDocument;
             if (document == null)
                 return;
 
-            var table = LogicalTreeHelper.FindLogicalNode(document, "chiTietHoaDon") as Table;
+            var table = LogicalTreeHelper.FindLogicalNode(document, "dataTable") as Table;
             if (table == null)
                 return;
 
-
             // Clear all the previous data in the document before adding new one
             if (table.RowGroups.Count > 1)
-                table.RowGroups.RemoveRange(1, table.RowGroups.Count - 1);
+                table.RowGroups.RemoveRange(1, table.RowGroups.Count - 1);      
 
-
-            bool convertSuccess = CollectionToTableConverter.ConvertToTable(
-                (document.DataContext as HoaDonViewModel).DanhSachChiTietBan.Models,
-                new string[]
-                {
-                    "MaSP",
-                    "TenSP",
-                    "SoLuong",
-                    "DonGiaBanRaMoneyFormat",
-                    "ThanhTienMoneyFormat"
-                }, table);          
+            (document.DataContext as ITableConvertable).ConvertDataToTable(table);
         }
 
     }

@@ -35,12 +35,26 @@ namespace ModelProject
         public string NgayLap
         {
             get => ngayLap;
-            set => SetProperty(ref ngayLap, value);
+            set
+            {
+                var parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
+                if (!parseSuccess)
+                {
+                    IsDataValid = false;
+                    return;
+                }
+                NgayLapDateTime = ngayLapDateTime;
+                SetProperty(ref ngayLap, value);
+            }
         }
         public long? MaKH
         {
             get => maKH;
-            set => SetProperty(ref maKH, value);
+            set
+            {
+                SetProperty(ref maKH, value);
+                TenKH = DataAccess.LoadKHByMaKH(value).TenKH;
+            }
         }
         public long TongTien
         {
@@ -52,8 +66,6 @@ namespace ModelProject
             get => tongTienTraTruoc;
             set
             {
-                if (value < 0 || value > TongTien)
-                    throw new Exception("Số tiền trả trước không hợp lệ");
                 SetProperty(ref tongTienTraTruoc, value);
                 UpdatePhieuDichVu();
             }
@@ -75,17 +87,39 @@ namespace ModelProject
         #endregion
 
         #region Additional Properties
+        public DateTime NgayLapDateTime
+        {
+            get => GetPropertyValue<DateTime>();
+            private set => SetProperty(value);
+        }
+        public string NgayLapDate
+        {
+            get => NgayLapDateTime.ToString("dd/MM/yyyy");
+        }
+        public string NgayLapTime
+        {
+            get => NgayLapDateTime.ToShortTimeString();
+        }
         public string TenTinhTrang
         {
             get => GetPropertyValue<string>();
             private set => SetProperty(value);
         }
+        public string TenKH
+        {
+            get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
         #endregion
+
         public PhieuDichVuModel() : base()
         {
             dsTinhTrang = DataAccess.LoadTinhTrang();
-            NgayLap = DateTime.Now.ToString("dd/MM/yyyy");
+            NgayLap = DateTime.Now.ToString();
+            IsDataValid = true;
         }
+
+
         private void UpdatePhieuDichVu()
         {
             TongTienConLai = TongTien - TongTienTraTruoc;

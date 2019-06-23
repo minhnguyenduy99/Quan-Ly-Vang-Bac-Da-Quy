@@ -156,32 +156,10 @@ namespace UIProject.ViewModels.PageViewModels
         #region Command execution
         private void OnSubmitPhieuDichVuCommandExecute(IWindow window)
         {
-            DialogWindowViewModel notifyWnd = new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.YesNo,
-                YesText = "Có",
-                NoText = "Không",
-                MessageText = "Bạn muốn tạo phiếu dịch vụ ?"
-            };
-            window.DataContext = notifyWnd;
-            notifyWnd.ButtonPressed += NotifyWnd_ButtonPressed;
             if (window.ShowDialog() == true)
             {
                 PhieuDichVuVM.Submit();
                 Reload();
-            }
-
-
-            // local function
-            void NotifyWnd_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
-            {
-                if (e.DialogResult == DialogResult.Yes)
-                    window.DialogResult = true;
-                else
-                {
-                    window.DialogResult = false;
-                }
-                window.Close();
             }
         }
 

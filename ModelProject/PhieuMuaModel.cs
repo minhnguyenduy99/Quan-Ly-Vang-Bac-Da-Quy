@@ -46,7 +46,11 @@ namespace ModelProject
         public long? MaNCC
         {
             get => maNCC;
-            set => SetProperty(ref maNCC, value);
+            set
+            {
+                SetProperty(ref maNCC, value);
+                TenNCC = DataAccess.LoadNCCByMaNCC(value).TenNCC;
+            }
         }
         public long ThanhTien
         {
@@ -70,6 +74,16 @@ namespace ModelProject
         public string NgayLapDate
         {
             get => NgayLapDateTime.ToString("dd/MM/yyyy");
+            private set => SetProperty(value);
+        }
+
+        public string NgayLapTime
+        {
+            get => NgayLapDateTime.ToShortTimeString();
+        }
+        public string TenNCC
+        {
+            get => GetPropertyValue<string>();
             private set => SetProperty(value);
         }
         #endregion

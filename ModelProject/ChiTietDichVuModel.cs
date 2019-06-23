@@ -23,6 +23,8 @@ namespace ModelProject
 
         private IEnumerable<TinhTrangModel> dsTinhTrang;
 
+        public static bool IsUpdatedFromDatabase = false;
+
         private bool requiredInnerUpdate = false;
 
         #region Main properties
@@ -34,13 +36,22 @@ namespace ModelProject
         public long? MaLoaiDV
         {
             get => maLoaiDV;
-            set => SetProperty(ref maLoaiDV, value);
+            set
+            {
+                SetProperty(ref maLoaiDV, value);
+                TenLoaiDV = DataAccess.LoadLoaiDichVuByMaLDV(value).TenLoaiDV;
+            }
         }
         public int SoLuong
         {
             get => soLuong;
             set
             {
+                if (IsUpdatedFromDatabase)
+                {
+                    SetProperty(ref soLuong, value);
+                    return;
+                } 
                 if (value <= 0)
                 {
                     IsDataValid = false;
@@ -61,6 +72,11 @@ namespace ModelProject
             get => traTruoc;
             set
             {
+                if (IsUpdatedFromDatabase)
+                {
+                    SetProperty(ref traTruoc, value);
+                    return;
+                }
                 if (requiredInnerUpdate)
                 {
                     SetProperty(ref traTruoc, value);
@@ -95,13 +111,22 @@ namespace ModelProject
         public long? MaTinhTrang
         {
             get => maTinhTrang;
-            set => SetProperty(ref maTinhTrang, value);
+            set
+            {
+                SetProperty(ref maTinhTrang, value);
+                TenTinhTrang = DataAccess.LoadTinhTrangByMaTT(value).TenTinhTrang;
+            }
         }
         public long ChiPhiRieng
         {
             get => chiPhiRieng;
             set
             {
+                if (IsUpdatedFromDatabase)
+                {
+                    SetProperty(ref chiPhiRieng, value);
+                    return;
+                }
                 if (value < 0)
                 {
                     IsDataValid = false;
@@ -147,14 +172,12 @@ namespace ModelProject
             get => GetPropertyValue<string>();
             private set => SetProperty(value);
         }
-
         public IRule SoTienTraTruocRule
         {
             get => GetPropertyValue<IRule>();
             set => SetProperty(value);
         }
         #endregion
-
 
         public ChiTietDichVuModel(PhieuDichVuModel phieuDV, LoaiDichVuModel dichVu) : base()
         {
@@ -175,6 +198,13 @@ namespace ModelProject
             TenTinhTrang = dsTinhTrang.ElementAt(1).TenTinhTrang;
             TenLoaiDV = dichVu.TenLoaiDV;
             NgayGiaoDateTime = DateTime.Now;         
+        }
+
+        // Default constructor for automatical loading from database, should not be used 
+        // in any case else
+        public ChiTietDichVuModel() : base()
+        {
+            dsTinhTrang = DataAccess.LoadTinhTrang();
         }
 
         public event EventHandler ThongTinChiTietThayDoi;
@@ -202,12 +232,10 @@ namespace ModelProject
             if (ConLai == 0)
             {
                 MaTinhTrang = dsTinhTrang.ElementAt(0).MaTinhTrang;
-                TenTinhTrang = dsTinhTrang.ElementAt(0).TenTinhTrang;
             }
             else
             {
                 MaTinhTrang = dsTinhTrang.ElementAt(1).MaTinhTrang;
-                TenTinhTrang = dsTinhTrang.ElementAt(1).TenTinhTrang;
             }
         }
 

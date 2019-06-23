@@ -1,5 +1,7 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Documents;
 using UIProject.ServiceProviders;
+using UIProject.ViewModels.PageViewModels;
 using UIProject.Views;
 
 namespace UIProject.Pages
@@ -29,8 +31,20 @@ namespace UIProject.Pages
 
         private void BtnThemPhieuMua_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            DialogPopupWindow notifyWnd = new DialogPopupWindow();
-            btnThemPhieuMua.CommandParameter = notifyWnd;
+            InitializePrintViewWindow();
+        }
+
+        private void InitializePrintViewWindow()
+        {
+            var phieuMuaPrintDoc = (FlowDocument)GetDocumentPage();
+            phieuMuaPrintDoc.DataContext = (DataContext as NhapHangPageVM).NhapHangVM;
+            DocumentPrintViewerWindow printWnd = new DocumentPrintViewerWindow(phieuMuaPrintDoc);
+            btnThemPhieuMua.CommandParameter = printWnd;
+        }
+
+        private IDocumentPaginatorSource GetDocumentPage()
+        {
+            return (IDocumentPaginatorSource)FindResource("PhieuMuaHangPrintTemplate");
         }
 
         private void BtnHuyPhieu_Click(object sender, System.Windows.RoutedEventArgs e)

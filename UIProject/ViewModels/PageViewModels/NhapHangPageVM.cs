@@ -119,32 +119,9 @@ namespace UIProject.ViewModels.PageViewModels
 
         private void OnSubmitPhieuNhapHangCommandExecute(IWindow window)
         {
-            DialogWindowViewModel dialogVM = new DialogWindowViewModel()
-            {
-                DialogType = DialogWindowType.YesNo,
-                YesText = "Có",
-                NoText = "Không",
-                MessageText = "Bạn muốn lưu phiếu mua hàng?",
-            };
-
-            dialogVM.ButtonPressed += NotifySubmitWnd_ButtonPressed;
-            window.DataContext = dialogVM;
             if (window.ShowDialog() == true)
             {
-                bool submitSuccess = NhapHangVM.Submit();
-                if (submitSuccess)
-                    Reload();
-            }
-
-            // local functon
-            void NotifySubmitWnd_ButtonPressed(object sender, DialogButtonPressedEventArgs e)
-            {
-                if (e.DialogResult == DialogResult.Yes)
-                    window.DialogResult = true;
-                if (e.DialogResult == DialogResult.No)
-                    window.DialogResult = false;
-
-                window.Close();
+                NhapHangVM.Submit();
             }
         }
 
