@@ -120,6 +120,12 @@ namespace UIProject.ViewModels.PageViewModels
                 var sanPhamDaChon = e.SelectedItem as ItemViewModel<SanPhamModel>;
                 if (sanPhamDaChon != null)
                 {
+                    // sản phẩm đã hết hàng
+                    if (sanPhamDaChon.Model.SoLuong == 0)
+                    {
+                        MessageBox.Show("Sản phẩm này đã hết hàng");
+                        return;
+                    }
                     var chiTietBan = new ChiTietBanModel(HoaDonVM.PhieuBan, sanPhamDaChon.Model);
                     HoaDonVM.ThemChiTietBan(chiTietBan);
                 }

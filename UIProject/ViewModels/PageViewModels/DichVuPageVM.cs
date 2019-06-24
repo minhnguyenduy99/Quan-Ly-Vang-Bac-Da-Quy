@@ -27,6 +27,7 @@ namespace UIProject.ViewModels.PageViewModels
         private ICommand chinhSuaPhieuDichVuCmd;
         private ICommand navigateTaoPhieuDichVuPageCmd;
         private ICommand themDichVuCmd;
+        private ICommand navigateTongQuanPageCmd;
 
         public ICommand XoaPhieuDichVuCommand
         {
@@ -43,6 +44,12 @@ namespace UIProject.ViewModels.PageViewModels
             get => navigateTaoPhieuDichVuPageCmd ?? new BaseCommand(OnNavigateTaoPhieuDichVuPageCommandExecute);
             set => navigateTaoPhieuDichVuPageCmd = value;
         }
+        public ICommand NavigateTongQuanPageCommand
+        {
+            get => navigateTongQuanPageCmd ?? new BaseCommand(OnNavigateTongQuanPageCommandExecute);
+            set => navigateTongQuanPageCmd = value;
+        }
+
 
         public SearchTextBoxViewModel<PhieuDichVuModel> TimKiemPhieuDichVuVM { get; set; }
         public EnumFilterViewModel<PhieuDichVuModel> LocTinhTrangPhieuDichVuVM { get; set; }
@@ -212,7 +219,10 @@ namespace UIProject.ViewModels.PageViewModels
 
             }
         }
-
+        private void OnNavigateTongQuanPageCommandExecute()
+        {
+            this.Navigator.Navigate("Tổng quan");
+        }
         private void RefreshResource()
         {
             dsPhieuDichVu = DataAccess.LoadPhieuDichVu();

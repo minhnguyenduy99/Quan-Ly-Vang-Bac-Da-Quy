@@ -39,6 +39,17 @@
                         VerticalAlignment="Center"
                         Content="Tạo phiếu dịch vụ"
                         Command="{Binding NavigateTaoPhieuDichVuPageCommand}"/>
+                <Button 
+                        Margin="10"
+                        Style="{StaticResource UIProjectShadowIconButtonStyle}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                    ToolTip="Quay về trang tổng quan"
+                        Command="{Binding NavigateTongQuanPageCommand}">
+                    <materialDesign:PackIcon Kind="ArrowBack"
+                                             Width="auto"
+                                             Height="auto"/>
+                </Button>
             </StackPanel>
            
         </Grid>

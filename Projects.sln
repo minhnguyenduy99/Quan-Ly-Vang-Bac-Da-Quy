@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIProject.Tests", "UIProject.Tests\UIProject.Tests.csproj", "{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallerProject", "InstallerProject\InstallerProject.vdproj", "{CDF635D6-AF54-44E8-BCF9-4FC8705832E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,8 @@ Global
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF635D6-AF54-44E8-BCF9-4FC8705832E0}.Debug|Any CPU.ActiveCfg = Debug
+		{CDF635D6-AF54-44E8-BCF9-4FC8705832E0}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -87,8 +87,8 @@ namespace UIProject.ServiceProviders
         {
             using (StreamWriter writer = new StreamWriter(file))
             {
-                writer.WriteLine(UserName);
-                writer.WriteLine(Password);
+                writer.WriteLine(DEFAULT_USERNAME);
+                writer.WriteLine(DEFAULT_PASSWORD);
 
                 writer.Close();
             }

@@ -934,7 +934,9 @@ namespace ModelProject
         
        private  static string LoadConnectionString(string id = "Default")
        {
-            return "Data Source=.\\..\\..\\..\\ModelProject\\database.db;Version=3;";
-       }
+            //return "Data Source=.\\..\\..\\..\\ModelProject\\database.db;Version=3;";
+
+            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+        }
     }
 }

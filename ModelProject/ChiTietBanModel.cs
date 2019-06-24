@@ -53,7 +53,7 @@ namespace ModelProject
                     return;
 
                 var soLuongSanPham = DataAccess.LoadSPByMaSP(MaSP).SoLuong;
-                if (value > soLuongSanPham)
+                if (value > soLuongSanPham || value == 0)
                 {
                     OnSoLuongSanPhamKhongDu();
                     return;
