@@ -24,6 +24,12 @@ namespace UIProject.Views
         public EditProductInfoWindow()
         {
             InitializeComponent();
+            this.Loaded += EditProductInfoWindow_Loaded;
+        }
+
+        private async void EditProductInfoWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         public FrameworkElement Activator { get; set; }

@@ -117,11 +117,10 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="179*"/>
+                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0"
                                        Content="SĐT" Margin="15,10,0,10"/>
@@ -131,8 +130,6 @@
                                        Content="Khu vực" Margin="15,10,0,10"/>
                                 <Label Grid.Row="3" Grid.Column="0"
                                        Content="Email" Margin="15,10,0,10"/>
-                                <Label Grid.Row="4" Grid.Column="0"
-                                       Content="Công nợ" Margin="15,10,0,10"/>
                                 <TextBlock Grid.Row="0" Grid.Column="1"
                                            Text="{Binding Model.SDT, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                                 <TextBlock Grid.Row="1" Grid.Column="1"
@@ -142,8 +139,6 @@
                                            Text="{Binding Model.TenKhuVuc, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                                 <TextBlock Grid.Row="3" Grid.Column="1"
                                            Text="{Binding Model.Email, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBlock Grid.Row="4" Grid.Column="1"
-                                           Text="{Binding Model.CongNo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource moneyConverter}}"/>
                             </Grid>
                             <Grid Margin="10 30 10 15">
                                 <Grid.ColumnDefinitions>

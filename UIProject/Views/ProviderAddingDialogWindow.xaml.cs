@@ -27,6 +27,12 @@ namespace UIProject.Views
         {
             InitializeComponent();
             Activator = activator;
+            this.Loaded += ProviderAddingDialogWindow_Loaded;
+        }
+
+        private async void ProviderAddingDialogWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         public bool? ShowDialog(Point position)

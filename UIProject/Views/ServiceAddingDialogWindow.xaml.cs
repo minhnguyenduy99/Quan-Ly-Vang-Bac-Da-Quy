@@ -27,6 +27,12 @@ namespace UIProject.Views
         {
             InitializeComponent();
             this.Activator = activator;
+            this.Loaded += ServiceAddingDialogWindow_Loaded;
+        }
+
+        private async void ServiceAddingDialogWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         public bool? ShowDialog(Point position)

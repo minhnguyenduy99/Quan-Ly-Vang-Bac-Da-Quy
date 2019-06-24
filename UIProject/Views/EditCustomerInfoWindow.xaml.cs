@@ -31,8 +31,13 @@ namespace UIProject.Views
             InitializeComponent();
 
             Activator = activator;
+            this.Loaded += EditCustomerInfoWindow_Loaded;
         }
 
+        private async void EditCustomerInfoWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
+        }
 
         private void UpdateInfoHandler(object sender, RoutedEventArgs e)
         {

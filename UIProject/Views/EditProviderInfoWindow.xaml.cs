@@ -27,6 +27,12 @@ namespace UIProject.Views
         {
             InitializeComponent();
             Activator = activator;
+            this.Loaded += EditProviderInfoWindow_Loaded;
+        }
+
+        private async void EditProviderInfoWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         public bool? ShowDialog(Point position)

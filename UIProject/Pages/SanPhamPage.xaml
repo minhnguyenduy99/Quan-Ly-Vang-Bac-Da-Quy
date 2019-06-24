@@ -158,11 +158,11 @@
                                                              Width="auto"/>
                             </Button>
                             <Button Grid.Column="2"
-                                        x:Name="btnDeleteProduct"
-                                        Background="{StaticResource DarkGrayBrush}"
-                                        ToolTip="Xóa sản phẩm khỏi cửa hàng"
-                                        Command="{Binding XoaSanPhamCommand}"
-                                        Click="BtnDeleteProduct_Click">
+                                    x:Name="btnDeleteProduct"
+                                    Background="{StaticResource DarkGrayBrush}"
+                                    ToolTip="Xóa sản phẩm khỏi cửa hàng"
+                                    Command="{Binding XoaSanPhamCommand}"
+                                    Click="BtnDeleteProduct_Click">
                                 <materialDesign:PackIcon Kind="DeleteForever"
                                                          Height="auto"
                                                          Width="auto"/>

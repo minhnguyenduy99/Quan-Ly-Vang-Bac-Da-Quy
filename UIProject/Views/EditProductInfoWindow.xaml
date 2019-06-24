@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="EditProductInfoWindow"
         x:Name="editProductWnd"
-        Style="{StaticResource CustomDialogWindowStyle}">
+        Style="{StaticResource CustomDialogWindowStyle}"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:MaLoaiSanPhamToLoaiSanPhamConverter x:Key="loaiSanPhamConverter"/>
         <Style x:Key="CustomDefinedLabelStyle" TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}">

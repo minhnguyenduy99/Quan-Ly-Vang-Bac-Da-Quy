@@ -81,10 +81,12 @@ namespace UIProject.ViewModels.DataViewModels
             if (dsPhieuBan.Count() == 0)
                 return 0;
 
-            var dsChiTiet = GetChiTietBanTrongNgay();
-            if (dsChiTiet.Count() == 0)
-                return 0;
-            return dsChiTiet.Select(chiTiet => chiTiet.ThanhTien).Aggregate((ct1, ct2) => ct1 + ct2);
+            long doanhThu = 0;
+            foreach(var phieuBan in dsPhieuBan)
+            {
+                doanhThu += phieuBan.ThanhTien;
+            }
+            return doanhThu;
         }
         private bool IsDateToday(string date)
         {

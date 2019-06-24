@@ -31,6 +31,11 @@ namespace UIProject.Views
             InitializeComponent();
 
             this.Activator = activator;
+            this.Loaded += CustomerAddingDialogWindow_Loaded;
+        }
+        private async void CustomerAddingDialogWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         public FrameworkElement Activator { get; set; }

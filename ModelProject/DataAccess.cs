@@ -148,7 +148,7 @@ namespace ModelProject
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update KhachHang set TENKH = @TenKH,DIACHI = @DiaChi ,SDT = @SDT,CONGNO = @CongNo ,MAKHUVUC = @MaKhuVuc ,EMAIL = @Email WHERE MAKH = @MaKH", KhachHang);
+                cnn.Execute("update KhachHang set TENKH = @TenKH,DIACHI = @DiaChi ,SDT = @SDT, MAKHUVUC = @MaKhuVuc ,EMAIL = @Email WHERE MAKH = @MaKH", KhachHang);
             }
         }
 

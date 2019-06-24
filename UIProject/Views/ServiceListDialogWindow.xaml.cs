@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UIProject.ServiceProviders;
 using UIProject.UIConnector;
 
 namespace UIProject.Views
@@ -24,6 +25,12 @@ namespace UIProject.Views
         {
             InitializeComponent();
             this.DataContextChanged += ServiceListDialogWindow_DataContextChanged;
+            this.Loaded += ServiceListDialogWindow_Loaded;
+        }
+
+        private async void ServiceListDialogWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         private void ServiceListDialogWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

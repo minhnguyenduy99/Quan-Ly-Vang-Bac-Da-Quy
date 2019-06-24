@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="EditCustomerInfoWindow"
         x:Name="editCustomerWnd"
-        Style="{StaticResource CustomDialogWindowStyle}">
+        Style="{StaticResource CustomDialogWindowStyle}"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:MaKhuVucToKhuVucConverter x:Key="khuVucConverter"/>
         <Style x:Key="CustomDefinedLabelStyle" TargetType="Label" BasedOn="{StaticResource BelowMediumLabelStyle}">

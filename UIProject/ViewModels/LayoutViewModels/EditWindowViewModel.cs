@@ -27,8 +27,7 @@ namespace UIProject.ViewModels.LayoutViewModels
         {
             NavigationBarVisibility = System.Windows.Visibility.Collapsed;
 
-
-            Data = (T)Activator.CreateInstance(typeof(T), null);
+            Data = (T)Activator.CreateInstance(typeof(T));
             model.Clone((T)Data);
 
             AdditionData = new List<IEnumerable<BaseSubmitableModel>>();

@@ -11,7 +11,8 @@
         WindowStyle="None"
         x:Name="ProductAddingWnd"
         Style="{StaticResource CustomDialogWindowStyle}"       
-        Title="ProductAddingDialogWindow">
+        Title="ProductAddingDialogWindow"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:MaLoaiSanPhamToLoaiSanPhamConverter x:Key="loaiSanPhamConverter"/>
         <converters:LoaiSanPhamToTenDonViTinhConverter x:Key="donViTinhConverter"/>

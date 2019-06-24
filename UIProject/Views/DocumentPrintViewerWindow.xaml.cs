@@ -43,10 +43,11 @@ namespace UIProject.Views
             printWndVM.PrintFinished += PrintWndVM_PrintFinished;
         }
 
-        private void DocumentPrintViewerWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void DocumentPrintViewerWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //UpdateBindingToLabel();
             ConvertDataGridToTable();
+            await AnimationHelper.FadeAsync(this, 0f, 1.0f);
         }
 
         private void PrintWndVM_PrintFinished(object sender, Events.PrintedEventArgs e)

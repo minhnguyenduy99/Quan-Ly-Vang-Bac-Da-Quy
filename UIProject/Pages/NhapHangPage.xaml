@@ -96,22 +96,22 @@
                       ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}"  
                       CanUserSortColumns="True"
                       CanUserAddRows="False"
-                        CanUserResizeColumns="False"
-                        CanUserResizeRows="False"
-                        AutoGenerateColumns="False"
-                        materialDesign:DataGridAssist.CellPadding="8"
-                        materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                        SelectionUnit="FullRow">
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    AutoGenerateColumns="False"
+                    materialDesign:DataGridAssist.CellPadding="8"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                    SelectionUnit="FullRow">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="80"
-                                    Binding="{Binding Model.MaSP}"
-                                    CanUserSort="False"
-                                    TextBlock.TextAlignment="Center"
-                                    IsReadOnly="True"
-                                    Header="Mã SP"
-                                    HeaderStyle="{StaticResource LeftDataGridHeader}"
-                                    CellStyle="{StaticResource LeftDataGridCell}"
-                                    EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
+                                        Binding="{Binding Model.MaSP}"
+                                        CanUserSort="False"
+                                        TextBlock.TextAlignment="Center"
+                                        IsReadOnly="True"
+                                        Header="Mã SP"
+                                        HeaderStyle="{StaticResource LeftDataGridHeader}"
+                                        CellStyle="{StaticResource LeftDataGridCell}"
+                                        EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                     <DataGridTextColumn Width="130"
                                         Binding="{Binding Model.TenSP}"
                                         Header="Tên sản phẩm"
@@ -166,7 +166,7 @@
                             <DataTemplate>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         VerticalAlignment="Center"
-                                        ToolTip="Xóa sản phẩm khỏi đơn hàng"
+                                        ToolTip="Xóa sản phẩm"
                                         Padding="5"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
@@ -249,7 +249,7 @@
             <Grid 
                   Margin="10 5 5 10" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="450" MaxWidth="450"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0"
