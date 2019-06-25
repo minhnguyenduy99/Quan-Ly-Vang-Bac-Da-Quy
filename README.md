@@ -25,12 +25,12 @@ SoftwareInstaller/Release/SoftwareInstaller.msi
 ## Các công nghệ sử dụng
 
  - Software platform: Windows Presentation Foundation (WPF)
- - UI Framework: [MaterialDesign in XAML]([http://materialdesigninxaml.net/](http://materialdesigninxaml.net/))
- - Database platform: [SQLite database]([https://www.sqlite.org/index.html](https://www.sqlite.org/index.html))
+ - UI Framework: [MaterialDesign in XAML](http://materialdesigninxaml.net/)
+ - Database platform: [SQLite database](https://www.sqlite.org/index.html)
 
 ## Người đóng góp
 
- - Nguyễn Duy Minh
- - Lưu Biêu Nghị
- - Lê Quốc Thắng
- - Đặng Thành Quyên
+ - Nguyễn Duy Minh - [](https://github.com/minhnguyenduy99)
+ - Lưu Biêu Nghị - [](https://github.com/mirushi)
+ - Lê Quốc Thắng - [](https://github.com/lqt1912)
+ - Đặng Thành Quyên - [](https://github.com/ltdethuong)
