@@ -45,7 +45,7 @@ namespace UIProject.ViewModels.LayoutViewModels
                 //  Print failed for some reasons
                 OnPrintFinished(new PrintedEventArgs(Printer, documentSource, false));
             }
-            OnPrintFinished(new PrintedEventArgs(Printer, documentSource, true));
+            OnPrintFinished(new PrintedEventArgs(Printer, documentSource, Printer.PrintResult));
         }
         protected virtual void OnPrintFinished(PrintedEventArgs e)
         {

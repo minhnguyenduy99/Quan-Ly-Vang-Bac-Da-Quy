@@ -20,7 +20,7 @@
             <BlockUIContainer>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Công ty TNHH MTV TeamWorkFirst"/>
-                    <TextBlock Text="Uy tín - chất lượng - An toàn - Hạnh phúc"/>
+                    <TextBlock Text="Uy tín - Chất lượng - An toàn - Hạnh phúc"/>
                     <TextBlock Text="Địa chỉ: Khu phố 6 - Linh Trung - Thủ Đức - TP Hồ Chí Minh"/>
                 </StackPanel>
             </BlockUIContainer>

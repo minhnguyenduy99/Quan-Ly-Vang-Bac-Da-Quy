@@ -20,6 +20,7 @@ namespace Services.PrintService
     {
         private PageMediaSize pageSizer;
         private PrintDialog printDlg;
+        private bool? printResult;
 
         public string DocumentName { get; set; }
         public double? PageWidth 
@@ -29,6 +30,15 @@ namespace Services.PrintService
         public double? PageHeight
         {
             get => pageSizer?.Height;
+        }
+        
+        /// <summary>
+        /// The result of print process. If print method is not called, the result is null
+        /// </summary>
+        public bool? PrintResult
+        {
+            get => printResult;
+            private set => printResult = value;
         }
 
         /// <summary>
@@ -63,6 +73,7 @@ namespace Services.PrintService
             pageSizer = new PageMediaSize(pageWidth, pageHeight);
 
             this.DocumentName = title;
+            this.PrintResult = null;
         }
 
         public PrintHelper(Visual visual, double width, double height)
@@ -84,6 +95,11 @@ namespace Services.PrintService
             if (printDlg.ShowDialog() == true)
             {
                 printDlg.PrintDocument(document.DocumentPaginator, DocumentName);
+                PrintResult = true;
+            }
+            else
+            {
+                PrintResult = false;
             }
         }
 

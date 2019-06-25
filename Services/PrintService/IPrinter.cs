@@ -10,6 +10,7 @@ namespace Services.PrintService
 {
     public interface IPrinter
     {        
+        bool? PrintResult { get; }
         void PrintDocument(IDocumentPaginatorSource documentSource);
         void PrintVisual(Visual visual);
         void Print(IPrintable printableObject);
