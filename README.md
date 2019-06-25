@@ -1,6 +1,8 @@
 
 # Phần mềm quản lý cửa hàng đá quý
 
+![](https://github.com/minhnguyenduy99/Quan-Ly-Vang-Bac-Da-Quy/blob/master/M%E1%BB%99t%20s%E1%BB%91%20h%C3%ACnh%20%E1%BA%A3nh%20ch%C6%B0%C6%A1ng%20tr%C3%ACnh/loginwindow.JPG)
+
 Nhằm phục vụ cho nhu cầu quản lý của các cửa hàng đá quý, nhóm mình đã phát triển một phần mềm giúp quản lý và hiện thực các công việc của cửa hàng như bán hàng, nhập hàng, tra cứu thông tin dịch vụ,... với tên gọi là **Jewelry Management Shop** (*JMS*)
 
 ## Cài đặt
@@ -23,12 +25,12 @@ SoftwareInstaller/Release/SoftwareInstaller.msi
 ## Các công nghệ sử dụng
 
  - Software platform: Windows Presentation Foundation (WPF)
- - UI Framework: [MaterialDesign in XAML]([http://materialdesigninxaml.net/](http://materialdesigninxaml.net/))
- - Database platform: [SQLite database]([https://www.sqlite.org/index.html](https://www.sqlite.org/index.html))
+ - UI Framework: [MaterialDesign in XAML](http://materialdesigninxaml.net/)
+ - Database platform: [SQLite database](https://www.sqlite.org/index.html)
 
 ## Người đóng góp
 
- - Nguyễn Duy Minh
- - Lưu Biêu Nghị
- - Lê Quốc Thắng
- - Đặng Thành Quyên
+ - [Nguyễn Duy Minh](https://github.com/minhnguyenduy99)
+ - [Lưu Biêu Nghị](https://github.com/mirushi)
+ - [Lê Quốc Thắng](https://github.com/lqt1912)
+ - [Đặng Thành Quyên](https://github.com/ltdethuong)
