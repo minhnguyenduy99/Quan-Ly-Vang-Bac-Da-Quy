@@ -30,7 +30,7 @@ SoftwareInstaller/Release/SoftwareInstaller.msi
 
 ## Người đóng góp
 
- - Nguyễn Duy Minh - [](https://github.com/minhnguyenduy99)
- - Lưu Biêu Nghị - [](https://github.com/mirushi)
- - Lê Quốc Thắng - [](https://github.com/lqt1912)
- - Đặng Thành Quyên - [](https://github.com/ltdethuong)
+ - [Nguyễn Duy Minh](https://github.com/minhnguyenduy99)
+ - [Lưu Biêu Nghị](https://github.com/mirushi)
+ - [Lê Quốc Thắng](https://github.com/lqt1912)
+ - [Đặng Thành Quyên](https://github.com/ltdethuong)
