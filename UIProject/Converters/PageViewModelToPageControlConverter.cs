@@ -65,6 +65,8 @@ namespace UIProject.Converters
                         PageDict.Add(pageVM, new SanPhamPage()); break;
                     case BaoCaoTonKhoPageVM vm:
                         PageDict.Add(pageVM, new BaoCaoTonKhoPage()); break;
+                    case DanhSachPhieuMuaPageVM vm:
+                        PageDict.Add(pageVM, new DanhSachPhieuNhapHangPage()); break;
                 }
 
                 PageDict[pageVM].DataContext = pageVM;

@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using ModelProject.ExtensionFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuDichVuModel : BaseSubmitableModel
+    public class PhieuDichVuModel : BaseSubmitableModel, INgayLap
     {
         private long ? maPhieu;
         private string ngayLap;
@@ -90,7 +91,7 @@ namespace ModelProject
         public DateTime NgayLapDateTime
         {
             get => GetPropertyValue<DateTime>();
-            private set => SetProperty(value);
+            set => SetProperty(value);
         }
         public string NgayLapDate
         {

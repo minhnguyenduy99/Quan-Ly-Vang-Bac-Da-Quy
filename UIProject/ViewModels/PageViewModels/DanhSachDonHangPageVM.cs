@@ -66,7 +66,10 @@ namespace UIProject.ViewModels.PageViewModels
                 OnXoaPhieuBanCommandExecute,
                 window => DanhSachPhieuBanVM?.SelectedItem != null);
         }
-
+        public ICommand HienThiTatCaCommand
+        {
+            get => new BaseCommand(() => ThoiGianLapPhieu = null);
+        }
 
         public DanhSachDonHangPageVM() : base() { }
         public DanhSachDonHangPageVM(INavigator navigator) : base(navigator)

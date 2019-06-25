@@ -34,6 +34,7 @@
             <vms:ContentViewModel Content="Sản phẩm" IconSource="/Images/software_icon.png" x:Key="TAB_SanPham"/>
             <vms:ContentViewModel Content="Phiếu dịch vụ" IconSource="/Images/software_icon.png" x:Key="TAB_DichVu"/>
             <vms:ContentViewModel Content="Nhập hàng" IconSource="/Images/software_icon.png" x:Key="TAB_NhapHang"/>
+            <vms:ContentViewModel Content="Danh sách phiếu nhập" IconSource="/Images/software_icon.png" x:Key="TAB_DSPhieuNhap"/>
             <vms:ContentViewModel Content="Báo cáo tồn kho" IconSource="/Images/software_icon.png" x:Key="TAB_BCTonKho"/>
             
             <!-- Contents of Expander -->
@@ -113,6 +114,8 @@
                             <StackPanel Orientation="Vertical">
                                 <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
                                              Content="{StaticResource TAB_NhapHang}"/>
+                                <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
+                                             Content="{StaticResource TAB_DSPhieuNhap}"/>
                                 <RadioButton Style="{StaticResource SubMenuTabRadioButtonStyle}"
                                              Content="{StaticResource TAB_BCTonKho}"/>
                             </StackPanel>

@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIProject.Tests", "UIProject.Tests\UIProject.Tests.csproj", "{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SoftwareInstaller", "SoftwareInstaller\SoftwareInstaller.vdproj", "{DD588AF3-D3CC-4162-A8C5-4BF231A1339A}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SoftwareInstaller", "SoftwareInstaller\SoftwareInstaller.vdproj", "{1EFAC79B-6967-4A7B-9DDA-978EFF37C672}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +41,8 @@ Global
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5BC5A0-582D-4BF5-BBED-550E0A4CA7B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD588AF3-D3CC-4162-A8C5-4BF231A1339A}.Debug|Any CPU.ActiveCfg = Debug
-		{DD588AF3-D3CC-4162-A8C5-4BF231A1339A}.Release|Any CPU.ActiveCfg = Release
+		{1EFAC79B-6967-4A7B-9DDA-978EFF37C672}.Debug|Any CPU.ActiveCfg = Debug
+		{1EFAC79B-6967-4A7B-9DDA-978EFF37C672}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

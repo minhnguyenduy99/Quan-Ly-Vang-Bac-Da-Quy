@@ -42,7 +42,7 @@
                                 <TextBox.Text>
                                     <Binding Path="SelectedDate"
                                              UpdateSourceTrigger="PropertyChanged"
-                                             Mode="TwoWay" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}" 
+                                             Mode="OneWay" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type DatePicker}}" 
                                              Converter="{StaticResource ToShortDateConverter}">
                                     </Binding>
                                 </TextBox.Text>

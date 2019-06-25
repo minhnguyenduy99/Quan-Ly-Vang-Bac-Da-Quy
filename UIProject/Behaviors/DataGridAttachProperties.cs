@@ -15,8 +15,6 @@ namespace UIProject.Behaviors
 {
     public class DataGridAttachProperties
     {
-
-
         #region CustomSorter Property
         public static readonly DependencyProperty CustomSorterProperty =
             DependencyProperty.RegisterAttached(
@@ -87,7 +85,10 @@ namespace UIProject.Behaviors
             if (dataGrid == null || !GetAllowCustomSort(dataGrid)) return;
 
 
-            ListCollectionView listColView = new ListCollectionView(dataGrid.ItemsSource as IList);
+            ListCollectionView listColView = dataGrid.ItemsSource as ListCollectionView;
+
+            if (listColView == null)
+                return;
 
             // Sanity check
             var sorter = GetCustomSorter(e.Column);

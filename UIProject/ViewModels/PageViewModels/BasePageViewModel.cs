@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using UIProject.UIConnector;
 using UIProject.ViewModels.FunctionInterfaces;
 using UIProject.ViewModels.LayoutViewModels;
 
@@ -19,6 +20,7 @@ namespace UIProject.ViewModels.PageViewModels
         private bool takeFullScreen;
         private bool isNavigated;
         private bool firstLoaded = true;
+        private bool isLoadAsync = false;
         #endregion
 
         /// <summary>
@@ -44,6 +46,12 @@ namespace UIProject.ViewModels.PageViewModels
             }
         } 
 
+        public bool IsLoadAsync
+        {
+            get => isLoadAsync;
+            set => SetProperty(ref isLoadAsync, value);
+        }
+
         /// <summary>
         /// The navigator that navigates this page 
         /// </summary>
@@ -56,6 +64,8 @@ namespace UIProject.ViewModels.PageViewModels
         {
         }
 
+
+
         /// <summary>
         /// Create an instance of <see cref="BasePageViewModel"/>
         /// </summary>
@@ -64,6 +74,32 @@ namespace UIProject.ViewModels.PageViewModels
         {
             this.Navigator = navigator;
             takeFullScreen = false;
+        }
+
+        /// <summary>
+        /// Perform loading and loading window asynchorously
+        /// </summary>
+        /// <param name="loadingWindow"></param>
+        public async void LoadAsync(IWindow loadingWindow)
+        {
+            if (loadingWindow == null)
+                Load();
+            Task loadingTask = new Task(() => this.Load());
+            loadingTask.Start();
+            loadingWindow.Show();
+            await loadingTask;
+            loadingWindow.Close();
+        }
+
+        public async void ReloadAsync(IWindow loadingWindow)
+        {
+            if (loadingWindow == null)
+                Load();
+            Task loadingTask = new Task(() => this.Reload());
+            loadingTask.Start();
+            loadingWindow.Show();
+            await loadingTask;
+            loadingWindow.Close();
         }
 
         /// <summary>
@@ -77,7 +113,9 @@ namespace UIProject.ViewModels.PageViewModels
         protected virtual void OnNavigated()
         {
             if (!firstLoaded)
+            {
                 Reload();
+            }
             else
                 firstLoaded = false;
             Navigated?.Invoke(this, EventArgs.Empty);

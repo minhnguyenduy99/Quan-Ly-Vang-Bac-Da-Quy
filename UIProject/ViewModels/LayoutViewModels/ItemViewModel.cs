@@ -11,6 +11,7 @@ using UIProject.ViewModels.FunctionInterfaces;
 
 namespace UIProject.ViewModels.LayoutViewModels
 {
+
     /// <summary>
     /// View model of item type
     /// </summary>

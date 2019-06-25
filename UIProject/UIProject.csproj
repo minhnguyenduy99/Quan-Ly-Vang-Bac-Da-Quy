@@ -100,6 +100,7 @@
     <Compile Include="Behaviors\DataGridAttachProperties.cs" />
     <Compile Include="Behaviors\DataGridSetColumnStyle.cs" />
     <Compile Include="Behaviors\ExtendContent.cs" />
+    <Compile Include="Behaviors\ICustomSorter.cs" />
     <Compile Include="Behaviors\MoneyRuleApplier.cs" />
     <Compile Include="Converters\AccountValidToVisibility.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -151,6 +152,9 @@
     <Compile Include="Pages\DanhSachPhieuDichVuPage.xaml.cs">
       <DependentUpon>DanhSachPhieuDichVuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DanhSachPhieuNhapHangPage.xaml.cs">
+      <DependentUpon>DanhSachPhieuNhapHangPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DoiTacPage.xaml.cs">
       <DependentUpon>DoiTacPage.xaml</DependentUpon>
     </Compile>
@@ -174,7 +178,6 @@
     <Compile Include="ServiceProviders\IAnimationService.cs" />
     <Compile Include="ServiceProviders\IAttachedViewModelAble.cs" />
     <Compile Include="ServiceProviders\IconButtonExtension.cs" />
-    <Compile Include="ServiceProviders\ICustomSorter.cs" />
     <Compile Include="ServiceProviders\LoadDataHelper.cs" />
     <Compile Include="ServiceProviders\LoginService.cs" />
     <Compile Include="ServiceProviders\PageControlExtension.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="ViewModels\PageViewModels\BaoCaoTonKhoPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\PageViewModels\DanhSachDonHangPageVM.cs" />
+    <Compile Include="ViewModels\PageViewModels\DanhSachPhieuNhapHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\DichVuPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\KhachHangPageVM.cs" />
     <Compile Include="ViewModels\PageViewModels\LamDichVuPageVM.cs" />
@@ -318,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DanhSachPhieuDichVuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DanhSachPhieuNhapHangPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -441,6 +449,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachChiTietNhapHangTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Templates\CustomDataTemplates\DanhSachDichVuTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -458,6 +470,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\CustomDataTemplates\DanhSachPhieuDichVuTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CustomDataTemplates\DanhSachPhieuNhapHangTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

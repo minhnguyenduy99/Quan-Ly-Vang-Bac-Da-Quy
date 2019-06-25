@@ -187,12 +187,12 @@ namespace ModelProject
             base.OnSubmited(e);
 
             // local function
-            void UpdatePhieuBan_SubmitType_Add()
-            {
-                var phieuBan = DataAccess.LoadPhieuBanByMaPhieuBan(this.MaPhieuBan);
-                phieuBan.ThanhTien += this.ThanhTien;
-                phieuBan.Submit(SubmitType.Update);
-            }
+            //void UpdatePhieuBan_SubmitType_Add()
+            //{
+            //    var phieuBan = DataAccess.LoadPhieuBanByMaPhieuBan(this.MaPhieuBan);
+            //    phieuBan.ThanhTien += this.ThanhTien;
+            //    phieuBan.Submit(SubmitType.Update);
+            //}
             void UpdateSanPham_SubmitType_Add()
             {
                 var sanPham = DataAccess.LoadSPByMaSP(this.MaSP);

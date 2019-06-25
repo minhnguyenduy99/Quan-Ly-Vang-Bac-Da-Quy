@@ -71,7 +71,6 @@ namespace UIProject.ViewModels.DataViewModels
             {
                 get => SanPham.DonGiaMuaVao * TonCuoi;
             }
-
             public ChiTietTonKho(SanPhamModel sanPham, int thang, int nam)
             {
                 SanPham = sanPham;
@@ -163,15 +162,15 @@ namespace UIProject.ViewModels.DataViewModels
                 int QuerySoLuongSanPhamBan()
                 {
                     int soLuong = 0;
-                    foreach(var chiTiet in dsChiTietBan)
+                    foreach (var chiTiet in dsChiTietBan)
                     {
-                        foreach(var phieuBan in dsPhieuBan)
+                        foreach (var phieuBan in dsPhieuBan)
                         {
                             int ngayBanTreHon = DateTime.Compare(
-                                DateTime.Parse(phieuBan.NgayLap), 
+                                DateTime.Parse(phieuBan.NgayLap),
                                 new DateTime(nam, thang, 1));
                             if (chiTiet.MaPhieuBan == phieuBan.MaPhieu && chiTiet.MaSP == maSP &&
-                                ngayBanTreHon >=0)
+                                ngayBanTreHon >= 0)
                             {
                                 soLuong += chiTiet.SoLuong;
                             }
@@ -266,7 +265,7 @@ namespace UIProject.ViewModels.DataViewModels
                 TongGiaTriTonKho = GetTongGiaTriTonKho();
                 return true;
             }
-            catch (Exception e) { return false; }
+            catch { return false; }
         }
 
 
@@ -298,7 +297,7 @@ namespace UIProject.ViewModels.DataViewModels
 
         protected override void ReloadComponentsInternal()
         {
-            
+
         }
 
         public bool ConvertDataToTable(Table table)

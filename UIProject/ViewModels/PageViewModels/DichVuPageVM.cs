@@ -49,7 +49,10 @@ namespace UIProject.ViewModels.PageViewModels
             get => navigateTongQuanPageCmd ?? new BaseCommand(OnNavigateTongQuanPageCommandExecute);
             set => navigateTongQuanPageCmd = value;
         }
-
+        public ICommand HienThiTatCaCommand
+        {
+            get => new BaseCommand(() => LocNgayLap = null);
+        }
 
         public SearchTextBoxViewModel<PhieuDichVuModel> TimKiemPhieuDichVuVM { get; set; }
         public EnumFilterViewModel<PhieuDichVuModel> LocTinhTrangPhieuDichVuVM { get; set; }

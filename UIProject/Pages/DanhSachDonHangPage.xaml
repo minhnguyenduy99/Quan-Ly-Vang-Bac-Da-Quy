@@ -56,11 +56,11 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <DockPanel Margin="5 5 5 20"
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5 5 5 20"
                                Grid.Row="0"
                                ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <customControls:SearchTextBox Margin="0"
-                                                      DockPanel.Dock="Left"
                                                       Style="{StaticResource FieldSearchTextBoxStyle}"
                                                       DataContext="{Binding TimKiemPhieuBanVM}"
                                                       Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -70,9 +70,19 @@
                                                       IconHeight="25"
                                                       Width="250"/>
                         <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"
+                                    Width="170"
                                     Margin="20 0 0 0"
                                     SelectedDate="{Binding ThoiGianLapPhieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </DockPanel>
+                        <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
+                                Margin="10 0 0 0"
+                                DockPanel.Dock="Right"
+                                ToolTip="Hiển thị tất cả"
+                                Command="{Binding HienThiTatCaCommand}">
+                            <materialDesign:PackIcon Kind="AllInclusive"
+                                                     Width="auto"
+                                                     Height="auto"/>
+                        </Button>
+                    </StackPanel>
                     <Grid Grid.Row="1">
                         <ContentControl x:Name="PART_CustomerList"
                                         Grid.Row="1"

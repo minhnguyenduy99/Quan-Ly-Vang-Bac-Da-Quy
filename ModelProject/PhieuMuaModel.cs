@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using ModelProject.ExtensionFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuMuaModel : BaseSubmitableModel
+    public class PhieuMuaModel : BaseSubmitableModel, INgayLap
     {
         private long? maPhieu;
         private string ngayLap;
@@ -24,7 +25,11 @@ namespace ModelProject
         public long ? MaPhieu
         {
             get => maPhieu;
-            set => SetProperty(ref maPhieu, value);
+            set
+            {
+                SetProperty(ref maPhieu, value);
+                SoLuongSanPham = DataAccess.LoadChiTietMuaByMaCTM(value).Count();
+            }
         }
         public string NgayLap
         {
@@ -65,7 +70,7 @@ namespace ModelProject
         public DateTime NgayLapDateTime
         {
             get => GetPropertyValue<DateTime>();
-            private set
+            set
             {
                 SetProperty(value);
             }
@@ -84,6 +89,11 @@ namespace ModelProject
         public string TenNCC
         {
             get => GetPropertyValue<string>();
+            private set => SetProperty(value);
+        }
+        public int SoLuongSanPham
+        {
+            get => GetPropertyValue<int>();
             private set => SetProperty(value);
         }
         #endregion

@@ -1,23 +1,25 @@
-﻿<Page x:Class="UIProject.Pages.DanhSachPhieuDichVuPage"
+﻿<Page x:Class="UIProject.Pages.DanhSachPhieuNhapHangPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UIProject.Pages"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:customControls="clr-namespace:UIProject.CustomControls"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:converters="clr-namespace:UIProject.Converters"
       mc:Ignorable="d" 
-      Title="DanhSachPhieuDichVuPage">
+      Title="DanhSachPhieuNhapHangPage">
     <Page.Resources>
-        <converters:SelectedItemToEnabledConverter x:Key="functionEnabledConverter"/>
+        <converters:SelectedItemToEnabledConverter x:Key="danhSachDonHangConverter"
+                                                   NullState="Disabled"
+                                                   NotNullState="Enabled"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition/>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="222*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -26,32 +28,16 @@
             </Grid.ColumnDefinitions>
             <Label Style="{StaticResource HeaderLabelStyle}"
                    Margin="10"
-                   Content="Danh sách phiếu dịch vụ"
+                   Content="Phiếu nhập hàng"
                    HorizontalAlignment="Left"/>
-            <StackPanel Grid.Column="1"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button 
-                        Margin="10"
-                        Padding="10 15"
-                        Style="{StaticResource UIProjectLightButtonStyle}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Content="Tạo phiếu dịch vụ"
-                        Command="{Binding NavigateTaoPhieuDichVuPageCommand}"/>
-                <Button 
-                        Margin="10"
-                        Style="{StaticResource UIProjectShadowIconButtonStyle}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                    ToolTip="Quay về trang tổng quan"
-                        Command="{Binding NavigateTongQuanPageCommand}">
-                    <materialDesign:PackIcon Kind="ArrowBack"
-                                             Width="auto"
-                                             Height="auto"/>
-                </Button>
-            </StackPanel>
-           
+            <Button Grid.Column="1"
+                    Margin="10"
+                    Padding="10 15"
+                    Style="{StaticResource UIProjectLightButtonStyle}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="Tiếp tục nhập hàng"
+                    Command="{Binding BanHangCommand}"/>
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
@@ -69,35 +55,25 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <StackPanel Margin="5 5 5 20"
-                                Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5 5 5 20"
                                Grid.Row="0"
                                ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <customControls:SearchTextBox Margin="0"
                                                       Style="{StaticResource FieldSearchTextBoxStyle}"
-                                                      DataContext="{Binding TimKiemPhieuDichVuVM}"
-                                                      Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                                    
-                                                      Hint="Tìm kiếm phiếu dịch vụ"
+                                                      DataContext="{Binding TimKiemPhieuMuaVM}"
+                                                      Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Hint="Tìm kiếm phiếu nhập hàng"
                                                       HorizontalAlignment="Left"
                                                       IconSource="/Images/search_icon.png"
                                                       IconHeight="25"
                                                       Width="250"/>
-                        <DatePicker DockPanel.Dock="Right"
-                                    Width="200"
-                                    Style="{StaticResource UIProjectDatePickerStyle}"
+                        <DatePicker Style="{StaticResource UIProjectDatePickerStyle}"
                                     Margin="20 0 0 0"
-                                    SelectedDate="{Binding LocNgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox Margin="20 10"
-                                  DataContext="{Binding LocTinhTrangPhieuDichVuVM}"
-                                  ItemsSource="{Binding Collection.Items}"
-                                  SelectedItem="{Binding Collection.SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  DisplayMemberPath="Model.TenTinhTrang"
-                                  materialDesign:HintAssist.Hint="Tình trạng"
-                                  Width="170"
-                                  FontSize="15"/>
+                                    Width="170"
+                                    SelectedDate="{Binding ThoiGianLapPhieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
                                 Margin="10 0 0 0"
-                                DockPanel.Dock="Right"
                                 ToolTip="Hiển thị tất cả"
                                 Command="{Binding HienThiTatCaCommand}">
                             <materialDesign:PackIcon Kind="AllInclusive"
@@ -108,12 +84,11 @@
                     <Grid Grid.Row="1">
                         <ContentControl x:Name="PART_CustomerList"
                                         Grid.Row="1"
-                                        Background="WhiteSmoke"
                                         DockPanel.Dock="Bottom"
                                         Padding="5"
                                         Width="auto"
-                                        ContentTemplate="{StaticResource DanhSachPhieuDichVuTemplate}"
-                                        Content="{Binding DanhSachPhieuDichVuVM}">
+                                        ContentTemplate="{StaticResource DanhSachPhieuNhapHangTemplate}"
+                                        Content="{Binding DanhSachPhieuMuaVM}">
                         </ContentControl>
                     </Grid>
                 </Grid>
@@ -138,10 +113,10 @@
                     </DockPanel.Resources>
 
                     <StackPanel DockPanel.Dock="Bottom">
-                        <Label Content="THÔNG TIN PHIẾU DỊCH VỤ"
+                        <Label Content="THÔNG TIN PHIẾU NHẬP HÀNG"
                                 Margin="0"
                                 FontWeight="Bold"/>
-                        <Grid DataContext="{Binding DanhSachPhieuDichVuVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid DataContext="{Binding DanhSachPhieuMuaVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -158,25 +133,24 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0"
-                                       Content="Ngày lập       :"/>
+                                       Content="Ngày lập    :"/>
                                 <Label Grid.Row="0" Grid.Column="1"
                                        Style="{StaticResource ValueLabelStyle}"
                                        Content="{Binding Model.NgayLapDate}"/>
                                 <Label Grid.Row="1" Grid.Column="0"
-                                       Content="Thời gian      :"/>
+                                       Content="Thời gian   :"/>
                                 <Label Grid.Row="1" Grid.Column="1"
                                        Style="{StaticResource ValueLabelStyle}"
                                        Content="{Binding Model.NgayLapTime}"/>
                                 <Label Grid.Row="2" Grid.Column="0"
-                                        Content="Khách hàng  :"/>
+                                        Content="Nhà CC     :"/>
                                 <Label Grid.Row="2" Grid.Column="1"
                                         Style="{StaticResource ValueLabelStyle}"
-                                        Content="{Binding Model.TenKH}"/>
+                                        Content="{Binding Model.TenNCC}"/>
                             </Grid>
                             <Grid Grid.Row="0" Grid.Column="1"
                                   Margin="10 0 0 0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
@@ -186,30 +160,25 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0"
-                                        Content="Tổng tiền    :"/>
+                                        Content="Số lượng sản phẩm  :"/>
                                 <Label Grid.Row="0" Grid.Column="1"
-                                       Style="{StaticResource ValueLabelStyle}"
-                                       Content="{Binding Model.TongTien, Converter={StaticResource moneyConverter}}"/>
+                                        Style="{StaticResource ValueLabelStyle}"
+                                        Content="{Binding Model.SoLuongSanPham}"/>
                                 <Label Grid.Row="1" Grid.Column="0"
-                                        Content="Trả trước     :"/>
+                                        Content="Tổng tiền hóa đơn   :"/>
                                 <Label Grid.Row="1" Grid.Column="1"
                                         Style="{StaticResource ValueLabelStyle}"
-                                        Content="{Binding Model.TongTienTraTruoc, Converter={StaticResource moneyConverter}}"/>
-                                <Label Grid.Row="2" Grid.Column="0"
-                                        Content="Còn lại        :"/>
-                                <Label Grid.Row="2" Grid.Column="1"
-                                        Style="{StaticResource ValueLabelStyle}"
-                                        Content="{Binding Model.TongTienConLai, Converter={StaticResource moneyConverter}}"/>
+                                        Content="{Binding Model.ThanhTien, Converter={StaticResource moneyConverter}}"/>
                             </Grid>
                         </Grid>
                         <Separator Margin="0 10"
                                    Background="LightGray"/>
-                        <Label Content="Chi tiết phiếu dịch vụ"
-                                   FontWeight="Bold"
-                                   Margin="0"/>
+                        <Label Content="Chi tiết phiếu nhập hàng"
+                                FontWeight="Bold"
+                                Margin="0"/>
                         <ContentControl Margin="0 10"
-                                        ContentTemplate="{StaticResource DanhSachChiTietDichVuTemplate}"
-                                        Content="{Binding DanhSachChiTietDichVuVM, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ContentTemplate="{StaticResource DANHSACH_DanhSachChiTietPhieuNhapHangTemplate}"
+                                        Content="{Binding DanhSachChiTietMuaVM, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalContentAlignment="Center">
                         </ContentControl>
                     </StackPanel>
@@ -217,36 +186,20 @@
                                 Margin="5 10 10 15"
                                 Background="LightGray"/>
                     <Image DockPanel.Dock="Left"
-                            Grid.ColumnSpan="2"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Source="/Images/them_dichvu.png"
-                            Margin="10 0 20 10"
-                            Width="70"
-                            Height="70"/>
-                    <Grid DataContext="{Binding DanhSachPhieuDichVuVM.SelectedItem, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0"
-                               Style="{StaticResource MediumLabelStyle}"
-                               Content="Mã phiếu dịch vụ"/>
-                        <Label Grid.Row="0" Grid.Column="1"
-                               Style="{StaticResource MediumLabelStyle}"
-                               Content="Tình trạng"/>
-                        <Label Grid.Row="1" Grid.Column="0"
-                               Style="{StaticResource LargeLabelStyle}"
-                               Content="{Binding Model.MaPhieu}"/>
-                        <Label Grid.Row="1" Grid.Column="1"
-                               Style="{StaticResource LargeLabelStyle}"
-                               Content="{Binding Model.TenTinhTrang}">
-                        </Label>
-                    </Grid>
+                               Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Source="/Images/tongquan_donhang.png"
+                               Margin="10 0 20 10"
+                               Width="70"
+                               Height="70"/>
+                    <TextBlock 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                FontSize="20"
+                                TextWrapping="Wrap"
+                                TextAlignment="Left"
+                                Text="{Binding DanhSachPhieuMuaVM.SelectedItem.Model.MaPhieu,StringFormat=Mã phiếu nhập hàng: {0}}"/>
                 </DockPanel>
             </materialDesign:Card>
         </Grid>

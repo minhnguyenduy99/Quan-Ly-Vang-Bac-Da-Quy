@@ -8,6 +8,9 @@ using UIProject.ViewModels.LayoutViewModels;
 using System.Globalization;
 using System.ComponentModel;
 using UIProject.Converters;
+using UIProject.Behaviors;
+using ModelProject.ExtensionFunctions;
+using BaseMVVM_Service.BaseMVVM;
 
 namespace UIProject.ServiceProviders
 {
@@ -16,16 +19,17 @@ namespace UIProject.ServiceProviders
     public class DateTimeComparer : ICustomSorter
     { 
         public ListSortDirection SortDirection { get; set; }
+
         public int Compare(object x, object y)
         {
-            var castX = (x as ItemViewModel<PhieuBanModel>).Model;
-            var castY = (y as ItemViewModel<PhieuBanModel>).Model;
-            if (castX != null && castY != null)
+            var castDateX = ObservableObject.GetPropValue(x, "Model.NgayLapDate").ToString();
+            var castDateY = ObservableObject.GetPropValue(y, "Model.NgayLapDate").ToString();
+            if (castDateX != null && castDateY != null)
             {
                 try
                 {
-                    var dateX = DateTime.ParseExact(castX.NgayLapDate, "dd/MM/yyyy", null);
-                    var dateY = DateTime.ParseExact(castY.NgayLapDate, "dd/MM/yyyy", null);
+                    var dateX = DateTime.ParseExact(castDateX, "dd/MM/yyyy", null);
+                    var dateY = DateTime.ParseExact(castDateY, "dd/MM/yyyy", null);
                     if (SortDirection == ListSortDirection.Ascending)
                         return dateX.CompareTo(dateY);
                     else

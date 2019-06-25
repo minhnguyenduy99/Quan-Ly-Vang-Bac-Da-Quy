@@ -32,6 +32,7 @@ namespace UIProject.ViewModels
             "Sản phẩm",
             "Dịch vụ",
             "Nhập hàng",
+            "Danh sách phiếu nhập",
             "Báo cáo tồn kho"
         };
 
@@ -129,6 +130,7 @@ namespace UIProject.ViewModels
                 CreateTabViewModel(ListTabNames[7], TabState.New),
                 CreateTabViewModel(ListTabNames[8], TabState.New),
                 CreateTabViewModel(ListTabNames[9], TabState.New),
+                CreateTabViewModel(ListTabNames[10], TabState.New),
             };
 
             SubcribeTabChangedEvent();
@@ -162,6 +164,8 @@ namespace UIProject.ViewModels
             if (tabName.Equals(ListTabNames[8]))
                 return new NhapHangPageVM(this);
             if (tabName.Equals(ListTabNames[9]))
+                return new DanhSachPhieuMuaPageVM(this);
+            if (tabName.Equals(ListTabNames[10]))
                 return new BaoCaoTonKhoPageVM(this);
             return null;
         }

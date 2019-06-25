@@ -6,13 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UIProject.ServiceProviders
+namespace UIProject.Behaviors
 {
-    /// <summary>
-    /// Interface defines how object is compared when they are in sorting
-    /// </summary>
     public interface ICustomSorter : IComparer
-    {
+    { 
         ListSortDirection SortDirection { get; set; }
     }
 }

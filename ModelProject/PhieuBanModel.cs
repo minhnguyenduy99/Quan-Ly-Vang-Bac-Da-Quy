@@ -1,4 +1,5 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
+using ModelProject.ExtensionFunctions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ModelProject
 {
-    public class PhieuBanModel : BaseSubmitableModel
+    public class PhieuBanModel : BaseSubmitableModel, INgayLap
     {
         private long ? maPhieu;
         private string ngayLap;
@@ -17,8 +18,6 @@ namespace ModelProject
         private double chietKhau;
         private string ghichu;
         private long thanhTien;
-
-        private bool isUpdateFromDatabase = true;
 
         #region Main properties
         public long ThanhTien
@@ -97,7 +96,7 @@ namespace ModelProject
 
         #region Additional properties
        
-        private DateTime NgayLapDateTime
+        public DateTime NgayLapDateTime
         {
             get => GetPropertyValue<DateTime>();
             set => SetProperty(value);

@@ -100,7 +100,7 @@ namespace UIProject.ViewModels.DataViewModels
             TongTien = 0;
             foreach(var chiTiet in DSChiTietMua.Items)
             {
-                TongSoLuong += chiTiet.Model.SoLuong;
+                TongSoLuong++;
                 TongTien += chiTiet.Model.DonGia * chiTiet.Model.SoLuong;
             }        
         }

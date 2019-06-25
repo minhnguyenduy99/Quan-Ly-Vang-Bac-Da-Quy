@@ -16,8 +16,8 @@ namespace ModelProject
         private int soLuong;
         private long traTruoc;
         private long thanhTien;
-        private long conLai;
         private string ngayGiao;
+        private long conLai;
         private long? maTinhTrang;
         private long chiPhiRieng;
 
@@ -97,8 +97,8 @@ namespace ModelProject
         }
         public long ConLai
         {
-            get => GetPropertyValue<long>();
-            private set => SetProperty(value);
+            get => conLai;
+            private set => SetProperty(ref conLai, value);
         }
         public string NgayGiao
         {

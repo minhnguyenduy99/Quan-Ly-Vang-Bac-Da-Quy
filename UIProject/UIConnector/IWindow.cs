@@ -34,4 +34,13 @@ namespace UIProject.UIConnector
         bool? ShowDialog(Point position);
         bool? ShowDialog(double dentaX, double dentaY);
     }
+
+    public class WindowEventArgs: EventArgs
+    {
+        public IWindow Window { get; private set; }
+        public WindowEventArgs(IWindow window)
+        {
+            Window = window;
+        }
+    }
 }

@@ -73,6 +73,8 @@
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachPhieuDichVuTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachDichVuTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachChiTietDichVuTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachPhieuNhapHangTemplate.xaml"/>
+                        <ResourceDictionary Source="./Templates/CustomDataTemplates/DanhSachChiTietNhapHangTemplate.xaml"/>
                         <!-- Control templates-->
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/InvalidateDataTemplate.xaml"/>
                         <ResourceDictionary Source="./Templates/CustomControlTemplates/TabItemControlTemplate.xaml"/>

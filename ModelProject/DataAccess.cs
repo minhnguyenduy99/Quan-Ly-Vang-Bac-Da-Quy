@@ -905,14 +905,18 @@ namespace ModelProject
         }
 
 
-        public static ChiTietMuaModel LoadChiTietMuaByMaCTM(long? mactb)
+        public static List<ChiTietMuaModel> LoadChiTietMuaByMaCTM(long? mactb)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output= cnn.Query<ChiTietMuaModel>("select * " +
-                    "from ChiTietMua " +
-                    "where MAPHIEUMUAHANG=@m ",new { m = mactb });
-                return output.ElementAt<ChiTietMuaModel>(0);
+                try
+                {
+                    var output = cnn.Query<ChiTietMuaModel>("select * " +
+                        "from ChiTietMua " +
+                        "where MAPHIEUMUA=@m ", new { m = mactb });
+                    return output.ToList();
+                }
+                catch { return new List<ChiTietMuaModel>(); }
             }
         }
 

@@ -75,6 +75,7 @@
     <Compile Include="ChiTietMuaModel.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="DonViTinhModel.cs" />
+    <Compile Include="ExtensionFunctions\INgayLap.cs" />
     <Compile Include="ExtensionFunctions\MoneyConverter.cs" />
     <Compile Include="KhachHangModel.cs" />
     <Compile Include="KhuVucModel.cs" />

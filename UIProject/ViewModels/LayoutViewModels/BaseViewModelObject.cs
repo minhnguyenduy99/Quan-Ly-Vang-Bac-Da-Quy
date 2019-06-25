@@ -21,8 +21,7 @@ namespace UIProject.ViewModels.LayoutViewModels
 
         public void Load()
         {
-            LoadComponentsInternal();
-            
+            LoadComponentsInternal();          
             Loaded?.Invoke(this, EventArgs.Empty);
         }
 
@@ -45,7 +44,7 @@ namespace UIProject.ViewModels.LayoutViewModels
     /// </summary>
     public abstract class BaseViewModelObject : BaseViewModel, IViewModelObject
     {
-        public BaseViewModelObject()
+        public BaseViewModelObject() : base()
         {
             Load();
         }

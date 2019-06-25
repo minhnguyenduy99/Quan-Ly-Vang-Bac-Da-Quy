@@ -15,6 +15,7 @@ namespace ModelProject
         private int soLuong;
         private long donGia;
         private long thanhTien;
+        private SanPhamModel sanPham;
 
         public static bool IsUpdateFromDatabase { get; set; } = false;
 
@@ -32,7 +33,9 @@ namespace ModelProject
                 SetProperty(ref maSP, value);
                 if (maSP == null)
                     return;
-                TenSP = DataAccess.LoadSanPham().Where(sp => sp.MaSP == maSP).ElementAt(0).TenSP;
+                sanPham = DataAccess.LoadSanPham().Where(sp => sp.MaSP == maSP).ElementAt(0);
+                TenSP = sanPham.TenSP;
+                TenLoaiSP = DataAccess.LoadLoaiSanPhamByMaLSP(sanPham.MaLoaiSP).TenLoaiSP;
             }
         }
         public int SoLuong
