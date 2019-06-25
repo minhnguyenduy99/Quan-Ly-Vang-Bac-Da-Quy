@@ -53,12 +53,25 @@ namespace UIProject.Views
         private void PrintWndVM_PrintFinished(object sender, Events.PrintedEventArgs e)
         {
             DialogPopupWindow notifyWnd = new DialogPopupWindow();
-            DialogWindowViewModel notifyWndVM = new DialogWindowViewModel()
+            DialogWindowViewModel notifyWndVM = null;
+            if (e.PrintResult == true)
             {
-                DialogType = DialogWindowType.Info,
-                MessageText = "In thành công",
-                OKText = "OK"
-            };
+                notifyWndVM = new DialogWindowViewModel()
+                {
+                    DialogType = DialogWindowType.Info,
+                    MessageText = "In thành công",
+                    OKText = "OK"
+                };
+            }
+            else
+            {
+                notifyWndVM = new DialogWindowViewModel()
+                {
+                    DialogType = DialogWindowType.Info,
+                    MessageText = "Hủy bỏ in",
+                    OKText = "OK"
+                };
+            }
             notifyWnd.DataContext = notifyWndVM;
             notifyWndVM.ButtonPressed += ButtonPressedHandler;
 

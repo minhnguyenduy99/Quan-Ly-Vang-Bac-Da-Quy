@@ -193,7 +193,9 @@ namespace UIProject.ViewModels.PageViewModels
             // thêm khách hàng thành công
             if (window.ShowDialog(-500, 0) == true)
             {
-                Reload();
+                dsKhachHang = DataAccess.LoadKhachHang();
+                TimKiemKhachHangVM.RefreshItemSource(dsKhachHang);
+                TimKiemKhachHangVM.Reload();
             }
         }
 
