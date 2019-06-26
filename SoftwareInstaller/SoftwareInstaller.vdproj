@@ -882,7 +882,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_96E910630DD046EC8084E9A0CD19E830"
             {
             "Name" = "8:#1919"
-            "AlwaysCreate" = "11:TRUE"
+            "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
@@ -894,7 +894,7 @@
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:TRUE"
+            "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -903,7 +903,7 @@
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_86C4C93EDAC14BF6B6D2DF2A76B50D15"
                     {
                     "Name" = "8:Lib"
-                    "AlwaysCreate" = "11:TRUE"
+                    "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
                     "Property" = "8:_36F255F61E284AA8B321F26E2860437E"
@@ -916,7 +916,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_D148B331444246F4AA1D026470058DB8"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:TRUE"
+            "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -941,7 +941,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SoftwareInstaller"
         "ProductCode" = "8:{F5204E1B-E3D3-4D05-88E5-034C4B5B16EC}"
-        "PackageCode" = "8:{0D0C34B7-AA99-426B-8A58-22ADFD4BCFD1}"
+        "PackageCode" = "8:{083104BD-B024-479A-BAC7-80CA3B77FAA7}"
         "UpgradeCode" = "8:{FD4D8718-6C87-4F23-8B96-CEFEB6BBCE14}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
