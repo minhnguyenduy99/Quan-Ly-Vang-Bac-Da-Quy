@@ -42,11 +42,19 @@ namespace UIProject.Converters
                 return Binding.DoNothing;
             try
             {
-                string[] dateSplit = value.ToString().Split('/');
+                char[] splits = new char[] { '/', '-', ':' };
+                string[] dateSplit = value.ToString().Split(splits, StringSplitOptions.RemoveEmptyEntries); ;
                 int day = int.Parse(dateSplit[0]);
                 int month = int.Parse(dateSplit[1]);
                 int year = int.Parse(dateSplit[2]);
-                return new DateTime(year, month, day);
+                if (dateSplit.Length <= 3)
+                {
+                    return new DateTime(year, month, day);
+                }
+                int hour = int.Parse(dateSplit[3]);
+                int minute = int.Parse(dateSplit[4]);
+                int second = int.Parse(dateSplit[5]);
+                return new DateTime(year, month, day, hour, minute, second);
             }
             catch { return DATE_ERROR_STATEMENT; }
         }

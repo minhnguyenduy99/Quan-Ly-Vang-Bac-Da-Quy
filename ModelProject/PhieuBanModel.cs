@@ -42,11 +42,7 @@ namespace ModelProject
             set
             {
                 SetProperty(ref ngayLap, value);
-                bool parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
-                if (parseSuccess)
-                {
-                    NgayLapDateTime = ngayLapDateTime;
-                }
+                NgayLapDateTime = new ToDateConverter().Convert(value);
 
             }
         }
@@ -104,18 +100,10 @@ namespace ModelProject
         public string NgayLapDate
         {
             get => NgayLapDateTime.ToString("dd/MM/yyyy");
-            private set
-            {
-                SetProperty(value);
-            }
         }
         public string NgayLapTime
         {
             get => NgayLapDateTime.ToShortTimeString();
-            private set
-            {
-                SetProperty(value);
-            }
         }
 
         public string TenKH

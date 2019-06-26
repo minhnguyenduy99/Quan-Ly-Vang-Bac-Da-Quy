@@ -165,9 +165,9 @@ namespace UIProject.ViewModels.DataViewModels
                     foreach (var chiTiet in dsChiTietBan)
                     {
                         foreach (var phieuBan in dsPhieuBan)
-                        {
+                        { 
                             int ngayBanTreHon = DateTime.Compare(
-                                DateTime.Parse(phieuBan.NgayLap),
+                                phieuBan.NgayLapDateTime,
                                 new DateTime(nam, thang, 1));
                             if (chiTiet.MaPhieuBan == phieuBan.MaPhieu && chiTiet.MaSP == maSP &&
                                 ngayBanTreHon >= 0)
@@ -186,7 +186,7 @@ namespace UIProject.ViewModels.DataViewModels
                         foreach (var phieuMua in dsPhieuMua)
                         {
                             int ngayMuaTreHon = DateTime.Compare(
-                                                    DateTime.Parse(phieuMua.NgayLap),
+                                                    phieuMua.NgayLapDateTime,
                                                     new DateTime(nam, thang, 1));
                             if (chiTiet.MaPhieuMua == phieuMua.MaPhieu && chiTiet.MaSP == maSP &&
                                 ngayMuaTreHon >= 0)

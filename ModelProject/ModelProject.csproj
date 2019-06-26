@@ -46,6 +46,7 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.9.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -77,6 +78,7 @@
     <Compile Include="DonViTinhModel.cs" />
     <Compile Include="ExtensionFunctions\INgayLap.cs" />
     <Compile Include="ExtensionFunctions\MoneyConverter.cs" />
+    <Compile Include="ExtensionFunctions\ToDateConverter.cs" />
     <Compile Include="KhachHangModel.cs" />
     <Compile Include="KhuVucModel.cs" />
     <Compile Include="LoaiDichVuModel.cs" />

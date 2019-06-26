@@ -36,16 +36,8 @@ namespace ModelProject
             get => ngayLap;
             set
             {
-                bool parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
-                if (!parseSuccess)
-                {
-                    IsDataValid = false;
-                    return;
-                }
-                IsDataValid = true;
-
                 SetProperty(ref ngayLap, value);
-                NgayLapDateTime = ngayLapDateTime;
+                NgayLapDateTime = new ToDateConverter().Convert(value);
             }
         }
         public long? MaNCC
