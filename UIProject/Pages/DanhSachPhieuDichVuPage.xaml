@@ -87,14 +87,6 @@
                                     Style="{StaticResource UIProjectDatePickerStyle}"
                                     Margin="20 0 0 0"
                                     SelectedDate="{Binding LocNgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox Margin="20 10"
-                                  DataContext="{Binding LocTinhTrangPhieuDichVuVM}"
-                                  ItemsSource="{Binding Collection.Items}"
-                                  SelectedItem="{Binding Collection.SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  DisplayMemberPath="Model.TenTinhTrang"
-                                  materialDesign:HintAssist.Hint="Tình trạng"
-                                  Width="170"
-                                  FontSize="15"/>
                         <Button Style="{StaticResource UIProjectLightIconButtonStyle}"
                                 Margin="10 0 0 0"
                                 DockPanel.Dock="Right"
@@ -104,6 +96,15 @@
                                                      Width="auto"
                                                      Height="auto"/>
                         </Button>
+                        <ComboBox Margin="20 10"
+                                  DataContext="{Binding LocTinhTrangPhieuDichVuVM}"
+                                  ItemsSource="{Binding Collection.Items}"
+                                  SelectedItem="{Binding Collection.SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Model.TenTinhTrang"
+                                  materialDesign:HintAssist.Hint="Tình trạng"
+                                  Width="170"
+                                  FontSize="15"/>
+
                     </StackPanel>
                     <Grid Grid.Row="1">
                         <ContentControl x:Name="PART_CustomerList"

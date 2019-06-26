@@ -19,7 +19,7 @@
       Title="BanHangPage">
     <Page.Resources>
         <converters:MoneyRuleConverter x:Key="moneyConverter"/>
-        <converters:NumberValidateConverter x:Key="numberValidateConverter"/>
+        <converters:NumberValidateConverter x:Key="numberValidateConverter" AllowNonNegative="True"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

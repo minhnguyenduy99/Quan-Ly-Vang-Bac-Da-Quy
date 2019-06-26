@@ -1,9 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates">
+                    xmlns:local="clr-namespace:UIProject.Templates.CustomDataTemplates"
+                    xmlns:behaviors="clr-namespace:UIProject.Behaviors">
     <DataTemplate x:Key="DanhSachPhieuDichVuTemplate">
         <DataGrid DataContext="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                   CanUserSortColumns="True"
+                  behaviors:DataGridAttachProperties.AllowCustomSort="True"
                   ItemsSource="{Binding DisplayItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   CanUserAddRows="False"
@@ -22,9 +24,10 @@
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="140"
                                     Binding="{Binding Model.NgayLapDate}"
+                                    behaviors:DataGridAttachProperties.CustomSorter="{StaticResource dateSorter}"
                                     Header="Ngày lập"
                                     IsReadOnly="True"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource CenteredDataGridHeader}"
                                     CellStyle="{StaticResource CenteredDataGridCell}"/>
                 <DataGridTextColumn Width="100"
