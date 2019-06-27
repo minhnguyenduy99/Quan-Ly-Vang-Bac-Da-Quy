@@ -41,9 +41,13 @@ namespace ModelProject
             get => ngayLap;
             set
             {
-                SetProperty(ref ngayLap, value);
-                NgayLapDateTime = new ToDateConverter().Convert(value);
-
+                bool tryParse = DateTime.TryParse(value, out DateTime parseDate);
+                if (!tryParse)
+                {
+                    parseDate = new ToDateConverter().Convert(value);
+                }
+                SetProperty(ref ngayLap, parseDate.ToString("MM/dd/yyyy hh:mm:ss tt"));
+                NgayLapDateTime = parseDate;
             }
         }
         public long? MaKH
@@ -114,7 +118,7 @@ namespace ModelProject
 
         public PhieuBanModel()
         {
-            NgayLap = DateTime.Now.ToString();
+            NgayLap = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
         }
 
 

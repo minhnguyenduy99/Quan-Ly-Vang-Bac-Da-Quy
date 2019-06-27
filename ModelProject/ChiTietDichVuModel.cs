@@ -1,5 +1,6 @@
 ﻿using BaseMVVM_Service.BaseMVVM;
 using BaseMVVM_Service.BaseMVVM.Interfaces;
+using ModelProject.ExtensionFunctions;
 using ModelProject.Model_rules;
 using System;
 using System.Collections.Generic;
@@ -103,9 +104,15 @@ namespace ModelProject
         public string NgayGiao
         {
             get => ngayGiao;
-            private set
+            set
             {
-                SetProperty(ref ngayGiao, value);
+                bool tryParse = DateTime.TryParse(value, out DateTime parseDate);
+                if (!tryParse)
+                {
+                    parseDate = new ToDateConverter().Convert(value);
+                }
+                SetProperty(ref ngayGiao, parseDate.ToString("MM/dd/yyyy"));
+                NgayGiaoDateTime = parseDate;
             }
         }
         public long? MaTinhTrang
@@ -147,8 +154,16 @@ namespace ModelProject
             set
             {
                 SetProperty(value);
-                NgayGiao = value.ToString("dd/MM/yyyy");
             }
+        }
+        public string NgayGiaoDate
+        {
+            get => NgayGiaoDateTime.ToString("dd/MM/yyyy");
+        }
+
+        public string NgayGiaoTime
+        {
+            get => NgayGiaoDateTime.ToShortTimeString();
         }
 
         public string TenLoaiDV
@@ -197,7 +212,7 @@ namespace ModelProject
             // additional properties
             TenTinhTrang = dsTinhTrang.ElementAt(1).TenTinhTrang;
             TenLoaiDV = dichVu.TenLoaiDV;
-            NgayGiaoDateTime = DateTime.Now;         
+            NgayGiao = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");         
         }
 
         // Default constructor for automatical loading from database, should not be used 

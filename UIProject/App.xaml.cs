@@ -11,6 +11,7 @@ using System.IO;
 using ModelProject;
 using System.Data.SQLite;
 using Dapper;
+using System.Threading;
 
 namespace UIProject
 {
@@ -19,6 +20,11 @@ namespace UIProject
     /// </summary>
     public partial class App : Application
     {
-
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var cultureInfo = new System.Globalization.CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            base.OnStartup(e);
+        }
     }
 }

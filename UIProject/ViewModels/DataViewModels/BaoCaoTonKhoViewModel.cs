@@ -98,7 +98,7 @@ namespace UIProject.ViewModels.DataViewModels
                 List<PhieuBanModel> queryPhieuBan = new List<PhieuBanModel>();
                 foreach (var phieuBan in dsPhieuBan)
                 {
-                    var ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuBan.NgayLapDate, null, null, null);
+                    var ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuBan.NgayLap, null, null, null);
                     if (ngayLap.Month == thang && ngayLap.Year == nam)
                     {
                         queryPhieuBan.Add(phieuBan);
@@ -111,13 +111,10 @@ namespace UIProject.ViewModels.DataViewModels
                 List<PhieuMuaModel> queryPhieuMua = new List<PhieuMuaModel>();
                 foreach (var phieuMua in dsPhieuMua)
                 {
-                    bool parseSuccess = DateTime.TryParse(phieuMua.NgayLap, out DateTime ngayLap);
-                    if (parseSuccess)
+                    var ngayLap = (DateTime)new ToShortDateConverter().ConvertBack(phieuMua.NgayLap, null, null, null);
+                    if (ngayLap.Month == thang && ngayLap.Year == nam)
                     {
-                        if (ngayLap.Month == thang && ngayLap.Year == nam)
-                        {
-                            queryPhieuMua.Add(phieuMua);
-                        }
+                        queryPhieuMua.Add(phieuMua);
                     }
                 }
                 return queryPhieuMua;

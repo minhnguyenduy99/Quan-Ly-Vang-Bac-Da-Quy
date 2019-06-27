@@ -130,6 +130,14 @@ namespace UIProject.ViewModels.DataViewModels
         {
             DSChiTietDichVu.Clear();
         }
+
+        public void Reload()
+        {
+            DSChiTietDichVu.Clear();
+            PhieuDichVu.TongTien = 0;
+            PhieuDichVu.TongTienTraTruoc = 0;
+
+        }
         public bool Submit()
         {
             bool submitPhieuDichVuSuccess = PhieuDichVu.Submit(SubmitType.Add);

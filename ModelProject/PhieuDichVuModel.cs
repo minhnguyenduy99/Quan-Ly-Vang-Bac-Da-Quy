@@ -38,14 +38,13 @@ namespace ModelProject
             get => ngayLap;
             set
             {
-                var parseSuccess = DateTime.TryParse(value, out DateTime ngayLapDateTime);
-                if (!parseSuccess)
+                bool tryParse = DateTime.TryParse(value, out DateTime parseDate);
+                if (!tryParse)
                 {
-                    IsDataValid = false;
-                    return;
+                    parseDate = new ToDateConverter().Convert(value);
                 }
-                NgayLapDateTime = ngayLapDateTime;
-                SetProperty(ref ngayLap, value);
+                SetProperty(ref ngayLap, parseDate.ToString("MM/dd/yyyy hh:mm:ss tt"));
+                NgayLapDateTime = parseDate;
             }
         }
         public long? MaKH

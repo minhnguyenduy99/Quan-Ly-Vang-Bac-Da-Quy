@@ -42,10 +42,10 @@ namespace UIProject.Converters
                 return Binding.DoNothing;
             try
             {
-                char[] splits = new char[] { '/', '-', ':' };
+                char[] splits = new char[] { '/', '-', ':', ' '};
                 string[] dateSplit = value.ToString().Split(splits, StringSplitOptions.RemoveEmptyEntries); ;
-                int day = int.Parse(dateSplit[0]);
-                int month = int.Parse(dateSplit[1]);
+                int month = int.Parse(dateSplit[0]);
+                int day = int.Parse(dateSplit[1]);
                 int year = int.Parse(dateSplit[2]);
                 if (dateSplit.Length <= 3)
                 {

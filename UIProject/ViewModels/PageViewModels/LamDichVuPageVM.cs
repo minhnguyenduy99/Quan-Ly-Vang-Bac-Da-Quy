@@ -231,7 +231,7 @@ namespace UIProject.ViewModels.PageViewModels
             TimKiemKhachHangVM.RefreshItemSource(dsKhachHang);
             TimKiemKhachHangVM.Reload();
 
-            PhieuDichVuVM = new PhieuDichVuViewModel();
+            PhieuDichVuVM.Reload();
         }
     }
 }

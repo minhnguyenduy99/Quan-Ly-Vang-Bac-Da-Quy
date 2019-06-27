@@ -348,7 +348,7 @@
                                                         CellStyle="{StaticResource RightDataGridCell}"
                                                         EditingElementStyle="{StaticResource CustomEditingTextColumnElementStyle}"/>
                                     <DataGridTextColumn Width="110"
-                                                        Binding="{Binding Model.NgayGiaoDateTime, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource ToShortDateConverter}}"
+                                                        Binding="{Binding Model.NgayGiao, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                                         Header="Ngày giao"
                                                         TextBlock.TextAlignment="Right"
                                                         IsReadOnly="False"

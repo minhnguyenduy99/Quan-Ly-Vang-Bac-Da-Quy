@@ -19,7 +19,7 @@
                                     Binding="{Binding Model.MaPhieu}"
                                     Header="Mã phiếu"
                                     IsReadOnly="True"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="140"
@@ -34,28 +34,28 @@
                                     IsReadOnly="True"
                                     Binding="{Binding Model.MaKH}"
                                     Header="Mã KH"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource LeftDataGridHeader}"
                                     CellStyle="{StaticResource LeftDataGridCell}"/>
                 <DataGridTextColumn Width="100"
                                     Binding="{Binding Model.TongTien, Mode=OneWay,Converter={StaticResource moneyConverter}}"
                                     Header="Tổng tiền"
                                     IsReadOnly="True"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
                 <DataGridTextColumn Width="100"
                                     IsReadOnly="True"
                                     Binding="{Binding Model.TongTienTraTruoc, Converter={StaticResource moneyConverter}}"
                                     Header="Trả trước"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>    
                 <DataGridTextColumn Width="100"
                                     IsReadOnly="True"
                                     Binding="{Binding Model.TenTinhTrang}"
                                     Header="Tình trạng"
-                                    CanUserSort="False"
+                                    CanUserSort="True"
                                     HeaderStyle="{StaticResource RightDataGridHeader}"
                                     CellStyle="{StaticResource RightDataGridCell}"/>
             </DataGrid.Columns>
