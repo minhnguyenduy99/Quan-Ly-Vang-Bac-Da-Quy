@@ -44,9 +44,9 @@ namespace UIProject.ViewModels.PageViewModels
 
         }
 
-        public ICommand NhapHangCommand
+        public ICommand NavigateNhapHangPageCommand
         {
-            get => new BaseCommand(OnNhapHangCommandExecute);
+            get => new BaseCommand(OnNavigateNhapHangPageCommandExecute);
         }
         public ICommand XoaPhieuMuaCommand
         {
@@ -166,7 +166,7 @@ namespace UIProject.ViewModels.PageViewModels
 
 
 
-        private void OnNhapHangCommandExecute()
+        private void OnNavigateNhapHangPageCommandExecute()
         {
             this.Navigator.Navigate("Nhập hàng");
         }

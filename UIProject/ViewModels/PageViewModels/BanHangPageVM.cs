@@ -172,7 +172,7 @@ namespace UIProject.ViewModels.PageViewModels
                 var khachHangDaChon = e.SelectedItem as ItemViewModel<KhachHangModel>;
                 if (khachHangDaChon != null)
                 {
-                    HoaDonVM.KhachHang = khachHangDaChon.Model;
+                    HoaDonVM.KhachHang = khachHangDaChon?.Model;
                 }
             }
             bool LocTenKhachHangCallBack(ItemViewModel<KhachHangModel> khachHang)

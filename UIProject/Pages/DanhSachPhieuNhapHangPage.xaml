@@ -37,7 +37,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Content="Tiếp tục nhập hàng"
-                    Command="{Binding BanHangCommand}"/>
+                    Command="{Binding NavigateNhapHangPageCommand}"/>
         </Grid>
         <Separator Grid.Row="1"
                    Margin="10"/>
